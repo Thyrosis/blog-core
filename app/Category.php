@@ -17,6 +17,17 @@ class Category extends Model
         });
     }
 
+    /**
+     * Access the description attribute.
+     *
+     * @param  string $description
+     * @return string
+     */
+    public function getDescriptionAttribute($description)
+    {
+        return \Purify::clean($description);
+    }
+
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = str_slug($value);

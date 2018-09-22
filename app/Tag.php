@@ -17,6 +17,17 @@ class Tag extends Model
             $tag->update(['slug' => $tag->name]);
         });
     }
+    
+    /**
+     * Access the description attribute.
+     *
+     * @param  string $description
+     * @return string
+     */
+    public function getDescriptionAttribute($description)
+    {
+        return \Purify::clean($description);
+    }
 
     /**
      * Create a slug for the tag

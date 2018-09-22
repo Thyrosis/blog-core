@@ -10,7 +10,8 @@
         "kitetail/zttp": "^0.3.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "spatie/laravel-feed": "^2.0"
+        "spatie/laravel-feed": "^2.0",
+        "stevebauman/purify": "2.0.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
