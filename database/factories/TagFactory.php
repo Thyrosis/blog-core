@@ -8,5 +8,6 @@ $factory->define(App\Tag::class, function (Faker $faker) {
     return [
         'name' => $name,
         'slug' => str_slug($name),
+        'description' => $faker->paragraph,
     ];
 });
