@@ -146,6 +146,28 @@ class Post extends Model implements Feedable
         return $this->wordLimit();
     }
 
+    /**
+     * Access the summary attribute.
+     *
+     * @param  string $summary
+     * @return string
+     */
+    public function getSummaryAttribute($summary)
+    {
+        return \Purify::clean($summary);
+    }
+
+    /**
+     * Access the body attribute.
+     *
+     * @param  string $body
+     * @return string
+     */
+    public function getBodyAttribute($body)
+    {
+        return \Purify::clean($body);
+    }
+
     public function toFeedItem()
     {
         return FeedItem::create()
