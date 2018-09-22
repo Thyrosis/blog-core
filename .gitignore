@@ -1,0 +1,22 @@
+# Default Laravel excludes
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vscode
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+
+# Exclude view folders, yet include the Core views
+#/resources/views/*
+#!/resources/views/core/
+
+# Exclude DirectAdmin logs/stats folders
+/logs
+/stats

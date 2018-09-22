@@ -1,0 +1,69 @@
+@tailwind preflight;
+
+@tailwind components;
+
+h1 {
+    @apply .uppercase;
+}
+
+.admin-h3 {
+    @apply .mb-5 .py-1 .border-b .border-teal .text-grey-darkest;
+}
+
+td, th {
+    @apply .p-2 .text-left;
+}
+
+.admin-container {
+    @apply .bg-white .border .shadow .mb-5 .p-5 .rounded;
+}
+
+.btn {
+    @apply .font-bold .py-2 .px-4 .rounded-lg;
+}
+
+.btn-blue {
+    @apply .bg-blue .text-white;
+}
+
+.btn-blue:hover {
+    @apply .bg-blue-dark;
+}
+
+.btn-grey {
+    @apply .bg-grey .text-white;
+}
+
+.btn-grey:hover {
+    @apply .bg-grey-dark;
+}
+
+.btn-red {
+    @apply .bg-red .text-white;
+}
+
+.btn-red:hover {
+    @apply .bg-red-dark;
+}
+
+.btn-teal {
+    @apply .bg-teal .text-white;
+}
+
+.btn-teal:hover {
+    @apply .bg-teal-dark;
+}
+
+a.btn {
+    @apply .no-underline;
+}
+
+.form-error {
+    @apply .mt-2 .text-red-dark .flex .justify-center .items-center;
+}
+
+.form-info {
+    @apply .text-xs .text-grey .pt-1;
+}
+
+@tailwind utilities;
