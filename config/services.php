@@ -36,16 +36,16 @@ return [
     ],
 
     'mailchimp' => [
-        'domain' => env('MAILCHIMP_DOMAIN'),
-        'user' => env('MAILCHIMP_USER'),
-        'secret' => env('MAILCHIMP_SECRET'),
-        'listId' => env('MAILCHIMP_LISTID'),
+        'domain' => env('MAILCHIMP_DOMAIN', false),
+        'user' => env('MAILCHIMP_USER', false),
+        'secret' => env('MAILCHIMP_SECRET', false),
+        'listId' => env('MAILCHIMP_LISTID', false),
     ],
 
     'recaptcha' => [
-        'url' => env('RECAPTCHA_URL'),
-        'sitekey' => env('RECAPTCHA_SITEKEY'),
-        'secretkey' => env('RECAPTCHA_SECRETKEY'),
+        'url' => env('RECAPTCHA_URL', false),
+        'sitekey' => env('RECAPTCHA_SITEKEY', false),
+        'secretkey' => env('RECAPTCHA_SECRETKEY', false),
     ],
 
     'facebook' => [
