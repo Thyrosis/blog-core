@@ -93,6 +93,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->posts()->sync([]);
+
+        $category->delete();
+
+        return redirect(route('admin.category.index'))->with('success', 'Category deleted');
     }
 }

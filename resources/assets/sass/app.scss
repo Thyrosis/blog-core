@@ -6,6 +6,10 @@ h1 {
     @apply .uppercase;
 }
 
+p {
+    @apply .mb-3 .tracking-normal .leading-normal;
+}
+
 .admin-h3 {
     @apply .mb-5 .py-1 .border-b .border-teal .text-grey-darkest;
 }

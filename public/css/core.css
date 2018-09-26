@@ -661,6 +661,12 @@ h1 {
   text-transform: uppercase;
 }
 
+p {
+  margin-bottom: .75rem;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
 .admin-h3 {
   margin-bottom: 1.25rem;
   padding-top: .25rem;

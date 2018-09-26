@@ -43,7 +43,8 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:tags'
+            'name' => 'required|unique:tags',
+            'description' => 'nullable',
         ]);
 
         Tag::create($data);
@@ -76,7 +77,7 @@ class TagController extends Controller
                 'required',
                 Rule::unique('tags')->ignore($tag->id),
             ],
-            'description' => 'nullable'
+            'description' => 'nullable',
         ]);
 
         $tag->update($data);
@@ -92,6 +93,10 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->posts()->sync([]);
+
+        $tag->delete();
+
+        return redirect(route('admin.tag.index'))->with('success', 'Tag deleted');
     }
 }
