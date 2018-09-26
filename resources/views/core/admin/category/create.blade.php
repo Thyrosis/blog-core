@@ -10,7 +10,8 @@
     <h3 class="admin-h3">New Category</h3>
 
     <form method="POST" action="{{ route('admin.category.store') }}">
-        {{ csrf_field() }}
+        @csrf
+        
         <div class="">
             <div class="mb-5">
                 <label for="name" class="text-grey-darker text-sm font-bold mb-2 block">Name</label>

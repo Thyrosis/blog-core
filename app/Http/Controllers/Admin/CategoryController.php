@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -42,23 +43,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|unique:categories',
+            'description' => 'nullable'
         ]);
 
         Category::create($data);
 
         return redirect(route('admin.category.index'))->with('success', 'Category saved');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
     }
 
     /**
@@ -69,7 +60,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('core.admin.category.edit')->with('category', $category);
     }
 
     /**
@@ -81,7 +72,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $data = $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('categories')->ignore($category->id),
+            ],
+            'description' => 'nullable'
+        ]);
+
+        $category->update($data);
+
+        return redirect(route('admin.category.index'))->with('success', 'Category updated');
     }
 
     /**
@@ -92,6 +93,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->posts()->sync([]);
+
+        $category->delete();
+
+        return redirect(route('admin.category.index'))->with('success', 'Category deleted');
     }
 }
