@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class TagController extends Controller
 {
@@ -51,17 +52,6 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Tag  $tag
@@ -69,7 +59,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('core.admin.tag.edit')->with('tag', $tag);
     }
 
     /**
@@ -81,7 +71,17 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $data = $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('tags')->ignore($tag->id),
+            ],
+            'description' => 'nullable'
+        ]);
+
+        $tag->update($data);
+
+        return redirect(route('admin.tag.index'))->with('success', 'Tag updated');
     }
 
     /**

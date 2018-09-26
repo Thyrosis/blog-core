@@ -44,6 +44,11 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Post');
     }
+    
+    public function publishedPosts()
+    {
+        return $this->belongsToMany('App\Post')->where('published', true)->where('published_at', '<', now());
+    }
 
     public function getRouteKeyName()
     {
