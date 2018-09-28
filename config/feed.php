@@ -17,9 +17,9 @@ return [
             /*
              * The feed will be available on this url.
              */
-            'url' => 'posts.rss',
+            'url' => env('FEED_URL', 'posts.rss'),
 
-            'title' => 'Papa Schrijft',
+            'title' => env('FEED_TITLE', 'Post feed title'),
         ],
     ],
 
