@@ -94,15 +94,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->validate([
-            'title' => ['required', 'min:3', 'max:255'],
+            'title' => ['nullable', 'min:3', 'max:255'],
             'longTitle' => 'nullable|min:3|max:255',
             'summary' => 'nullable',
-            'body' => 'required|min:3',
-            'commentable' => 'required|boolean',
-            'featured' => 'required|boolean',
+            'body' => 'nullable|min:3',
+            'commentable' => 'nullable|boolean',
+            'featured' => 'nullable|boolean',
             'featureimage' => 'nullable',
-            'published' => 'required|boolean',
-            'published_at' => 'required|date',
+            'published' => 'nullable|boolean',
+            'published_at' => 'nullable|date',
         ]);
 
         $post->update($data);
