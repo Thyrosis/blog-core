@@ -6,6 +6,9 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Rules\UniqueSlug;
+use Carbon\Carbon;
+use Illuminate\Validation\Rule;
+
 
 class PostController extends Controller
 {
@@ -51,8 +54,11 @@ class PostController extends Controller
             'featured' => 'required|boolean',
             'featureimage' => 'nullable',
             'published' => 'required|boolean',
-            'published_at' => 'required|date',
+            'published_at_date' => 'required|date',
+            'published_at_time' => 'required|date_format:"H:i"',
         ]);
+
+        $data = Post::processData($data);
 
         $post = Post::create($data);
 
@@ -96,14 +102,21 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => ['nullable', 'min:3', 'max:255'],
             'longTitle' => 'nullable|min:3|max:255',
+            'slug' => [
+                'required',
+                Rule::unique('posts')->ignore($post->id),
+            ],
             'summary' => 'nullable',
             'body' => 'nullable|min:3',
             'commentable' => 'nullable|boolean',
             'featured' => 'nullable|boolean',
             'featureimage' => 'nullable',
             'published' => 'nullable|boolean',
-            'published_at' => 'nullable|date',
+            'published_at_date' => 'nullable|date',
+            'published_at_time' => 'nullable|date_format:"H:i"',
         ]);
+
+        $data = Post::processData($data);
 
         $post->update($data);
 
