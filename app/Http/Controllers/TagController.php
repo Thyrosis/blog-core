@@ -12,10 +12,13 @@ class TagController extends Controller
      *
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
+     * @version 2018-09-21  - Added default view
+     *                      - Pass through posts based on new Tag::publishedPosts method
+     * @version 2018-10-01  - Call upon tag.index view first, then post.index and lastly core.tag.index for default
      */
     public function show(Tag $tag)
     {
         $posts = $tag->publishedPosts()->latest()->simplePaginate(config('custom.postsPerPage'));
-        return view()->first(['post.index', 'core.post.index'])->with('tag', $tag)->with('posts', $posts);
+        return view()->first(['tag.index', 'post.index', 'core.tag.index'])->with('tag', $tag)->with('posts', $posts);
     }
 }
