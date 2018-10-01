@@ -5,6 +5,9 @@ return [
 
     'defaultAuthor' => env('DEFAULT_AUTHOR', 'Anonymous'),
 
+    'defaultCommentable' => env('DEFAULT_COMMENTABLE', 0),
+    'defaultPublished' => env('DEFAULT_PUBLISHED', 0),
+
     'postsPerPage' => env('POSTS_PER_PAGE', 10),
 
     'allowRegistrations' => env('ALLOW_REGISTRATIONS', false),

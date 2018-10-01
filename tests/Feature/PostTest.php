@@ -134,9 +134,11 @@ class PostTest extends TestCase
      */
     public function aPostCanBeCreated()
     {
+        $this->withoutExceptionHandling();
+        
         $this->signIn();
 
-        $post = factory(Post::class)->make()->toArray();
+        $post = factory(Post::class)->states('publishing')->make()->toArray();
 
         $response = $this->post(route('admin.post.store'), $post);
 
@@ -148,6 +150,8 @@ class PostTest extends TestCase
      */
     public function aPostCanBeEdited()
     {
+        $this->withoutExceptionHandling();
+
         $this->signIn();
 
         $post = factory(Post::class)->create();
@@ -166,7 +170,7 @@ class PostTest extends TestCase
     {
         $this->signIn();
 
-        $post = factory(Post::class)->make()->toArray();
+        $post = factory(Post::class)->states('publishing')->make()->toArray();
 
         $response = $this->post(route('admin.post.store'), $post);
 

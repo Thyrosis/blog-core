@@ -13,31 +13,12 @@ use Illuminate\Support\Facades\Log;
 
 class Post extends Model implements Feedable
 {
-    protected $guarded = [];
+    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'views', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     protected static function boot()
     {
         parent::boot();
-        
-        static::created(function ($post) {
-            $post->update(['user_id' => auth()->id(), 'slug' => $post->title]);
-        });
-    }
-
-    /**
-     * Set the custom slug attribute
-     * 
-     * Uses the static slug() method to generate a random slug if the
-     * flat slug is already taken.
-     * 
-     * @param string    $value
-     */
-    public function setSlugAttribute($value)
-    {        
-        //$this->attributes['slug'] = str_slug($value);
-
-        $this->attributes['slug'] = static::createSlug($value);
     }
 
     /**
@@ -63,11 +44,31 @@ class Post extends Model implements Feedable
      * 
      * @param string    $date
      */
-    public function setPublishedAtAttribute($date)
+    public function setPublishedAtAttribute($datetime)
     {
-        if (is_string($date)) {
-            $this->attributes['published_at'] = Carbon::parse($date);
+        if (is_string($datetime)) {
+            $this->attributes['published_at'] = Carbon::parse($datetime);
+        } else {
+            $this->attributes['published_at'] = $datetime;
         }
+    }
+
+    public static function processData($data) {
+        // A post is always linked to the currently authenticated user
+        $data['user_id'] = auth()->id();
+
+        // If there isn't a slug (and therefor it's a new post) a slug should be created
+        if (!isset($data['slug'])) {
+            $data['slug'] = static::createSlug($data['title']);
+        }
+
+        // Pull the date and time together in a published at Carbon instance
+        if (isset($data['published_at_date']) && isset($data['published_at_time'])) {
+            $data['published_at'] = Carbon::parse($data['published_at_date'] . " " . $data['published_at_time']);
+        }
+    
+        // Return the data array and continue with whatever you were doing.
+        return $data;
     }
 
     /**

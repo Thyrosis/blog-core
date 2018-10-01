@@ -13,7 +13,7 @@
             <h3 class="admin-h3">{{ $post->title }}</h3>
             
             <div>
-                <p>{{ $post->getSummary() }}</p>
+                <p>{!! $post->getSummary() !!}</p>
             </div>
 
             <div class="mt-5">
