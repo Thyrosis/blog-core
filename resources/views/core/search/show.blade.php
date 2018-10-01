@@ -1,30 +1,25 @@
 @extends ('core.layout.app')
 
 @section ('main')
-<div class="admin-container">
-    <h3 class="admin-h3">Resultaten</h3>
 
-    <table class="w-full">
-        <tr class="border-b">
-            <th class="">Title</th>
-            <th class="hidden lg:table-cell">Summary</th>
-        </tr>
 
-        @forelse ($posts as $post)
-        <tr class="border-b border-grey-light hover:border-blue">
-            <td class="" >
-                <a href="{{ route('post.show', $post) }}">{{ $post->getLongTitle() }}</a>
-            </td>
+    <div class="admin-container">
+        <h3 class="admin-h3">Results</h3>
+        <p>You've searched for the term <strong>{{ $search->term }}</strong>. These are the results we found for you:</p>
+    </div>
 
-            <td class="hidden lg:table-cell">
-                {{ $post->getSummary() }}
-            </td>
-        </tr>
-        @empty
-        <tr class="border-b border-grey-light hover:border-blue">
-            <td colspan="2" >No results found</td>
-        </tr>
-        @endforelse
-    </table>
-</div>
+    @forelse ($posts as $post)
+        @includeFirst(['core.category._single', 'core.post._single'], ['post' => $post])
+    @empty
+        <div class="admin-container">
+            <h3 class="admin-h3">No results found</h3>
+            
+            <div>
+                <p>Searching for {{ $search->term }} apparently didn't yield any results. Why not try to search for something else?</p>
+            </div>
+
+        </div>
+    @endforelse
+
+    @include ('core.search._create')
 @endsection
