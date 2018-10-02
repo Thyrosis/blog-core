@@ -11,44 +11,52 @@
     <div class="admin-container">
         <h3 class="admin-h3">Create new post</h3>
 
-        <div class="mb-5">
-            <label for="title" class="text-grey-darker text-sm font-bold mb-2 block">Title</label>
-            <input type="text" id="title" name="title" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('title') }}" placeholder="Title" />
-            <p class="form-info">The title of the post. Will be turned into a URL-friendly slug too.</p>
+        <div class="mb-5 flex flex-wrap md:flex-no-wrap">
+            <div class="mr-5 flex flex-col justify-between">
+                <div class="mb-5">
+                    <label for="title" class="text-grey-darker text-sm font-bold mb-2 block">Title</label>
+                    <input type="text" id="title" name="title" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('title') }}" placeholder="Title" />
+                    <p class="form-info">The title of the post. Will be turned into a URL-friendly slug too.</p>
 
-            @if ($errors->has('title'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('title') }}</span>
+                    @if ($errors->has('title'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('title') }}</span>
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
 
-        <div class="mb-5">
-            <label for="longTitle" class="text-grey-darker text-sm font-bold mb-2 block">Long title</label>
-            <input type="text" id="longTitle" name="longTitle" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" value="{{ old('longTitle') }}" placeholder="Longer, more descriptive title" />
-            <p class="form-info">The 'real' title of the article. Doesn't serve any technical purpose but can be used in themes if one so wishes to do so.</p>
+                <div class="mb-5">
+                    <label for="longTitle" class="text-grey-darker text-sm font-bold mb-2 block">Long title</label>
+                    <input type="text" id="longTitle" name="longTitle" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" value="{{ old('longTitle') }}" placeholder="Longer, more descriptive title" />
+                    <p class="form-info">The 'real' title of the article. Doesn't serve any technical purpose but can be used in themes if one so wishes to do so.</p>
 
-            @if ($errors->has('longTitle'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('longTitle') }}</span>
+                    @if ($errors->has('longTitle'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('longTitle') }}</span>
+                        </div>
+                    @endif
                 </div>
-            @endif
+            </div>
+
+            <div>
+                <label for="summary" class="text-grey-darker text-sm font-bold mb-2 block">Summary</label>
+                <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="5">{{ old('summary') }}</textarea>
+                <p class="form-info">A small summary of the post. Often used on index pages.</p>
+
+                @if ($errors->has('summary'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('summary') }}</span>
+                    </div>
+                @endif
+            </div>
         </div>
+    </div>
+
+    <div class="admin-container">
+        <h3 class="admin-h3">Content</h3>
 
         <div class="mb-5">
-            <label for="summary" class="text-grey-darker text-sm font-bold mb-2 block">Summary</label>
-            <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="5">{{ old('summary') }}</textarea>
-            <p class="form-info">A small summary of the post. Often used on index pages.</p>
-
-            @if ($errors->has('summary'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('summary') }}</span>
-                </div>
-            @endif
-        </div>
-
-        <div class="mb-5">
-            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Content</label>
+            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Body</label>
             <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="20">{{ old('body') }}</textarea>
             <p class="form-info">The body of the post.</p>
 
@@ -158,7 +166,7 @@
             <label for="published_at" class="text-grey-darker text-sm font-bold mb-2 block">Publish date and time</label>
             <input type="date" id="published_at_date" name="published_at_date" class="shadow border rounded px-2 py-2 focus:shadow-inner" value="{{ old('published_at_date', \Carbon\Carbon::now()->toDateString()) }}" />
             <input type="time" id="published_at_time" name="published_at_time" class="shadow border rounded px-2 py-2 focus:shadow-inner" value="{{ old('published_at_time', \Carbon\Carbon::now()->format('H:i')) }}" />
-            <p class="form-info">Publishing date and time. A date in the past with status set to published means the post will be published immediately.</small>
+            <p class="form-info">Publishing date and time. A date in the past with status set to published means the post will be published immediately. Current time: {{ \Carbon\Carbon::now()->format('H:i') }}</small>
 
             @if ($errors->has('published_at_date'))
                 <div class="form-error">
