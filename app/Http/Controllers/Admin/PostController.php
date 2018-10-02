@@ -103,7 +103,7 @@ class PostController extends Controller
             'title' => ['nullable', 'min:3', 'max:255'],
             'longTitle' => 'nullable|min:3|max:255',
             'slug' => [
-                'required',
+                'nullable',
                 Rule::unique('posts')->ignore($post->id),
             ],
             'summary' => 'nullable',
