@@ -54,7 +54,7 @@
         <div class="mb-5">
             <label for="summary" class="text-grey-darker text-sm font-bold mb-2 block">Summary</label>
             <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="5">{{ old('summary', $post->summary) }}</textarea>
-            <p class="form-info">A small summary of the post. Often used on index pages.</p>
+            <p class="form-info">A small summary of the post. Often used on index pages or search results.</p>
 
             @if ($errors->has('summary'))
                 <div class="form-error">
@@ -83,8 +83,8 @@
             <div class="mb-5">
                 <label for="commentable" class="text-grey-darker text-sm font-bold mb-2 block">Allow comments</label>
                 <div class="flex">
-                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', $post->commentable) == 0 ) checked @endif /> Nee</div>
-                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="1" @if ( old('commentable', $post->commentable) == 1 ) checked @endif /> Ja</div>
+                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', $post->commentable) == 0 ) checked @endif /> No</div>
+                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="1" @if ( old('commentable', $post->commentable) == 1 ) checked @endif /> Yes</div>
                 </div>
                 <p class="form-info">Can be used to show or hide comment fields on the front end.</p>
 
@@ -98,8 +98,8 @@
             <div class="mb-5">
                 <label for="published" class="text-grey-darker text-sm font-bold mb-2 block">Published status</label>
                 <div class="flex flex-wrap">
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', $post->published) == 0 ) checked @endif /> Nee</div>
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', $post->published) == 1 ) checked @endif /> Ja</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', $post->published) == 0 ) checked @endif /> Draft</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', $post->published) == 1 ) checked @endif /> Published</div>
                 </div>
                 <p class="form-info">Whether the post is included in 'published' collections.</p>
 
@@ -175,7 +175,7 @@
             <input type="date" id="published_at_date" name="published_at_date" class="shadow border rounded px-2 py-2 focus:shadow-inner" value="{{ old('published_at_date', $post->published_at->toDateString()) }}" />
             <input type="time" id="published_at_time" name="published_at_time" class="shadow border rounded px-2 py-2 focus:shadow-inner" value="{{ old('published_at_time', $post->published_at->format('H:i')) }}" />
 
-            <p class="form-info">Publishing date and time. A date in the past with status set to published means the post will be published immediately.</small>
+            <p class="form-info">Publishing date and time. A date in the past with status set to published means the post will be published immediately. Current time: {{ \Carbon\Carbon::now()->format('H:i') }}</small>
 
             @if ($errors->has('published_at_date'))
                 <div class="form-error">
@@ -191,7 +191,7 @@
         </div>
 
         <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">Save</button>
+            <button type="submit" class="btn btn-blue">Update</button>
             <button type="reset" class="btn btn-grey">Reset</button>
         </div>
     </div>
@@ -205,11 +205,11 @@
         <h3 class="admin-h3">Delete post</h3>
 
         <p>
-            If you use this button, you will completely delete a post from all records. It will vanish into the void that is called nothing. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you've written, just unpublish it.
+            If you use this button, you will completely delete a post from all records. It will vanish into the nothingness that is called void. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you've written, just unpublish it.
         </p>
 
         <div class="mb-5">
-            <button type="submit" class="btn btn-red" onclick="return confirm('Are you sure you want to delete this post? It cannot be undone!');">Delete</button>
+            <button type="submit" class="btn btn-red" onclick="return confirm('Are you really, absolutely, one hunderd percent sure you want to delete this post? It cannot be undone!');">Delete</button>
         </div>
     </div>    
 </form>
