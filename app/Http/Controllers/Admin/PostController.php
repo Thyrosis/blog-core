@@ -60,11 +60,8 @@ class PostController extends Controller
 
         $data = Post::processData($data);
 
-        $post = Post::create($data);
-
-        $post->tags()->sync(request('tags'));
-        $post->categories()->sync(request('categories'));
-
+        $post = Post::create($data)->sync($request);
+        
         return redirect($post->path())->with("success", "Post posted");
     }
 
@@ -120,9 +117,7 @@ class PostController extends Controller
         $data = Post::processData($data);
 
         $post->update($data);
-
-        $post->tags()->sync(request('tags'));
-        $post->categories()->sync(request('categories'));
+        $post->sync($request);       
 
         return redirect(route('admin.post.edit', $post))->with("success", "Post updated");
     }
