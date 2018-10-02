@@ -4,8 +4,11 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Carbon;
 
 $factory->define(App\Post::class, function (Faker $faker) {
+
+    $title = $faker->word . " " . $faker->word;
+
     return [
-        'title' => $faker->word,
+        'title' => $title,
         'longTitle' => $faker->sentence,
         'slug' => $faker->word,
         'summary' => $faker->paragraph,

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
+use Illuminate\Validation\ValidationException;
 
 class PostTest extends TestCase
 {
@@ -140,7 +141,11 @@ class PostTest extends TestCase
 
         $post = factory(Post::class)->states('publishing')->make()->toArray();
 
-        $response = $this->post(route('admin.post.store'), $post);
+        try {
+            $response = $this->post(route('admin.post.store'), $post);
+        } catch (ValidationException $e) {
+            dd($e);
+        }
 
         $response->assertSessionHas('success');
     }
@@ -158,7 +163,12 @@ class PostTest extends TestCase
 
         $post->title = "Edited";
 
-        $response = $this->patch(route('admin.post.update', $post), $post->toArray());
+        try {
+            $response = $this->patch(route('admin.post.update', $post), $post->toArray());
+        } catch (ValidationException $e) {
+            dd($e);
+        }
+        
 
         $response->assertSessionHas('success');
     }
@@ -168,18 +178,15 @@ class PostTest extends TestCase
      */
     public function aPostCanBeDeleted()
     {
+        $this->withoutExceptionHandling();
+
         $this->signIn();
 
-        $post = factory(Post::class)->states('publishing')->make()->toArray();
+        $post = factory(Post::class)->create();
 
-        $response = $this->post(route('admin.post.store'), $post);
+        $response = $this->delete(route('admin.post.destroy', $post));
 
         $response->assertSessionHas('success');
-        $this->assertDatabaseHas('posts', ['title' => $post['title']]);
-
-        $response2 = $this->get(route('admin.post.destroy', $post));
-
-        $response2->assertSessionHas('success');
         $this->assertDatabaseMissing('posts', ['title' => $post['title']]);
     }
 }

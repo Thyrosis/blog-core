@@ -82,6 +82,27 @@ class Post extends Model implements Feedable
     }
 
     /**
+     * Sync a posts related tags and categories if needed
+     * 
+     * @param   Illuminate\Http\Request $request
+     * @version 20181002
+     */
+    public function sync($request)
+    {
+        // If the request has tags, sync them.
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags);
+        }
+
+        // If the request has categories, sync them.
+        if ($request->has('categories')) {
+            $post->categories()->sync($request->categories);
+        }
+
+        return $this;
+    }
+
+    /**
      * Define the relationship between posts and comments. 
      * 
      * Each post can have many comments, but each comment

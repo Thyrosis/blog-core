@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('post/', 'Admin\PostController@store')->name('admin.post.store');
     Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('admin.post.edit');
     Route::patch('post/{post}', 'Admin\PostController@update')->name('admin.post.update');
-    Route::get('post/{post}/delete', 'Admin\PostController@destroy')->name('admin.post.destroy');
+    Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('admin.post.destroy');
     Route::get('post/{post}', 'Admin\PostController@show')->name('admin.post.show');
 
     Route::get('comment', 'Admin\CommentController@index')->name('admin.comment.index');

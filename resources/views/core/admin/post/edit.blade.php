@@ -193,8 +193,24 @@
         <div class="mb-5 flex" style="justify-content: space-around">
             <button type="submit" class="btn btn-blue">Save</button>
             <button type="reset" class="btn btn-grey">Reset</button>
-            <a href="{{ route('admin.post.destroy', $post) }}" onclick="return confirm('Are you sure you want to delete this post? It cannot be undone!');" class="btn btn-red">Delete</a>
         </div>
     </div>
+</form>
+
+<form method="POST" action="{{ route('admin.post.destroy', $post) }}" >
+    @csrf
+    @method ('DELETE')
+
+    <div class="admin-container">
+        <h3 class="admin-h3">Delete post</h3>
+
+        <p>
+            If you use this button, you will completely delete a post from all records. It will vanish into the void that is called nothing. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you've written, just unpublish it.
+        </p>
+
+        <div class="mb-5">
+            <button type="submit" class="btn btn-red" onclick="return confirm('Are you sure you want to delete this post? It cannot be undone!');">Delete</button>
+        </div>
+    </div>    
 </form>
 @endsection
