@@ -7,6 +7,7 @@ use App\Post;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Validation\ValidationException;
 
 class CategoryTest extends TestCase
 {
@@ -17,17 +18,25 @@ class CategoryTest extends TestCase
      */
     public function aPostCanBelongToACategory()
     {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+        
         $category = factory(Category::class)->create();
 
         $this->assertDatabaseHas('categories', $category->toArray());
 
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->states('publishing')->make(['categories' => [$category->id]]);
 
-        $this->assertDatabaseHas('posts', $post->toArray());
+        try {
+            $this->post(route('admin.post.store'), $post->toArray());
+        } catch (ValidationException $e) {
+            dd($e);
+        }        
 
-        $post->categories()->sync([$category->id]);
+        $this->assertDatabaseHas('posts', ['title' => $post->title]);
 
-        $this->assertEquals(1, $post->fresh()->categories->count());
+        $this->assertEquals(1, Post::first()->categories->count());
     }
 
     /**
