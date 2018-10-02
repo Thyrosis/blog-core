@@ -39,8 +39,12 @@ Of course, it's easiest to create a base layout file from which you extend those
 - **layout/app**: base layout file
 - **post/index**: post index (main, category and tag), extends layout/app. Gets *$posts* as Blade parameter
 - **post/show**: single post, extends layout/app. Gets *$post* as Blade parameter
+- **post/_single**: a single post (summary) for the index pages (post.index, category.index, tag.index)
+- **category/index**: Showing all posts related to this category (prone to change as it should be category.show)
+- **tag/index**: Showing all posts related to this tag (prone to change as it should be tag.show)
 - **search/_create**: an includable snippet which only has a form that POSTS to the search.create route
-- **search/show**: show search results, extends layout/app. Gets *$posts* as Blade parameter.
+- **search/show**: show search results, extends layout/app. Gets *$posts* as Blade parameter
+- **errors**: to include 403, 404, 429, 500 and 503.blade.php in your own templates
 
 ## Contributing
 
