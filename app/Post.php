@@ -42,7 +42,7 @@ class Post extends Model implements Feedable
     /** 
      * Set the custom published at attribute
      * 
-     * @param string    $date
+     * @param string    $datetime
      */
     public function setPublishedAtAttribute($datetime)
     {
@@ -53,12 +53,22 @@ class Post extends Model implements Feedable
         }
     }
 
+    /**
+     * Process a posts data on create or update.
+     * 
+     * @param   array   $data
+     * @return  array   Processed $data
+     * @version 20181002    - Only update user_id if there isn't one
+     *                      - Only update slug if there is a title
+     */
     public static function processData($data) {
         // A post is always linked to the currently authenticated user
-        $data['user_id'] = auth()->id();
+        if (!isset($data['user_id'])) {
+            $data['user_id'] = auth()->id();
+        }        
 
         // If there isn't a slug (and therefor it's a new post) a slug should be created
-        if (!isset($data['slug'])) {
+        if (!isset($data['slug']) && isset($data['title'])) {
             $data['slug'] = static::createSlug($data['title']);
         }
 

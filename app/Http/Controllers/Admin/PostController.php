@@ -100,6 +100,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->validate([
+            'user_id' => 'nullable',
             'title' => ['nullable', 'min:3', 'max:255'],
             'longTitle' => 'nullable|min:3|max:255',
             'slug' => [
