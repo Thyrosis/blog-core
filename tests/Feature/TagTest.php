@@ -17,17 +17,25 @@ class TagTest extends TestCase
      */
     public function aPostCanBelongToATag()
     {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+        
         $tag = factory(Tag::class)->create();
 
         $this->assertDatabaseHas('tags', $tag->toArray());
 
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->states('publishing')->make(['tags' => [$tag->id]]);
 
-        $this->assertDatabaseHas('posts', $post->toArray());
+        try {
+            $this->post(route('admin.post.store'), $post->toArray());
+        } catch (ValidationException $e) {
+            dd($e);
+        }        
 
-        $post->tags()->sync([$tag->id]);
+        $this->assertDatabaseHas('posts', ['title' => $post->title]);
 
-        $this->assertEquals(1, $post->fresh()->tags->count());
+        $this->assertEquals(1, Post::first()->tags->count());
     }
 
     /**

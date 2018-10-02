@@ -91,12 +91,12 @@ class Post extends Model implements Feedable
     {
         // If the request has tags, sync them.
         if ($request->has('tags')) {
-            $post->tags()->sync($request->tags);
+            $this->tags()->sync($request->tags);
         }
 
         // If the request has categories, sync them.
         if ($request->has('categories')) {
-            $post->categories()->sync($request->categories);
+            $this->categories()->sync($request->categories);
         }
 
         return $this;
