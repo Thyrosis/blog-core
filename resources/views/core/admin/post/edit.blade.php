@@ -10,6 +10,8 @@
     @csrf
     @method ('PATCH')
 
+    <input type="hidden" id="user_id" name="user_id" value="{{ $post->user_id }}" />
+
     <div class="admin-container">
         <h3 class="admin-h3">Edit post</h3>
 
