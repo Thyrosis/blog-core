@@ -11,7 +11,7 @@
     <div class="admin-container">
         <h3 class="admin-h3">Create new post</h3>
 
-        <div class="mb-5 flex flex-wrap md:flex-no-wrap">
+        <div class="mb-5 flex flex-col lg:flex-row">
             <div class="mr-5 flex flex-col justify-between">
                 <div class="mb-5">
                     <label for="title" class="text-grey-darker text-sm font-bold mb-2 block">Title</label>
