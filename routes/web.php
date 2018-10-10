@@ -68,6 +68,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('subscription', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
     Route::get('subscription/{subscription}', 'Admin\SubscriptionController@show')->name('admin.subscription.show');
 
+    Route::get('menu', 'Admin\MenuController@edit')->name('admin.menu.index');
+    Route::get('menu/edit', 'Admin\MenuController@edit')->name('admin.menu.edit');
+    Route::patch('menu/update', 'Admin\MenuController@update')->name('admin.menu.update');
+    Route::get('menu/show', 'Admin\MenuController@show')->name('admin.menu.show');
 });
 
 /**
