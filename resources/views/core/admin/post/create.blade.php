@@ -11,8 +11,8 @@
     <div class="admin-container">
         <h3 class="admin-h3">Create new post</h3>
 
-        <div class="mb-5 flex flex-col lg:flex-row">
-            <div class="mr-5 flex flex-col justify-between">
+        <div class="mb-5 flex flex-wrap md:flex-no-wrap">
+            <div class="mr-5 flex flex-col justify-around">
                 <div class="mb-5">
                     <label for="title" class="text-grey-darker text-sm font-bold mb-2 block">Title</label>
                     <input type="text" id="title" name="title" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('title') }}" placeholder="Title" />
@@ -40,7 +40,7 @@
 
             <div>
                 <label for="summary" class="text-grey-darker text-sm font-bold mb-2 block">Summary</label>
-                <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="5">{{ old('summary') }}</textarea>
+                <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-slim" rows="10">{{ old('summary') }}</textarea>
                 <p class="form-info">A small summary of the post. Often used on index pages.</p>
 
                 @if ($errors->has('summary'))
