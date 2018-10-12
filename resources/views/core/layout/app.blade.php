@@ -106,6 +106,17 @@
             autosave_retention: "4320m",
             autosave_interval: "15s"
         });
+
+        tinymce.init({
+            selector: '.tinymce-slim',
+            menubar: false,
+            browser_spellcheck: true,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks paste help wordcount'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic backcolor | bullist numlist | removeformat | link insert',
+        });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
