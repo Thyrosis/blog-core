@@ -1,9 +1,7 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    Posts
-@endsection
-
+@section ('title', 'Posts')
+    
 @section ('main')
 
 <form method="POST" action="{{ route('admin.post.store') }}" >
