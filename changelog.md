@@ -1,5 +1,40 @@
 # Release Notes
 
+## 1.0.2 (2018-11-08)
+
+- Composer update
+
+### Package operations
+- 0 installs
+- 24 updates
+- 0 removals
+
+### Details
+- Updating symfony/css-selector (v4.1.6 => v4.1.7)
+- Updating symfony/polyfill-php72 (v1.9.0 => v1.10.0)
+- Updating symfony/polyfill-mbstring (v1.9.0 => v1.10.0)
+- Updating symfony/var-dumper (v4.1.6 => v4.1.7)
+- Updating symfony/routing (v4.1.6 => v4.1.7)
+- Updating symfony/process (v4.1.6 => v4.1.7)
+- Updating symfony/polyfill-ctype (v1.9.0 => v1.10.0)
+- Updating symfony/http-foundation (v4.1.6 => v4.1.7)
+- Updating symfony/event-dispatcher (v4.1.6 => v4.1.7)
+- Updating symfony/debug (v4.1.6 => v4.1.7)
+- Updating symfony/http-kernel (v4.1.6 => v4.1.7)
+- Updating symfony/finder (v4.1.6 => v4.1.7)
+- Updating symfony/console (v4.1.6 => v4.1.7)
+- Updating symfony/translation (v4.1.6 => v4.1.7)
+- Updating nesbot/carbon (1.34.0 => 1.34.1)
+- Updating monolog/monolog (1.23.0 => 1.24.0)
+- Updating league/flysystem (1.0.47 => 1.0.48)
+- Updating laravel/framework (v5.7.9 => v5.7.13)
+- Updating filp/whoops (2.2.1 => 2.3.1)
+- Updating phpunit/php-token-stream (3.0.0 => 3.0.1)
+- Updating phpunit/php-code-coverage (6.0.8 => 6.1.4)
+- Updating phpunit/phpunit (7.4.0 => 7.4.3)
+- Updating tightenco/collect (v5.7.9 => v5.7.12)
+- Updating psy/psysh (v0.9.8 => v0.9.9)
+
 ## 1.0.1 (2018-11-08)
 
 - Started tracking changes in this changelog by adding changelog.md to the root of the project.
