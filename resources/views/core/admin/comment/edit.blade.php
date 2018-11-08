@@ -37,7 +37,7 @@
 
         <div class="mb-5">
             <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Comment</label>
-            <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" >{{ old('body', $comment->body) }}</textarea>
+            <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-slim" >{{ old('body', $comment->body) }}</textarea>
             <p class="form-info">Comment text</p>
 
             @if ($errors->has('body'))

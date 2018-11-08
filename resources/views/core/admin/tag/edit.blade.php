@@ -26,7 +26,7 @@
 
             <div class="mb-5">
                 <label for="description" class="text-grey-darker text-sm font-bold mb-2 block">Description</label>
-                <textarea id="description" name="description" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" >{{ old('description', $tag->description) }}</textarea>
+                <textarea id="description" name="description" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-slim" >{{ old('description', $tag->description) }}</textarea>
                 <p class="form-info">Description of the tag. Can be show anywhere the template dictates, like anchor-titles or META descriptions in tag pages.</p>
 
                 @if ($errors->has('description'))
