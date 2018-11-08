@@ -1,8 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    Posts
-@endsection
+@section ('title', 'Posts')
 
 @section ('main')
 
@@ -73,7 +71,7 @@
     
         <div class="mb-5">
             <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Body</label>
-            <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce" rows="20">{{ old('body', $post->body) }}</textarea>
+            <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-{{ config('custom.tinyMCEStyle')}}" rows="20">{{ old('body', $post->body) }}</textarea>
             <p class="form-info">The body of the post.</p>
 
             @if ($errors->has('body'))

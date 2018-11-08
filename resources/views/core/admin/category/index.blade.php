@@ -1,8 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    Categories
-@endsection
+@section ('title', 'Categories')
 
 @section ('main')
 

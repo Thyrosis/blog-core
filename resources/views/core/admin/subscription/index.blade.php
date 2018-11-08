@@ -1,8 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    Subscriptions
-@endsection
+@section ('title', 'Subscriptions')
 
 @section ('main')
 

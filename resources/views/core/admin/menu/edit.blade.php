@@ -1,5 +1,7 @@
 @extends('core.layout.app')
 
+@section ('title', 'Menu')
+
 @section ('html.head')
 <style>
 	body.dragging, body.dragging * {

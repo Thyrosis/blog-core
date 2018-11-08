@@ -21,4 +21,6 @@ return [
     'commentSubject' => env('COMMENT_SUBJECT', 'A new comment has been posted'),
 
     'commentSubscriptionAdded' => env('COMMENT_SUBSCRIPTION_ADDED', 'Bedankt! Je krijgt een berichtje als er een reactie geplaatst wordt.'),
+
+    'tinyMCEStyle' => env('TINYMCE_STYLE', 'regular'),
 ];

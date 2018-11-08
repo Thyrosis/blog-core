@@ -1,8 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    Post :: {{ $post->title }}, {{ $post->longTitle }}
-@endsection
+@section ('title', 'Posts')
 
 @section ('main')
     <div class="admin-container">
