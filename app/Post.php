@@ -131,15 +131,22 @@ class Post extends Model implements Feedable
     /**
      * Returns the URL to the feature image (if used)
      * 
+     * @param   bool    default     Whether to return the default featureImage
      * @return string
+     * 
+     * @version     20181111    Added parameter 'default'
      */
-    public function getFeatureImage()
+    public function getFeatureImage($default = true)
     {
         if ($this->featureimage) {
             return $this->featureimage;
         }
 
-        return config('custom.featureImage');
+        if ($default) {
+            return config('custom.featureImage');
+        }
+
+        return false;
     }
 
     /**
