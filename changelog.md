@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.0.3 (2018-11-11)
+
+- Removed route /home from routes file to avoid conflict with possible Home Post
+- Removed Route::resource for MenuController out of public routes
+
 ## 1.0.2 (2018-11-08)
 
 - Composer update
