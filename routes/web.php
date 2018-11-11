@@ -12,7 +12,6 @@
  */
 
 Route::get('/', 'PostController@index')->name('home');
-Route::get('/home', 'PostController@index');
 
 /**
  * API ROUTES
@@ -81,8 +80,6 @@ Route::post('comment', 'CommentController@store')->name('comment.store');
 
 Route::get('category/{category}', 'CategoryController@show')->name('category.show');
 Route::get('tag/{tag}', 'TagController@show')->name('tag.show');
-
-Route::resource('menu', 'MenuController');
 
 Route::post('subscription', 'SubscriptionController@store')->name('subscription.store');
 Route::delete('subscription/{subscription}', 'SubscriptionController@destroy')->name('subscription.destroy');
