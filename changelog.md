@@ -4,6 +4,9 @@
 
 - Removed route /home from routes file to avoid conflict with possible Home Post
 - Removed Route::resource for MenuController out of public routes
+- Added 'code' plugin to full TinyMCE
+- Added 'img[style] to both TinyMCE and Purifier allowed elements
+- Reorded TinyMCE plugins alphabetically
 
 ## 1.0.2 (2018-11-08)
 

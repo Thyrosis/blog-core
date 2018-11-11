@@ -96,9 +96,10 @@
         tinymce.init({
             selector: '.tinymce-full',
             theme: 'modern',
-            plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+            plugins: 'advlist anchor autolink charmap code codesample colorpicker contextmenu directionality fullpage fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
+            extended_valid_elements: "img[style]",
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }
@@ -113,24 +114,18 @@
             selector: '.tinymce-regular',
             menubar: false,
             browser_spellcheck: true,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor textcolor',
-                'searchreplace visualblocks code fullscreen autosave',
-                'media table paste help wordcount'
-            ],
+            plugins: 'advlist anchor autolink autosave charmap code fullscreen help image link lists media paste preview print searchreplace table textcolor visualblocks wordcount',
             toolbar: 'undo redo restoredraft | styleselect | code fullscreen | bold italic backcolor | bullist numlist outdent indent | removeformat | link insert',
             autosave_retention: "4320m",
             autosave_interval: "15s"
+            extended_valid_elements: "img[style]",
         });
 
         tinymce.init({
             selector: '.tinymce-slim',
             menubar: false,
             browser_spellcheck: true,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor textcolor',
-                'searchreplace visualblocks paste help wordcount'
-            ],
+            plugins: 'link charmap anchor textcolor paste wordcount',
             toolbar: 'undo redo | styleselect | bold italic backcolor | bullist numlist | removeformat | link insert',
         });
         </script>
