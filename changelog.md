@@ -6,6 +6,7 @@
 - Removed Route::resource for MenuController out of public routes
 - Added 'code' plugin to full TinyMCE
 - Added 'img[style] to both TinyMCE and Purifier allowed elements
+- Added 'float' to Purifier allowed CSS elements
 - Reorded TinyMCE plugins alphabetically
 
 ## 1.0.2 (2018-11-08)

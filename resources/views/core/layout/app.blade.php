@@ -99,7 +99,7 @@
             plugins: 'advlist anchor autolink charmap code codesample colorpicker contextmenu directionality fullpage fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
-            extended_valid_elements: "img[style]",
+            extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }
@@ -118,7 +118,7 @@
             toolbar: 'undo redo restoredraft | styleselect | code fullscreen | bold italic backcolor | bullist numlist outdent indent | removeformat | link insert',
             autosave_retention: "4320m",
             autosave_interval: "15s"
-            extended_valid_elements: "img[style]",
+            extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
         });
 
         tinymce.init({
