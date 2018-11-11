@@ -15,4 +15,11 @@ class Menu extends Model
             return self::orderBy('order', 'ASC')->get();
         });
     }
+
+    public function rebuild()
+    {
+        Cache::forget('menu');
+
+        self::build();
+    }
 }

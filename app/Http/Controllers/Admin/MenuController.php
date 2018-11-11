@@ -82,6 +82,8 @@ class MenuController extends Controller
 
         $menu->save();
 
+        $menu->rebuild();
+
         return redirect(route('admin.menu.edit'))->with('menu', $menu)->with('success', "Menu saved");
     }
 }
