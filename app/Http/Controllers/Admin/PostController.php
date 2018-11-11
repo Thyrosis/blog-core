@@ -62,7 +62,7 @@ class PostController extends Controller
 
         $post = Post::create($data)->sync($request);
         
-        return redirect($post->path())->with("success", "Post posted");
+        return redirect(route('admin.post.edit', $post))->with("success", "Post posted");
     }
 
     /**
