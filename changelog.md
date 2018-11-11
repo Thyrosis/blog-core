@@ -8,6 +8,11 @@
 - Added 'img[style] to both TinyMCE and Purifier allowed elements
 - Added 'float' to Purifier allowed CSS elements
 - Reorded TinyMCE plugins alphabetically
+- Changed redirect after posting new post from post.show to admin.post.edit
+- Added 'View post' button to admin.post.edit
+- Added parameter 'default' to Post->getFeatureImage ()
+- Add function Menu->rebuild()
+- Rebuild cached Menu-item after Menu update
 
 ## 1.0.2 (2018-11-08)
 
