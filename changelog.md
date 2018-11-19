@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.0.4 (2018-11-19)
+
+- Alphabetically arranged HTML.Allowed in purify configuration
+- Added hr and pre as well as several other items to HTML.Allowed elements
+
 ## 1.0.3 (2018-11-11)
 
 - Removed route /home from routes file to avoid conflict with possible Home Post
