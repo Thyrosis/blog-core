@@ -1,5 +1,11 @@
 # Release Notes
 
+## 1.0.5 (2018-12-04)
+
+- Added blockquote to admin TinyMCE panel
+- Added button to view post on blog to post.edit
+- Added post-column to admin.comments.index
+
 ## 1.0.4 (2018-11-19)
 
 - Alphabetically arranged HTML.Allowed in purify configuration

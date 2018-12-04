@@ -10,7 +10,7 @@
         <tr class="border-b">
             <th class="table-cell">Name</th>
             <th class="hidden lg:table-cell">Email</th>
-            <th class="hidden lg:table-cell">Post</th>
+            <th class="table-cell">Post</th>
             <th class="table-cell">Content</th>
             <th class="hidden lg:table-cell">Date</th>
             <th class="table-cell" colspan="3">Actions</th>
@@ -20,7 +20,7 @@
         <tr class="border-b border-grey-light hover:border-teal @if (!$comment->approved) bg-red-lightest @endif ">
             <td class="table-cell">{{ $comment->name }}</a></td>
             <td class="hidden lg:table-cell">{{ $comment->emailaddress }}</td>
-            <td class="hidden lg:table-cell"><a href="{{ route('post.show', $comment->post) }}" target="_blank">{{ $comment->post->title }}</a></td>
+            <td class="table-cell"><a href="{{ route('post.show', $comment->post) }}" target="_blank">{{ $comment->post->title }}</a></td>
             <td class="table-cell">{!! $comment->body !!}</td>
             <td class="hidden lg:table-cell">{{ $comment->created_at->format('jM') }}</td>
             <td class="table-cell">
