@@ -95,25 +95,32 @@
         <script>
         tinymce.init({
             selector: '.tinymce-full',
-            theme: 'modern',
-            plugins: 'advlist anchor autolink charmap code codesample colorpicker contextmenu directionality fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            image_advtab: true,
+            autosave_retention: "4320m",
+            autosave_interval: "15s",
+            block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Quote=blockquote;Preformatted=pre',
+            branding: false,
+            browser_spellcheck: true,
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+            ],
             extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
+            image_advtab: true,
+            plugins: 'advlist anchor autolink autosave charmap code codesample colorpicker contextmenu directionality fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }
             ],
-            content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            ]
+            theme: 'modern',
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
         });
         </script>
         <script>
         tinymce.init({
             selector: '.tinymce-regular',
-            menubar: false,
+            branding: false,
             browser_spellcheck: true,
+            menubar: false,
+            block_formats: 'Heading 1=h1;Heading 2=h2;Heading 3=h3;Paragraph=p;Quote=blockquote;Preformatted=pre',
             plugins: 'advlist anchor autolink autosave charmap code fullscreen help image link lists media paste preview print searchreplace table textcolor visualblocks wordcount',
             toolbar: 'undo redo restoredraft | styleselect | code fullscreen | bold italic backcolor | bullist numlist outdent indent | removeformat | link insert',
             autosave_retention: "4320m",
