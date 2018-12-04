@@ -11,7 +11,12 @@
     <input type="hidden" id="user_id" name="user_id" value="{{ $post->user_id }}" />
 
     <div class="admin-container">
-        <h3 class="admin-h3">Edit post</h3>
+        <h3 class="admin-h3 flex justify-between">
+            Edit post
+            <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
+                <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+            </a>
+        </h3>
 
         <div class="mb-5 flex flex-wrap md:flex-no-wrap">
             <div class="mr-5 flex flex-col justify-around">
