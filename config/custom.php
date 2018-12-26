@@ -23,4 +23,6 @@ return [
     'commentSubscriptionAdded' => env('COMMENT_SUBSCRIPTION_ADDED', 'Bedankt! Je krijgt een berichtje als er een reactie geplaatst wordt.'),
 
     'tinyMCEStyle' => env('TINYMCE_STYLE', 'regular'),
+
+    'tinyMCEAPIkey' => env('TINYMCE_APIKEY', false),
 ];

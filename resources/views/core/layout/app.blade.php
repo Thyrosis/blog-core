@@ -91,8 +91,33 @@
         </div>
 
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/jquery.tinymce.min.js" integrity="sha256-nws9gG0l3dJYDL46Oc93epZ4MuxrIUBeeK8YiDPU6Cg=" crossorigin="anonymous"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/tinymce.min.js" integrity="sha256-BWGlECOM0f4OdMtyz5KsxTeW4S+FPuDvva6yNDjWBJo=" crossorigin="anonymous"></script>        
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/tinymce.min.js" integrity="sha256-BWGlECOM0f4OdMtyz5KsxTeW4S+FPuDvva6yNDjWBJo=" crossorigin="anonymous"></script>         -->
+
+        <script src='http://cloud.tinymce.com/5-testing/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
+
         <script>
+            tinymce.init({
+                selector: '.tinymce-full',                
+                autosave_retention: "4320m",
+                autosave_interval: "15s",
+                block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Quote=blockquote;Preformatted=pre',
+                branding: false,
+                browser_spellcheck: true,
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                ],
+                extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
+                image_advtab: true,
+                plugins: 'advlist anchor code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template  textpattern toc visualblocks visualchars wordcount',
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            });
+        </script>
+            
+        <!-- <script>
         tinymce.init({
             selector: '.tinymce-full',
             autosave_retention: "4320m",
@@ -105,7 +130,7 @@
             ],
             extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
             image_advtab: true,
-            plugins: 'advlist anchor autolink autosave charmap code codesample colorpicker contextmenu directionality fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
+            plugins: 'advlist anchor code colorpicker contextmenu fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textcolor textpattern toc visualblocks visualchars wordcount',
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }
@@ -135,7 +160,7 @@
             plugins: 'link charmap anchor textcolor paste wordcount',
             toolbar: 'undo redo | styleselect | bold italic backcolor | bullist numlist | removeformat | link insert',
         });
-        </script>
+        </script> -->
 
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script>
