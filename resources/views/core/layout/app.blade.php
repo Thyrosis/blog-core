@@ -93,7 +93,7 @@
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/jquery.tinymce.min.js" integrity="sha256-nws9gG0l3dJYDL46Oc93epZ4MuxrIUBeeK8YiDPU6Cg=" crossorigin="anonymous"></script> -->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/tinymce.min.js" integrity="sha256-BWGlECOM0f4OdMtyz5KsxTeW4S+FPuDvva6yNDjWBJo=" crossorigin="anonymous"></script>         -->
 
-        <script src='http://cloud.tinymce.com/5-testing/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
+        <script src='https://cloud.tinymce.com/5-testing/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
 
         <script>
             tinymce.init({
