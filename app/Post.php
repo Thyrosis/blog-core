@@ -207,6 +207,9 @@ class Post extends Model implements Feedable
         return \Purify::clean($body);
     }
 
+    /**
+     * @version 20190108    Provided a default author in case user doesn't exist any more
+     */
     public function toFeedItem()
     {
         return FeedItem::create()
@@ -215,7 +218,7 @@ class Post extends Model implements Feedable
             ->summary( (!empty($this->summary)) ? $this->summary : $this->wordLimit(50) )
             ->updated($this->published_at)
             ->link($this->link)
-            ->author($this->user->name);
+            ->author($this->user->name ?? config('custom.defaultAuthor'));
     }
 
     public static function getFeedItems()
