@@ -1,5 +1,12 @@
 # Release Notes
 
+## 1.0.6 (2019-01-08)
+
+- Composer update
+- TinyMCE upgrade to 5
+- Bugfixes in RSS Feed
+- Added To-Do list in todo.md
+
 ## 1.0.5 (2018-12-04)
 
 - Added blockquote to admin TinyMCE panel
