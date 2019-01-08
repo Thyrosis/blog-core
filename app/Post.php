@@ -215,7 +215,7 @@ class Post extends Model implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary( (!empty($this->summary)) ? $this->summary : $this->wordLimit(50) )
+            ->summary( (!empty($this->summary)) ? strip_tags($this->summary) : $this->wordLimit(50) )
             ->updated($this->published_at)
             ->link($this->link)
             ->author($this->user->name ?? config('custom.defaultAuthor'));

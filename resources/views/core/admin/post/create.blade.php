@@ -38,7 +38,7 @@
 
             <div>
                 <label for="summary" class="text-grey-darker text-sm font-bold mb-2 block">Summary</label>
-                <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-slim" rows="10">{{ old('summary') }}</textarea>
+                <textarea id="summary" name="summary" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-{{ config('custom.tinyMCEStyle')}}" rows="10">{{ old('summary') }}</textarea>
                 <p class="form-info">A small summary of the post. Often used on index pages.</p>
 
                 @if ($errors->has('summary'))
