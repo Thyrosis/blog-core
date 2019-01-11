@@ -2,7 +2,7 @@
 
 ## High priority (or 'Fix it NOW')
 
-- None for now.
+- Add a (contact) form option
 
 ## Medium Priority (or 'Just get on with it')
 
