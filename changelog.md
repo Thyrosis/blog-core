@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.0.7 (2019-01-11)
+
+- Purify Config change to allow style attribute on all HTML elements
+
 ## 1.0.6 (2019-01-08)
 
 - Composer update
