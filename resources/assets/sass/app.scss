@@ -70,4 +70,37 @@ a.btn {
     @apply .text-xs .text-grey .pt-1;
 }
 
+.form-control {
+    @apply .shadow .w-full .border .rounded .px-2 .py-2;
+}
+
+.form-control:focus {
+    @apply .shadow-inner;
+}
+
+.form-label {
+    @apply .text-grey-darker .text-sm .font-bold .mb-2 .block;
+}
+
+table.admin-table {
+    @apply .w-full;
+}
+
+.admin-table-row {
+    @apply .border-b .border-grey-light;
+}
+
+.admin-table-row-header {
+    @apply .border-b;
+}
+
+.admin-table-row:hover {
+    @apply .border-blue;
+}
+
+.admin-table-cell {
+    @apply .table-cell;
+}
+
+
 @tailwind utilities;
