@@ -10,4 +10,6 @@
 
     @include ('core.search._create')
 
+    @include ('core.admin.form._show', ['form' => App\Form::find(7)])
+
 @endsection

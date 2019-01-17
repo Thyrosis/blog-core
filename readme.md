@@ -46,6 +46,14 @@ Of course, it's easiest to create a base layout file from which you extend those
 - **search/show**: show search results, extends layout/app. Gets *$posts* as Blade parameter
 - **errors**: to include 403, 404, 429, 500 and 503.blade.php in your own templates
 
+## Forms
+
+There is a rudimentary form functionality included in the project. You can make your own form and use it in a template or use a default one provided and style it using css.
+
+To use the default, use @include('forms._show', App\Form::find($id)) in your blade file. It will load the given forms ID. You can find the ID in the admin panel, it's the last digit of the Action URL.
+
+To build up your own form using HTML, open the form using the POST method and use the action in the admin panel. Don't forget to use the CSRF field in your form ( @csrf )
+
 ## Contributing
 
 As I only use this blog for my own projects, I don't expect any contributions. If you do happen to stumble across this repo and think "wow, that's a really roundabout way of doing something", feel free to create a pull request or something.

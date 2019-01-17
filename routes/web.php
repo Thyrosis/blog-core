@@ -1,5 +1,7 @@
 <?php
 
+use App\Form;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +73,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('menu/edit', 'Admin\MenuController@edit')->name('admin.menu.edit');
     Route::patch('menu/update', 'Admin\MenuController@update')->name('admin.menu.update');
     Route::get('menu/show', 'Admin\MenuController@show')->name('admin.menu.show');
+
 });
 
 /**
@@ -101,6 +104,11 @@ Route::delete('unsubscribe', 'MailChimpController@delete')->name('newsletter.del
  * RSS FEED ROUTES
  */
 Route::feeds();
+
+/**
+ * PLUGIN ROUTES
+ */
+Form::routes();
 
 /**
  * And if we're here, nothing matched. Finally, is it a post??

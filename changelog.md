@@ -1,5 +1,15 @@
 # Release Notes
 
+## Future functionality
+
+- User management (roles, profile)
+- Custom user profile options
+- Better form management (ordering fields, validation, response by mail)
+
+## 1.0.8 (2019-01-17)
+
+- Added form functionality. It works in the most basic way, so needs some polishing.
+
 ## 1.0.7 (2019-01-11)
 
 - Purify Config change to allow style attribute on all HTML elements
