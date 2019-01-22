@@ -19,9 +19,10 @@
     <table class="w-full">
         <tr class="border-b">
             <th class="table-cell">Title</th>
-            <th class="hidden lg:table-cell">Longtitle</th>
+            <th class="hidden lg:table-cell">Summary</th>
             <th class="hidden lg:table-cell">Published at</th>
             <th class="hidden lg:table-cell">Views</th>
+            <th class="hidden lg:table-cell">Comments</th>
             <th class="table-cell" colspan="2">Actions</th>
         </tr>
         @foreach ($posts->sortByDesc('published_at') as $post)
@@ -29,9 +30,10 @@
             <td class="table-cell" >
                 {{ $post->title }}
             </td>
-            <td class="hidden lg:table-cell">{{ $post->longTitle }}</td>
+            <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
             <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-lightest @endif">{{ $post->published_at->toFormattedDateString() }}</td>
-            <td class="hidden lg:table-cell">{{ $post->views }}</td>
+            <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
+            <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
             <td class="table-cell">
                 <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
                     <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>

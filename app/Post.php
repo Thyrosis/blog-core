@@ -2,14 +2,16 @@
 
 namespace App;
 
+use App\Mail\NewComment;
+use App\View;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NewComment;
-use Illuminate\Support\Facades\Log;
 
 class Post extends Model implements Feedable
 {
@@ -433,5 +435,43 @@ class Post extends Model implements Feedable
         $this->subscriptions->each(function ($subscription) use ($comment) {
             Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
         });
+    }
+
+    /**
+     * Decides the logic for tracking views of this Post.
+     * 
+     * For now, being authenticated doesn't add a view.
+     * When the user level functionality is done, only exlude admin users
+     * for the view counting. Regular users will count.
+     * 
+     * This functionality replaces the original views-column on Posts.
+     * 
+     * @return      $this
+     * @since       20190122
+     */
+    public function view()
+    {        
+        if (auth()->guest()) {
+            View::create([
+                'post_id' => $this->id,
+                'url' => request()->url(),
+                'path' => request()->path(),
+                'ipaddress' => null,
+                'iphash' => encrypt(request()->ip()),
+            ]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Relationship between Post and Views.
+     * 
+     * @return      Illuminate\Database\Eloquent\Relations
+     * @since       20190122
+     */
+    public function views()
+    {
+        return $this->hasMany(View::class);
     }
 }
