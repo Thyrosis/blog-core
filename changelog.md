@@ -6,12 +6,14 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
-## 1.0.9 ()
+## 1.0.9 (2019-01-22)
 
 - Added Views to track Post-views.
 - Composer update (Laravel to 5.7.22)
 - Fixed a bug in validation feedback (admin panel)
-
+- Added User functionality. It works in the most basic way, so needs some polishing.
+- Added .form-group to the CSS file. View files still need to be converted.
+ 
 ## 1.0.8 (2019-01-17)
 
 - Added form functionality. It works in the most basic way, so needs some polishing.

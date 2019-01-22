@@ -1,7 +1,5 @@
 <?php
 
-use App\Form;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,9 +104,10 @@ Route::delete('unsubscribe', 'MailChimpController@delete')->name('newsletter.del
 Route::feeds();
 
 /**
- * PLUGIN ROUTES
+ * OTHER ROUTES
  */
-Form::routes();
+App\Form::routes();
+App\User::routes();
 
 /**
  * And if we're here, nothing matched. Finally, is it a post??
