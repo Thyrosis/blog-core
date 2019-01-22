@@ -34,7 +34,7 @@
                 @if (session()->has('error'))
                 <div class="m-5">
                     <div class="container mx-auto text-center border-2 border-red-lighter bg-red-lightest rounded p-3 shadow">
-                        {{ session('error') }}
+                        {!! session('error') !!}
                     </div>
                 </div>
                 @endif
@@ -42,7 +42,7 @@
                 @if (session()->has('warning'))
                 <div class="m-5">
                     <div class="container mx-auto text-center border-2 border-orange-lighter bg-orange-lightest rounded p-3 shadow">
-                        {{ session('warning') }}
+                        {!! session('warning') !!}
                     </div>
                 </div>
                 @endif
@@ -50,7 +50,7 @@
                 @if (session()->has('success'))
                 <div class="m-5">
                     <div class="container mx-auto text-center border-2 border-green-lighter bg-green-lightest rounded p-3 shadow">
-                        {{ session('success') }}
+                        {!! session('success') !!}
                     </div>
                 </div>
                 @endif
@@ -58,7 +58,7 @@
                 @if (session()->has('info'))
                 <div class="m-5">
                     <div class="container mx-auto text-center border-2 border-blue-lighter bg-blue-lightest rounded p-3 shadow">
-                        {{ session('info') }}
+                        {!! session('info') !!}
                     </div>
                 </div>
                 @endif
@@ -66,7 +66,7 @@
                 @if (session()->has('status'))
                 <div class="m-5">
                     <div class="container mx-auto text-center border-2 border-blue-lighter bg-blue-lightest rounded p-3 shadow">
-                        {{ session('status') }}
+                        {!! session('status') !!}
                     </div>
                 </div>
                 @endif
