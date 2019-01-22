@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTrackingToComments extends Migration
+class AddPosttypeToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddTrackingToComments extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->boolean('notify')->default(0);
+        Schema::table('posts', function (Blueprint $table) {
+            $table->text('type')->default('post');
         });
     }
 
@@ -25,8 +25,8 @@ class AddTrackingToComments extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('notify');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('type');
         });
     }
 }
