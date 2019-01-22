@@ -14,7 +14,7 @@ class AddPosttypeToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->text('type')->default('post');
+            $table->string('type', 20)->default('post');
         });
     }
 
