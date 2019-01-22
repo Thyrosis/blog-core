@@ -70,6 +70,10 @@ a.btn {
     @apply .text-xs .text-grey .pt-1;
 }
 
+.form-group {
+    @apply .mb-5;
+}
+
 .form-control {
     @apply .shadow .w-full .border .rounded .px-2 .py-2;
 }

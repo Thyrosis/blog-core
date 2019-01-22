@@ -25,6 +25,7 @@
                         <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('admin.tag.index') }}">Tags</a>
                         <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('admin.menu.edit') }}">Menu</a>                        
                         <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('admin.form.index') }}">Form</a>
+                        <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('admin.user.index') }}">Users</a>
                         <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('feeds.main') }}" target="_blank">RSS-feed</a>
                         <a class="no-underline p-2 md:p-5 hover:border-b-2 hover:border-teal" href="{{ route('logout') }}">Logout</a>
                     </div>

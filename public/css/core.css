@@ -761,6 +761,10 @@ a.btn {
   padding-top: .25rem;
 }
 
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
 .form-control {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
