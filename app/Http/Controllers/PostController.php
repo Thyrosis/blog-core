@@ -38,9 +38,7 @@ class PostController extends Controller
             return redirect(route('home'));
         }
 
-        if (auth()->guest()) {
-            $post->increment('views');
-        }
+        $post->view();
 
         $post->previous = $post->previous();
         $post->next = $post->next();
