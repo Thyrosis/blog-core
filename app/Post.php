@@ -15,7 +15,7 @@ use Spatie\Feed\FeedItem;
 
 class Post extends Model implements Feedable
 {
-    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'views', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     protected static function boot()
