@@ -6,6 +6,15 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.10 (2019-01-23)
+
+- Add required column to admin.form.create
+- Add validation to admin.form.create
+- Add Form->toHTML() to retrieve HTMLified form
+- In addition to purifying Post->body, also parse for ||FORM|| tags
+- Add Post->body() method to retrieve original content (non-purified or parsed)
+- Add .form-button CSS class for default buttons
+
 ## 1.0.9 (2019-01-22)
 
 - Added Views to track Post-views.

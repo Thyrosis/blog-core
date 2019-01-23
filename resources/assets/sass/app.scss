@@ -86,6 +86,10 @@ a.btn {
     @apply .text-grey-darker .text-sm .font-bold .mb-2 .block;
 }
 
+.form-button {
+    @apply .font-bold .text-grey-darkest .border-2 .border-grey-darkest .py-2 .px-4 .rounded-lg;
+}
+
 table.admin-table {
     @apply .w-full;
 }

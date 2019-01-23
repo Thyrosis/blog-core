@@ -26,7 +26,7 @@ class AddContentToMenu extends Migration
     public function down()
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->drop('content');
+            $table->dropColumn('content');
         });
     }
 }

@@ -43,6 +43,10 @@ class FormController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @version 20190123    Added required option to create form and store route
+     * 
+     * @todo    Need to make some validation rules for form (token/action).
+     *          Also need to repopulate formfields on validation error.
      */
     public function store(Request $request)
     {
@@ -63,6 +67,7 @@ class FormController extends Controller
                     'elementId' => str_slug($request->elementName[$i]),
                     'class' => $request->class[$i],
                     'description' => $request->description[$i],
+                    'required' => $request->required[$i],
                 ]);
             }
         }
