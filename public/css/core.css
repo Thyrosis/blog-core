@@ -790,6 +790,18 @@ a.btn {
   display: block;
 }
 
+.form-button {
+  font-weight: 700;
+  color: #3d4852;
+  border-width: 2px;
+  border-color: #3d4852;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: .5rem;
+}
+
 table.admin-table {
   width: 100%;
 }

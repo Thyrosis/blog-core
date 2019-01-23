@@ -56,6 +56,32 @@ class Post extends Model implements Feedable
     }
 
     /**
+     * Parse the text for use of placeholders.
+     * 
+     * Currently active:
+     *   Forms : ||FORM||{id}||
+     * 
+     * Planned:
+     *   Mentions : @[username]
+     * 
+     * @param   string $text    Text to parse for placeholders
+     * @return  string
+     * @version 20190123
+     */
+    public function parse($text)
+    {
+        if (str_contains($text, "||FORM||")) {
+            $temptext = explode("||", $text);
+
+            $form = Form::find($temptext[2]);
+
+            $text = str_replace_first("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
+        }
+
+        return $text;
+    }
+
+    /**
      * Process a posts data on create or update.
      * 
      * @param   array   $data
@@ -63,7 +89,8 @@ class Post extends Model implements Feedable
      * @version 20181002    - Only update user_id if there isn't one
      *                      - Only update slug if there is a title
      */
-    public static function processData($data) {
+    public static function processData($data) 
+    {
         // A post is always linked to the currently authenticated user
         if (!isset($data['user_id'])) {
             $data['user_id'] = auth()->id();
@@ -198,15 +225,23 @@ class Post extends Model implements Feedable
         return \Purify::clean($summary);
     }
 
+    public function body()
+    {
+        return $this->attributes['body'];
+    }
+
     /**
      * Access the body attribute.
      *
      * @param  string $body
      * @return string
+     * @version 20190123    Added parsing of Forms
      */
     public function getBodyAttribute($body)
     {
-        return \Purify::clean($body);
+        $body = \Purify::clean($body);
+
+        return $this->parse($body);
     }
 
     /**
