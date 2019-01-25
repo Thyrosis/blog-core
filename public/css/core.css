@@ -823,6 +823,67 @@ table.admin-table {
   display: table-cell;
 }
 
+.admin-nav-link {
+  display: inline-block;
+  color: #b8c2cc;
+  text-decoration: none;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.admin-nav-link-active {
+  display: inline-block;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-nav-link:hover {
+  color: #f1f5f8;
+  text-decoration: underline;
+}
+
+.admin-feedback {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-width: 2px;
+  border-radius: .25rem;
+  padding: .75rem;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+}
+
+.admin-feedback-success {
+  border-color: #a2f5bf;
+  background-color: #e3fcec;
+}
+
+.admin-feedback-warning {
+  border-color: #fcd9b6;
+  background-color: #fff5eb;
+}
+
+.admin-feedback-error {
+  border-color: #f9acaa;
+  background-color: #fcebea;
+}
+
+.admin-feedback-info {
+  border-color: #bcdefa;
+  background-color: #eff8ff;
+}
+
+.admin-feedback-status {
+  border-color: #bcdefa;
+  background-color: #eff8ff;
+}
+
 .list-reset {
   list-style: none;
   padding: 0;

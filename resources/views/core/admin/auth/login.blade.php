@@ -1,5 +1,7 @@
 @extends ('core.layout.app')
 
+@section ('title', 'Dashboard')
+
 @section ('main')
 
 <div class="admin-container">
