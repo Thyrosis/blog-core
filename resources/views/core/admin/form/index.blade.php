@@ -16,53 +16,69 @@
 <div class="admin-container">
     <h3 class="admin-h3">Index</h3>
 
-    <table class="admin-table">
-        <tr class="admin-table-row-header">
-            <th>Name</th>
-            <th>Fields</th>
-            <th>Action</th>
-        </tr>
-
-        @foreach (App\Form::all() as $form)
-        <tr class="admin-table-row">
-            <td class="admin-table-cell">{{ $form->name }}</td>
-            <td>@foreach ($form->fields as $field)
-                {{ $field->name }}, 
-            @endforeach </td>
-            <td>{{ $form->action() }}</td>
-        </tr>
-        @endforeach
-    </table>
-</div>
-
-<div class="admin-container">
-    <h3 class="admin-h3">Responses</h3>
-
-    @foreach ($forms as $form)
-    <table class="admin-table">
-        <tr class="admin-table-row-header">
-            <th>Form</th>
-            <th>Content</th>
-            <th>Date</th>
-        </tr>
-
-        @forelse ($form->responses as $response)
-        <tr class="admin-table-row">
-            <td class="admin-table-cell">{{ $form->name }}</td>
-            <td> @foreach (json_decode($response->content) as $field => $content)
-                <strong>{{ $field }}</strong>: {{ $content }}<br />
-            @endforeach </td>
-            <td>{{ $response->created_at->diffForHumans() }}</td>
-        </tr>
+    <div>
+        <div class="hidden lg:flex lg:flex-row">
+            <div class="cat-name mr-3 w-24">
+                <label class="form-label">Name</label>
+            </div>
+            <div class="cat-name flex-1 mr-3">
+                <label class="form-label">Fields</label>
+            </div>
+            <div class="cat-name mr-3">
+                <label class="form-label">Action</label>
+            </div>
+        </div>
+        @forelse ($forms as $form)
+        <div class="form flex flex-col lg:flex-row @if (!$loop->last) border-b pb-2 mb-2 @endif ">
+            
+            <div class="cat-name mr-3 w-24">
+                <a href="#{{ $form->name }}-{{ $form->id }}" class="text-teal-dark no-underline"><strong>{{ $form->name }}</strong></a>
+            </div>
+            <div class="flex-1 cat-desc mr-3">
+                @foreach ($form->fields as $field)
+                    {{ $field->name }}, 
+                @endforeach
+            </div>
+            <div class="cat-actions hidden lg:inline-block">
+                {{ $form->action() }}
+            </div>            
+        </div>
         @empty
-        <tr class="admin-table-row">
-            <td class="admin-table-cell" colspan="3">
-                No responses yet.
-            </td>
-        </tr>
+            <i>No forms created yet.</i>
         @endforelse
-    </table>
-    @endforeach
+                
+    </div>
 </div>
+
+@foreach ($forms as $form)
+<div class="admin-container">
+    <h3 class="admin-h3"><a name="{{ $form->name}}-{{ $form->id }}">Responses: {{ $form->name }}</a></h3>
+
+    <div>
+        @forelse ($form->responses as $response)
+        <div class="form flex flex-col lg:flex-row @if (!$loop->last) border-b pb-2 mb-2 @endif ">
+            
+            <div class="cat-name mr-3">
+                <label class="form-label" for="name">{{ $form->name }}</label>
+            </div>
+            <div class="flex-1 cat-desc mr-3">
+                @foreach (json_decode($response->content) as $field => $content)
+                    <strong>{{ $field }}</strong>: {{ $content }}<br />
+                @endforeach
+            </div>
+            <div class="cat-actions">
+            {{ $response->created_at->diffForHumans() }}
+            </div>            
+        </div>
+
+        @empty
+        <div class="">
+            <i>No responses yet.</i>
+        </div>
+        @endforelse
+                
+    </div>
+</div>
+@endforeach
 
 @endsection
