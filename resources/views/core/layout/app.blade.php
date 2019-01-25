@@ -35,7 +35,7 @@
 	<div class="container mx-auto mt-32 md:mt-18">
         @include ('core.layout.feedback')
 
-        <div class="page-title my-6">
+        <div class="page-title mx-1 my-6">
             <h1>@yield ('title')</h1>
         </div>
 

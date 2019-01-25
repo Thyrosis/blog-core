@@ -19,11 +19,15 @@ td, th {
 }
 
 .admin-container {
-    @apply .bg-white .border .shadow .mb-5 .p-5 .rounded;
+    @apply .bg-white .border .shadow .mx-1 .mb-5 .p-5 .rounded;
 }
 
 .btn {
     @apply .font-bold .py-2 .px-4 .rounded-lg;
+}
+
+.btn-small {
+    @apply .font-bold .py-1 .px-2 .rounded-lg;
 }
 
 .btn-blue {

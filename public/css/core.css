@@ -687,6 +687,8 @@ th {
   border-width: 1px;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  margin-left: .25rem;
+  margin-right: .25rem;
   margin-bottom: 1.25rem;
   padding: 1.25rem;
   border-radius: .25rem;
@@ -698,6 +700,15 @@ th {
   padding-bottom: .5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  border-radius: .5rem;
+}
+
+.btn-small {
+  font-weight: 700;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
   border-radius: .5rem;
 }
 
