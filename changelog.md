@@ -6,6 +6,13 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.11 (2019-01-28)
+
+- Complete dashboard template overhaul
+- Add responsive elements to admin pages
+- Add option to remove unused form element rows when creating form
+- Store FormResponseController.create feedback in flash variable
+
 ## 1.0.10 (2019-01-23)
 
 - Add required column to admin.form.create
