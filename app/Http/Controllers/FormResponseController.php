@@ -16,11 +16,17 @@ class FormResponseController extends Controller
      */
     public function store(Request $request, Form $form)
     {
-        FormResponse::create([
+        $formResponse = FormResponse::create([
             'form_id' => $form->id,
             'content' => json_encode($request->except('_token')),
         ]);
+        
+        if ($formResponse) {
+            $request->session()->flash('success', 'Form submission successful. Thank you!');
+            redirect()->back();
+        }
 
-        return redirect()->back()->with('success', 'Form entered');
+        $request->session()->flash('error', 'Form submission failed. Please try again.');
+        redirect()->back();
     }
 }
