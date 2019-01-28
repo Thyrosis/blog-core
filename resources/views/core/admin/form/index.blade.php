@@ -18,23 +18,23 @@
 
     <div>
         <div class="hidden lg:flex lg:flex-row">
-            <div class="cat-name mr-3 w-24">
+            <div class="cat-name mr-2 w-1/5">
                 <label class="form-label">Name</label>
             </div>
-            <div class="cat-name flex-1 mr-3">
+            <div class="cat-name flex-1 mr-2">
                 <label class="form-label">Fields</label>
             </div>
-            <div class="cat-name mr-3">
+            <div class="cat-name mr-2">
                 <label class="form-label">Action</label>
             </div>
         </div>
         @forelse ($forms as $form)
         <div class="form flex flex-col lg:flex-row @if (!$loop->last) border-b pb-2 mb-2 @endif ">
             
-            <div class="cat-name mr-3 w-24">
+            <div class="cat-name mr-2 w-1/5">
                 <a href="#{{ $form->name }}-{{ $form->id }}" class="text-teal-dark no-underline"><strong>{{ $form->name }}</strong></a>
             </div>
-            <div class="flex-1 cat-desc mr-3">
+            <div class="flex-1 cat-desc mr-2">
                 @foreach ($form->fields as $field)
                     {{ $field->name }}, 
                 @endforeach
@@ -58,10 +58,10 @@
         @forelse ($form->responses as $response)
         <div class="form flex flex-col lg:flex-row @if (!$loop->last) border-b pb-2 mb-2 @endif ">
             
-            <div class="cat-name mr-3">
+            <div class="cat-name mr-2 w-1/5 hidden lg:block">
                 <label class="form-label" for="name">{{ $form->name }}</label>
             </div>
-            <div class="flex-1 cat-desc mr-3">
+            <div class="flex-1 cat-desc mr-2">
                 @foreach (json_decode($response->content) as $field => $content)
                     <strong>{{ $field }}</strong>: {{ $content }}<br />
                 @endforeach

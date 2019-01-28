@@ -58,7 +58,7 @@ class FormController extends Controller
         $form->fresh();
 
         for ($i = 0; $i < 5; $i++) {
-            if (null !== $request->elementName[$i]) {
+            if (isset($request->elementName[$i]) && null !== $request->elementName[$i]) {
                 FormField::create([
                     'form_id' => $form->id,
                     'input' => $request->input[$i],
