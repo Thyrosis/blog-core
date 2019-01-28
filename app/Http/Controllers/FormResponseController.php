@@ -23,10 +23,10 @@ class FormResponseController extends Controller
         
         if ($formResponse) {
             $request->session()->flash('success', 'Form submission successful. Thank you!');
-            redirect()->back();
+            return redirect()->back();
         }
 
         $request->session()->flash('error', 'Form submission failed. Please try again.');
-        redirect()->back();
+        return redirect()->back();
     }
 }
