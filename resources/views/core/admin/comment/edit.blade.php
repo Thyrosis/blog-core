@@ -12,8 +12,8 @@
         <h3 class="admin-h3">Edit comment</h3>
 
         <div class="mb-5">
-            <label for="name" class="text-grey-darker text-sm font-bold mb-2 block">Name</label>
-            <input type="text" id="name" name="name" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" value="{{ old('name', $comment->name) }}" />
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $comment->name) }}" />
             <p class="form-info">Comment poster</p>
 
             @if ($errors->has('name'))
@@ -24,8 +24,8 @@
         </div>
 
         <div class="mb-5">
-            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">Email Address</label>
-            <input type="email" id="emailaddress" name="emailaddress" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" value="{{ old('emailaddress', $comment->emailaddress) }}" />
+            <label for="emailaddress" class="form-label">Email Address</label>
+            <input type="email" id="emailaddress" name="emailaddress" class="form-control" value="{{ old('emailaddress', $comment->emailaddress) }}" />
             <p class="form-info">Commenter's email address</p>
 
             @if ($errors->has('emailaddress'))
@@ -36,8 +36,8 @@
         </div>
 
         <div class="mb-5">
-            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Comment</label>
-            <textarea id="body" name="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner tinymce-slim" >{{ old('body', $comment->body) }}</textarea>
+            <label for="body" class="form-label">Comment</label>
+            <textarea id="body" name="body" class="form-control tinymce-slim" >{{ old('body', $comment->body) }}</textarea>
             <p class="form-info">Comment text</p>
 
             @if ($errors->has('body'))

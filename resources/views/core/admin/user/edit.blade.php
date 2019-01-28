@@ -5,8 +5,6 @@
 @section ('main')
 
 <div class="admin-container">
-    @dump ($user->toArray())
-
     <form method="POST" action="{{ route('admin.user.update', $user) }}">
         @csrf
         @method ("PATCH")

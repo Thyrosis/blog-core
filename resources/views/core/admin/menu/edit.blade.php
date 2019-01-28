@@ -110,7 +110,7 @@
 						@csrf
 						@method ('PATCH')
 						<input type="hidden" id="hidden_menu" name="hidden_menu" value="" />
-						<button class="btn btn-teal">Save</button>
+						<button class="btn btn-blue">Save</button>
 					</form>					
 				</div>
 			</div>

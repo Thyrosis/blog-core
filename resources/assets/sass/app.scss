@@ -2,8 +2,12 @@
 
 @tailwind components;
 
+.font {
+    font-family: 'Krub', sans-serif;
+}
+
 h1 {
-    @apply .uppercase;
+    @apply .uppercase .font;
 }
 
 p {
@@ -11,7 +15,7 @@ p {
 }
 
 .admin-h3 {
-    @apply .mb-5 .py-1 .border-b .border-teal .text-grey-darkest;
+    @apply .mb-5 .py-1 .border-b .border-teal .text-grey-darkest .font;
 }
 
 td, th {
@@ -79,7 +83,7 @@ a.btn {
 }
 
 .form-control {
-    @apply .shadow .w-full .border .rounded .px-2 .py-2;
+    @apply .shadow .w-full .border .rounded .px-2 .py-2 font;
 }
 
 .form-control:focus {

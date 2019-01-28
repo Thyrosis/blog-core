@@ -5,7 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>{{ config('app.name') }} :: DASHBOARD</title>
-	<meta name="author" content="SaXXites">
+    <meta name="author" content="SaXXites">
+    <link href="https://fonts.googleapis.com/css?family=Krub:400,700" rel="stylesheet">
     <link href="{{ config('app.url') }}/css/core.css" rel="stylesheet">
 
     @yield ('html.head')
@@ -15,14 +16,14 @@
 
 	<nav class="flex items-center justify-between flex-wrap bg-grey-darkest p-6 fixed w-full z-10 pin-t">
 		<div class="flex items-center flex-no-shrink text-white mr-6">
-			<a class="text-white no-underline hover:text-white hover:no-underline" href="#">
-				<span class="text-2xl pl-2">{{ config('app.name') }}</span>
+			<a class="text-white no-underline hover:text-white hover:no-underline" href="{{ config('app.url') }}/admin">
+				<span class="text-2xl pl-2 font">{{ config('app.name') }}</span>
 			</a>
 		</div>
 
 		<div class="block lg:hidden">
 			<button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-grey border-grey-dark hover:text-white hover:border-white">
-				<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
 			</button>
 		</div>
 
@@ -35,7 +36,7 @@
 	<div class="container mx-auto mt-32 md:mt-18">
         @include ('core.layout.feedback')
 
-        <div class="page-title mx-1 my-6">
+        <div class="page-title mx-1 my-6 font">
             <h1>@yield ('title')</h1>
         </div>
 
