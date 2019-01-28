@@ -79,7 +79,7 @@
                             @method('DELETE')
 
                             <button form="form_delete_{{ $category->id }}" type="submit" class="m-1 btn-small btn-red">
-                                <i data-feather="trash"></i>
+                                <i data-feather="trash-2"></i>
                             </button>
                         </form>
                     </div>
