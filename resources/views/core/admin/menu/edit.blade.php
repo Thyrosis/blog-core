@@ -64,41 +64,45 @@
 			</div>
 
 			<div class="flex-1 ml-3">
-				<strong>Categories</strong>
-				<div class="my-2 flex">
-					<select class="flex-1 p-1 border border-teal" id="category">
+				<label class="form-label">Categories</label>
+				<div class="my-2 flex items-center">
+					<select class="flex-1 form-control" id="category">
 					@foreach (App\Category::all() as $category)
 						<option class="p-1" value="{{ $category->url() }}">{{ $category->name }}</option>
 					@endforeach
 					</select>
-					<button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('category');">Add</button>
+					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('category');"></i>
+					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('category');">Add</button> -->
 				</div>
 
-				<strong>Tags</strong>
-				<div class="my-2 flex">
-					<select class="flex-1 p-1 border border-teal" id="tag">
+				<label class="form-label">Tags</label>
+				<div class="my-2 flex items-center">
+					<select class="flex-1 form-control" id="tag">
 					@foreach (App\Tag::all() as $tag)
 						<option class="p-1" value="{{ $tag->url() }}">{{ $tag->name }}</option>
 					@endforeach
 					</select>
-					<button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('tag');">Add</button>
+					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('tag');"></i>
+					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('tag');">Add</button> -->
 				</div>
 
-				<strong>Posts</strong>
-				<div class="my-2 flex">
-					<select class="flex-1 p-1 border border-teal" id="post">
+				<label class="form-label">Posts</label>
+				<div class="my-2 flex items-center">
+					<select class="flex-1 form-control" id="post">
 					@foreach (App\Post::all() as $post)
 						<option class="p-1" value="{{ $post->link() }}">{{ $post->title }}</option>
 					@endforeach
 					</select>
-					<button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('post');">Add</button>
+					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('post');"></i>
+					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('post');">Add</button> -->
 				</div>
 
-				<strong>Custom URL</strong>
-				<div class="my-2 flex">
-					<input placeholder="Name" class="flex-1 p-1 border border-teal" type="text" id="item_name" />
-					<input placeholder="URL" class="flex-1 p-1 border border-teal" type="text" id="item_link" />
-					<button class="border border-teal bg-teal px-3" onClick="addToMenu();">Add</button>
+				<label class="form-label">Custom URL</label>
+				<div class="my-2 flex items-center">
+					<input placeholder="Name" class="flex-1 form-control" type="text" id="item_name" />
+					<input placeholder="URL" class="flex-1 form-control" type="text" id="item_link" />
+					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addToMenu();"></i>
+					<!-- <button class="border border-teal bg-teal px-3" onClick="addToMenu();">Add</button> -->
 				</div>
 
 				<div class="my-2">
