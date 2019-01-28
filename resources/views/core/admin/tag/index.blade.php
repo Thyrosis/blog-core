@@ -18,7 +18,7 @@
         </div>
         <div class="flex-1 tag-desc mr-3">
             <label class="form-label" for="description">Description</label>
-            <input form="form_0" type="text" name="description" id="description" value="{{ old('description') }}" class="w-full form-control" placeholder="Description" />
+            <input form="form_0" type="text" name="description" id="description" value="{{ old('description') }}" class="form-control" placeholder="Description" />
         </div>
         <div class="tag-actions">
             <label class="form-label">Actions</label>

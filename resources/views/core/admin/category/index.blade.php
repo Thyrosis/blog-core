@@ -14,11 +14,11 @@
 
         <div class="cat-name mr-3">
             <label class="form-label" for="name">Name</label>
-            <input form="form_0" type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" placeholder="Name" />
+            <input class="form-control" form="form_0" id="name" name="name" placeholder="Name" type="text" value="{{ old('name') }}" />
         </div>
         <div class="flex-1 cat-desc mr-3">
             <label class="form-label" for="description">Description</label>
-            <input form="form_0" type="text" name="description" id="description" value="{{ old('description') }}" class="w-full form-control" placeholder="Description" />
+            <input class="form-control" form="form_0" id="description" name="description" type="text" placeholder="Description" value="{{ old('description') }}" />
         </div>
         <div class="cat-actions">
             <label class="form-label">Actions</label>
