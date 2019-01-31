@@ -16,8 +16,11 @@ class FormResponseController extends Controller
      */
     public function store(Request $request, Form $form)
     {
+        $mailfield = $form->hasMailField();
+
         $formResponse = FormResponse::create([
             'form_id' => $form->id,
+            'email' => ($mailfield) ? $request->$mailfield : $mailfield,
             'content' => json_encode($request->except('_token')),
         ]);
         

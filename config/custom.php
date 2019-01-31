@@ -25,4 +25,6 @@ return [
     'tinyMCEStyle' => env('TINYMCE_STYLE', 'regular'),
 
     'tinyMCEAPIkey' => env('TINYMCE_APIKEY', false),
+
+    'adminEmailAddress' => env('MAIL_ADMIN_ADDRESS', false),
 ];

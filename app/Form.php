@@ -46,6 +46,17 @@ class Form extends Model
         return $this->hasMany(FormField::class)->orderBy('id', 'ASC');
     }
 
+    public function hasMailField()
+    {        
+        foreach ($this->fields as $field) {
+            if ($field->type == "email") {
+                return $field->elementId;
+            }
+        }
+        
+        return null;
+    }
+
     /**
      * Define the relationship between a form and its responses. 
      * 

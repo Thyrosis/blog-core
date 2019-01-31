@@ -62,7 +62,7 @@ class FormController extends Controller
                 FormField::create([
                     'form_id' => $form->id,
                     'input' => $request->input[$i],
-                    'type' => $request->type[$i],
+                    'type' => ($request->input[$i] == "input" ? $request->type[$i] : null),
                     'name' => $request->elementName[$i],
                     'elementId' => str_slug($request->elementName[$i]),
                     'class' => $request->class[$i],
