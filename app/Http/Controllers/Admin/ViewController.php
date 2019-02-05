@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\View;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class ViewController extends Controller
      */
     public function index()
     {
-        //
+        return view('core.admin.view.index')->with('views', View::with('post')->get()); 
     }
 
     /**
@@ -44,9 +50,9 @@ class ViewController extends Controller
      * @param  \App\View  $View
      * @return \Illuminate\Http\Response
      */
-    public function show(View $View)
+    public function show(View $view)
     {
-        //
+        return view('core.admin.view.show')->with('view', $view); 
     }
 
     /**

@@ -465,6 +465,9 @@ class Post extends Model implements Feedable
         });
     }
 
+    /**
+     * Queue an email to all subscribed email addresses
+     */
     public function notifySubscriptions($comment)
     {
         $this->subscriptions->each(function ($subscription) use ($comment) {
@@ -485,14 +488,15 @@ class Post extends Model implements Feedable
      * @since       20190122
      */
     public function view()
-    {        
+    {
         if (auth()->guest()) {
-            View::create([
+            $view = View::create([
                 'post_id' => $this->id,
                 'url' => request()->url(),
                 'path' => request()->path(),
                 'ipaddress' => null,
-                'iphash' => encrypt(request()->ip()),
+                'iphash' => View::encrypt(request()->ip()),
+                'user_agent' => View::encrypt(request()->header('user-agent')),
             ]);
         }
 

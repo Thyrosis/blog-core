@@ -6,6 +6,12 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.12 (2019-02-05)
+
+- Add user-agent to view recording
+- Add view.index and view.show to Admin panel
+- TODO: listen to DNT-header
+
 ## 1.0.11 (2019-01-28)
 
 - Complete dashboard template overhaul

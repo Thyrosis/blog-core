@@ -72,6 +72,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::patch('menu/update', 'Admin\MenuController@update')->name('admin.menu.update');
     Route::get('menu/show', 'Admin\MenuController@show')->name('admin.menu.show');
 
+    Route::get('view', 'Admin\ViewController@index')->name('admin.view.index');
+    Route::get('view/{view}', 'Admin\ViewController@show')->name('admin.view.show');
+
 });
 
 /**
