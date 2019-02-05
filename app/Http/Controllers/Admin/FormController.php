@@ -12,7 +12,7 @@ class FormController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['submit']);
+        $this->middleware('auth');
     }
 
     /**
