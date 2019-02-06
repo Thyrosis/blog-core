@@ -95,4 +95,25 @@ class SearchTest extends TestCase
         $this->assertArrayHasKey(2, $search->result);
         $this->assertArrayHasKey(3, $search->result);
     }
+
+    /**
+     * @test
+     */
+    public function aSearchWontReturnUnpublishedPosts()
+    {
+        $this->signIn();
+
+        $post = factory(Post::class)->create(['title' => 'A beautiful post']);
+        $post2 = factory(Post::class)->create(['title' => 'Another beautiful post', 'published' => 0]);
+
+        $this->assertEquals(count(Post::all()), 2);
+
+        $response = $this->post(route('search.store'), ['term' => 'beautiful']);
+
+        $search = Search::first();
+
+        $response->assertRedirect(route("search.show", $search));
+        
+        $this->assertEquals(count($search->result), 1);
+    }
 }
