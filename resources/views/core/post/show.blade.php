@@ -13,27 +13,27 @@
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Comments</h3>
+    <h3 class="admin-h3">@lang('Comments')</h3>
 
     @foreach ($post->comments as $comment)
         <div>
-            <p><strong>{{ $comment->name }}</strong> said:<br />
+            <p><strong>{{ $comment->name }}</strong> @lang('said'):<br />
             {!! $comment->body !!}</p>
         </div>
     @endforeach
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Subscribe</h3>
+    <h3 class="admin-h3">@lang('Subscribe')</h3>
 
     <form method="POST" action="{{ route('subscription.store') }}">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post->id }}" />
         
         <div class="mb-5">
-            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">E-mailadres</label>
+            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">@lang('E-mail Address')</label>
             <input type="text" name="emailaddress" id="emailaddress" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('emailaddress') }}" />
-            <p class="form-info">Wordt een URL van gemaakt en toont op de voorpagina</p>
+            <p class="form-info">@lang('Your e-mail address. We\'ll only use it to send you a message when someone replies to this post.')</p>
 
             @if ($errors->has('emailaddress'))
                 <div class="form-error">
@@ -43,23 +43,23 @@
         </div>
 
         <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">Opslaan</button>
-            <button type="reset" class="btn btn-grey">Reset</button>
+            <button type="submit" class="btn btn-blue">@lang('Save')</button>
+            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
         </div>
     </form>
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Comment</h3>
+    <h3 class="admin-h3">@lang('Comment')</h3>
 
     <form method="POST" action="{{ route('comment.store') }}">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post->id }}" />
 
         <div class="mb-5">
-            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">Email adres</label>
+            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">@lang('E-mail Address')</label>
             <input type="email" name="emailaddress" id="emailaddress" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('emailaddress') }}" />
-            <p class="form-info">Wordt een URL van gemaakt en toont op de voorpagina</p>
+            <p class="form-info">@lang('Your e-mail address. We\'ll only use it to send you a message when someone replies to this post.')</p>
 
             @if ($errors->has('emailaddress'))
                 <div class="form-error">
@@ -69,9 +69,9 @@
         </div>
 
         <div class="mb-5">
-            <label for="name" class="text-grey-darker text-sm font-bold mb-2 block">Name</label>
+            <label for="name" class="text-grey-darker text-sm font-bold mb-2 block">@lang('Name')</label>
             <input type="text" name="name" id="name" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('name') }}" />
-            <p class="form-info">Wordt een URL van gemaakt en toont op de voorpagina</p>
+            <p class="form-info">@lang('Your name. Will be published with your comment.')</p>
 
             @if ($errors->has('name'))
                 <div class="form-error">
@@ -81,9 +81,9 @@
         </div>
 
         <div class="mb-5">
-            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">Comment</label>
+            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">@lang('Comment')</label>
             <textarea name="body" id="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required>{{ old('body') }}</textarea>
-            <p class="form-info">Wordt een URL van gemaakt en toont op de voorpagina</p>
+            <p class="form-info">@lang('Your comment')</p>
 
             @if ($errors->has('body'))
                 <div class="form-error">
@@ -93,12 +93,12 @@
         </div>
 
         <div class="form-group">
-            Notify: <input type="checkbox" name="notify" value="1" />
+            @lang('Subscribe'): <input type="checkbox" name="notify" value="1" />
         </div>
 
         <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">Opslaan</button>
-            <button type="reset" class="btn btn-grey">Reset</button>
+            <button type="submit" class="btn btn-blue">@lang('Save')</button>
+            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
         </div>
     </form>
 </div>

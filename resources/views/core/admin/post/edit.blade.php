@@ -1,6 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Posts')
+@section ('title', __('Posts'))
 
 @section ('main')
 
@@ -12,7 +12,7 @@
 
     <div class="admin-container">
         <h3 class="admin-h3 flex justify-between">
-            Edit post
+            @lang('Edit post')
             <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
                 <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
             </a>
@@ -21,9 +21,9 @@
         <div class="mb-5 flex flex-wrap md:flex-no-wrap">
             <div class="mr-5 flex flex-col justify-around">
                 <div class="mb-5">
-                    <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">@lang('Title')</label>
                     <input type="text" id="title" name="title" class="form-control" required value="{{ old('title', $post->title) }}" />
-                    <p class="form-info">The title of the post. Will be turned into a URL-friendly slug too.</p>
+                    <p class="form-info">@lang('The title of the post. Will be turned into a URL-friendly slug too.')</p>
 
                     @if ($errors->has('title'))
                         <div class="form-error">
@@ -45,9 +45,9 @@
                 </div>
 
                 <div class="mb-5">
-                    <label for="longTitle" class="form-label">Long title</label>
+                    <label for="longTitle" class="form-label">@lang('Long title')</label>
                     <input type="text" id="longTitle" name="longTitle" class="form-control" value="{{ old('longTitle', $post->longTitle) }}" />
-                    <p class="form-info">The 'real' title of the article. Doesn't serve any technical purpose but can be used in themes if one so wishes to do so.</p>
+                    <p class="form-info">@lang('The \'real\' title of the article. Doesn\'t serve any technical purpose but can be used in themes if one so wishes to do so.')</p>
 
                     @if ($errors->has('longTitle'))
                         <div class="form-error">
@@ -58,9 +58,9 @@
             </div>
         
             <div class="mb-5">
-                <label for="summary" class="form-label">Summary</label>
+                <label for="summary" class="form-label">@lang('Summary')</label>
                 <textarea id="summary" name="summary" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="10">{{ old('summary', $post->summary) }}</textarea>
-                <p class="form-info">A small summary of the post. Often used on index pages or search results.</p>
+                <p class="form-info">@lang('A small summary of the post. Often used on index pages.')</p>
 
                 @if ($errors->has('summary'))
                     <div class="form-error">
@@ -72,12 +72,12 @@
     </div>
 
     <div class="admin-container">
-        <h3 class="admin-h3">Content</h3>
+        <h3 class="admin-h3">@lang('Content')</h3>
     
         <div class="mb-5">
-            <label for="body" class="form-label">Body</label>
+            <label for="body" class="form-label">@lang('Body')</label>
             <textarea id="body" name="body" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="20">{{ old('body', $post->body()) }}</textarea>
-            <p class="form-info">The body of the post.</p>
+            <p class="form-info">@lang('The body of the post.')</p>
 
             @if ($errors->has('body'))
                 <div class="form-error">
@@ -88,16 +88,16 @@
     </div>
 
     <div class="admin-container">
-        <h3 class="admin-h3">Extra info</h3>
+        <h3 class="admin-h3">@lang('Extra information')</h3>
 
         <div class="flex justify-between">
             <div class="mb-5">
-                <label for="commentable" class="form-label">Allow comments</label>
+                <label for="commentable" class="form-label">@lang('Allow comments')</label>
                 <div class="flex">
                     <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', $post->commentable) == 0 ) checked @endif /> No</div>
                     <div class="my-1 mx-2"><input type="radio" name="commentable" value="1" @if ( old('commentable', $post->commentable) == 1 ) checked @endif /> Yes</div>
                 </div>
-                <p class="form-info">Can be used to show or hide comment fields on the front end.</p>
+                <p class="form-info">@lang('Can be used to show or hide comment fields on the front end.')</p>
 
                 @if ($errors->has('commentable'))
                     <div class="form-error">
@@ -107,12 +107,12 @@
             </div>
                 
             <div class="mb-5">
-                <label for="published" class="form-label">Published status</label>
+                <label for="published" class="form-label">@lang('Published status')</label>
                 <div class="flex flex-wrap">
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', $post->published) == 0 ) checked @endif /> Draft</div>
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', $post->published) == 1 ) checked @endif /> Published</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', $post->published) == 0 ) checked @endif /> @lang('Draft')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', $post->published) == 1 ) checked @endif /> @lang('Published')</div>
                 </div>
-                <p class="form-info">Whether the post is included in 'published' collections.</p>
+                <p class="form-info">@lang('Whether the post is included in \'published\' collections.')</p>
 
                 @if ($errors->has('published'))
                     <div class="form-error">
@@ -122,12 +122,12 @@
             </div>
 
             <div class="mb-5">
-                <label for="featured" class="form-label">Featured post</label>
+                <label for="featured" class="form-label">@lang('Featured post')</label>
                 <div class="flex">            
-                    <div class="my-1 mx-2"><input type="radio" name="featured" value="0" @if ( old('featured', $post->featured) == 0 ) checked @endif /> Nee</div>
-                    <div class="my-1 mx-2"><input type="radio" name="featured" value="1" @if ( old('featured', $post->featured) == 1 ) checked @endif /> Ja</div>
+                    <div class="my-1 mx-2"><input type="radio" name="featured" value="0" @if ( old('featured', $post->featured) == 0 ) checked @endif /> @lang('No')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="featured" value="1" @if ( old('featured', $post->featured) == 1 ) checked @endif /> @lang('Yes')</div>
                 </div>
-                <p class="form-info">Featured posts can for instance be highlighted in the theme or pinned to the top of the page.</p>
+                <p class="form-info">@lang('Featured posts can for instance be highlighted in the theme or pinned to the top of the page.')</p>
 
                 @if ($errors->has('featured'))
                     <div class="form-error">
@@ -138,9 +138,9 @@
         </div>
 
         <div class="mb-5">
-            <label for="featureimage" class="form-label">Feature Image (<a href="{{ config('custom.cdnUrl') }}" target="_blank">CDN</a>)</label>
+            <label for="featureimage" class="form-label">@lang('Feature Image') (<a href="{{ config('custom.cdnUrl') }}" target="_blank">CDN</a>)</label>
             <input type="text" id="featureimage" name="featureimage" class="form-control" value="{{ old('featureimage', $post->featureimage) }}" />
-            <p class="form-info">Doesn't serve a technical purpose, but can be used in themes.</p>
+            <p class="form-info">@lang('Doesn\'t serve a technical purpose, but can be used in themes.')</p>
 
             @if ($errors->has('featureimage'))
                 <div class="form-error">
@@ -150,13 +150,13 @@
         </div>
     
         <div class="mb-5">
-            <label for="categories" class="form-label">Category</label>
+        <label for="categories" class="form-label">@lang('Category')</label>
             <div class="flex  flex-wrap">
                 @foreach (\App\Category::all() as $category)
                 <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id) || $post->categories->pluck('id')->contains($category->id)) checked @endif /> {{ $category->name }}</div>
                 @endforeach
             </div>
-            <p class="form-info">The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.</p>
+            <p class="form-info">@lang('The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.')</p>
 
             @if ($errors->has('categories'))
                 <div class="form-error">
@@ -166,13 +166,13 @@
         </div>
             
         <div class="mb-5">
-            <label for="tags" class="form-label">Tags</label>
+            <label for="tags" class="form-label">@lang('Tags')</label>
             <div class="flex flex-wrap">
                 @foreach (\App\Tag::all() as $tag)
                 <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id) || $post->tags->pluck('id')->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
                 @endforeach
             </div>
-            <p class="form-info">The tags to which this post is linked. You could use just one, but you should probably use a category for that.</p>
+            <p class="form-info">@lang('The tags to which this post is linked. You could use just one, but you should probably use a category for that.')</p>
 
             @if ($errors->has('tags'))
                 <div class="form-error">
@@ -182,11 +182,11 @@
         </div>
 
         <div class="mb-5">
-            <label for="published_at" class="form-label">Publish date and time</label>
+            <label for="published_at" class="form-label">@lang('Publish date and time')</label>
             <input type="date" id="published_at_date" name="published_at_date" class="form-control w-1/5" value="{{ old('published_at_date', $post->published_at->toDateString()) }}" />
             <input type="time" id="published_at_time" name="published_at_time" class="form-control w-1/5" value="{{ old('published_at_time', $post->published_at->format('H:i')) }}" />
 
-            <p class="form-info">Publishing date and time. A date in the past with status set to published means the post will be published immediately. Current time: {{ \Carbon\Carbon::now()->format('H:i') }}</small>
+            <p class="form-info">@lang('Publishing date and time. A date in the past with status set to published means the post will be published immediately.') @lang('Current time'): {{ \Carbon\Carbon::now()->format('H:i') }}</p>
 
             @if ($errors->has('published_at_date'))
                 <div class="form-error">
@@ -202,8 +202,8 @@
         </div>
 
         <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">Update</button>
-            <button type="reset" class="btn btn-grey">Reset</button>
+            <button type="submit" class="btn btn-blue">@lang('Update')</button>
+            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
         </div>
     </div>
 </form>
@@ -213,14 +213,14 @@
     @method ('DELETE')
 
     <div class="admin-container">
-        <h3 class="admin-h3">Delete post</h3>
+        <h3 class="admin-h3">@lang('Delete post')</h3>
 
         <p>
-            If you use this button, you will completely delete a post from all records. It will vanish into the nothingness that is called void. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you've written, just unpublish it.
+            @lang('If you use this button, you will completely delete a post from all records. It will vanish into the nothingness that is called void. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you\'ve written, just unpublish it.')
         </p>
 
         <div class="mb-5">
-            <button type="submit" class="btn btn-red" onclick="return confirm('Are you really, absolutely, one hunderd percent sure you want to delete this post? It cannot be undone!');">Delete</button>
+            <button type="submit" class="btn btn-red" onclick="return confirm('Are you really, absolutely, one hunderd percent sure you want to delete this post? It cannot be undone!');">@lang('Delete')</button>
         </div>
     </div>    
 </form>

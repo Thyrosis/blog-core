@@ -25,16 +25,6 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('core.admin.tag.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,17 +40,6 @@ class TagController extends Controller
         Tag::create($data);
 
         return redirect(route('admin.tag.index'))->with('success', 'Tag saved');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tag $tag)
-    {
-        return view('core.admin.tag.edit')->with('tag', $tag);
     }
 
     /**

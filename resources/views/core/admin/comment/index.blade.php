@@ -1,19 +1,19 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Comments')
+@section ('title', __('Comments'))
 
 @section ('main')
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     <table class="w-full">
         <tr class="border-b">
-            <th class="table-cell">Name</th>
-            <th class="hidden lg:table-cell">Email</th>
-            <th class="table-cell">Post</th>
-            <th class="table-cell">Content</th>
-            <th class="hidden lg:table-cell">Date</th>
-            <th class="table-cell" colspan="3">Actions</th>
+            <th class="table-cell">@lang('Name')</th>
+            <th class="hidden lg:table-cell">@lang('E-mail Address')</th>
+            <th class="table-cell">@lang('Post')</th>
+            <th class="table-cell">@lang('Content')</th>
+            <th class="hidden lg:table-cell">@lang('Date')</th>
+            <th class="table-cell" colspan="3">@lang('Actions')</th>
         </tr>
 
         @foreach ($comments as $comment)

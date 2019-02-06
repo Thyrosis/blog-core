@@ -6,6 +6,6 @@
     </div>
 
     <div class="mt-5">
-        <a href="{{ $post->path() }}">Read on</a>
+        <a href="{{ $post->path() }}">@lang('Read on')</a>
     </div>
 </div>

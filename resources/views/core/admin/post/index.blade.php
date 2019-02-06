@@ -1,29 +1,29 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Posts')
+@section ('title', __('Posts'))
 
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">New Post</h3>
+    <h3 class="admin-h3">@lang('New Post')</h3>
     <p>
         <a href="{{ route('admin.post.create') }}" class="btn btn-teal">
-            Create
+            @lang('Create')
         </a>
     </p>
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     <table class="w-full">
         <tr class="border-b">
-            <th class="table-cell">Title</th>
-            <th class="hidden lg:table-cell">Summary</th>
-            <th class="hidden lg:table-cell">Published at</th>
-            <th class="hidden lg:table-cell">Views</th>
-            <th class="hidden lg:table-cell">Comments</th>
-            <th class="table-cell" colspan="2">Actions</th>
+            <th class="table-cell">@lang('Title')</th>
+            <th class="hidden lg:table-cell">@lang('Summary')</th>
+            <th class="hidden lg:table-cell">@lang('Published at')</th>
+            <th class="hidden lg:table-cell">@lang('Views')</th>
+            <th class="hidden lg:table-cell">@lang('Comments')</th>
+            <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
         @foreach ($posts->sortByDesc('published_at') as $post)
         <tr class="border-b border-grey-light hover:border-blue">

@@ -1,18 +1,18 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Views')
+@section ('title', __('Views'))
 
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">View</h3>
+    <h3 class="admin-h3">@lang('View')</h3>
 
     <table class="w-full">
         <tr class="border-b">
-            <th class="table-cell">Post</th>
-            <th class="hidden lg:table-cell">Date</th>
-            <th class="hidden lg:table-cell">IP address</th>
-            <th class="hidden lg:table-cell">User Agent</th>
+            <th class="table-cell">@lang('Post')</th>
+            <th class="hidden lg:table-cell">@lang('Date')</th>
+            <th class="hidden lg:table-cell">@lang('IP Address')</th>
+            <th class="hidden lg:table-cell">@lang('User Agent')</th>
         </tr>
         <tr>
             <td class="table-cell">{{ $view->post->title }}</td>
@@ -21,7 +21,7 @@
             <td class="hidden lg:table-cell">{{ App\View::decrypt($view->user_agent) }}</td>
         </tr>
         <tr>
-            <th colspan="4">Related views</th>
+            <th colspan="4">@lang('Related Views')</th>
         </tr>
         @foreach ($view->getSame('user_agent') as $v)
         <tr class="border-b border-grey-light hover:border-blue">

@@ -20,6 +20,6 @@
     @endforeach
 
     <div class="form-group">
-        <button type="submit">Send</button>
+        <button type="submit">@lang('Send')</button>
     </div>
 </form>

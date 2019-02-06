@@ -1,19 +1,19 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Views')
+@section ('title', __('Views'))
 
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     <table class="w-full">
         <tr class="border-b">
-            <th class="table-cell">Post</th>
-            <th class="hidden lg:table-cell">Date</th>
-            <th class="hidden lg:table-cell">IP address</th>
-            <th class="hidden lg:table-cell">User Agent</th>
-            <th class="table-cell">Actions</th>
+            <th class="table-cell">@lang('Post')</th>
+            <th class="hidden lg:table-cell">@lang('Date')</th>
+            <th class="hidden lg:table-cell">@lang('IP Address')</th>
+            <th class="hidden lg:table-cell">@lang('User Agent')</th>
+            <th class="table-cell">@lang('Actions')</th>
         </tr>
 
         @foreach ($views as $view)

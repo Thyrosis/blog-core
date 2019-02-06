@@ -1,6 +1,6 @@
 @extends('core.layout.app')
 
-@section ('title', 'Menu')
+@section ('title', __('Menu'))
 
 @section ('html.head')
 <style>
@@ -29,10 +29,9 @@
 
 	<div class="admin-container">
 
-		<h3 class="admin-h3">Arrange your menu</h3>
+		<h3 class="admin-h3">@lang('Arrange your menu')</h3>
 		
-		<p>On the left side, the current menu is displayed. Just click and drag an item to the place you want them to be.</p>
-		<p>On the right side, you can add categories, tags, posts or custom links to the menu.</p>
+		@lang('<p>On the left side, the current menu is displayed. Just click and drag an item to the place you want them to be.</p><p>On the right side, you can add categories, tags, posts or custom links to the menu.</p>')
 
 		<div class="flex">
 			<div class="flex-1 mr-3">
@@ -64,7 +63,7 @@
 			</div>
 
 			<div class="flex-1 ml-3">
-				<label class="form-label">Categories</label>
+				<label class="form-label">@lang('Categories')</label>
 				<div class="my-2 flex items-center">
 					<select class="flex-1 form-control" id="category">
 					@foreach (App\Category::all() as $category)
@@ -75,7 +74,7 @@
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('category');">Add</button> -->
 				</div>
 
-				<label class="form-label">Tags</label>
+				<label class="form-label">@lang('Tags')</label>
 				<div class="my-2 flex items-center">
 					<select class="flex-1 form-control" id="tag">
 					@foreach (App\Tag::all() as $tag)
@@ -86,7 +85,7 @@
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('tag');">Add</button> -->
 				</div>
 
-				<label class="form-label">Posts</label>
+				<label class="form-label">@lang('Posts')</label>
 				<div class="my-2 flex items-center">
 					<select class="flex-1 form-control" id="post">
 					@foreach (App\Post::all() as $post)
@@ -97,10 +96,10 @@
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('post');">Add</button> -->
 				</div>
 
-				<label class="form-label">Custom URL</label>
+				<label class="form-label">@lang('URL')</label>
 				<div class="my-2 flex items-center">
-					<input placeholder="Name" class="flex-1 form-control" type="text" id="item_name" />
-					<input placeholder="URL" class="flex-1 form-control" type="text" id="item_link" />
+					<input placeholder="@lang('Name')" class="flex-1 form-control" type="text" id="item_name" />
+					<input placeholder="@lang('URL')" class="flex-1 form-control" type="text" id="item_link" />
 					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addToMenu();"></i>
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addToMenu();">Add</button> -->
 				</div>
@@ -110,7 +109,7 @@
 						@csrf
 						@method ('PATCH')
 						<input type="hidden" id="hidden_menu" name="hidden_menu" value="" />
-						<button class="btn btn-blue">Save</button>
+						<button class="btn btn-blue">@lang('Save')</button>
 					</form>					
 				</div>
 			</div>
