@@ -50,14 +50,13 @@
 		}
     </script>
     
-    <script src='https://cloud.tinymce.com/5-testing/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
+    <script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
     <script>
         tinymce.init({
             selector: '.tinymce-full',                
             autosave_retention: "4320m",
             autosave_interval: "15s",
-            block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Quote=blockquote;Preformatted=pre',
-            branding: false,
+            block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Quote=blockquote;Preformatted=pre',
             browser_spellcheck: true,
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
