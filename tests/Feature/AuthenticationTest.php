@@ -20,7 +20,7 @@ class AuthenticationTest extends TestCase
      */
     public function aLoginPageIsShownToUnauthenticatedUser()
     {
-        $this->get(route('login'))->assertStatus(200)->assertSee('Login');
+        $this->get(route('login'))->assertStatus(200);
     }
 
     /**
@@ -28,7 +28,7 @@ class AuthenticationTest extends TestCase
      */
     public function aUserCanResetTheirPassword()
     {
-        $this->get(route('password.request'))->assertStatus(200)->assertSee('Password');
+        $this->get(route('password.request'))->assertStatus(200);
     }
 
     /**

@@ -42,14 +42,15 @@ class SearchController extends Controller
                 'term' => 'required'
             ]
         );
-
+        
         $term = $data['term'];
 
-        $data['result'] = Post::where('body', 'like', '%' . $term . '%')
+        $data['result'] = Post::where('published', 1)->where(function ($query) use ($term) {
+            $query->where('body', 'like', '%' . $term . '%')
             ->orWhere('summary', 'like', '%' . $term . '%')
             ->orWhere('longTitle', 'like', '%' . $term . '%')
-            ->orWhere('title', 'like', '%' . $term . '%')
-            ->pluck('id');
+            ->orWhere('title', 'like', '%' . $term . '%');
+        })->pluck('id');
 
         $data['uuid'] = (string)Str::uuid();
 
