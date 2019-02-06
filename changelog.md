@@ -6,6 +6,12 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.13 (2019-02-06)
+
+- Add multilangual support with nl.json translation file
+- Switch TinyMCE Cloud from 5-testing to 5 (stable)
+- Composer update to Laravel 5.7.25
+
 ## 1.0.12 (2019-02-05)
 
 - Add user-agent to view recording
