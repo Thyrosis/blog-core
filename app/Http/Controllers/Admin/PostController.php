@@ -66,17 +66,6 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        return view('core.admin.post.show')->with('post', $post);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Post  $post

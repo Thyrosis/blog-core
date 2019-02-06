@@ -45,20 +45,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('comment/{comment}', 'Admin\CommentController@destroy')->name('admin.comment.destroy');
 
     Route::get('category', 'Admin\CategoryController@index')->name('admin.category.index');
-    Route::get('category/create', 'Admin\CategoryController@create')->name('admin.category.create');
     Route::post('category', 'Admin\CategoryController@store')->name('admin.category.store');
-    Route::get('category/{category}/edit', 'Admin\CategoryController@edit')->name('admin.category.edit');
     Route::patch('category/{category}', 'Admin\CategoryController@update')->name('admin.category.update');
     Route::delete('category/{category}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
-    Route::get('category/{category}', 'Admin\CategoryController@show')->name('admin.category.show');
 
     Route::get('tag', 'Admin\TagController@index')->name('admin.tag.index');
-    Route::get('tag/create', 'Admin\TagController@create')->name('admin.tag.create');
     Route::post('tag', 'Admin\TagController@store')->name('admin.tag.store');
-    Route::get('tag/{tag}/edit', 'Admin\TagController@edit')->name('admin.tag.edit');
     Route::patch('tag/{tag}', 'Admin\TagController@update')->name('admin.tag.update');
     Route::delete('tag/{tag}', 'Admin\TagController@destroy')->name('admin.tag.destroy');
-    Route::get('tag/{tag}', 'Admin\TagController@show')->name('admin.tag.show');
 
     Route::get('subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');
     Route::post('subscription', 'Admin\SubscriptionController@store')->name('admin.subscription.store');

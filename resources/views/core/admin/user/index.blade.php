@@ -1,19 +1,19 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Users')
+@section ('title', __('Users'))
 
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     <table class="w-full">
         <tr class="border-b">
-            <th class="table-cell">Name</th>
-            <th class="hidden lg:table-cell">Email</th>
-            <th class="hidden lg:table-cell">Joined at</th>
-            <th class="hidden lg:table-cell">Last Login</th>
-            <th class="table-cell" colspan="2">Actions</th>
+            <th class="table-cell">@lang('Name')</th>
+            <th class="hidden lg:table-cell">@lang('E-mail Address')</th>
+            <th class="hidden lg:table-cell">@lang('Joined at')</th>
+            <th class="hidden lg:table-cell">@lang('Last Login')</th>
+            <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
         @foreach ($users as $user)
         <tr class="border-b border-grey-light hover:border-blue">

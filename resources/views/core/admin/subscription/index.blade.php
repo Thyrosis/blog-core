@@ -1,13 +1,13 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Subscriptions')
+@section ('title', __('Subscriptions'))
 
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">Purge subscriptions</h3>
+    <h3 class="admin-h3">@lang('Purge subscriptions')</h3>
     <p>
-        <b>Warning:</b> Clicking this button will remove all subscriptions connected to unpublished posts.
+        @lang('<b>Warning:</b> Clicking this button will remove all subscriptions connected to unpublished posts.')
     </p>
     <p>
         &nbsp;
@@ -25,7 +25,7 @@
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     @foreach ($subscriptions as $post_id => $subscriptions)
     <div class="mb-5">

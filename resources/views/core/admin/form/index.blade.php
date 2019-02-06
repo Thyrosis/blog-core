@@ -1,31 +1,31 @@
 @extends ('core.layout.app')
 
-@section ('title', 'Forms')
+@section ('title', __('Forms'))
     
 @section ('main')
 
 <div class="admin-container">
-    <h3 class="admin-h3">New Form</h3>
+    <h3 class="admin-h3">@lang('Create new form')</h3>
     <p>
         <a href="{{ route('admin.form.create') }}" class="btn btn-teal">
-            Create
+            @lang('Create')
         </a>
     </p>
 </div>
 
 <div class="admin-container">
-    <h3 class="admin-h3">Index</h3>
+    <h3 class="admin-h3">@lang('Index')</h3>
 
     <div>
         <div class="hidden lg:flex lg:flex-row">
             <div class="cat-name mr-2 w-1/5">
-                <label class="form-label">Name</label>
+                <label class="form-label">@lang('Name')</label>
             </div>
             <div class="cat-name flex-1 mr-2">
-                <label class="form-label">Fields</label>
+                <label class="form-label">@lang('Fields')</label>
             </div>
             <div class="cat-name mr-2">
-                <label class="form-label">Action</label>
+                <label class="form-label">@lang('Action')</label>
             </div>
         </div>
         @forelse ($forms as $form)
@@ -44,7 +44,7 @@
             </div>            
         </div>
         @empty
-            <i>No forms created yet.</i>
+            <i>@lang('No forms created yet.')</i>
         @endforelse
                 
     </div>
@@ -52,7 +52,7 @@
 
 @foreach ($forms as $form)
 <div class="admin-container">
-    <h3 class="admin-h3"><a name="{{ $form->name}}-{{ $form->id }}">Responses: {{ $form->name }}</a></h3>
+    <h3 class="admin-h3"><a name="{{ $form->name}}-{{ $form->id }}">@lang('Responses'): {{ $form->name }}</a></h3>
 
     <div>
         @forelse ($form->responses as $response)
@@ -73,7 +73,7 @@
 
         @empty
         <div class="">
-            <i>No responses yet.</i>
+            <i>@lang('No responses yet.')</i>
         </div>
         @endforelse
                 

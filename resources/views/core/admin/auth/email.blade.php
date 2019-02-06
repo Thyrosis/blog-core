@@ -1,8 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title')
-    {{ __('Reset Password') }}
-@endsection
+@section ('title', __('Reset Password'))
 
 @section ('main')
 
@@ -11,10 +9,10 @@
         @csrf
 
         <div class="mb-4">
-            <label for="email" class="block text-grey-darker text-sm font-bold mb-2">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="block text-grey-darker text-sm font-bold mb-2">@lang('E-Mail Address')</label>
 
             <div>
-                <input id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus placeholder="email@address.ext" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline">
+                <input id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus placeholder="@lang('email@address.ex')" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline">
 
                 @if ($errors->has('email'))
                     <div class="form-error">
