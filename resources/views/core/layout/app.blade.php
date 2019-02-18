@@ -61,9 +61,11 @@
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
             ],
+            document_base_url : '{{ config('app.url') }}',
             extended_valid_elements: "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style]",
             image_advtab: true,
             plugins: 'advlist anchor code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template  textpattern toc visualblocks visualchars wordcount',
+            relative_urls : true,
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }

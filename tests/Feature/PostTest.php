@@ -43,6 +43,8 @@ class PostTest extends TestCase
      */
     public function anUnpublishedPostWontShowOnIndex()
     {
+        $this->withoutExceptionHandling();
+        
         $posts = factory(Post::class, 4)->create();
         $unpublishedPost = factory(Post::class)->create();
         $unpublishedPost->update(['title' => 'NotShowing', 'published' => 0]);
