@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
-use Illuminate\Http\Request;
+use App\Setting;
 
 class TagController extends Controller
 {
@@ -18,7 +18,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $posts = $tag->publishedPosts()->latest()->simplePaginate(config('custom.postsPerPage'));
+        $posts = $tag->publishedPosts()->latest()->simplePaginate(Setting::get('post.showPerPage'));
         return view()->first(['tag.index', 'post.index', 'core.tag.index'])->with('tag', $tag)->with('posts', $posts);
     }
 }

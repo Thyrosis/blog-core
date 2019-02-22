@@ -5,6 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Post;
+use App\Setting;
 
 class UniqueSlug implements Rule
 {
@@ -27,7 +28,7 @@ class UniqueSlug implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (config('custom.allowRandomSlugs')) {
+        if (Setting::get('post.allowRandomSlugs')) {
             return !DB::table('posts')->where('slug', Post::createSlug($value))->exists();
         }
 

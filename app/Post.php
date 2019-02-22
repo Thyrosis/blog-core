@@ -173,7 +173,7 @@ class Post extends Model implements Feedable
         }
 
         if ($default) {
-            return config('custom.featureImage');
+            return Setting::get('post.defaultFeatureImage');
         }
 
         return false;
@@ -256,7 +256,7 @@ class Post extends Model implements Feedable
             ->summary( (!empty($this->summary)) ? strip_tags($this->summary) : $this->wordLimit(50) )
             ->updated($this->published_at)
             ->link($this->link)
-            ->author($this->user->name ?? config('custom.defaultAuthor'));
+            ->author($this->user->name ?? Setting::get('post.defaultAuthor'));
     }
 
     public static function getFeedItems()

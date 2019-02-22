@@ -135,5 +135,31 @@
     "Search for...": "Zoeken naar...",
     "We'll search in title, summary and body for you.": "We zoeken voor je in het onderwerp, de samenvatting en de tekst van alle posts.",
     "Search Results": "Zoekresultaten",
-    "No results found": "Geen resultaten gevonden"
+    "No results found": "Geen resultaten gevonden",
+
+    "Allow random slugs": "Gebruik willekeurige URLs",
+    "If the title of the new post would result in an URL already in use, allow the application to append a random string to the URL so that duplicate titles are allowed.": "Als de titel van een post of pagina al bestaat, gebruik een aantal willekeurige karakters in de URL om de titel toch te kunnen hergebruiken.",
+
+    "Default Author": "Standaard naam",
+    "This author name is used when no username can't be found": "De naam die wordt weergegeven als een post geen gekoppelde gebruiker (meer) heeft.",
+    "Anonymous": "Anoniem",
+
+    "Posts per page": "Artikelen per pagina",
+    "On index pages, this is the amount of posts that are shown per page": "Op overzichtspagina's worden er zo veel artikelen per pagina getoond.",
+
+    "New comment subject": "Onderwerp 'Nieuwe reactie'",
+    "The subject for new comment notifcation emails.": "Het onderwerp van de e-mail die een volger van een artikel ontvangt.",
+    "A new comment has been posted": "Een nieuwe reactie is geplaatst",
+    "Notification thanks": "Bedankttekst aanmelding",
+    "The thank you message for subscribing to a post.": "De tekst die getoond wordt aan iemand die zich aanmeldt voor updates op een artikel.",
+    "Thanks! You'll receive a notification when a new comment is posted.": "Bedankt! Je ontvangt een berichtje als er een reactie geplaatst wordt.",
+
+    "TinyMCE API key": "TinyMCE API-sleutel",
+    "The API key for TinyMCE cloud.": "De API-sleutel om gebruik te kunnen maken van TinyMCE cloud.",
+
+    "CDN URL": "CDN adres",
+    "The URL where feature images are retrieved from.": "Het adres van de website waar uitgelichte afbeeldingen worden gezocht.",
+
+    "Allow registrations": "Registraties toestaan",
+    "Allow for new users to register themselves via the site.": "Sta bezoekers toe om zichzelf te registreren als gebruiker op je website."
 }

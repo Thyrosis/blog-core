@@ -6,6 +6,13 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.14 (2019-02-22)
+
+- Composer update to Laravel 5.7.26
+- Add database settings
+- Skip Googlebot when storing views
+- Attempt to fix Purify's target="_blank" issue (but failed to some extent)
+
 ## 1.0.13 (2019-02-06)
 
 - Add multilangual support with nl.json translation file

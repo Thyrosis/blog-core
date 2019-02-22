@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Rules\UniqueSlug;
-use Illuminate\Http\Request;
+use App\Setting;
 
 class PostController extends Controller
 {
@@ -18,10 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //$posts = Post::getPublished()->where('featured', 0)->simplePaginate(config('custom.postsPerPage'));
-        //$featuredPosts = Post::getPublished()->where('featured', 1)->get();
-
-        $posts = Post::getPublished()->simplePaginate(config('custom.postsPerPage'));
+        $posts = Post::getPublished()->simplePaginate(Setting::get('post.showPerPage'));
 
         return view()->first(['post.index', 'core.post.index'])->with('posts', $posts);
     }

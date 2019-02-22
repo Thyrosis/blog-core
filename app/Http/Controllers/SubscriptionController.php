@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use App\Setting;
 
 class SubscriptionController extends Controller
 {
@@ -31,7 +32,7 @@ class SubscriptionController extends Controller
             return redirect()->back()->with("error", "Oops... I don't know what happened, but adding your subscription obviously failed.");
         }
 
-        return redirect()->back()->with("success", config('custom.commentSubscriptionAdded'));
+        return redirect()->back()->with("success", Setting::get('comment.notification.subscribed'));
     }
 
     /**
