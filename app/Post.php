@@ -5,11 +5,12 @@ namespace App;
 use App\Mail\NewComment;
 use App\View;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
@@ -490,14 +491,16 @@ class Post extends Model implements Feedable
     public function view()
     {
         if (auth()->guest()) {
-            $view = View::create([
-                'post_id' => $this->id,
-                'url' => request()->url(),
-                'path' => request()->path(),
-                'ipaddress' => null,
-                'iphash' => View::encrypt(request()->ip()),
-                'user_agent' => View::encrypt(request()->header('user-agent')),
-            ]);
+            if (!Str::contains(request()->header('user-agent'), ['Googlebot', 'bing'])) {
+                $view = View::create([
+                    'post_id' => $this->id,
+                    'url' => request()->url(),
+                    'path' => request()->path(),
+                    'ipaddress' => null,
+                    'iphash' => View::encrypt(request()->ip()),
+                    'user_agent' => View::encrypt(request()->header('user-agent')),
+                ]);
+            }
         }
 
         return $this;
