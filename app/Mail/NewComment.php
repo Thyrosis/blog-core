@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Comment;
+use App\Setting;
 
 class NewComment extends Mailable
 {
@@ -31,6 +32,6 @@ class NewComment extends Mailable
      */
     public function build()
     {
-        return $this->subject(config('custom.commentSubject'))->markdown('mail.newComment');
+        return $this->subject(Setting::get('comment.notification.subject'))->markdown('mail.newComment');
     }
 }

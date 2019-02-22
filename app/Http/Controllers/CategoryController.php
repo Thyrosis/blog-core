@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Setting;
 
 class CategoryController extends Controller
 {
@@ -19,7 +20,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = $category->publishedPosts()->latest()->simplePaginate(config('custom.postsPerPage'));
+        $posts = $category->publishedPosts()->latest()->simplePaginate(Setting::get('post.showPerPage'));
         return view()->first(['category.index', 'post.index', 'core.category.index'])->with('category', $category)->with('posts', $posts);
     }
 }

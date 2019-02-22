@@ -59,7 +59,7 @@
         
             <div class="mb-5">
                 <label for="summary" class="form-label">@lang('Summary')</label>
-                <textarea id="summary" name="summary" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="10">{{ old('summary', $post->summary) }}</textarea>
+                <textarea id="summary" name="summary" class="form-control tinymce-full" rows="10">{{ old('summary', $post->summary) }}</textarea>
                 <p class="form-info">@lang('A small summary of the post. Often used on index pages.')</p>
 
                 @if ($errors->has('summary'))
@@ -76,7 +76,7 @@
     
         <div class="mb-5">
             <label for="body" class="form-label">@lang('Body')</label>
-            <textarea id="body" name="body" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="20">{{ old('body', $post->body()) }}</textarea>
+            <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body', $post->body()) }}</textarea>
             <p class="form-info">@lang('The body of the post.')</p>
 
             @if ($errors->has('body'))
@@ -138,7 +138,7 @@
         </div>
 
         <div class="mb-5">
-            <label for="featureimage" class="form-label">@lang('Feature Image') (<a href="{{ config('custom.cdnUrl') }}" target="_blank">CDN</a>)</label>
+            <label for="featureimage" class="form-label">@lang('Feature Image') (<a href="{{ Setting::get('cdn.url') }}" target="_blank">CDN</a>)</label>
             <input type="text" id="featureimage" name="featureimage" class="form-control" value="{{ old('featureimage', $post->featureimage) }}" />
             <p class="form-info">@lang('Doesn\'t serve a technical purpose, but can be used in themes.')</p>
 

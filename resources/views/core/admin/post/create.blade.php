@@ -38,7 +38,7 @@
 
             <div>
                 <label for="summary" class="form-label">@lang('Summary')</label>
-                <textarea id="summary" name="summary" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="10">{{ old('summary') }}</textarea>
+                <textarea id="summary" name="summary" class="form-control tinymce-full" rows="10">{{ old('summary') }}</textarea>
                 <p class="form-info">@lang('A small summary of the post. Often used on index pages.')</p>
 
                 @if ($errors->has('summary'))
@@ -55,7 +55,7 @@
 
         <div class="mb-5">
             <label for="body" class="form-label">@lang('Body')</label>
-            <textarea id="body" name="body" class="form-control tinymce-{{ config('custom.tinyMCEStyle')}}" rows="20">{{ old('body') }}</textarea>
+            <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body') }}</textarea>
             <p class="form-info">@lang('The body of the post.')</p>
 
             @if ($errors->has('body'))
@@ -73,8 +73,8 @@
             <div class="mb-5">
                 <label for="commentable" class="form-label">@lang('Allow comments')</label>
                 <div class="flex">
-                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', config('custom.defaultCommentable')) == 0 ) checked @endif /> @lang('No')</div>
-                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="1" @if ( old('commentable', config('custom.defaultCommentable')) == 1 ) checked @endif /> @lang('Yes')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', Setting::get('post.commentable')) == 0 ) checked @endif /> @lang('No')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="commentable" value="1" @if ( old('commentable', Setting::get('post.commentable')) == 1 ) checked @endif /> @lang('Yes')</div>
                 </div>
                 <p class="form-info">@lang('Can be used to show or hide comment fields on the front end.')</p>
 
@@ -88,8 +88,8 @@
             <div class="mb-5">
                 <label for="published" class="form-label">@lang('Published status')</label>
                 <div class="flex flex-wrap">
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', config('custom.defaultPublished')) == 0 ) checked @endif /> @lang('Draft')</div>
-                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', config('custom.defaultPublished')) == 1 ) checked @endif /> @lang('Published')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', Setting::get('post.published')) == 0 ) checked @endif /> @lang('Draft')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="published" value="1" @if ( old('published', Setting::get('post.published')) == 1 ) checked @endif /> @lang('Published')</div>
                 </div>
                 <p class="form-info">@lang('Whether the post is included in \'published\' collections.')</p>
 
@@ -117,8 +117,8 @@
         </div>
 
         <div class="mb-5">
-            <label for="featureimage" class="form-label">@lang('Feature Image') (<a href="{{ config('custom.cdnUrl') }}" target="_blank">CDN</a>)</label>
-            <input class="form-control" id="featureimage" name="featureimage" type="text" value="{{ old('featureimage') }}" />
+            <label for="featureimage" class="form-label">@lang('Feature Image') (<a href="{{ Setting::get('cdn.url') }}" target="_blank">CDN</a>)</label>
+            <input class="form-control" id="featureimage" name="featureimage" type="text" value="{{ old('featureimage', Setting::get('post.defaultFeatureImage')) }}" />
             <p class="form-info">@lang('Doesn\'t serve a technical purpose, but can be used in themes.')</p>
 
             @if ($errors->has('featureimage'))

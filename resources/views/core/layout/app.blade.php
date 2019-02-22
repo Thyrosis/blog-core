@@ -50,7 +50,7 @@
 		}
     </script>
     
-    <script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ config("custom.tinyMCEAPIkey") }}'></script>
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ Setting::get('tinyMCE.license') }}"></script>
     <script>
         tinymce.init({
             selector: '.tinymce-full',                

@@ -12,5 +12,5 @@ Alles lezen
 @endcomponent
 
 Groetjes,<br>
-{{ config('custom.defaultAuthor') }}
+{{ config('app.name') }}
 @endcomponent
