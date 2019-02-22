@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('view', 'Admin\ViewController@index')->name('admin.view.index');
     Route::get('view/{view}', 'Admin\ViewController@show')->name('admin.view.show');
 
+
+
 });
 
 /**
@@ -105,6 +107,7 @@ Route::feeds();
  */
 App\Form::routes();
 App\User::routes();
+App\Setting::routes();
 
 /**
  * And if we're here, nothing matched. Finally, is it a post??
