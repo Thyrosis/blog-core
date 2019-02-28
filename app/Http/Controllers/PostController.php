@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::getPublished()->simplePaginate(Setting::get('post.showPerPage'));
+        $posts = Post::getPublished()->whereType('post')->simplePaginate(Setting::get('post.showPerPage'));
 
         return view()->first(['post.index', 'core.post.index'])->with('posts', $posts);
     }

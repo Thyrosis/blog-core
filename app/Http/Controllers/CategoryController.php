@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = $category->publishedPosts()->latest()->simplePaginate(Setting::get('post.showPerPage'));
+        $posts = $category->publishedPosts()->latest()->whereType('post')->simplePaginate(Setting::get('post.showPerPage'));
         return view()->first(['category.index', 'post.index', 'core.category.index'])->with('category', $category)->with('posts', $posts);
     }
 }

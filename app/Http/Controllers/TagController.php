@@ -18,7 +18,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $posts = $tag->publishedPosts()->latest()->simplePaginate(Setting::get('post.showPerPage'));
+        $posts = $tag->publishedPosts()->latest()->whereType('post')->simplePaginate(Setting::get('post.showPerPage'));
         return view()->first(['tag.index', 'post.index', 'core.tag.index'])->with('tag', $tag)->with('posts', $posts);
     }
 }
