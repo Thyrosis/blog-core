@@ -28,6 +28,9 @@
             <a class="admin-nav-link" href="{{ route('admin.view.index') }}">Views</a>
         </li>
         <li class="mr-3">
+            <a class="admin-nav-link" href="{{ route('admin.setting.edit') }}">Settings</a>
+        </li>
+        <li class="mr-3">
             <a class="admin-nav-link" href="{{ route('feeds.main') }}" target="_blank">RSS-feed</a>
         </li>
         <li class="mr-3">
