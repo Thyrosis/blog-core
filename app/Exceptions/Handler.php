@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Arr;
 
 class Handler extends ExceptionHandler
 {
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof TokenMismatchException) {
             return back()
-                ->withInput(array_merge($request->all(), ['_token' => csrf_token()]))
+                ->withInput(Arr::merge($request->all(), ['_token' => csrf_token()]))
                 ->with('warning', "<strong>Hold up!</strong> You took quite a while to respond there, so we're just taking precautions. Please check your input and try again.");
         }
 

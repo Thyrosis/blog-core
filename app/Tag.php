@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Tag extends Model
 {
@@ -34,7 +35,7 @@ class Tag extends Model
      */
     public function setSlugAttribute($value)
     {        
-        $this->attributes['slug'] = str_slug($value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 
     /**

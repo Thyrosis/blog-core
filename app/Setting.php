@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Setting extends Model
 {
@@ -52,7 +53,7 @@ class Setting extends Model
 
     public static function updateSingle($code, $value)
     {
-        $code = str_replace('_', '.', $code);
+        $code = Str::replace('_', '.', $code);
 
         return DB::table('settings')
         ->where('code', $code)

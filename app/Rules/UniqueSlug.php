@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Post;
 use App\Setting;
 
@@ -32,7 +33,7 @@ class UniqueSlug implements Rule
             return !DB::table('posts')->where('slug', Post::createSlug($value))->exists();
         }
 
-        return !DB::table('posts')->where('slug', str_slug($value))->exists();
+        return !DB::table('posts')->where('slug', Str::slug($value))->exists();
     }
 
     /**

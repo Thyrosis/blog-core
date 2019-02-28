@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Form;
 use App\FormField;
-use App\FormResponse;
+Use Illuminate\Support\Str;
 
 class FormController extends Controller
 {
@@ -64,7 +64,7 @@ class FormController extends Controller
                     'input' => $request->input[$i],
                     'type' => ($request->input[$i] == "input" ? $request->type[$i] : null),
                     'name' => $request->elementName[$i],
-                    'elementId' => str_slug($request->elementName[$i]),
+                    'elementId' => Str::slug($request->elementName[$i]),
                     'class' => $request->class[$i],
                     'description' => $request->description[$i],
                     'required' => $request->required[$i],
