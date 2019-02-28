@@ -11,7 +11,7 @@
 |
  */
 
-Route::get('/', 'PostController@index')->name('home');
+App\Setting::routes();
 
 /**
  * API ROUTES
@@ -107,7 +107,7 @@ Route::feeds();
  */
 App\Form::routes();
 App\User::routes();
-App\Setting::routes();
+// App\Setting::routes();
 
 /**
  * And if we're here, nothing matched. Finally, is it a post??

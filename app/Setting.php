@@ -27,11 +27,27 @@ class Setting extends Model
     {
         Route::get('/admin/setting', 'Admin\SettingController@edit')->name('admin.setting.edit')->middleware('auth');
         Route::patch('/admin/setting', 'Admin\SettingController@update')->name('admin.setting.update')->middleware('auth');
+
+        $homeRoute = Setting::get('home.url');
+
+        if (is_null($homeRoute) || $homeRoute == "post.index") {
+            Route::get('/', 'PostController@index')->name('home');
+        } else {
+            Route::redirect('/', $homeRoute)->name('home');;
+        }
+
+        $postRoute = Setting::get('post.index');
+
+        if (is_null($postRoute)) {
+            Route::get('blog', 'PostController@index')->name('post.index');
+        } else {
+            Route::get($postRoute, 'PostController@index')->name('post.index');
+        }
     }
 
     public static function get($code)
     {
-        return self::whereCode($code)->first()->value ?? false;
+        return self::whereCode($code)->first()->value ?? null;
     }
 
     public static function updateSingle($code, $value)
