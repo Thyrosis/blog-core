@@ -15,6 +15,16 @@ class SettingSeeder extends Seeder
         $settings = array();
         
         $settings[] = [
+            'code' => 'post.index',
+            'type' => 'TEXT',
+            'label' => __("Blog URL"),
+            'description' => __("At what URL is the blogpost-index available."),
+            'value' => 'blog',
+            'category' => 'post',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'post.commentable',
             'type' => 'BOOLEAN',
             'label' => __("Allow comments"),
@@ -40,6 +50,16 @@ class SettingSeeder extends Seeder
             'label' => __("Feature Image"),
             'description' => __("Doesn't serve a technical purpose, but can be used in themes."),
             'value' => '',
+            'category' => 'post',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'post.defaultType',
+            'type' => 'TEXT',
+            'label' => __("Post type"),
+            'description' => __("Sets the default type to either post or page."),
+            'value' => 'post',
             'category' => 'post',
             'hidden' => '0',
         ];
@@ -110,6 +130,16 @@ class SettingSeeder extends Seeder
             'label' => __("CDN URL"),
             'description' => __("The URL where feature images are retrieved from."),
             'value' => 'https://source.unsplash.com/random/1000x300',
+            'category' => 'general',
+            'hidden' => '1',
+        ];
+
+        $settings[] = [
+            'code' => 'home.url',
+            'type' => 'TEXT',
+            'label' => __("Homepage"),
+            'description' => __("When someone visits your domain (not a specific page) what URL do they see?"),
+            'value' => 'post.index',
             'category' => 'general',
             'hidden' => '1',
         ];

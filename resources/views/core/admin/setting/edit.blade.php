@@ -26,6 +26,21 @@
         </div>
         @endforeach
 
+        @php 
+            $setting = Setting::whereCode('home.url')->firstOrFail();
+        @endphp
+        <div class="form-group">
+            <label class="form-label" for="{{ $setting->code }}">{{ $setting->label }}</label>
+            <select class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}">
+                <option value="post.index">Indexpagina van artikelen</option>
+                <option disabled> -- @lang('Posts') -- </option>
+                @foreach (App\Post::orderBy('longTitle', 'ASC')->get() as $post)
+                <option value="{{ $post->slug }}">{{ $post->getLongTitle() }}</option>
+                @endforeach
+            </select>
+            <p class="form-info">{{ $setting->description }}</p>
+        </div>
+
         <div class="mb-5 flex" style="justify-content: space-around">
             <button type="submit" class="btn btn-blue">@lang('Update')</button>
             <button type="reset" class="btn btn-grey">@lang('Reset')</button>

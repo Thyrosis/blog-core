@@ -46,7 +46,7 @@
     "The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.": "De categorie waar dit bericht bij hoort. Geen, één of meerdere mogelijk.",
     "The tags to which this post is linked. You could use just one, but you should probably use a category for that.": "Het label wat aan dit bericht hangt. Geen, één of meerdere mogelijk.",
     "Publish date and time": "Publicatie datum en tijd",
-    "Publishing date and time. A date in the past with status set to published means the post will be published immediately.": "Datum en tijdstip van publicatie. Een bericht verschijnt alleen online als deze in het verleden ligt &eactute;n de status gepubliceerd is.",
+    "Publishing date and time. A date in the past with status set to published means the post will be published immediately.": "Datum en tijdstip van publicatie. Een bericht verschijnt alleen online als deze in het verleden ligt <b>en</b> de status gepubliceerd is.",
     "Current time": "Het is nu",
     "Edit post": "Bericht bewerken",
     "Update": "Bijwerken",
@@ -54,6 +54,9 @@
     "If you use this button, you will completely delete a post from all records. It will vanish into the nothingness that is called void. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you've written, just unpublish it.": "Als je deze knop gebruikt, wordt dit bericht helemaal verwijderd. Je kunt het dan NIET meer terughalen! Als je nog ooit terug wil kijken naar dit bericht, zet dan de status op 'concept' en gebruik deze knop niet!",
     "New Post": "Nieuw bericht",
     "Published at": "Publicatiedatum",
+    "Post type": "Type post",
+    "Page": "Pagina",
+    "Whether this is a post or a page.": "Is dit een blogpost of een specifieke pagina",
 
     "Comments": "Reacties",
     "Content": "Inhoud",
@@ -161,5 +164,10 @@
     "The URL where feature images are retrieved from.": "Het adres van de website waar uitgelichte afbeeldingen worden gezocht.",
 
     "Allow registrations": "Registraties toestaan",
-    "Allow for new users to register themselves via the site.": "Sta bezoekers toe om zichzelf te registreren als gebruiker op je website."
+    "Allow for new users to register themselves via the site.": "Sta bezoekers toe om zichzelf te registreren als gebruiker op je website.",
+
+    "Sets the default type to either post or page.": "Selecteert het standaard type (artikel of pagina) bij het aanmaken van een nieuw item.",
+
+    "Blog URL": "Blog URL",
+    "At what URL is the blogpost-index available.": "Op welke pagina/URL wordt het blog getoond?"
 }

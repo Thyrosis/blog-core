@@ -16,7 +16,7 @@ class SettingController extends Controller
      */
     public function edit()
     {
-        return view('core.admin.setting.edit')->with('settings', Setting::all());
+        return view('core.admin.setting.edit')->with('settings', Setting::whereHidden(0)->get());
     }
 
     /**
