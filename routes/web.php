@@ -11,7 +11,13 @@
 |
  */
 
-App\Setting::routes();
+try {
+    App\Setting::routes();
+} catch (Exception $e) {
+    Route::get('/admin/setting', 'Admin\SettingController@edit')->name('admin.setting.edit')->middleware('auth');
+    Route::patch('/admin/setting', 'Admin\SettingController@update')->name('admin.setting.update')->middleware('auth');
+    Route::get('/', 'PostController@index')->name('home');
+}
 
 /**
  * API ROUTES
