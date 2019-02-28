@@ -2,10 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Category;
 use App\Post;
-use App\Tag;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;

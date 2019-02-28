@@ -29,11 +29,12 @@ class SubscriptionTest extends TestCase
      */
     public function aReaderCanSubscribeToAPost()
     {
+        $this->withoutExceptionHandling();
+
         $post = factory(Post::class)->create();
 
         $response = $this->post(route('subscription.store'), ['emailaddress' => 'subscriber@domain.ext', 'post_id' => $post->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('success');
 
         $this->assertCount(1, Subscription::all());
         $this->assertDatabaseHas('subscriptions', ["emailaddress" => "subscriber@domain.ext"]);
@@ -50,11 +51,9 @@ class SubscriptionTest extends TestCase
 
         $response = $this->post(route('subscription.store'), ['emailaddress' => 'subscriber@domain.ext', 'post_id' => $post->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('success');
 
         $response = $this->post(route('subscription.store'), ['emailaddress' => 'subscriber@domain.ext', 'post_id' => $post->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('success');
 
         $this->assertCount(1, Subscription::all());
         $this->assertDatabaseHas('subscriptions', ["emailaddress" => "subscriber@domain.ext"]);
