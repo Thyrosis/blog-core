@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Colour extends Model
 {
@@ -24,6 +25,6 @@ class Colour extends Model
 
     public static function select()
     {
-        return array_random(self::COLOURS);
+        return Arr::random(self::COLOURS);
     }
 }

@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use App\Category;
 use App\Post;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
+Use Illuminate\Support\Str;
 
 class CategoryTest extends TestCase
 {
@@ -71,6 +71,10 @@ class CategoryTest extends TestCase
         $this->post(route('admin.category.store'), $category->toArray());
 
         $this->assertDatabaseHas('categories', $category->toArray());
+
+        $dbCategory = Category::first();
+
+        $this->assertEquals(Str::slug($category->name), $dbCategory->slug);
     }
 
     /**

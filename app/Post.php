@@ -26,12 +26,12 @@ class Post extends Model implements Feedable
      * Create a custom slug with specified amount of random trailing characters
      */
     public static function slug($value, $random = 5) {
-        return str_slug($value) . "-" . str_random($random);
+        return Str::slug($value) . "-" . Str::random($random);
     }
 
     public static function createSlug($value)
     {
-        $slug = str_slug($value);
+        $slug = Str::slug($value);
 
         while (static::whereSlug($slug)->exists()) {
             $slug = static::slug($value);
@@ -69,12 +69,12 @@ class Post extends Model implements Feedable
      */
     public function parse($text)
     {
-        if (str_contains($text, "||FORM||")) {
+        if (Str::contains($text, "||FORM||")) {
             $temptext = explode("||", $text);
 
             $form = Form::find($temptext[2]);
 
-            $text = str_replace_first("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
+            $text = Str::replace_first("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
         }
 
         return $text;
@@ -411,7 +411,7 @@ class Post extends Model implements Feedable
      */
     public function words()
     {
-        return str_word_count(strip_tags($this->body));
+        return Str::word_count(strip_tags($this->body));
     }
 
     /**
