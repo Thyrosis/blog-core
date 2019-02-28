@@ -69,7 +69,7 @@
     <div class="admin-container">
         <h3 class="admin-h3">@lang('Extra information')</h3>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between flex-col md:flex-row">
             <div class="mb-5">
                 <label for="commentable" class="form-label">@lang('Allow comments')</label>
                 <div class="flex">
@@ -128,55 +128,74 @@
             @endif
         </div>
     
-        <div class="mb-5">
-            <label for="categories" class="form-label">@lang('Category')</label>
-            <div class="flex  flex-wrap">
-                @foreach (\App\Category::all() as $category)
-                <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id)) checked @endif /> {{ $category->name }}</div>
-                @endforeach
+        <div class="flex justify-between flex-col md:flex-row">
+            <div class="mb-5 md:w-1/2 md:mr-1">
+                <label for="categories" class="form-label">@lang('Category')</label>
+                <div class="flex flex-wrap">
+                    @foreach (\App\Category::all() as $category)
+                    <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id)) checked @endif /> {{ $category->name }}</div>
+                    @endforeach
+                </div>
+                <p class="form-info">@lang('The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.')</p>
+
+                @if ($errors->has('categories'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('categories') }}</span>
+                    </div>
+                @endif
             </div>
-            <p class="form-info">@lang('The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.')</p>
-
-            @if ($errors->has('categories'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('categories') }}</span>
+                
+            <div class="mb-5 md:w-1/2 md:ml-1">
+                <label for="tags" class="form-label">@lang('Tags')</label>
+                <div class="flex flex-wrap">
+                    @foreach (\App\Tag::all() as $tag)
+                    <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
+                    @endforeach
                 </div>
-            @endif
-        </div>
-            
-        <div class="mb-5">
-            <label for="tags" class="form-label">@lang('Tags')</label>
-            <div class="flex flex-wrap">
-                @foreach (\App\Tag::all() as $tag)
-                <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
-                @endforeach
+                <p class="form-info">@lang('The tags to which this post is linked. You could use just one, but you should probably use a category for that.')</p>
+
+                @if ($errors->has('tags'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('tags') }}</span>
+                    </div>
+                @endif
             </div>
-            <p class="form-info">@lang('The tags to which this post is linked. You could use just one, but you should probably use a category for that.')</p>
-
-            @if ($errors->has('tags'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('tags') }}</span>
-                </div>
-            @endif
         </div>
 
-        <div class="mb-5">
-            <label for="published_at" class="form-label">@lang('Publish date and time')</label>
-            <input type="date" id="published_at_date" name="published_at_date" class="form-control w-1/5" value="{{ old('published_at_date', \Carbon\Carbon::now()->toDateString()) }}" />
-            <input type="time" id="published_at_time" name="published_at_time" class="form-control w-1/5" value="{{ old('published_at_time', \Carbon\Carbon::now()->format('H:i')) }}" />
-            <p class="form-info">@lang('Publishing date and time. A date in the past with status set to published means the post will be published immediately.') @lang('Current time'): {{ \Carbon\Carbon::now()->format('H:i') }}</p>
+        <div class="flex justify-between flex-col md:flex-row">
+            <div class="mb-5 md:mr-1">
+                <label for="type" class="form-label">@lang('Post type')</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="post" @if (old('type', Setting::get('post.defaultType')) == 'post') selected @endif >@lang('Post')</option>
+                    <option value="page" @if (old('type', Setting::get('post.defaultType')) == 'page') selected @endif >@lang('Page')</option>
+                </select>
+                <p class="form-info">@lang('Whether this is a post or a page.')</p>
 
-            @if ($errors->has('published_at_date'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at') }}</span>
-                </div>
-            @endif
+                @if ($errors->has('type'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('type') }}</span>
+                    </div>
+                @endif
+            </div>
+        
+            <div class="mb-5 md:w-1/2 md:ml-1">
+                <label for="published_at" class="form-label">@lang('Publish date and time')</label>
+                <input type="date" id="published_at_date" name="published_at_date" class="form-control w-1/5" value="{{ old('published_at_date', \Carbon\Carbon::now()->toDateString()) }}" />
+                <input type="time" id="published_at_time" name="published_at_time" class="form-control w-1/5" value="{{ old('published_at_time', \Carbon\Carbon::now()->format('H:i')) }}" />
+                <p class="form-info">@lang('Publishing date and time. A date in the past with status set to published means the post will be published immediately.') @lang('Current time'): {{ \Carbon\Carbon::now()->format('H:i') }}</p>
 
-            @if ($errors->has('published_at_time'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at_time') }}</span>
-                </div>
-            @endif
+                @if ($errors->has('published_at_date'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at') }}</span>
+                    </div>
+                @endif
+
+                @if ($errors->has('published_at_time'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at_time') }}</span>
+                    </div>
+                @endif
+            </div>
         </div>
 
         <div class="mb-5 flex" style="justify-content: space-around">

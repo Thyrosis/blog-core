@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 
@@ -16,7 +15,7 @@ class PostController extends Controller
      */
     public function index($limit = 5)
     {
-        $posts = Post::getPublished();
+        $posts = Post::getPublished()->whereType('post');
         
         return response()->json([
             'data' => $posts->limit($limit)->get(),

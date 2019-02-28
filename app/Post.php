@@ -2,13 +2,11 @@
 
 namespace App;
 
+use App\Comment;
 use App\Mail\NewComment;
 use App\View;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
@@ -16,7 +14,7 @@ use Spatie\Feed\FeedItem;
 
 class Post extends Model implements Feedable
 {
-    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     protected static function boot()
@@ -261,7 +259,7 @@ class Post extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return static::getPublished()->get();
+        return static::getPublished()->whereType('post')->get();
     }
 
     /**
