@@ -53,7 +53,7 @@ class Setting extends Model
 
     public static function updateSingle($code, $value)
     {
-        $code = Str::replace('_', '.', $code);
+        $code = str_replace('_', '.', $code);
 
         return DB::table('settings')
         ->where('code', $code)

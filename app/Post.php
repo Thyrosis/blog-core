@@ -74,7 +74,7 @@ class Post extends Model implements Feedable
 
             $form = Form::find($temptext[2]);
 
-            $text = Str::replace_first("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
+            $text = Str::replaceFirst("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
         }
 
         return $text;
