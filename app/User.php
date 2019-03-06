@@ -41,14 +41,54 @@ class User extends Authenticatable
         }
     }
 
+    public function canModerate()
+    {
+        dump($this->isAdmin());
+        dump($this->isModerator());
+        
+        if ($this->isAdmin() || $this->isModerator()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function home()
+    {
+        if ($this->canModerate()) {
+            return route('admin.post.index');
+        }
+
+        return route('profile.user.show');
+    }
+
+    public function isAdmin()
+    {
+        return $this->meta('role') == 'admin';
+    }
+
+    public function isModerator()
+    {
+        return $this->meta('role') == 'moderator';
+    }
+
+    public function meta($key)
+    {
+        return Meta::where(['user_id' => $this->id, 'key' => $key])->first()->value ?? null;
+    }
+
     public static function routes()
     {
         Route::get('/admin/user/', 'Admin\UserController@index')->name('admin.user.index');
-        Route::get('/admin/user/{user}', 'Admin\UserController@show')->name('admin.user.show');
+        Route::get('/admin/user/{user}', 'Admin\UserController@show')->name('admin.user.show')->middleware('moderator');
         Route::get('/admin/user/create', 'Admin\UserController@create')->name('admin.user.create');
         Route::post('/admin/user/store', 'Admin\UserController@store')->name('admin.user.store');
-        Route::get('/admin/user/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
+        Route::get('/admin/user/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit')->middleware('moderator');
         Route::patch('/admin/user/{user}', 'Admin\UserController@update')->name('admin.user.update');
         Route::delete('/admin/user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
+
+        // Route::get('/user/profile', 'Profile\UserController@show')->name('profile.user.show');
+        // Route::get('/', 'Admin\PostController@index')->name('profile.user.show');
+        // Route::get('/home', 'Admin\PostController@index')->name('home');
     }
 }
