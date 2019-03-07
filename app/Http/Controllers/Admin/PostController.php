@@ -101,6 +101,7 @@ class PostController extends Controller
             'published' => 'nullable|boolean',
             'published_at_date' => 'nullable|date',
             'published_at_time' => 'nullable|date_format:"H:i"',
+            'type' => 'nullable',
         ]);
 
         $data = Post::processData($data);

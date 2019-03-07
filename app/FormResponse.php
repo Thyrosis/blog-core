@@ -17,13 +17,24 @@ class FormResponse extends Model
         parent::boot();
         
         static::created(function ($formResponse) {
-            Log::info("Queueing a new FormResponse mail to ".config('custom.adminEmailAddress')." with the following details: ", $formResponse->toArray());
-            Mail::to(config('custom.adminEmailAddress'))->queue(new NewFormResponse($formResponse));
+            if (Setting::get('mail.useQueue')) {
+                Log::info("Queueing a new FormResponse mail to ".config('custom.adminEmailAddress')." with the following details: ", $formResponse->toArray());
+                Mail::to(config('custom.adminEmailAddress'))->queue(new NewFormResponse($formResponse));
 
-            if ($formResponse->email !== null) {
-                Log::info("Queueing a new FormResponseCopy mail to ".$formResponse->email." with the following details: ", $formResponse->toArray());
-                Mail::to($formResponse->email)->queue(new NewFormResponseCopy($formResponse));
+                if ($formResponse->email !== null) {
+                    Log::info("Queueing a new FormResponseCopy mail to ".$formResponse->email." with the following details: ", $formResponse->toArray());
+                    Mail::to($formResponse->email)->queue(new NewFormResponseCopy($formResponse));
+                }
+            } else {
+                Log::info("Sending a new FormResponse mail to ".config('custom.adminEmailAddress')." with the following details: ", $formResponse->toArray());
+                Mail::to(config('custom.adminEmailAddress'))->send(new NewFormResponse($formResponse));
+
+                if ($formResponse->email !== null) {
+                    Log::info("Sending a new FormResponseCopy mail to ".$formResponse->email." with the following details: ", $formResponse->toArray());
+                    Mail::to($formResponse->email)->send(new NewFormResponseCopy($formResponse));
+                }
             }
+            
         });
     }
 

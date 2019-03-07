@@ -27,3 +27,11 @@
     {!! session('status') !!}
 </div>
 @endif
+
+@if ($errors->any())
+    <div class="admin-feedback admin-feedback-error">
+        @foreach ($errors->all() as $error)
+            {{ $error }}<br />
+        @endforeach
+    </div>
+@endif

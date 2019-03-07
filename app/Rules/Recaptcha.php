@@ -15,9 +15,8 @@ class Recaptcha implements Rule
      */
     public function __construct()
     {
-        $this->url = config('services.recaptcha.url');
+        $this->url = 'https://www.google.com/recaptcha/api/siteverify';
         $this->client = new \GuzzleHttp\Client(['base_uri' => $this->url]);
-        // $this->data['auth'] = [config('services.mailchimp.user'), config('services.mailchimp.secret')];
         $this->data['http_errors'] = false;
     }
 
@@ -30,13 +29,19 @@ class Recaptcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        return json_decode($this->client->post('siteverify', [
+        $return = json_decode($this->client->post('siteverify', [
             'query' => [
-                'secret' => config('services.recaptcha.secretkey'),
+                'secret' => \Setting::get('recaptcha.server'),
                 'response' => $value,
                 'remoteip' => request()->ip()
             ]
-        ])->getBody())->success;
+        ])->getBody());
+        
+        if ($return->success === true && $return->score > 0.7) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

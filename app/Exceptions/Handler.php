@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof TokenMismatchException) {
             return back()
-                ->withInput(Arr::merge($request->all(), ['_token' => csrf_token()]))
+                ->withInput(array_merge($request->all(), ['_token' => csrf_token()]))
                 ->with('warning', "<strong>Hold up!</strong> You took quite a while to respond there, so we're just taking precautions. Please check your input and try again.");
         }
 
