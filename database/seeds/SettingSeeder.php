@@ -154,6 +154,46 @@ class SettingSeeder extends Seeder
             'hidden' => '0',
         ];
 
+        $settings[] = [
+            'code' => 'mail.useQueue',
+            'type' => 'BOOLEAN',
+            'label' => __("Queue emails"),
+            'description' => __("Move the sending of emails to a backgroundtask. Makes the application run smoother, but doesn't always work (especially on shared hosting) as it requires the proc_open PHP function."),
+            'value' => 0,
+            'category' => 'mail',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'recaptcha.version',
+            'type' => 'TEXT',
+            'label' => __("reCaptcha version"),
+            'description' => __("The version of Google's Recaptcha service to use."),
+            'value' => 3,
+            'category' => 'recaptcha',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'recaptcha.client',
+            'type' => 'TEXT',
+            'label' => __("reCaptcha client key"),
+            'description' => __("The public part of the key provided by Google's Recaptcha service."),
+            'value' => null,
+            'category' => 'recaptcha',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'recaptcha.server',
+            'type' => 'TEXT',
+            'label' => __("reCaptcha server key"),
+            'description' => __("The private part of the key provided by Google's Recaptcha service."),
+            'value' => null,
+            'category' => 'recaptcha',
+            'hidden' => '0',
+        ];
+
         foreach ($settings as $setting) {
             try {
                 Setting::create($setting);
