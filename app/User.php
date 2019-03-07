@@ -43,9 +43,6 @@ class User extends Authenticatable
 
     public function canModerate()
     {
-        dump($this->isAdmin());
-        dump($this->isModerator());
-        
         if ($this->isAdmin() || $this->isModerator()) {
             return true;
         }
@@ -59,7 +56,7 @@ class User extends Authenticatable
             return route('admin.post.index');
         }
 
-        return route('profile.user.show');
+        return '/admin';
     }
 
     public function isAdmin()
@@ -79,15 +76,17 @@ class User extends Authenticatable
 
     public static function routes()
     {
-        Route::get('/admin/user/', 'Admin\UserController@index')->name('admin.user.index');
-        Route::get('/admin/user/{user}', 'Admin\UserController@show')->name('admin.user.show')->middleware('moderator');
-        Route::get('/admin/user/create', 'Admin\UserController@create')->name('admin.user.create');
-        Route::post('/admin/user/store', 'Admin\UserController@store')->name('admin.user.store');
-        Route::get('/admin/user/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit')->middleware('moderator');
-        Route::patch('/admin/user/{user}', 'Admin\UserController@update')->name('admin.user.update');
-        Route::delete('/admin/user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
+        Route::get('/admin/user/', 'Admin\UserController@index')->name('admin.user.index')->middleware(['auth','moderator']);
+        Route::get('/admin/user/{user}', 'Admin\UserController@show')->name('admin.user.show')->middleware(['auth','moderator']);
+        Route::get('/admin/user/create', 'Admin\UserController@create')->name('admin.user.create')->middleware(['auth','moderator']);
+        Route::post('/admin/user/store', 'Admin\UserController@store')->name('admin.user.store')->middleware(['auth','moderator']);
+        Route::get('/admin/user/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit')->middleware(['auth','moderator']);
+        Route::patch('/admin/user/{user}', 'Admin\UserController@update')->name('admin.user.update')->middleware(['auth','moderator']);
+        Route::delete('/admin/user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy')->middleware(['auth','moderator']);
 
-        // Route::get('/user/profile', 'Profile\UserController@show')->name('profile.user.show');
+        Route::get('/user/profile/{user}', 'Profile\UserController@show')->name('profile.show')->middleware('auth');
+        Route::get('/user/profile/{user}/edit', 'Profile\UserController@edit')->name('profile.edit')->middleware('auth');
+        Route::patch('/user/profile/{user}', 'Profile\UserController@update')->name('profile.update')->middleware('auth');
         // Route::get('/', 'Admin\PostController@index')->name('profile.user.show');
         // Route::get('/home', 'Admin\PostController@index')->name('home');
     }

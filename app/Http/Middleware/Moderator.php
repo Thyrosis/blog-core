@@ -17,16 +17,13 @@ class Moderator
     public function handle($request, Closure $next)
     {
         if (!auth()->check()) {
-            dump("not logged in");
-            redirect(route('login'));
+            return redirect(route('login'));
         }
 
         if (!auth()->user()->canModerate()) {
-            dump("Redirecting to ".auth()->user()->home());
-            redirect(auth()->user()->home());
+            return redirect(auth()->user()->home());
         }
 
-        //dd("Continue!");
         return $next($request);
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Profile;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('core.admin.user.index')->with('users', User::all());
+        //
     }
 
     /**
@@ -26,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('core.admin.user.create');
+        //
     }
 
     /**
@@ -37,54 +36,47 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        return view('core.admin.user.show')->with('user', $user);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        return view('core.admin.user.edit')->with('user', $user);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        $data = $request->validate([
-            'name' => ['required', 'min:3', Rule::unique('users')->ignore($user->id)],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-        ]);
-
-        $user->update($data);
-
-        return redirect(route('admin.user.edit', $user))->with("success", "User updated");
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
