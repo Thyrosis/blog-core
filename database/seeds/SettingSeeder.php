@@ -165,6 +165,16 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'mail.adminAddress',
+            'type' => 'TEXT',
+            'label' => __("Administrator email address"),
+            'description' => __("What address to use for system notifications."),
+            'value' => null,
+            'category' => 'mail',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'recaptcha.version',
             'type' => 'TEXT',
             'label' => __("reCaptcha version"),
