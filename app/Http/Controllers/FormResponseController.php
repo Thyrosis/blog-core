@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Form;
 use App\FormResponse;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 
 class FormResponseController extends Controller
@@ -16,20 +17,24 @@ class FormResponseController extends Controller
      */
     public function store(Request $request, Form $form)
     {
+        $request->validate([
+            'recaptcha_response' => ['required', new Recaptcha]
+        ]);
+
         $mailfield = $form->hasMailField();
 
         $formResponse = FormResponse::create([
             'form_id' => $form->id,
             'email' => ($mailfield) ? $request->$mailfield : $mailfield,
-            'content' => json_encode($request->except('_token')),
+            'content' => json_encode($request->except(['_token', 'recaptcha_response'])),
         ]);
         
         if ($formResponse) {
-            $request->session()->flash('success', 'Form submission successful. Thank you!');
+            $request->session()->flash('success', \Setting::get('form.thanksForSubmission'));
             return redirect()->back();
         }
 
-        $request->session()->flash('error', 'Form submission failed. Please try again.');
+        $request->session()->flash('error', \Setting::get('form.submissionError'));
         return redirect()->back();
     }
 }

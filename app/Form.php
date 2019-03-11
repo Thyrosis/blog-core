@@ -92,7 +92,8 @@ class Form extends Model
     public function toHTML()
     {
         $html = "<form method='POST' action='{$this->action()}'>
-            {$this->csrf()}";
+            {$this->csrf()}
+            <input type='hidden' name='recaptcha_response' id='recaptchaResponse'>";
 
             foreach ($this->fields as $field) {
                 $html .= "<div class='form-group'>

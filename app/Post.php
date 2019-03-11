@@ -74,7 +74,21 @@ class Post extends Model implements Feedable
 
             $form = Form::find($temptext[2]);
 
-            $text = Str::replace_first("||FORM||{$temptext[2]}||", $form->toHTML(), $text);            
+            $text = Str::replaceFirst("||FORM||{$temptext[2]}||", $form->toHTML(), $text);
+            
+            $client = Setting::get('recaptcha.client');
+            
+            if ($client) {
+                $text .= "<script src='https://www.google.com/recaptcha/api.js?render=".$client."'></script>
+                <script>
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('".$client."', {action: 'contact'}).then(function(token) {
+                        var recaptchaResponse = document.getElementById('recaptchaResponse');
+                        recaptchaResponse.value = token;
+                    });
+                });
+                </script>";
+            }
         }
 
         return $text;

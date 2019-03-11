@@ -22,9 +22,6 @@ class FormController extends Controller
      */
     public function index()
     {
-        // $forms = Form::all();
-        // $responses = FormResponse::all();
-
         return view('core.admin.form.index')->with('forms', Form::all());
     }
 

@@ -31,6 +31,6 @@ class NewFormResponseCopy extends Mailable
      */
     public function build()
     {
-        return $this->subject("Your form entry at ".config('app.name'))->markdown('mail.newFormResponseCopy');
+        return $this->subject( \__("Your form entry at")." ".config('app.name'))->markdown('mail.newFormResponseCopy');
     }
 }

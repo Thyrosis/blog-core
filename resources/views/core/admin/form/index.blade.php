@@ -63,7 +63,9 @@
             </div>
             <div class="flex-1 cat-desc mr-2">
                 @foreach (json_decode($response->content) as $field => $content)
-                    <strong>{{ $field }}</strong>: {{ $content }}<br />
+                    @if ($field !== "recaptcha_response")
+                        <strong>{{ $field }}</strong>: {{ $content }}<br />
+                    @endif
                 @endforeach
             </div>
             <div class="cat-actions">
