@@ -85,6 +85,7 @@
 
 
     "Send": "Verzenden",
+    "Form": "Formulier",
     "Forms": "Formulieren",
     "Create new form": "Nieuw formulier maken",
     "Action": "Doelbestemming",
@@ -169,5 +170,13 @@
     "Sets the default type to either post or page.": "Selecteert het standaard type (artikel of pagina) bij het aanmaken van een nieuw item.",
 
     "Blog URL": "Blog URL",
-    "At what URL is the blogpost-index available.": "Op welke pagina/URL wordt het blog getoond?"
+    "At what URL is the blogpost-index available.": "Op welke pagina/URL wordt het blog getoond?",
+
+    "New Form Response": "Formulier ingevuld",
+    "Thank you for using the form on the website. These are the details you left us.": "Bedankt voor het invullen van het formulier op de webiste. Dit zijn de gegevens die je hebt ingevuld.",
+    "Kind regards": "Vriendelijke groet",
+    "Your form entry at": "Je ingevulde formulier van",
+    "Somebody used your form at": "Formulier ingevuld op",
+    "One of your forms was used at your website.": "Een van je formulieren op de website is ingevuld.",
+    "View in dashboard": "Bekijk online"
 }

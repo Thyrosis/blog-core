@@ -1,14 +1,14 @@
 @component('mail::message')
-# New Form Response
+# @lang("New Form Response")
 
-Thank you for using the website {{ config('app.url') }}. These are the details you left us.
+@lang("Thank you for using the form on the website. These are the details you left us.")
 
 @component('mail::panel')
     @foreach ($formResponse->getContent() as $key => $value)
-        {{ $key }}: {{ $value }}<br />
+        **{{ ucfirst($key) }}**: {{ $value }}<br />
     @endforeach
 @endcomponent
 
-Kind regards,<br>
+@lang("Kind regards"),<br>
 {{ config('app.name') }}
 @endcomponent

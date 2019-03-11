@@ -1,18 +1,19 @@
 @component('mail::message')
-# New Form Response
+# @lang("New Form Response")
 
-A new response was left using your form **{{ $formResponse->form->name }}**
+@lang("One of your forms was used at your website.")
 
 @component('mail::panel')
+        **@lang("Form")**: {{ $formResponse->form->name }}<br />
     @foreach ($formResponse->getContent() as $key => $value)
-        {{ $key }}: {{ $value }}<br />
+        **{{ ucfirst($key) }}**: {{ $value }}<br />
     @endforeach
 @endcomponent
 
 @component('mail::button', ['url' => route('admin.form.index')."#".$formResponse->form->name."-".$formResponse->form->id])
-View in dashboard
+    @lang("View in dashboard")
 @endcomponent
 
-Thanks,<br>
+@lang("Kind regards"),<br>
 {{ config('app.name') }}
 @endcomponent

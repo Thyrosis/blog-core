@@ -31,6 +31,6 @@ class NewFormResponse extends Mailable
      */
     public function build()
     {
-        return $this->subject("New form response at ".config('app.name'))->markdown('mail.newFormresponse');
+        return $this->subject( \__("Somebody used your form at")." ".config('app.name'))->markdown('mail.newFormresponse');
     }
 }

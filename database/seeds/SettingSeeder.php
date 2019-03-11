@@ -204,6 +204,26 @@ class SettingSeeder extends Seeder
             'hidden' => '0',
         ];
 
+        $settings[] = [
+            'code' => 'form.thanksForSubmission',
+            'type' => 'TEXT',
+            'label' => __("Form thank you"),
+            'description' => __("The message shown to the visitor when a form was successfully entered."),
+            'value' => null,
+            'category' => 'form',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'form.submissionError',
+            'type' => 'TEXT',
+            'label' => __("Form error"),
+            'description' => __("The message shown to the visitor when a form didn't save successfully."),
+            'value' => null,
+            'category' => 'form',
+            'hidden' => '0',
+        ];
+
         foreach ($settings as $setting) {
             try {
                 Setting::create($setting);
