@@ -10,6 +10,19 @@ class Meta extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User')->withPivot('value')->withTimestamps();
+    }
+
+    public function using($value = null)
+    {
+        $using = array();
+
+        foreach ($this->users as $user) {
+            if ($value == $user->pivot->value) {
+                $using[] = $user;
+            }
+        }
+
+        return collect($using);
     }
 }
