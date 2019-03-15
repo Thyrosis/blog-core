@@ -6,14 +6,10 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Meta;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,38 +21,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('core.admin.user.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('core.admin.user.show')->with('user', $user);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -64,7 +28,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('core.admin.user.edit')->with('user', $user);
+        return view('core.admin.user.edit')->with('user', $user)->with('metas', Meta::all());
     }
 
     /**
@@ -83,6 +47,12 @@ class UserController extends Controller
 
         $user->update($data);
 
+        foreach (Meta::all() as $meta) {
+            if ($meta->updateable) {
+                $user->updateMeta($meta->code, $request->{$meta->code});
+            }
+        }
+
         return redirect(route('admin.user.edit', $user))->with("success", "User updated");
     }
 
@@ -94,6 +64,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        return redirect(route('admin.user.edit', $user))->with("error", "User Delete function not yet implemented.");
     }
 }

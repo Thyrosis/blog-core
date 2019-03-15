@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -9,7 +11,17 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
- */
+*/
+
+Route::get('maarten', function() {
+    $me = App\User::find(1);
+    dump($me);
+
+    $meta = App\Meta::where('key', 'last_login')->first();
+    dump($meta);
+
+    $me->metas()->sync([$meta->id => [ 'value' => Carbon::now()] ], false);
+});
 
 try {
     App\Setting::routes();

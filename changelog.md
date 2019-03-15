@@ -6,6 +6,10 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.15
+
+- First shot at admin user-management including Meta-data.
+
 ## 1.0.14 (2019-02-22)
 
 - Composer update to Laravel 5.7.26

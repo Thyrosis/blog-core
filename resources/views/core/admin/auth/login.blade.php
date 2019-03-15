@@ -61,6 +61,13 @@
                     @lang('Forgot your password')
                 </a>
             </div>
+
+            @if (Setting::get('user.allowRegistrations'))
+            <div>
+                Nog geen account?
+                <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="{{ route('register') }}">Registreren</a>
+            </div>
+            @endif
         </div>
     </form>
 </div>

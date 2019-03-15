@@ -149,7 +149,7 @@ class SettingSeeder extends Seeder
             'type' => 'BOOLEAN',
             'label' => __("Allow registrations"),
             'description' => __("Allow for new users to register themselves via the site."),
-            'value' => 0,
+            'value' => true,
             'category' => 'user',
             'hidden' => '0',
         ];
