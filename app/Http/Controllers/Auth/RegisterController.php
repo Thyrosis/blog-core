@@ -68,11 +68,18 @@ class RegisterController extends Controller
             return redirect(route('home'));
         }
         
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Always add the first user as Admin
+        if ($user && User::all()->count() == 1) {
+            $user->updateMeta('level', 'admin');
+        }
+
+        return $user;
     }
 
     /**

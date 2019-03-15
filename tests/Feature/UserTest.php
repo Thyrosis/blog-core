@@ -23,10 +23,13 @@ class UserTest extends TestCase
             $this->assertDatabaseHas('users', $user->toArray());
         }
 
-        $this->signIn();
+        $admin = factory(User::class)->create();
+        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $admin->updateMeta($meta->key, 'Admin');
+
+        $this->signIn($admin);
 
         $response = $this->get(route('admin.user.index'));
-
         $response->assertStatus(200);
 
         foreach ($users as $user) {
@@ -37,13 +40,32 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanBeEdited()
+    public function aListOfUsersIsNotAvailableToNonAdmins()
     {
+        $users = factory(User::class, 4)->create();
+
+        foreach ($users as $user) {
+            $this->assertDatabaseHas('users', $user->toArray());
+        }
+
         $this->signIn();
 
-        $user = factory(User::class)->create();
+        $response = $this->get(route('admin.user.index'));
+        $response->assertStatus(302);
+    }
 
-        $this->assertDatabaseHas('users', $user->toArray());
+    /**
+     * @test
+     */
+    public function aUserCanBeEdited()
+    {
+        $admin = factory(User::class)->create();
+        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $admin->updateMeta($meta->key, 'Admin');
+
+        $this->signIn($admin);
+
+        $user = factory(User::class)->create();
 
         $response = $this->get(route('admin.user.edit', $user));
 
@@ -74,20 +96,11 @@ class UserTest extends TestCase
     {
         $meta = factory(Meta::class)->create();
 
-        $user = User::find($meta->user_id);
+        $user = factory(User::class)->create();
 
-        $this->assertEquals($meta->user_id, $user->id);
-    }
+        $user->updateMeta($meta->key, 'This Value');
 
-    /**
-     * @test
-     */
-    public function aUserCanCallOnItsOwnMeta() {
-        $meta = factory(Meta::class)->create();
-
-        $user = User::find($meta->user_id);
-
-        $this->assertEquals($meta->value, $user->meta('first_name'));
+        $this->assertEquals($user->meta($meta->key), 'This Value');
     }
 
     /**
@@ -96,9 +109,12 @@ class UserTest extends TestCase
     public function nonexistingMetadataReturnsNull() {
         $meta = factory(Meta::class)->create();
 
-        $user = User::find($meta->user_id);
+        $user = factory(User::class)->create();
 
-        $this->assertEquals(null, $user->meta('last_name'));
+        $user->updateMeta($meta->key, 'This Value');
+        $this->assertEquals($user->meta($meta->key), 'This Value');
+
+        $this->assertEquals($user->meta('nonexisting'), null);
     }
 
     /**
@@ -106,11 +122,12 @@ class UserTest extends TestCase
      */
     public function metadataDefinesModeratorLevel() {
         $user = factory(User::class)->create();
+        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $user->updateMeta($meta->key, 'Admin');
 
-        $meta = Meta::create(['user_id' => $user->id, 'key' => 'role', 'value' => 'admin']);
-
-        $this->assertEquals('admin', $user->meta('role'));
-        $this->assertEquals(true, $user->canModerate());
+        $this->assertEquals($user->meta('level'), 'Admin');
+        $this->assertEquals($user->isAdmin(), true);
+        $this->assertEquals($user->canModerate(), true);
     }
 
     /**
@@ -120,7 +137,7 @@ class UserTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->assertEquals(null, $user->meta('role'));
-        $this->assertEquals(false, $user->canModerate());
+        $this->assertEquals($user->meta('level'), null);
+        $this->assertEquals($user->canModerate(), false);
     }
 }

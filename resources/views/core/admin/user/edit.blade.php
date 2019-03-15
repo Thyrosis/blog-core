@@ -20,6 +20,24 @@
             <p class="form-info">@lang('User\'s email address. Used for logging in and sending messages.')</p>
         </div>
 
+        @foreach ($metas->where('updateable', true) as $meta)
+            <div class="form-group">
+                <label class="form-label" for="{{ $meta->code }}">{{ $meta->label }}</label>
+                <input class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}" type="text" value="{{ $user->meta($meta->code) }}" />
+                <p class="form-info">{{ $meta->description }}</p>
+            </div>
+        @endforeach
+
+        <hr class="border" />
+
+        @foreach ($metas->where('updateable', false) as $meta)
+            <div class="form-group">
+                <label class="form-label" for="{{ $meta->code }}">{{ $meta->label }}</label>
+                <input class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}" type="text" value="{{ $user->meta($meta->code) }}" disabled />
+                <p class="form-info">{{ $meta->description }}</p>
+            </div>
+        @endforeach
+
         <div class="form-group">
             <button type="submit" class="btn btn-blue">@lang('Update')</button>
         </div>

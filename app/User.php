@@ -61,25 +61,49 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->meta('role') == 'admin';
+        return strtolower($this->level()) == 'admin';
     }
 
     public function isModerator()
     {
-        return $this->meta('role') == 'moderator';
+        return strtolower($this->level()) == 'moderator';
     }
 
-    public function meta($key)
+    public function metas()
     {
-        return Meta::where(['user_id' => $this->id, 'key' => $key])->first()->value ?? null;
+        return $this->belongsToMany('App\Meta')->withPivot('value')->withTimestamps();
+    }
+
+    public function level()
+    {
+        return $this->meta('level') ?? 'user';   
+    }
+
+    public function meta($code = null)
+    {
+        if (empty($code)) {
+            return null;
+        }
+
+        if ($meta = $this->metas()->where('code', $code)->first()) {
+            return $meta->pivot->value;
+        }
+
+        return null;
+    }
+
+    public function updateMeta($code = null, $value = null)
+    {
+        if (!empty($code)) {
+            return $this->metas()->sync([Meta::where('code', $code)->first()->id => ['value' => $value] ], false);
+        }
+
+        return false;
     }
 
     public static function routes()
     {
         Route::get('/admin/user/', 'Admin\UserController@index')->name('admin.user.index')->middleware(['auth','moderator']);
-        Route::get('/admin/user/{user}', 'Admin\UserController@show')->name('admin.user.show')->middleware(['auth','moderator']);
-        Route::get('/admin/user/create', 'Admin\UserController@create')->name('admin.user.create')->middleware(['auth','moderator']);
-        Route::post('/admin/user/store', 'Admin\UserController@store')->name('admin.user.store')->middleware(['auth','moderator']);
         Route::get('/admin/user/{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit')->middleware(['auth','moderator']);
         Route::patch('/admin/user/{user}', 'Admin\UserController@update')->name('admin.user.update')->middleware(['auth','moderator']);
         Route::delete('/admin/user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy')->middleware(['auth','moderator']);

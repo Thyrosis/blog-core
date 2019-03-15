@@ -14,10 +14,12 @@ class CreateUserMetaTable extends Migration
     public function up()
     {
         Schema::create('metas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('user_id');
-            $table->string('key');
-            $table->text('value');
+            $table->increments('id');
+            $table->string('code')->unique()->index();
+            $table->string('label')->unique();
+            $table->text('description')->nullable();
+            $table->boolean('system')->default(true);
+            $table->boolean('updateable')->default(true);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateUserMetaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_meta');
+        Schema::dropIfExists('metas');
     }
 }

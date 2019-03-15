@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meta extends Model
 {
-    protected $fillable = ['user_id', 'key', 'value'];
+    protected $fillable = ['code', 'label', 'description'];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }
