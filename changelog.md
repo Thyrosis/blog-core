@@ -9,8 +9,12 @@
 ## 1.0.15 (2019-03-15)
 
 - First shot at admin user-management including Meta-data.
+- Save last login timestamp as user meta data
 - Add Google reCAPTCHA to forms, including settings to set site and private key.
 - Composer update to Laravel 5.8.4 (also install Guzzle for reCAPTCHA)
+- Updates to post & page creating and editing
+- Divide post and pages on admin index page for better overview
+- Hide categories and labels when none are available
 
 ## 1.0.14 (2019-02-22)
 

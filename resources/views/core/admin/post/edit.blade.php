@@ -150,37 +150,49 @@
         </div>
     
         <div class="flex justify-between flex-col md:flex-row">
-            <div class="mb-5 md:w-1/2 md:mr-1">
-                <label for="categories" class="form-label">@lang('Category')</label>
-                <div class="flex  flex-wrap">
-                    @foreach (\App\Category::all() as $category)
-                    <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id) || $post->categories->pluck('id')->contains($category->id)) checked @endif /> {{ $category->name }}</div>
-                    @endforeach
-                </div>
-                <p class="form-info">@lang('The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.')</p>
+            @php
+                $categories = \App\Category::all()
+            @endphp
 
-                @if ($errors->has('categories'))
-                    <div class="form-error">
-                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('categories') }}</span>
+            @if ($categories->count() > 0)
+                <div class="mb-5 md:w-1/2 md:mr-1">
+                    <label for="categories" class="form-label">@lang('Category')</label>
+                    <div class="flex  flex-wrap">
+                        @foreach (\App\Category::all() as $category)
+                        <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id) || $post->categories->pluck('id')->contains($category->id)) checked @endif /> {{ $category->name }}</div>
+                        @endforeach
                     </div>
-                @endif
-            </div>
+                    <p class="form-info">@lang('The category to which this post is linked. Can use multiple if needed, but you should probably use tags for that.')</p>
+
+                    @if ($errors->has('categories'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('categories') }}</span>
+                        </div>
+                    @endif
+                </div>
+            @endif
             
-            <div class="mb-5 md:w-1/2 md:ml-1">
-                <label for="tags" class="form-label">@lang('Tags')</label>
-                <div class="flex flex-wrap">
-                    @foreach (\App\Tag::all() as $tag)
-                    <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id) || $post->tags->pluck('id')->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
-                    @endforeach
-                </div>
-                <p class="form-info">@lang('The tags to which this post is linked. You could use just one, but you should probably use a category for that.')</p>
+            @php
+                $tags = \App\Tag::all()
+            @endphp
 
-                @if ($errors->has('tags'))
-                    <div class="form-error">
-                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('tags') }}</span>
+            @if ($tags->count() > 0)   
+                <div class="mb-5 md:w-1/2 md:ml-1">
+                    <label for="tags" class="form-label">@lang('Tags')</label>
+                    <div class="flex flex-wrap">
+                        @foreach (\App\Tag::all() as $tag)
+                        <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id) || $post->tags->pluck('id')->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
+                        @endforeach
                     </div>
-                @endif
-            </div>
+                    <p class="form-info">@lang('The tags to which this post is linked. You could use just one, but you should probably use a category for that.')</p>
+
+                    @if ($errors->has('tags'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('tags') }}</span>
+                        </div>
+                    @endif
+                </div>
+            @endif
         </div>
 
         <div class="flex justify-between flex-col md:flex-row">
