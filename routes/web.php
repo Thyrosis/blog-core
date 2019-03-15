@@ -13,16 +13,6 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('maarten', function() {
-    $me = App\User::find(1);
-    dump($me);
-
-    $meta = App\Meta::where('key', 'last_login')->first();
-    dump($meta);
-
-    $me->metas()->sync([$meta->id => [ 'value' => Carbon::now()] ], false);
-});
-
 try {
     App\Setting::routes();
 } catch (Exception $e) {

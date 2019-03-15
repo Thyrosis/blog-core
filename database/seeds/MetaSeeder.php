@@ -32,5 +32,15 @@ class MetaSeeder extends Seeder
                 // do nothing;
             }
         }
+
+        $meta = Meta::where('code', 'level')->first();
+
+        if ($meta->using('admin')->count() == 0) {
+            try {
+                \App\User::first()->updateMeta('level', 'admin');
+            } catch (Exception $e) {
+                // do nothing
+            }
+        }
     }
 }
