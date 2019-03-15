@@ -56,6 +56,7 @@ class PostController extends Controller
             'published' => 'required|boolean',
             'published_at_date' => 'required|date',
             'published_at_time' => 'required|date_format:"H:i"',
+            'type' => 'nullable',
         ]);
 
         $data = Post::processData($data);
