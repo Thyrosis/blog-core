@@ -6,9 +6,11 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
-## 1.0.15
+## 1.0.15 (2019-03-15)
 
 - First shot at admin user-management including Meta-data.
+- Add Google reCAPTCHA to forms, including settings to set site and private key.
+- Composer update to Laravel 5.8.4 (also install Guzzle for reCAPTCHA)
 
 ## 1.0.14 (2019-02-22)
 
