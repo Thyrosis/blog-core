@@ -192,8 +192,8 @@
         
             <div class="mb-5 md:w-1/2 md:ml-1">
                 <label for="published_at" class="form-label">@lang('Publish date and time')</label>
-                <input type="date" id="published_at_date" name="published_at_date" class="form-control w-1/5" value="{{ old('published_at_date', \Carbon\Carbon::now()->toDateString()) }}" />
-                <input type="time" id="published_at_time" name="published_at_time" class="form-control w-1/5" value="{{ old('published_at_time', \Carbon\Carbon::now()->format('H:i')) }}" />
+                <input type="date" id="published_at_date" name="published_at_date" class="form-control w-1/3" value="{{ old('published_at_date', \Carbon\Carbon::now()->toDateString()) }}" />
+                <input type="time" id="published_at_time" name="published_at_time" class="form-control w-1/3" value="{{ old('published_at_time', \Carbon\Carbon::now()->format('H:i')) }}" />
                 <p class="form-info">@lang('Publishing date and time. A date in the past with status set to published means the post will be published immediately.') @lang('Current time'): {{ \Carbon\Carbon::now()->format('H:i') }}</p>
 
                 @if ($errors->has('published_at_date'))
