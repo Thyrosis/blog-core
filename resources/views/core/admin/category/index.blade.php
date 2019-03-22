@@ -33,7 +33,6 @@
     </div>
 </div>
 
-
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Manage your categories')</h3>
 
@@ -42,7 +41,7 @@
     </div>
 
     <div>
-        @foreach ($categories as $category)        
+        @foreach ($categories as $category)
         <div class="category flex flex-col lg:flex-row">
             <form id="form_{{ $category->id }}" name="form_{{ $category->id }}" method="POST" action="{{ route('admin.category.update', $category) }}">
                 @csrf
