@@ -69,7 +69,7 @@ return [
 
         // 'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,strong,i,em,blockquote,sub,sup,code,a[href|title],ul,ol,li,p[style],br,hr,span,img[style|width|height|alt|src]',
         // Not supported: center,s,u
-        'HTML.Allowed' => 'a[href|title],b,big,blockquote,br,code,del,div,em,h1,h2,h3,h4,h5,h6,hr,i,img[style|width|height|alt|src],li,ol,p[style],pre,small,span[style],strong,sub,sup,table[style|summary],td[abbr],th[abbr],tr,ul,*[style]',
+        'HTML.Allowed' => 'a[href|title],b,big,blockquote,br,code,del,div,em,h1,h2,h3,h4,h5,h6,hr,i,img[width|height|alt|src],li,ol,p,pre,small,span,strong,sub,sup,table[summary],td[abbr],th[abbr],tr,ul,*[class|style]',
 
         /*
         |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
         |
         */
 
-        'CSS.AllowedProperties' => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align,float',
+        'CSS.AllowedProperties' => 'background-color,color,float,font,font-size,font-weight,font-style,font-family,height,padding-left,text-decoration,text-align,width',
 
         /*
         |--------------------------------------------------------------------------

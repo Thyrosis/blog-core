@@ -35,7 +35,7 @@
                 <option value="post.index">Indexpagina van artikelen</option>
                 <option disabled> -- @lang('Posts') -- </option>
                 @foreach (App\Post::orderBy('longTitle', 'ASC')->get() as $post)
-                <option value="{{ $post->slug }}">{{ $post->getLongTitle() }}</option>
+                <option value="{{ $post->slug }}" @if ($setting->value == $post->slug) selected @endif >{{ $post->getLongTitle() }}</option>
                 @endforeach
             </select>
             <p class="form-info">{{ $setting->description }}</p>
