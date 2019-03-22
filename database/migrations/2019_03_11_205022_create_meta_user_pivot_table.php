@@ -20,9 +20,6 @@ class CreateMetaUserPivotTable extends Migration
             $table->timestamps();
 
             $table->unique(['meta_id', 'user_id']);
-
-            $table->foreign('meta_id')->references('id')->on('metas')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
