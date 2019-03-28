@@ -115,6 +115,7 @@ Route::feeds();
  */
 App\Form::routes();
 App\User::routes();
+App\Meta::routes();
 // App\Setting::routes();
 
 /**
