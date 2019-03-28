@@ -10,6 +10,8 @@
     <div>
         {!! $post->body !!}
     </div>
+
+    <p>Took you about {{ $post->readTime() }} {{ \Illuminate\Support\Str::plural('minute', $post->readTime()) }} to read, right?</p>
 </div>
 
 <div class="admin-container">
