@@ -7,6 +7,11 @@
 <div class="w-full flex-grow xl:flex xl:items-center xl:w-auto hidden xl:block pt-6 xl:pt-0" id="nav-content">
     <ul class="list-reset xl:flex justify-end flex-1 items-center">
         <li class="mr-3">
+            <a class="admin-nav-link" href="{{ route('profile.show', auth()->user()) }}">@lang('Profile')</a>
+        </li>
+
+        @if (auth()->user()->canModerate())
+        <li class="mr-3">
             <a class="admin-nav-link" href="{{ route('admin.post.index') }}">Posts</a>
         </li>
         <li class="mr-3">
@@ -36,6 +41,8 @@
         <li class="mr-3">
             <a class="admin-nav-link" href="{{ route('admin.setting.edit') }}">Settings</a>
         </li>
+        @endif
+
         <li class="mr-3">
             <a class="admin-nav-link" href="{{ route('feeds.main') }}" target="_blank">RSS-feed</a>
         </li>

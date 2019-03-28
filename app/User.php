@@ -56,7 +56,7 @@ class User extends Authenticatable
             return route('admin.post.index');
         }
 
-        return '/admin';
+        return route('profile.show', $this);
     }
 
     public function isAdmin()
@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function metas()
     {
-        return $this->belongsToMany('App\Meta')->withPivot('value')->withTimestamps();
+        return $this->belongsToMany('App\Meta', config('database.connections.mysql.database').'.meta_user')->withPivot('value')->withTimestamps();
     }
 
     public function level()
@@ -111,7 +111,5 @@ class User extends Authenticatable
         Route::get('/user/profile/{user}', 'Profile\UserController@show')->name('profile.show')->middleware('auth');
         Route::get('/user/profile/{user}/edit', 'Profile\UserController@edit')->name('profile.edit')->middleware('auth');
         Route::patch('/user/profile/{user}', 'Profile\UserController@update')->name('profile.update')->middleware('auth');
-        // Route::get('/', 'Admin\PostController@index')->name('profile.user.show');
-        // Route::get('/home', 'Admin\PostController@index')->name('home');
     }
 }

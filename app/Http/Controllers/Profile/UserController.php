@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Profile;
 
 use App\User;
+use App\Meta;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -19,27 +21,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\User  $user
@@ -47,7 +28,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('core.admin.profile.show')->with('user', $user);
     }
 
     /**
@@ -58,7 +39,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('core.admin.profile.edit')->with('user', $user);
     }
 
     /**
@@ -70,7 +51,24 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if (auth()->id() !== $user->id) {
+            die('hacker!');
+        }
+
+        $data = $request->validate([
+            'name' => ['required', 'min:3', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+        ]);
+
+        $user->update($data);
+
+        foreach (Meta::all() as $meta) {
+            if ($meta->updateable) {
+                $user->updateMeta($meta->code, $request->{$meta->code});
+            }
+        }
+
+        return redirect(route('profile.show', $user))->with("success", "User updated");
     }
 
     /**
