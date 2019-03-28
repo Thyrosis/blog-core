@@ -6,6 +6,19 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.16 (2019-03-28)
+
+- Make profile-controller and views
+- Redirect user to homepage after login
+- Allow for metadata in secondary auth-connection
+- Change menu depending on authenticated user's level
+- Add Meta-related routes to routes.web file
+- Laravel update to 5.8.8
+- Update the core layout template to make the comment index on admin level responsive.
+- Extend published date and time fields to allow for full date and time to fit
+- Preselect home.url setting when editing settings
+- Update Purify config to allow style on every HTML element
+
 ## 1.0.15 (2019-03-15)
 
 - First shot at admin user-management including Meta-data.
