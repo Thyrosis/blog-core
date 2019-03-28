@@ -425,7 +425,7 @@ class Post extends Model implements Feedable
      */
     public function words()
     {
-        return Str::word_count(strip_tags($this->body));
+        return Str::words(strip_tags($this->body));
     }
 
     /**
