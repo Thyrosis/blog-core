@@ -425,7 +425,7 @@ class Post extends Model implements Feedable
      */
     public function words()
     {
-        return Str::words(strip_tags($this->body));
+        return str_word_count(strip_tags($this->body));
     }
 
     /**
@@ -438,7 +438,7 @@ class Post extends Model implements Feedable
      */
     public function readTime()
     {
-        return floor($this->words() / 250);
+        return (floor($this->words() / 250) > 0) ? floor($this->words() / 250) : 1;
     }
 
     /** PROBABLY DEPRECATED FUNCTIONS - NEED CLEANING UP **/
