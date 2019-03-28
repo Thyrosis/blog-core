@@ -35,7 +35,7 @@ class MetaSeeder extends Seeder
 
         $meta = Meta::where('code', 'level')->first();
 
-        if ($meta->using('admin')->count() == 0) {
+        if ($meta && $meta->using('admin')->count() == 0) {
             try {
                 \App\User::first()->updateMeta('level', 'admin');
             } catch (Exception $e) {

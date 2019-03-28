@@ -32,7 +32,7 @@ class Meta extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', config('database.connections.mysql_auth.database').'.meta_user')->withPivot('value')->withTimestamps();
+        return $this->belongsToMany('App\User', config('database.connections.mysql.database').'.meta_user')->withPivot('value')->withTimestamps();
     }
 
     public function using($value = null)
