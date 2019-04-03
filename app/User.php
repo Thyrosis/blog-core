@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function level()
     {
-        return $this->meta('level') ?? 'user';   
+        return $this->meta('access-level') ?? 'user';   
     }
 
     public function meta($code = null)

@@ -21,7 +21,7 @@
             <td class="table-cell" >{{ $user->name }}</td>
             <td class="hidden lg:table-cell">{{ $user->email }}</td>
             <td class="hidden lg:table-cell">{{ $user->created_at->toFormattedDateString() }}</td>
-            <td class="hidden lg:table-cell">{{ $user->meta('last_login') }}</td>
+            <td class="hidden lg:table-cell">{{ $user->meta('last-login') }}</td>
             <td class="hidden lg:table-cell">{{ $user->level() }}</td>
             <td class="table-cell">
                 <a href="{{ route('admin.user.edit', $user) }}" class="no-underline">
