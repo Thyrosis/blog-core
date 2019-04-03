@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use Illuminate\Support\Facades\Route;
 
 class Post extends Model implements Feedable
 {
@@ -527,5 +528,21 @@ class Post extends Model implements Feedable
     public function views()
     {
         return $this->hasMany(View::class);
+    }
+
+    public static function routes()
+    {
+        Route::get('/', 'PostController@index')->name('home');
+        Route::get('', 'Admin\PostController@index')->name('admin');
+
+        Route::middleware(['auth', 'moderator'])->prefix('admin')->name('admin.')->group(function () {
+            Route::get('post', 'Admin\PostController@index')->name('post.index');
+            Route::get('post/create', 'Admin\PostController@create')->name('post.create');
+            Route::post('post/', 'Admin\PostController@store')->name('post.store');
+            Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('post.edit');
+            Route::patch('post/{post}', 'Admin\PostController@update')->name('post.update');
+            Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('post.destroy');
+            Route::get('post/{post}', 'Admin\PostController@show')->name('post.show');
+        });
     }
 }

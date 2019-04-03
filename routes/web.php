@@ -13,13 +13,16 @@ use Carbon\Carbon;
 |
 */
 
-try {
-    App\Setting::routes();
-} catch (Exception $e) {
-    Route::get('/admin/setting', 'Admin\SettingController@edit')->name('admin.setting.edit')->middleware('auth');
-    Route::patch('/admin/setting', 'Admin\SettingController@update')->name('admin.setting.update')->middleware('auth');
-    Route::get('/', 'PostController@index')->name('home');
-}
+/**
+ * OTHER ROUTES
+ */
+App\Form::routes();
+App\User::routes();
+App\Meta::routes();
+App\Media::routes();
+App\Post::routes();
+App\Setting::routes();
+
 
 /**
  * API ROUTES
@@ -36,16 +39,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     Auth::routes();
     Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
-
-    Route::get('', 'Admin\PostController@index')->name('admin');
-
-    Route::get('post', 'Admin\PostController@index')->name('admin.post.index');
-    Route::get('post/create', 'Admin\PostController@create')->name('admin.post.create');
-    Route::post('post/', 'Admin\PostController@store')->name('admin.post.store');
-    Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('admin.post.edit');
-    Route::patch('post/{post}', 'Admin\PostController@update')->name('admin.post.update');
-    Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('admin.post.destroy');
-    Route::get('post/{post}', 'Admin\PostController@show')->name('admin.post.show');
 
     Route::get('comment', 'Admin\CommentController@index')->name('admin.comment.index');
     Route::get('comment/{comment}/edit', 'Admin\CommentController@edit')->name('admin.comment.edit');
@@ -110,12 +103,6 @@ Route::delete('unsubscribe', 'MailChimpController@delete')->name('newsletter.del
  */
 Route::feeds();
 
-/**
- * OTHER ROUTES
- */
-App\Form::routes();
-App\User::routes();
-App\Meta::routes();
 // App\Setting::routes();
 
 /**

@@ -28,21 +28,26 @@ class Setting extends Model
     {
         Route::get('/admin/setting', 'Admin\SettingController@edit')->name('admin.setting.edit')->middleware('auth');
         Route::patch('/admin/setting', 'Admin\SettingController@update')->name('admin.setting.update')->middleware('auth');
+        
+        try {
+            $homeRoute = Setting::get('home.url');
 
-        $homeRoute = Setting::get('home.url');
+            if (is_null($homeRoute) || $homeRoute == "post.index") {
+                Route::get('/', 'PostController@index')->name('home');
+            } else {
+                Route::redirect('/', $homeRoute)->name('home');;
+            }
 
-        if (is_null($homeRoute) || $homeRoute == "post.index") {
-            Route::get('/', 'PostController@index')->name('home');
-        } else {
-            Route::redirect('/', $homeRoute)->name('home');;
-        }
+            $postRoute = Setting::get('post.index');
 
-        $postRoute = Setting::get('post.index');
-
-        if (is_null($postRoute)) {
+            if (is_null($postRoute)) {
+                Route::get('blog', 'PostController@index')->name('post.index');
+            } else {
+                Route::get($postRoute, 'PostController@index')->name('post.index');
+            }
+        } catch (Exception $e) {
             Route::get('blog', 'PostController@index')->name('post.index');
-        } else {
-            Route::get($postRoute, 'PostController@index')->name('post.index');
+            Route::get('/', 'PostController@index')->name('home');
         }
     }
 
