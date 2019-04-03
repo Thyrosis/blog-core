@@ -13,13 +13,13 @@ class MetaSeeder extends Seeder
     public function run()
     {
         $metas[] = [
-            'code' => 'level',
+            'code' => 'access-level',
             'label' => 'Access level',
             'description' => __("Access level for the user."),
         ];
 
         $metas[] = [
-            'code' => 'last_login',
+            'code' => 'last-login',
             'label' => 'Last Login',
             'description' => __("Last time this user successfully logged in to the application."),
             'updateable' => false,
@@ -33,11 +33,11 @@ class MetaSeeder extends Seeder
             }
         }
 
-        $meta = Meta::where('code', 'level')->first();
+        $meta = Meta::where('code', 'access-level')->first();
 
         if ($meta && $meta->using('admin')->count() == 0) {
             try {
-                \App\User::first()->updateMeta('level', 'admin');
+                \App\User::first()->updateMeta('access-level', 'admin');
             } catch (Exception $e) {
                 // do nothing
             }

@@ -24,7 +24,7 @@ class UserTest extends TestCase
         }
 
         $admin = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $meta = factory(Meta::class)->create(['key' => 'access-level']);
         $admin->updateMeta($meta->key, 'Admin');
 
         $this->signIn($admin);
@@ -60,7 +60,7 @@ class UserTest extends TestCase
     public function aUserCanBeEdited()
     {
         $admin = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $meta = factory(Meta::class)->create(['key' => 'access-level']);
         $admin->updateMeta($meta->key, 'Admin');
 
         $this->signIn($admin);
@@ -122,10 +122,10 @@ class UserTest extends TestCase
      */
     public function metadataDefinesModeratorLevel() {
         $user = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'level']);
+        $meta = factory(Meta::class)->create(['key' => 'access-level']);
         $user->updateMeta($meta->key, 'Admin');
 
-        $this->assertEquals($user->meta('level'), 'Admin');
+        $this->assertEquals($user->meta('access-level'), 'Admin');
         $this->assertEquals($user->isAdmin(), true);
         $this->assertEquals($user->canModerate(), true);
     }
@@ -137,7 +137,7 @@ class UserTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->assertEquals($user->meta('level'), null);
+        $this->assertEquals($user->meta( 'access-level'), null);
         $this->assertEquals($user->canModerate(), false);
     }
 }

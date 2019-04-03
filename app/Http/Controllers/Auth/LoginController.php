@@ -58,7 +58,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $user->updateMeta('last_login', Carbon::now());
+        $user->updateMeta('last-login', Carbon::now());
         
         return redirect()->intended($user->home());
     }
