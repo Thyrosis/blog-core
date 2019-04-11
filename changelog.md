@@ -6,6 +6,10 @@
 - Custom user profile options
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.17 (2019-04-03)
+
+- Bugfix for 1.0.15 and meta-seeder
+
 ## 1.0.16 (2019-03-28)
 
 - Make profile-controller and views

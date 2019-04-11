@@ -39,6 +39,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (auth()->id() !== $user->id) {
+            return redirect(route('home'))->with('warning', "You tried to access a page you are not allowed to see.");
+        }
+
         return view('core.admin.profile.edit')->with('user', $user);
     }
 
@@ -52,7 +56,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         if (auth()->id() !== $user->id) {
-            die('hacker!');
+            return redirect(route('home'))->with('warning', "You tried to access a page you are not allowed to see.");
         }
 
         $data = $request->validate([

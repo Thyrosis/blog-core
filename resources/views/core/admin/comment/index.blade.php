@@ -24,22 +24,24 @@
                 <a href="{{ route('post.show', $comment->post) }}#{{ $comment->id }}" target="_blank" class="no-underline">
                     <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
                 </a>&nbsp;
-                
+
+                <a href="{{ route('admin.comment.edit', $comment) }}"><i class="text-teal" data-feather="edit-3"></i></a>&nbsp;
+
                 <form class="m-0" method="POST" action="{{ route('admin.comment.update', $comment) }}">
-                    @csrf 
+                    @csrf
                     @method('PATCH')
                     <input type="hidden" name="approved" value="{{ ($comment->approved) ? '0' : '1' }}" />
-                
+
                     @if (!$comment->approved)
-                        <button type="submit"><i class="text-green" data-feather="thumbs-up"></i></button>
+                    <button type="submit"><i class="text-green" data-feather="thumbs-up"></i></button>
                     @else
-                        <button type="submit"><i class="text-red-dark" data-feather="thumbs-down"></i></button>
+                    <button type="submit"><i class="text-red-dark" data-feather="thumbs-down"></i></button>
                     @endif
-                </form>
+                </form>&nbsp;
 
                 <form class="m-0" method="POST" onsubmit="return confirm('Are you sure?');" action="{{ route('admin.comment.destroy', $comment) }}">
-                    @csrf 
-                    @method('DELETE') 
+                    @csrf
+                    @method('DELETE')
                     <button type="submit"><i class="text-grey-darkest" data-feather="trash-2"></i></button>
                 </form>
             </div>
