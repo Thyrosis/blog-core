@@ -536,7 +536,7 @@ class Post extends Model implements Feedable
         Route::get('', 'Admin\PostController@index')->name('admin');
 
         Route::middleware(['auth', 'moderator'])->prefix('admin')->name('admin.')->group(function () {
-            Route::get('post', 'Admin\PostController@index')->name('post.index');
+            Route::get('', 'Admin\PostController@index')->name('post.index');
             Route::get('post/create', 'Admin\PostController@create')->name('post.create');
             Route::post('post/', 'Admin\PostController@store')->name('post.store');
             Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('post.edit');
