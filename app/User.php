@@ -95,7 +95,11 @@ class User extends Authenticatable
     public function updateMeta($code = null, $value = null)
     {
         if (!empty($code)) {
-            return $this->metas()->sync([Meta::where('code', $code)->first()->id => ['value' => $value] ], false);
+            $meta = Meta::where('code', $code)->first();
+
+            if ($meta) {
+                return $this->metas()->sync([$meta->id => ['value' => $value] ], false);
+            }
         }
 
         return false;
