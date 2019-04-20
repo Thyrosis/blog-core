@@ -37,8 +37,8 @@ class ProfileTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response = $this->patch(route('profile.update', auth()->user()));
+        $response = $this->patch(route('profile.update', auth()->user()), auth()->user()->toArray());
 
-        $response->assertStatus(200);
+        $response->assertStatus(302)->assertSessionHas('success');
     }
 }

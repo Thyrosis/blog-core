@@ -11,6 +11,19 @@ class Meta extends Model
     protected $fillable = ['code', 'label', 'description', 'system', 'updateable'];
 
     protected $connection = 'mysql';
+    protected $database = null;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->database = \DB::connection()->getDatabaseName().'.';
+
+        if (config('app.env') === 'testing') {
+            $this->connection = 'sqlite';
+            $this->database = null;
+        }
+    }
 
     protected static function boot()
     {
@@ -32,7 +45,11 @@ class Meta extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', config('database.connections.mysql.database').'.meta_user')->withPivot('value')->withTimestamps();
+        // if (config('app.env') === 'testing') {
+        //     return $this->belongsToMany('App\User', 'sqlite.meta_user')->withPivot('value')->withTimestamps();
+        // }
+
+        return $this->belongsToMany('App\User', $this->database.'meta_user')->withPivot('value')->withTimestamps();
     }
 
     public function using($value = null)

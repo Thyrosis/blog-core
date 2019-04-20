@@ -23,20 +23,14 @@ class CategoryTest extends TestCase
         $this->signIn();
         
         $category = factory(Category::class)->create();
+        $post = factory(Post::class)->create();
+        $post->categories()->attach($category->id);
+
+        $this->assertEquals($post->fresh()->categories->count(), 1);
 
         $this->assertDatabaseHas('categories', $category->toArray());
 
-        $post = factory(Post::class)->states('publishing')->make(['categories' => [$category->id]]);
-
-        try {
-            $this->post(route('admin.post.store'), $post->toArray());
-        } catch (ValidationException $e) {
-            dd($e);
-        }        
-
-        $this->assertDatabaseHas('posts', ['title' => $post->title]);
-
-        $this->assertEquals(1, Post::first()->categories->count());
+        $this->assertEquals($category->fresh()->posts->count(), 1);
     }
 
     /**

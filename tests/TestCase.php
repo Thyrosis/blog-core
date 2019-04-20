@@ -17,4 +17,33 @@ abstract class TestCase extends BaseTestCase
 
         return $user;
     }
+
+    protected function signInAdmin($user = null, $overrides = [])
+    {
+        $user = $user ?: factory(User::class)->create($overrides);
+        
+        $meta = \App\Meta::where('code', 'access-level')->first();
+
+        if (!$meta) {
+            \App\Meta::create([
+                'code' => 'access-level',
+                'label' => "Access level",
+                'system' => 1,
+                'updateable' => 1,
+            ]);
+        }
+
+        $user->updateMeta('access-level', 'Admin');
+
+        $this->actingAs($user);
+
+        return $user;
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        
+        shell_exec('php artisan db:seed --database=sqlite');
+    }
 }

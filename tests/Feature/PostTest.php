@@ -17,6 +17,8 @@ class PostTest extends TestCase
      */
     public function aPostCanBeRead()
     {
+        $this->withoutExceptionHandling();
+
         $post = factory(Post::class)->create();
 
         $this->assertDatabaseHas('posts', $post->toArray());
@@ -136,7 +138,7 @@ class PostTest extends TestCase
     {
         $this->withoutExceptionHandling();
         
-        $this->signIn();
+        $this->signInAdmin();
 
         $post = factory(Post::class)->states('publishing')->make()->toArray();
 
@@ -146,6 +148,7 @@ class PostTest extends TestCase
             dd($e);
         }
 
+        // dd($response->getContent());
         $response->assertSessionHas('success');
     }
 
@@ -156,7 +159,7 @@ class PostTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->signIn();
+        $this->signInAdmin();
 
         $post = factory(Post::class)->create();
 
@@ -179,7 +182,7 @@ class PostTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->signIn();
+        $this->signInAdmin();
 
         $post = factory(Post::class)->create();
 

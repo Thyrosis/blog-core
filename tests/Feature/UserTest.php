@@ -7,6 +7,8 @@ use App\Meta;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
+
 
 class UserTest extends TestCase
 {
@@ -23,11 +25,7 @@ class UserTest extends TestCase
             $this->assertDatabaseHas('users', $user->toArray());
         }
 
-        $admin = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'access-level']);
-        $admin->updateMeta($meta->key, 'Admin');
-
-        $this->signIn($admin);
+        $this->signInAdmin();
 
         $response = $this->get(route('admin.user.index'));
         $response->assertStatus(200);
@@ -59,11 +57,7 @@ class UserTest extends TestCase
      */
     public function aUserCanBeEdited()
     {
-        $admin = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'access-level']);
-        $admin->updateMeta($meta->key, 'Admin');
-
-        $this->signIn($admin);
+        $this->signInAdmin();
 
         $user = factory(User::class)->create();
 
@@ -94,25 +88,26 @@ class UserTest extends TestCase
      */
     public function aUserHasMetaInformation()
     {
-        $meta = factory(Meta::class)->create();
+        $meta = factory(Meta::class)->create(['label' => Str::random(32)]);
 
         $user = factory(User::class)->create();
 
-        $user->updateMeta($meta->key, 'This Value');
+        $user->updateMeta($meta->code, 'This Value');
 
-        $this->assertEquals($user->meta($meta->key), 'This Value');
+        $this->assertEquals($user->meta($meta->code), 'This Value');
     }
 
     /**
      * @test
      */
     public function nonexistingMetadataReturnsNull() {
-        $meta = factory(Meta::class)->create();
+        $meta = factory(Meta::class)->create(['label' => 'This is my test label']);
 
         $user = factory(User::class)->create();
 
-        $user->updateMeta($meta->key, 'This Value');
-        $this->assertEquals($user->meta($meta->key), 'This Value');
+        $user->updateMeta($meta->code, 'This Value');
+
+        $this->assertEquals($user->meta($meta->code), 'This Value');
 
         $this->assertEquals($user->meta('nonexisting'), null);
     }
@@ -121,13 +116,11 @@ class UserTest extends TestCase
      * @test
      */
     public function metadataDefinesModeratorLevel() {
-        $user = factory(User::class)->create();
-        $meta = factory(Meta::class)->create(['key' => 'access-level']);
-        $user->updateMeta($meta->key, 'Admin');
+        $this->signInAdmin();
 
-        $this->assertEquals($user->meta('access-level'), 'Admin');
-        $this->assertEquals($user->isAdmin(), true);
-        $this->assertEquals($user->canModerate(), true);
+        $this->assertEquals(auth()->user()->meta('access-level'), 'Admin');
+        $this->assertEquals(auth()->user()->isAdmin(), true);
+        $this->assertEquals(auth()->user()->canModerate(), true);
     }
 
     /**

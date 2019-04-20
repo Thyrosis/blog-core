@@ -34,9 +34,9 @@ class MediaTest extends TestCase
      */
     public function aMediaFileHasAName()
     {
-        $media = factory(Media::class)->create(['name' => 'Jumping rabbit']);
+        $media = factory(Media::class)->create(['filename' => 'Jumping rabbit']);
 
-        $this->assertEquals($media->name, 'Jumping rabbit');
+        $this->assertEquals($media->filename, 'Jumping rabbit');
     }
 
     /**
@@ -86,7 +86,7 @@ class MediaTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->signIn();
+        $this->signInAdmin();
 
         Storage::fake();
 

@@ -43,10 +43,11 @@ class AuthenticationTest extends TestCase
     /**
      * @test
      */
-    public function aGuestCannotViewAdminPages() {
+    public function aGuestCannotViewAdminPages() 
+    {
         $this->get(route('admin.post.index'))->assertStatus(302);
         $this->get(route('admin.post.create'))->assertStatus(302);
-        $this->get(route('admin.post.store'))->assertStatus(302);
+        $this->get(route('admin.post.store'))->assertStatus(405);
 
         $post = factory(Post::class)->create();
         $this->get(route('admin.post.edit', $post))->assertStatus(302);
