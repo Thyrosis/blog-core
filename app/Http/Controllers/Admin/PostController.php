@@ -106,8 +106,9 @@ class PostController extends Controller
         ]);
 
         $data = Post::processData($data);
-
+    // dump($data);
         $post->update($data);
+        // dd($post->fresh()->body);
         $post->sync($request);       
 
         return redirect(route('admin.post.edit', $post))->with("success", "Post updated");

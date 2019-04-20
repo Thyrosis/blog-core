@@ -29,6 +29,7 @@ class User extends Authenticatable
     ];
 
     protected $connection = 'mysql';
+    protected $metaDatabase = null;
 
     public function __construct(array $attributes = [])
     {
@@ -36,9 +37,12 @@ class User extends Authenticatable
 
         if (config('app.env') === 'testing') {
             $this->connection = 'sqlite';
+            $this->metaDatabase = null;
         } else if (config('custom.customAuthDB')) {
+            $this->metaDatabase = \DB::connection()->getDatabaseName().'.';
             $this->connection = 'mysql_auth';
         }
+
     }
 
     public function canModerate()
@@ -71,7 +75,7 @@ class User extends Authenticatable
 
     public function metas()
     {
-        return $this->belongsToMany('App\Meta', config('database.connections.mysql.database').'.meta_user')->withPivot('value')->withTimestamps();
+        return $this->belongsToMany('App\Meta', $this->metaDatabase.'meta_user')->withPivot('value')->withTimestamps();
     }
 
     public function level()

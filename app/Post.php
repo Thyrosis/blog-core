@@ -533,8 +533,7 @@ class Post extends Model implements Feedable
     public static function routes()
     {
         Route::get('/', 'PostController@index')->name('home');
-        Route::get('', 'Admin\PostController@index')->name('admin');
-
+        
         Route::middleware(['auth', 'moderator'])->prefix('admin')->name('admin.')->group(function () {
             Route::get('', 'Admin\PostController@index')->name('post.index');
             Route::get('post/create', 'Admin\PostController@create')->name('post.create');

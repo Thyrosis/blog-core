@@ -69,7 +69,10 @@ return [
 
         // 'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,strong,i,em,blockquote,sub,sup,code,a[href|title],ul,ol,li,p[style],br,hr,span,img[style|width|height|alt|src]',
         // Not supported: center,s,u
-        'HTML.Allowed' => 'a[href|title],b,big,blockquote,br,code,del,div,em,h1,h2,h3,h4,h5,h6,hr,i,img[width|height|alt|src],li,ol,p,pre,small,span,strong,sub,sup,table[summary],td[abbr],th[abbr],tr,ul,*[class|style]',
+        // 'HTML.Allowed' => 'a[href|title],b,big,blockquote,br,code,del,div,em,h1,h2,h3,h4,h5,h6,hr,i,img[width|height|alt|src],li,ol,p,pre,small,span,strong,sub,sup,table[summary],td[abbr],th[abbr],tr,ul,*[class|name|style|title]',
+        'HTML.Allowed' => 'a,b,big,blockquote,br,code,del,div,em,h1,h2,h3,h4,h5,h6,hr,i,img,li,ol,p,pre,small,span,strong,sub,sup,table,td,th,tr,ul,*[abbr|alt|class|height|href|name|src|style|summary|title|width]',
+        'Attr.AllowedFrameTargets' => array('_blank', 'name'),
+        'Attr.AllowedRel' => array('nofollow', 'noopener', 'print'),
 
         /*
         |--------------------------------------------------------------------------

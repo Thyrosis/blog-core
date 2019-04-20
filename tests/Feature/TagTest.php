@@ -19,7 +19,7 @@ class TagTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->signIn();
+        $this->signInAdmin();
         
         $tag = factory(Tag::class)->create();
 
