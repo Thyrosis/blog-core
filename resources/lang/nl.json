@@ -23,6 +23,8 @@
 
     "Post": "Bericht",
     "Posts": "Berichten",
+    "Page": "Pagina",
+    "Pages": "Pagina's",
     "Create new post": "Maak nieuw bericht",
     "Title": "Titel",
     "The title of the post. Will be turned into a URL-friendly slug too.": "De titel van het bericht. Wordt ook gebruikt om de URL mee te maken.",
@@ -81,8 +83,11 @@
     "Last Login": "Laatst ingelogd",
     "Chosen username. Used to identify the user to others, not for logging in.": "Gebruikersnaam van de gebruiker. Mag de eigen naam zijn, maar ook zelf verzonnen. Wordt niet gebruikt om mee in te loggen.",
     "User's email address. Used for logging in and sending messages.": "Het e-mailadres van de gebruiker. Wordt gebruikt om mee in te loggen en als communicatie e-mailadres.",
+    "Profile": "Profiel",
 
-
+    "Settings": "Instellingen",
+    "Site": "Website",
+    "Logout": "Uitloggen",
 
     "Send": "Verzenden",
     "Form": "Formulier",

@@ -60,6 +60,6 @@ class LoginController extends Controller
     {
         $user->updateMeta('last-login', Carbon::now());
         
-        return redirect()->intended($user->home());
+        return redirect(route('profile.show', $user));
     }
 }

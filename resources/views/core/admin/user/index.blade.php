@@ -5,6 +5,15 @@
 @section ('main')
 
 <div class="admin-container">
+    <h3 class="admin-h3">@lang('New Meta')</h3>
+    <p>
+        <a href="{{ route('admin.meta.index') }}" class="btn btn-teal">
+            @lang('View')
+        </a>
+    </p>
+</div>
+
+<div class="admin-container">
     <h3 class="admin-h3">@lang('Index')</h3>
 
     <table class="w-full">

@@ -21,11 +21,13 @@
         </div>
 
         @foreach (App\Meta::where('updateable', true)->get() as $meta)
+            @if ($meta->code !== "access-level")
             <div class="form-group">
                 <label class="form-label" for="{{ $meta->code }}">{{ $meta->label }}</label>
                 <input class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}" type="text" value="{{ $user->meta($meta->code) }}" />
                 <p class="form-info">{{ $meta->description }}</p>
             </div>
+            @endif
         @endforeach
 
         <div class="form-group">
