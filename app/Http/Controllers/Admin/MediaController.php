@@ -15,7 +15,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('core.admin.media.index')->with('medias', Media::all());
+        return view('core.admin.media.index')->with('medias', Media::all())->with('categories', Media::categories());;
     }
 
     /**
@@ -36,16 +36,19 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'uploadedFiles' => 'required'
+        $data = request()->validate([
+            'uploadedFiles' => 'required',
+            'label' => 'nullable',
+            'description' => 'nullable'
         ]);
 
         foreach ($request->uploadedFiles as $file) {
-            $path = $file->store('media');
-            Media::create([ 'filepath' => $path, 'filename' => $file->getClientOriginalName(), 'filetype' => $file->getClientMimeType()]);
+            $category = (!empty($request->category)) ? $request->category : "random";
+            $path = $file->store($category);
+            Media::create(['user_id' => auth()->id(), 'filepath' => $path, 'filename' => $file->getClientOriginalName(), 'category' => $category, 'filetype' => $file->getClientMimeType(), 'label' => $data['label'], 'description' => $data['description']]);
         }
 
-        return redirect(route('media.index'))->with('success', 'De bestanden zijn succesvol geupload.');
+        return redirect(route('admin.media.index'))->with('success', 'De bestanden zijn succesvol geupload.');
     }
 
     /**

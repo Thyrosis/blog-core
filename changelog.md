@@ -2,9 +2,16 @@
 
 ## Future functionality
 
+- Better form management (ordering fields, validation, response by mail)
+
+## 1.0.18 (2019-05-01)
+
 - User management (roles, profile)
 - Custom user profile options
-- Better form management (ordering fields, validation, response by mail)
+- Improvements to TinyMCE and Purify config
+- Translation updates
+- Fix tests
+- Add signInAdmin method
 
 ## 1.0.17 (2019-04-03)
 

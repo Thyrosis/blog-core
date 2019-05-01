@@ -36,6 +36,9 @@
             <a class="admin-nav-link" href="{{ route('admin.form.index') }}">@lang('Form')</a>
         </li>
         <li class="mr-3">
+            <a class="admin-nav-link" href="{{ route('admin.media.index') }}">@lang('Media')</a>
+        </li>
+        <li class="mr-3">
             <a class="admin-nav-link" href="{{ route('admin.user.index') }}">@lang('Users')</a>
         </li>
         <li class="mr-3">
