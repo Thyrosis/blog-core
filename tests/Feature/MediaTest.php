@@ -64,7 +64,7 @@ class MediaTest extends TestCase
 
         Storage::fake();
 
-        $response = $this->json('POST', route('media.store'), [ 'uploadedFiles' => [
+        $response = $this->json('POST', route('admin.media.store'), [ 'uploadedFiles' => [
                 UploadedFile::fake()->image('photo1.jpg'),
                 UploadedFile::fake()->image('photo2.jpg')
             ]
@@ -90,7 +90,7 @@ class MediaTest extends TestCase
 
         Storage::fake();
 
-        $response = $this->json('POST', route('media.store'), [
+        $response = $this->json('POST', route('admin.media.store'), [
             'uploadedFiles' => [
                 UploadedFile::fake()->image('photo1.jpg'),
                 UploadedFile::fake()->image('photo2.jpg')
@@ -101,6 +101,6 @@ class MediaTest extends TestCase
             Storage::assertExists($media->filepath);
         }
 
-        $response = $this->get(route('media.index'))->assertSee($media->filepath);
+        $response = $this->get(route('admin.media.index'))->assertSee($media->filepath);
     }
 }
