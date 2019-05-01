@@ -12,6 +12,7 @@
 - Translation updates
 - Fix tests
 - Add signInAdmin method
+- Laravel update to 5.8.15
 
 ## 1.0.17 (2019-04-03)
 
