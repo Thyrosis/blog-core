@@ -23,7 +23,15 @@
         @foreach ($metas->where('updateable', true) as $meta)
             <div class="form-group">
                 <label class="form-label" for="{{ $meta->code }}">{{ $meta->label }}</label>
-                <input class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}" type="text" value="{{ $user->meta($meta->code) }}" />
+                @if ($meta->code == 'access-level')
+                    <select class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}">
+                        <option value="user" @if ($user->meta($meta->code) == "user") selected @endif >@lang('User')</option>
+                        <option value="moderator" @if ($user->meta($meta->code) == "moderator") selected @endif >@lang('Moderator')</option>
+                        <option value="admin" @if ($user->meta($meta->code) == "admin") selected @endif >@lang('Admin')</option>
+                    </select>
+                @else
+                    <input class="form-control" id="{{ $meta->code }}" name="{{ $meta->code }}" type="text" value="{{ $user->meta($meta->code) }}" />
+                @endif
                 <p class="form-info">{{ $meta->description }}</p>
             </div>
         @endforeach
