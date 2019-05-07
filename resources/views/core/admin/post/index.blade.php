@@ -25,6 +25,7 @@
             <th class="hidden lg:table-cell">@lang('Comments')</th>
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
+
         @foreach ($posts->where('type', 'page')->sortByDesc('published_at') as $post)
         <tr class="border-b border-grey-light hover:border-blue">
             <td class="table-cell" >
@@ -60,26 +61,36 @@
             <th class="hidden lg:table-cell">@lang('Comments')</th>
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
+        
+        @php
+            $future = true;
+        @endphp
+
         @foreach ($posts->where('type', 'post')->sortByDesc('published_at') as $post)
-        <tr class="border-b border-grey-light hover:border-blue">
-            <td class="table-cell" >
-                {{ $post->title }}
-            </td>
-            <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
-            <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-lightest @endif">{{ $post->published_at->toFormattedDateString() }}</td>
-            <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
-            <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
-            <td class="table-cell">
-                <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
-                    <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
-                </a>
-            </td>
-            <td class="table-cell">
-                <a href="{{ route('admin.post.edit', $post) }}" class="no-underline">
-                    <i class="text-teal" data-feather="edit-3"></i>
-                </a>
-            </td>
-        </tr>
+            @php
+                if ($future == true && $post->published_at->isPast()) {
+                    $future = false;
+                }
+            @endphp
+            <tr class="border-b border-grey-light hover:border-blue @if ($future) bg-blue-lightest @endif ">
+                <td class="table-cell" >
+                    {{ $post->title }}
+                </td>
+                <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
+                <td class="hidden lg:table-cell @if (!$post->published) bg-red-lightest @endif">{{ $post->published_at->toFormattedDateString() }}</td>
+                <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
+                <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
+                <td class="table-cell">
+                    <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
+                        <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                    </a>
+                </td>
+                <td class="table-cell">
+                    <a href="{{ route('admin.post.edit', $post) }}" class="no-underline">
+                        <i class="text-teal" data-feather="edit-3"></i>
+                    </a>
+                </td>
+            </tr>
         @endforeach
     </table>
 </div>
