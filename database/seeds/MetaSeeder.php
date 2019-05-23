@@ -37,7 +37,13 @@ class MetaSeeder extends Seeder
 
         if ($meta && $meta->using('admin')->count() == 0) {
             try {
-                \App\User::first()->updateMeta('access-level', 'admin');
+                $user = \App\User::first();
+
+                if ($user) {
+                    $user->updateMeta('access-level', 'admin');
+                } else {
+                    echo "WARNING: No user has been created yet - sign up your first user first and then re-run this seeder.";
+                }
             } catch (Exception $e) {
                 // do nothing
             }
