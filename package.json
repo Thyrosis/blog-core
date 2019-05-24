@@ -12,15 +12,14 @@
     "devDependencies": {
         "axios": "^0.18",
         "cross-env": "^5.1",
-        "laravel-mix": "^4",
+        "laravel-mix": "^4.0.15",
+        "laravel-mix-tailwind": "^0.1.0",
         "lodash": "^4.17.11",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.16.1",
         "sass-loader": "^7.1.0",
+        "tailwindcss": "^1.0.1",
         "vue-template-compiler": "^2.5.22"
     },
-    "dependencies": {
-        "laravel-mix-tailwind": "^0.1.0",
-        "tailwindcss": "^0.7"
-    }
+    "dependencies": {}
 }
