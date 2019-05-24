@@ -5,8 +5,8 @@
         @csrf       
 
         <div class="mb-5">
-            <label for="term" class="text-grey-darker text-sm font-bold mb-2 block">@lang('Search for...')</label>
-            <input type="text" name="term" id="term" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('term') }}" />
+            <label class="form-label" for="term">@lang('Search for...')</label>
+            <input class="form-control" id="term" name="term" required type="text" value="{{ old('term') }}" />
             <p class="form-info">@lang('We\'ll search in title, summary and body for you.')</p>
 
             @if ($errors->has('term'))
