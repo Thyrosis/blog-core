@@ -1,4 +1,4 @@
-@tailwind preflight;
+@tailwind base;
 
 @tailwind components;
 
@@ -7,7 +7,11 @@
 }
 
 h1 {
-    @apply .uppercase .font;
+    @apply .uppercase .font .text-3xl;
+}
+
+h2 {
+    @apply .text-2xl;
 }
 
 p {
@@ -23,7 +27,7 @@ td, th {
 }
 
 .admin-container {
-    @apply .bg-white .border .shadow .mx-1 .mb-5 .p-5 .rounded;
+    @apply .bg-white .shadow .mx-1 .mb-5 .p-5 .rounded;
 }
 
 .btn {
@@ -83,7 +87,7 @@ a.btn {
 }
 
 .form-control {
-    @apply .shadow .w-full .border .rounded .px-2 .py-2 font;
+    @apply .shadow .w-full .border .border-grey-light .rounded .px-2 .py-2 font;
 }
 
 .form-control:focus {
@@ -128,6 +132,22 @@ table.admin-table {
 
 .admin-nav-link:hover {
     @apply .text-grey-lighter .underline;
+}
+
+.admin-nav-group {
+    @apply .inline-block .text-grey .no-underline .py-2 .px-4;
+}
+
+.admin-nav-group:hover {
+    @apply .text-grey-lighter;
+}
+
+.admin-nav-group-link {
+    @apply .py-2 .px-4 .block .text-black;
+}
+
+.admin-nav-group-link:hover {
+    @apply .bg-grey-lighter;
 }
 
 .admin-feedback {

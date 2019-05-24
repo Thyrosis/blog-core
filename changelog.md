@@ -4,6 +4,10 @@
 
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.19 (2019-05-24)
+
+- Upgrade Tailwind to v1.0
+
 ## 1.0.18 (2019-05-01)
 
 - User management (roles, profile)
