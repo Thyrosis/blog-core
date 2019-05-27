@@ -33,8 +33,8 @@
         <input type="hidden" name="post_id" value="{{ $post->id }}" />
         
         <div class="mb-5">
-            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">@lang('E-mail Address')</label>
-            <input type="text" name="emailaddress" id="emailaddress" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('emailaddress') }}" />
+            <label class="form-label" for="emailaddress" >@lang('E-mail Address')</label>
+            <input class="form-control" id="emailaddress" name="emailaddress" required type="text" value="{{ old('emailaddress') }}" />
             <p class="form-info">@lang('Your e-mail address. We\'ll only use it to send you a message when someone replies to this post.')</p>
 
             @if ($errors->has('emailaddress'))
@@ -59,8 +59,8 @@
         <input type="hidden" name="post_id" value="{{ $post->id }}" />
 
         <div class="mb-5">
-            <label for="emailaddress" class="text-grey-darker text-sm font-bold mb-2 block">@lang('E-mail Address')</label>
-            <input type="email" name="emailaddress" id="emailaddress" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('emailaddress') }}" />
+            <label class="form-label" for="emailaddress">@lang('E-mail Address')</label>
+            <input class="form-control" id="emailaddress" name="emailaddress" required type="email" value="{{ old('emailaddress') }}" />
             <p class="form-info">@lang('Your e-mail address. We\'ll only use it to send you a message when someone replies to this post.')</p>
 
             @if ($errors->has('emailaddress'))
@@ -71,8 +71,8 @@
         </div>
 
         <div class="mb-5">
-            <label for="name" class="text-grey-darker text-sm font-bold mb-2 block">@lang('Name')</label>
-            <input type="text" name="name" id="name" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required value="{{ old('name') }}" />
+            <label class="form-label" for="name" >@lang('Name')</label>
+            <input class="form-control" id="name" name="name" required type="text" value="{{ old('name') }}" />
             <p class="form-info">@lang('Your name. Will be published with your comment.')</p>
 
             @if ($errors->has('name'))
@@ -83,8 +83,8 @@
         </div>
 
         <div class="mb-5">
-            <label for="body" class="text-grey-darker text-sm font-bold mb-2 block">@lang('Comment')</label>
-            <textarea name="body" id="body" class="shadow w-full border rounded px-2 py-2 focus:shadow-inner" required>{{ old('body') }}</textarea>
+            <label class="form-label" for="body">@lang('Comment')</label>
+            <textarea class="form-control" id="body" name="body" required>{{ old('body') }}</textarea>
             <p class="form-info">@lang('Your comment')</p>
 
             @if ($errors->has('body'))

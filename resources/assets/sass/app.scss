@@ -87,7 +87,7 @@ a.btn {
 }
 
 .form-control {
-    @apply .shadow .w-full .border .border-grey-light .rounded .px-2 .py-2 font;
+    @apply .shadow .w-full .border .border-grey-light .rounded .px-2 .py-2 font .text-black;
 }
 
 .form-control:focus {

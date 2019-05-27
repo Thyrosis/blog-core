@@ -21,7 +21,7 @@
                     @lang('Comments')
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-                <div class="items-center absolute border rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 10rem;">
+                <div class="items-center absolute border border-teal rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 10rem;">
                     <a class="admin-nav-group-link" href="{{ route('admin.comment.index') }}" >@lang('View')</a>
                     <a class="admin-nav-group-link" href="{{ route('admin.subscription.index') }}" >@lang('Subscriptions')</a>
                 </div>
@@ -39,7 +39,7 @@
                     @lang('General')
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-                <div class="items-center absolute border rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 10rem;">
+                <div class="items-center absolute border border-teal rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 10rem;">
                     <a class="admin-nav-group-link" href="{{ route('admin.setting.edit') }}">@lang('Settings')</a>
                     <a class="admin-nav-group-link" href="{{ route('admin.category.index') }}">@lang('Categories')</a>
                     <a class="admin-nav-group-link" href="{{ route('admin.tag.index') }}">@lang('Tags')</a>
@@ -82,9 +82,10 @@
                     @lang('Statistics')
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-                <div class="items-center absolute border border-t-0 rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 8rem;">
+                <div class="items-center absolute border border-teal border-t-0 rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 8rem;">
                     <a class="admin-nav-group-link" href="{{ route('admin.view.index') }}">@lang('Views')</a>
                     <a class="admin-nav-group-link" href="{{ route('admin.user.index') }}">@lang('Users')</a>
+                    <a class="admin-nav-group-link" href="{{ route('admin.meta.index') }}">@lang('Meta')</a>
                     <a class="admin-nav-group-link" href="{{ route('feeds.main') }}" target="_blank">@lang('RSS-feed')</a>
                 </div>
             </div>
@@ -96,7 +97,7 @@
                     @lang('Profile')
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-                <div class="items-center absolute border border-t-0 rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 8rem;">
+                <div class="items-center absolute border border-teal border-t-0 rounded-b-lg p-1 bg-white p-2 invisible group-hover:visible w-full" style="min-width: 8rem;">
                     <a class="admin-nav-group-link" href="{{ route('profile.show', auth()->user()) }}" >@lang('View')</a>
                     <a class="admin-nav-group-link" href="{{ route('profile.edit', auth()->user()) }}" >@lang('Edit')</a>
                     <hr class="border-t mx-2 border-grey-light">
