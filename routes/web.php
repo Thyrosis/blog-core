@@ -99,9 +99,12 @@ Route::patch('subscription', 'MailChimpController@update')->name('newsletter.pat
 Route::delete('unsubscribe', 'MailChimpController@delete')->name('newsletter.delete');
 
 /**
- * RSS FEED ROUTES
+ * RSS FEED AND SITEMAP ROUTES
  */
 Route::feeds();
+Route::get('sitemap.xml', function() {
+    return Response::view('core.layout.sitemap')->header('Content-Type', 'text/xml');
+});
 
 // App\Setting::routes();
 
