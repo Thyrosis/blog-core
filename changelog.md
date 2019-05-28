@@ -4,6 +4,10 @@
 
 - Better form management (ordering fields, validation, response by mail)
 
+## 1.0.20 (2019-05-28)
+
+- Add automatic sitemap.xml
+
 ## 1.0.19 (2019-05-24)
 
 - Upgrade Tailwind to v1.0
