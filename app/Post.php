@@ -171,6 +171,13 @@ class Post extends Model implements Feedable
         return $this->belongsTo(User::class);
     }
 
+    public function generateHash()
+    {
+        $this->hash = Str::random(20);
+        $this->update();
+        return $this->hash;
+    }
+
     /**
      * Returns the URL to the feature image (if used)
      * 
