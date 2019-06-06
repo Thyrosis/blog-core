@@ -26,7 +26,7 @@ class AddUserAgentToViews extends Migration
     public function down()
     {
         Schema::table('views', function (Blueprint $table) {
-            //
+            $table->dropColumn('user_agent');
         });
     }
 }

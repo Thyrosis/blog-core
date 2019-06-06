@@ -175,7 +175,7 @@
         </div>
 
         <div class="flex justify-between flex-col md:flex-row">
-            <div class="mb-5 md:mr-1">
+            <div class="mb-5 md:w-1/4 md:mr-1">
                 <label for="type" class="form-label">@lang('Post type')</label>
                 <select class="form-control" id="type" name="type">
                     <option value="post" @if (old('type', Setting::get('post.defaultType')) == 'post') selected @endif >@lang('Post')</option>
@@ -205,6 +205,21 @@
                 @if ($errors->has('published_at_time'))
                     <div class="form-error">
                         <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at_time') }}</span>
+                    </div>
+                @endif
+            </div>
+
+            <div class="mb-5 md:w-1/4 md:ml-1">
+                <label for="hash" class="form-label">@lang('Enable public viewing ahead of publishing')</label>
+                <div class="flex">            
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="0" @if ( old('use_hash') == null ) checked @endif /> @lang('No')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="1" @if ( old('use_hash') != null ) checked @endif /> @lang('Yes')</div>
+                </div>
+                <p class="form-info">@lang('Using a unique hash, you can provide pre-publishing access to posts to unauthorised users.')</p>
+
+                @if ($errors->has('hash'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('hash') }}</span>
                     </div>
                 @endif
             </div>

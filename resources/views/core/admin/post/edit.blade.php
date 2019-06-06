@@ -233,9 +233,10 @@
 
             <div class="mb-5 md:w-1/4 md:ml-1">
                 <label for="hash" class="form-label">@lang('Enable public viewing ahead of publishing')</label>
-                <div class="flex">            
-                    <div class="my-1 mx-2"><input type="radio" name="hash" value="0" @if ( old('hash', $post->hash) == null ) checked @endif /> @lang('No')</div>
-                    <div class="my-1 mx-2"><input type="radio" name="hash" value="1" @if ( old('hash', $post->hash) != null ) checked @endif /> @lang('Yes')</div>
+                <div class="flex">           
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="0" @if ( old('use_hash', $post->hash) == null ) checked @endif /> @lang('No')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="1" @if ( old('use_hash', $post->hash) != null ) checked @endif /> @lang('Yes')</div>
+                    @if (!empty($post->hash))<div class="my-1 mx-2">Hash: {{ $post->hash }} <input type="hidden" name="hash" value="{{ $post->hash }}"></div>@endif
                 </div>
                 <p class="form-info">@lang('Using a unique hash, you can provide pre-publishing access to posts to unauthorised users.')</p>
 

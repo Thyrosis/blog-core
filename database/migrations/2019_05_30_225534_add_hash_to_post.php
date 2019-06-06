@@ -14,7 +14,7 @@ class AddHashToPost extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->text('hash')->nullable();
+            $table->text('hash')->nullable()->after('published');
         });
     }
 
@@ -26,7 +26,7 @@ class AddHashToPost extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropColumn('hash');
         });
     }
 }
