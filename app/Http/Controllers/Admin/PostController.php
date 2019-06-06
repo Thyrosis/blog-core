@@ -57,6 +57,7 @@ class PostController extends Controller
             'published_at_date' => 'required|date',
             'published_at_time' => 'required|date_format:"H:i"',
             'type' => 'nullable',
+            'use_hash' => 'required',
         ]);
 
         $data = Post::processData($data);
@@ -103,12 +104,12 @@ class PostController extends Controller
             'published_at_date' => 'nullable|date',
             'published_at_time' => 'nullable|date_format:"H:i"',
             'type' => 'nullable',
+            'use_hash' => 'required',
+            'hash' => 'nullable',
         ]);
 
         $data = Post::processData($data);
-    // dump($data);
         $post->update($data);
-        // dd($post->fresh()->body);
         $post->sync($request);       
 
         return redirect(route('admin.post.edit', $post))->with("success", "Post updated");

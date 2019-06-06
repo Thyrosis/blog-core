@@ -13,7 +13,7 @@
     <div class="admin-container">
         <h3 class="admin-h3 flex justify-between">
             @lang('Edit post')
-            <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
+            <a href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" target="_blank" class="no-underline">
                 <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
             </a>
         </h3>
@@ -91,7 +91,7 @@
         <h3 class="admin-h3">@lang('Extra information')</h3>
 
         <div class="flex justify-between flex-col md:flex-row">
-            <div class="mb-5">
+            <div class="mb-5 md:w-1/3">
                 <label for="commentable" class="form-label">@lang('Allow comments')</label>
                 <div class="flex">
                     <div class="my-1 mx-2"><input type="radio" name="commentable" value="0" @if ( old('commentable', $post->commentable) == 0 ) checked @endif /> No</div>
@@ -106,7 +106,7 @@
                 @endif
             </div>
                 
-            <div class="mb-5">
+            <div class="mb-5 md:w-1/3">
                 <label for="published" class="form-label">@lang('Published status')</label>
                 <div class="flex flex-wrap">
                     <div class="my-1 mx-2"><input type="radio" name="published" value="0" @if ( old('published', $post->published) == 0 ) checked @endif /> @lang('Draft')</div>
@@ -121,7 +121,7 @@
                 @endif
             </div>
 
-            <div class="mb-5">
+            <div class="mb-5 md:w-1/3">
                 <label for="featured" class="form-label">@lang('Featured post')</label>
                 <div class="flex">            
                     <div class="my-1 mx-2"><input type="radio" name="featured" value="0" @if ( old('featured', $post->featured) == 0 ) checked @endif /> @lang('No')</div>
@@ -196,7 +196,7 @@
         </div>
 
         <div class="flex justify-between flex-col md:flex-row">
-            <div class="mb-5 md:mr-1">
+            <div class="mb-5 md:w-1/4 md:mr-1">
                 <label for="type" class="form-label">@lang('Post type')</label>
                 <select class="form-control" id="type" name="type">
                     <option value="post" @if (old('type', $post->type) == 'post') selected @endif >@lang('Post')</option>
@@ -227,6 +227,22 @@
                 @if ($errors->has('published_at_time'))
                     <div class="form-error">
                         <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('published_at_time') }}</span>
+                    </div>
+                @endif
+            </div>
+
+            <div class="mb-5 md:w-1/4 md:ml-1">
+                <label for="hash" class="form-label">@lang('Enable public viewing ahead of publishing')</label>
+                <div class="flex">           
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="0" @if ( old('use_hash', $post->hash) == null ) checked @endif /> @lang('No')</div>
+                    <div class="my-1 mx-2"><input type="radio" name="use_hash" value="1" @if ( old('use_hash', $post->hash) != null ) checked @endif /> @lang('Yes')</div>
+                    @if (!empty($post->hash))<div class="my-1 mx-2">Hash: {{ $post->hash }} <input type="hidden" name="hash" value="{{ $post->hash }}"></div>@endif
+                </div>
+                <p class="form-info">@lang('Using a unique hash, you can provide pre-publishing access to posts to unauthorised users.')</p>
+
+                @if ($errors->has('hash'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('hash') }}</span>
                     </div>
                 @endif
             </div>

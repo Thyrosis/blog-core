@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserAgentToViews extends Migration
+class AddHashToPost extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserAgentToViews extends Migration
      */
     public function up()
     {
-        Schema::table('views', function (Blueprint $table) {
-            $table->text('user_agent')->default(null)->nullable();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->text('hash')->nullable()->after('published');
         });
     }
 
@@ -25,8 +25,8 @@ class AddUserAgentToViews extends Migration
      */
     public function down()
     {
-        Schema::table('views', function (Blueprint $table) {
-            $table->dropColumn('user_agent');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('hash');
         });
     }
 }

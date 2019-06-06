@@ -30,15 +30,33 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        if (!$post->isPublished() && auth()->guest()) {
-            return redirect(route('home'));
+        $show = false;
+
+        if ($post->isPublished()) {
+            $show = true;
         }
 
-        $post->view();
+        if (auth()->check()) {
+            $show = true;
+        }
 
-        $post->previous = $post->previous();
-        $post->next = $post->next();
-        
-        return view()->first(['post.show', 'core.post.show'])->with('post', $post);
+        if (isset($post->hash) && !empty($post->hash)) {
+            $hash = request()->query('hash');
+
+            if ($hash == $post->hash) {
+                $show = true;
+            }
+        }
+
+        if ($show) {
+            $post->view();
+
+            $post->previous = $post->previous();
+            $post->next = $post->next();
+            
+            return view()->first(['post.show', 'core.post.show'])->with('post', $post);
+        }
+
+        return redirect(route('home'));
     }
 }

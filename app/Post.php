@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 class Post extends Model implements Feedable
 {
-    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type'];
+    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type', 'hash'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     protected static function boot()
@@ -120,6 +120,17 @@ class Post extends Model implements Feedable
             $data['published_at'] = Carbon::parse($data['published_at_date'] . " " . $data['published_at_time']);
         }
     
+        // Set the hash if it's just been enabled, remove when disabled
+        if (isset($data['use_hash'])) {
+            if ($data['use_hash'] == 1) {
+                if (!isset($data['hash'])) {
+                    $data['hash'] = static::generateHash(10);
+                }
+            } else {
+                $data['hash'] = null;
+            }
+        }
+
         // Return the data array and continue with whatever you were doing.
         return $data;
     }
@@ -169,6 +180,11 @@ class Post extends Model implements Feedable
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function generateHash($characters = 5)
+    {
+        return Str::random($characters);
     }
 
     /**
