@@ -47,9 +47,10 @@
     <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ Setting::get('tinyMCE.license') }}"></script>
     <script>
         tinymce.init({
-            selector: '.tinymce-full',                
-            autosave_retention: "4320m",
+            selector: '.tinymce-full',
             autosave_interval: "15s",
+            autosave_restore_when_empty: true,
+            autosave_retention: "1440",
             block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Quote=blockquote;Preformatted=pre',
             browser_spellcheck: true,
             content_css: [
@@ -59,13 +60,13 @@
             // extended_valid_elements: "a[href|title|target=_blank],img[class|src|border=0|alt|title|hspace|vspace|width|height|align],*[name|style|title|class],p[name]",
             valid_elements: "*[*]",
             image_advtab: true,
-            plugins: 'advlist anchor code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template  textpattern toc visualblocks visualchars wordcount',
-            relative_urls : true,
+            plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
+            relative_urls : false,
             templates: [
-                { title: 'Test template 1', content: 'Test 1' },
-                { title: 'Test template 2', content: 'Test 2' }
+                { title: 'Quote', description: 'Default quote field', content: '<blockquote>This is a quote. Nice to display with a different background color or some padding on the left. Style it in your custom CSS file.</blockquote><p>&nbsp;</p>'},
+                { title: 'Highlight', description: 'Highlighted paragraph', content: '<p style="background-color: #456789; padding: 1rem;">This is a regular paragraph but with a different background color. Style as needed.</p><p>&nbsp;</p>' }
             ],
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
         });
     </script>
 
