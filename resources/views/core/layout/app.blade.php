@@ -60,6 +60,8 @@
             // extended_valid_elements: "a[href|title|target=_blank],img[class|src|border=0|alt|title|hspace|vspace|width|height|align],*[name|style|title|class],p[name]",
             valid_elements: "*[*]",
             image_advtab: true,
+            language_url : '{{ config('app.url') }}/js/languages/{{ config('app.locale') }}.js',
+            language: '{{ config('app.locale') }}',
             plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
             relative_urls : false,
             templates: [
