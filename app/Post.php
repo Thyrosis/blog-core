@@ -69,6 +69,19 @@ class Post extends Model implements Feedable
     }
 
     /**
+     * Duplicate a post object, including all tags and categories
+     * 
+     * @return      App\Post
+     * @version     20190702
+     * @todo        Duplicate the category and tags too
+     */
+    public function duplicate()
+    {
+        $newPost = $this->replicate();
+        $newPost->save();
+    }
+
+    /**
      * Generate a random hash 
      * 
      * @param   int $characters     Amount of characters has should be long
