@@ -214,9 +214,21 @@ class Post extends Model implements Feedable
      * 
      * @return string
      */
-    public function getLongTitle()
+    public function getTitle()
     {
         return $this->longTitle ?? $this->title;
+    }
+    
+    /**
+     * Returns the used Long Title, or just
+     * the regular title if it isn't set.
+     * 
+     * @return string
+     * @deprecated  20190702    Replaced by the more logical getTitle()
+     */
+    public function getLongTitle()
+    {
+        return $this->getTitle();
     }
 
     /**
