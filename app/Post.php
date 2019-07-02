@@ -38,6 +38,12 @@ class Post extends Model implements Feedable
         return $this->belongsToMany('App\Category');
     }
 
+    /** 
+     * Create a slug for the post
+     * 
+     * @param   string $value   Value to create a slug from
+     * @return  string
+     */
     public static function createSlug($value)
     {
         $slug = Str::slug($value);
@@ -62,6 +68,12 @@ class Post extends Model implements Feedable
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * Generate a random hash 
+     * 
+     * @param   int $characters     Amount of characters has should be long
+     * @return  string
+     */
     public static function generateHash($characters = 5)
     {
         return Str::random($characters);
@@ -102,6 +114,11 @@ class Post extends Model implements Feedable
         return false;
     }
 
+    /** 
+     * Get all items to post on RSS feed
+     * 
+     * @return Collection
+     */
     public static function getFeedItems()
     {
         return static::getPublished()->whereType('post')->get();
@@ -382,6 +399,9 @@ class Post extends Model implements Feedable
         return (floor($this->words() / 250) > 0) ? floor($this->words() / 250) : 1;
     }
 
+    /**
+     * Define all the routes related to post
+     */
     public static function routes()
     {
         Route::get('/', 'PostController@index')->name('home');
