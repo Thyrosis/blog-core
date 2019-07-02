@@ -23,13 +23,27 @@ class Post extends Model implements Feedable
         parent::boot();
     }
 
-    /**
-     * Create a custom slug with specified amount of random trailing characters
-     */
-    public static function slug($value, $random = 5) {
-        return Str::slug($value) . "-" . Str::random($random);
+    public function body()
+    {
+        return $this->attributes['body'];
     }
 
+    /**
+     * Return the attached categories instances
+     * 
+     * @return  App\Category
+     */
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }
+
+    /** 
+     * Create a slug for the post
+     * 
+     * @param   string $value   Value to create a slug from
+     * @return  string
+     */
     public static function createSlug($value)
     {
         $slug = Str::slug($value);
@@ -41,18 +55,240 @@ class Post extends Model implements Feedable
         return $slug;
     }
 
-    /** 
-     * Set the custom published at attribute
+    /**
+     * Define the relationship between posts and comments. 
      * 
-     * @param string    $datetime
+     * Each post can have many comments, but each comment
+     * only belongs to one post.
+     * 
+     * @return Illuminate\Database\Eloquent\Relations
      */
-    public function setPublishedAtAttribute($datetime)
+    public function comments()
     {
-        if (is_string($datetime)) {
-            $this->attributes['published_at'] = Carbon::parse($datetime);
-        } else {
-            $this->attributes['published_at'] = $datetime;
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Duplicate a post object, including all tags and categories
+     * 
+     * @return      App\Post
+     * @version     20190702
+     * @todo        Duplicate the category and tags too
+     */
+    public function duplicate()
+    {
+        $newPost = $this->replicate();
+        $newPost->save();
+    }
+
+    /**
+     * Generate a random hash 
+     * 
+     * @param   int $characters     Amount of characters has should be long
+     * @return  string
+     */
+    public static function generateHash($characters = 5)
+    {
+        return Str::random($characters);
+    }
+
+    /**
+     * Access the body attribute.
+     *
+     * @param  string $body
+     * @return string
+     * @version 20190123    Added parsing of Forms
+     */
+    public function getBodyAttribute($body)
+    {
+        $body = \Purify::clean($body);
+
+        return $this->parse($body);
+    }
+
+    /**
+     * Returns the URL to the feature image (if used)
+     * 
+     * @param   bool    default     Whether to return the default featureImage
+     * @return string
+     * 
+     * @version     20181111    Added parameter 'default'
+     */
+    public function getFeatureImage($default = true)
+    {
+        if ($this->featureimage) {
+            return $this->featureimage;
         }
+
+        if ($default) {
+            return Setting::get('post.defaultFeatureImage');
+        }
+
+        return false;
+    }
+
+    /** 
+     * Get all items to post on RSS feed
+     * 
+     * @return Collection
+     */
+    public static function getFeedItems()
+    {
+        return static::getPublished()->whereType('post')->get();
+    }
+
+    /**
+     * Get a custom set link attribute (including hostname)
+     * 
+     * @return string
+     */
+    public function getLinkAttribute()
+    {
+        return config('app.url') . $this->path;
+    }
+
+    /**
+     * Returns the used Long Title, or just
+     * the regular title if it isn't set.
+     * 
+     * @return string
+     * @deprecated  20190702    Replaced by the more logical getTitle()
+     */
+    public function getLongTitle()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * Return a custom path attribute (internal linking)
+     * 
+     * @return string
+     */
+    public function getPathAttribute()
+    {
+        return "/{$this->slug}";
+    }
+
+    /**
+     * Return a collection of published posts
+     * 
+     * @return Illuminate\Support\Collection
+     */
+    public static function getPublished()
+    {
+        return static::where('published', true)->where('published_at', '<', now())->orderBy('published_at', 'DESC')->orderBy('id', 'DESC');
+    }
+    
+    /**
+     * Defines the route keyname used by Larave.
+     * 
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }   
+
+    /**
+     * Returns the summary if it was created,
+     * or just the first 75 words of the body if not.
+     * 
+     * @return string
+     */
+    public function getSummary()
+    {
+        if (!empty($this->summary)) {
+            return $this->summary;
+        }
+
+        return $this->wordLimit();
+    }
+
+    /**
+     * Access the summary attribute.
+     *
+     * @param  string $summary
+     * @return string
+     */
+    public function getSummaryAttribute($summary)
+    {
+        return \Purify::clean($summary);
+    }
+
+    /**
+     * Returns the used Long Title, or just
+     * the regular title if it isn't set.
+     * 
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->longTitle ?? $this->title;
+    } 
+
+    /**
+     * Return the current published status.
+     * 
+     * If the status is 0, return false.
+     * If the status is 1, first check if the post published date
+     * is in the past. If so, return true, otherwise false.
+     * 
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        if ($this->published == 0) {
+            return false;
+        }
+
+        return $this->published_at->isPast();
+    }
+
+    /**
+     * Returns the direct link, including the URL
+     */
+    public function link()
+    {
+        return config('app.url').$this->path();
+    }
+
+    /**
+     * Find the post published after this one
+     * 
+     * @return App\Post
+     */
+    public function next()
+    {
+        return self::where('published', true)->where('published_at', '<', Carbon::now())->where('published_at', '>', $this->published_at)->orderBy('published_at', 'ASC')->first();
+    }
+
+    /**
+     * Send an email to all subscribed commenters to this post.
+     * 
+     * Forget the current commenters email address to avoid receiving an email yourself when posting.
+     * 
+     * @param App\Comment $comment
+     * @version 2018-08-10  Added forget to the collection
+     */
+    public function notifySubscribers($comment)
+    {
+        $subscribers = $this->subscribers()->filter(function ($value) use ($comment) {
+            return $comment->emailaddress !== $value;
+        });
+
+        $subscribers->each( function ($subscriber) use ($comment) {
+            Mail::to($subscriber)->queue(new NewComment($comment));
+        });
+    }
+
+    /**
+     * Queue an email to all subscribed email addresses
+     */
+    public function notifySubscriptions($comment)
+    {
+        $this->subscriptions->each(function ($subscription) use ($comment) {
+            Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
+        });
     }
 
     /**
@@ -96,6 +332,24 @@ class Post extends Model implements Feedable
     }
 
     /**
+     * Returns the direct path (no URL)
+     */
+    public function path()
+    {
+        return "/{$this->slug}";
+    }
+
+    /**
+     * Find the post published before this one
+     * 
+     * @return App\Post
+     */
+    public function previous()
+    {
+        return self::where('published', true)->where('published_at', '<', $this->published_at)->orderBy('published_at', 'DESC')->first();
+    }
+
+    /**
      * Process a posts data on create or update.
      * 
      * @param   array   $data
@@ -136,6 +390,93 @@ class Post extends Model implements Feedable
     }
 
     /**
+     * Update this posts published status to 1
+     * 
+     * @return boolean
+     */
+    public function publish()
+    {
+        return $this->update(['published' => 1]);
+    }
+
+    /**
+     * Calculate the average read time for this post.
+     * 
+     * The average time is calculated using 250 words per minute as reading speed.
+     * 250 is the average adult's reading speed, according to some researches.
+     * 
+     * @return int
+     */
+    public function readTime()
+    {
+        return (floor($this->words() / 250) > 0) ? floor($this->words() / 250) : 1;
+    }
+
+    /**
+     * Define all the routes related to post
+     */
+    public static function routes()
+    {
+        Route::get('/', 'PostController@index')->name('home');
+        
+        Route::middleware(['auth', 'moderator'])->prefix('admin')->name('admin.')->group(function () {
+            Route::get('', 'Admin\PostController@index')->name('post.index');
+            Route::get('post/create', 'Admin\PostController@create')->name('post.create');
+            Route::post('post/', 'Admin\PostController@store')->name('post.store');
+            Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('post.edit');
+            Route::patch('post/{post}', 'Admin\PostController@update')->name('post.update');
+            Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('post.destroy');
+            Route::get('post/{post}', 'Admin\PostController@show')->name('post.show');
+        });
+    }
+
+    /** 
+     * Set the custom published at attribute
+     * 
+     * @param string    $datetime
+     */
+    public function setPublishedAtAttribute($datetime)
+    {
+        if (is_string($datetime)) {
+            $this->attributes['published_at'] = Carbon::parse($datetime);
+        } else {
+            $this->attributes['published_at'] = $datetime;
+        }
+    }
+
+    /**
+     * Create a custom slug with specified amount of random trailing characters
+     */
+    public static function slug($value, $random = 5) {
+        return Str::slug($value) . "-" . Str::random($random);
+    }
+
+    /**
+     * Collect all email addresses of commenters who've subscribed to the post
+     * 
+     * @return Illuminate\Support\Collection $emails
+     * @deprecated?
+     */
+    public function subscribers()
+    {
+        $emails = collect();
+
+        $this->comments()->where('notify', 1)->get()->each(function ($comment) use ($emails) {
+            $emails->push($comment->emailaddress);
+        });
+
+        return $emails->unique();
+    }
+
+    /**
+     * @deprecated?
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class); 
+    }
+
+    /**
      * Sync a posts related tags and categories if needed
      * 
      * @param   Illuminate\Http\Request $request
@@ -157,121 +498,13 @@ class Post extends Model implements Feedable
     }
 
     /**
-     * Define the relationship between posts and comments. 
+     * Return the attached tags instances
      * 
-     * Each post can have many comments, but each comment
-     * only belongs to one post.
-     * 
-     * @return Illuminate\Database\Eloquent\Relations
+     * @return  App\Tag
      */
-    public function comments()
+    public function tags()
     {
-        return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Define the relationship between posts and users.
-     * 
-     * Each post belongs to one user, but each user
-     * can have many posts.
-     * 
-     * @return  App\User
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public static function generateHash($characters = 5)
-    {
-        return Str::random($characters);
-    }
-
-    /**
-     * Returns the URL to the feature image (if used)
-     * 
-     * @param   bool    default     Whether to return the default featureImage
-     * @return string
-     * 
-     * @version     20181111    Added parameter 'default'
-     */
-    public function getFeatureImage($default = true)
-    {
-        if ($this->featureimage) {
-            return $this->featureimage;
-        }
-
-        if ($default) {
-            return Setting::get('post.defaultFeatureImage');
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns the used Long Title, or just
-     * the regular title if it isn't set.
-     * 
-     * @return string
-     */
-    public function getLongTitle()
-    {
-        return $this->longTitle ?? $this->title;
-    }
-
-    /**
-     * Defines the route keyname used by Larave.
-     * 
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }    
-
-    /**
-     * Returns the summary if it was created,
-     * or just the first 75 words of the body if not.
-     * 
-     * @return string
-     */
-    public function getSummary()
-    {
-        if (!empty($this->summary)) {
-            return $this->summary;
-        }
-
-        return $this->wordLimit();
-    }
-
-    /**
-     * Access the summary attribute.
-     *
-     * @param  string $summary
-     * @return string
-     */
-    public function getSummaryAttribute($summary)
-    {
-        return \Purify::clean($summary);
-    }
-
-    public function body()
-    {
-        return $this->attributes['body'];
-    }
-
-    /**
-     * Access the body attribute.
-     *
-     * @param  string $body
-     * @return string
-     * @version 20190123    Added parsing of Forms
-     */
-    public function getBodyAttribute($body)
-    {
-        $body = \Purify::clean($body);
-
-        return $this->parse($body);
+        return $this->belongsToMany('App\Tag');
     }
 
     /**
@@ -288,105 +521,6 @@ class Post extends Model implements Feedable
             ->author($this->user->name ?? Setting::get('post.defaultAuthor'));
     }
 
-    public static function getFeedItems()
-    {
-        return static::getPublished()->whereType('post')->get();
-    }
-
-    /**
-     * Return a collection of published posts
-     * 
-     * @return Illuminate\Support\Collection
-     */
-    public static function getPublished()
-    {
-        return static::where('published', true)->where('published_at', '<', now())->orderBy('published_at', 'DESC')->orderBy('id', 'DESC');
-    }
-
-    /**
-     * Return a custom path attribute (internal linking)
-     * 
-     * @return string
-     */
-    public function getPathAttribute()
-    {
-        return "/{$this->slug}";
-    }
-
-    /**
-     * Get a custom set link attribute (including hostname)
-     * 
-     * @return string
-     */
-    public function getLinkAttribute()
-    {
-        return config('app.url') . $this->path;
-    }
-
-    /**
-     * Return the current published status.
-     * 
-     * If the status is 0, return false.
-     * If the status is 1, first check if the post published date
-     * is in the past. If so, return true, otherwise false.
-     * 
-     * @return boolean
-     */
-    public function isPublished()
-    {
-        if ($this->published == 0) {
-            return false;
-        }
-
-        return $this->published_at->isPast();
-    }
-
-    /**
-     * Returns the direct path (no URL)
-     */
-    public function path()
-    {
-        return "/{$this->slug}";
-    }
-
-    /**
-     * Returns the direct link, including the URL
-     */
-    public function link()
-    {
-        return config('app.url').$this->path();
-    }
-
-    /**
-     * Return the attached categories instances
-     * 
-     * @return  App\Category
-     */
-    public function categories()
-    {
-        return $this->belongsToMany('App\Category');
-    }
-
-    /**
-     * Return the attached tags instances
-     * 
-     * @return  App\Tag
-     */
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag');
-    }
-
-    /**
-     * Update this posts published status to 1
-     * 
-     * @return boolean
-     */
-    public function publish()
-    {
-        return $this->update(['published' => 1]);
-    }
-
     /**
      * Update this posts published status to 0
      * 
@@ -398,111 +532,16 @@ class Post extends Model implements Feedable
     }
 
     /**
-     * Find the post published after this one
+     * Define the relationship between posts and users.
      * 
-     * @return App\Post
-     */
-    public function next()
-    {
-        return self::where('published', true)->where('published_at', '<', Carbon::now())->where('published_at', '>', $this->published_at)->orderBy('published_at', 'ASC')->first();
-    }
-
-    /**
-     * Find the post published before this one
+     * Each post belongs to one user, but each user
+     * can have many posts.
      * 
-     * @return App\Post
+     * @return  App\User
      */
-    public function previous()
+    public function user()
     {
-        return self::where('published', true)->where('published_at', '<', $this->published_at)->orderBy('published_at', 'DESC')->first();
-    }
-
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class); 
-    }
-
-    /**
-     * Limit the number of words in a string.
-     *
-     * @param  string  $value
-     * @param  int     $words
-     * @param  string  $end
-     * @return string
-     */
-    public function wordLimit($words = 75, $end = '...')
-    {
-        return \Illuminate\Support\Str::words(strip_tags($this->body), $words, $end);
-    }
-
-    /**
-     * Count the amount of words in the post
-     * 
-     * @return int
-     */
-    public function words()
-    {
-        return str_word_count(strip_tags($this->body));
-    }
-
-    /**
-     * Calculate the average read time for this post.
-     * 
-     * The average time is calculated using 250 words per minute as reading speed.
-     * 250 is the average adult's reading speed, according to some researches.
-     * 
-     * @return int
-     */
-    public function readTime()
-    {
-        return (floor($this->words() / 250) > 0) ? floor($this->words() / 250) : 1;
-    }
-
-    /** PROBABLY DEPRECATED FUNCTIONS - NEED CLEANING UP **/
-
-    /**
-     * Collect all email addresses of commenters who've subscribed to the post
-     * 
-     * @return Illuminate\Support\Collection $emails
-     */
-    public function subscribers()
-    {
-        $emails = collect();
-
-        $this->comments()->where('notify', 1)->get()->each(function ($comment) use ($emails) {
-            $emails->push($comment->emailaddress);
-        });
-
-        return $emails->unique();
-    }
-
-    /**
-     * Send an email to all subscribed commenters to this post.
-     * 
-     * Forget the current commenters email address to avoid receiving an email yourself when posting.
-     * 
-     * @param App\Comment $comment
-     * @version 2018-08-10  Added forget to the collection
-     */
-    public function notifySubscribers($comment)
-    {
-        $subscribers = $this->subscribers()->filter(function ($value) use ($comment) {
-            return $comment->emailaddress !== $value;
-        });
-
-        $subscribers->each( function ($subscriber) use ($comment) {
-            Mail::to($subscriber)->queue(new NewComment($comment));
-        });
-    }
-
-    /**
-     * Queue an email to all subscribed email addresses
-     */
-    public function notifySubscriptions($comment)
-    {
-        $this->subscriptions->each(function ($subscription) use ($comment) {
-            Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
-        });
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -546,18 +585,26 @@ class Post extends Model implements Feedable
         return $this->hasMany(View::class);
     }
 
-    public static function routes()
+    /**
+     * Limit the number of words in a string.
+     *
+     * @param  string  $value
+     * @param  int     $words
+     * @param  string  $end
+     * @return string
+     */
+    public function wordLimit($words = 75, $end = '...')
     {
-        Route::get('/', 'PostController@index')->name('home');
-        
-        Route::middleware(['auth', 'moderator'])->prefix('admin')->name('admin.')->group(function () {
-            Route::get('', 'Admin\PostController@index')->name('post.index');
-            Route::get('post/create', 'Admin\PostController@create')->name('post.create');
-            Route::post('post/', 'Admin\PostController@store')->name('post.store');
-            Route::get('post/{post}/edit', 'Admin\PostController@edit')->name('post.edit');
-            Route::patch('post/{post}', 'Admin\PostController@update')->name('post.update');
-            Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('post.destroy');
-            Route::get('post/{post}', 'Admin\PostController@show')->name('post.show');
-        });
+        return \Illuminate\Support\Str::words(strip_tags($this->body), $words, $end);
+    }
+
+    /**
+     * Count the amount of words in the post
+     * 
+     * @return int
+     */
+    public function words()
+    {
+        return str_word_count(strip_tags($this->body));
     }
 }
