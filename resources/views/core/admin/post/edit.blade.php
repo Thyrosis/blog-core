@@ -13,9 +13,20 @@
     <div class="admin-container">
         <h3 class="admin-h3 flex justify-between">
             @lang('Edit post')
-            <a href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" target="_blank" class="no-underline">
-                <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
-            </a>
+            <span>
+                <a  class="no-underline inline-block"
+                    href="{{ route('admin.post.edit', $post) }}?action=duplicate"
+                    title="@lang('Duplicate this post')" >
+                    <i class="text-grey-darkest" class="text-teal" data-feather="copy"></i>
+                </a>
+                    &nbsp;
+                <a  class="no-underline inline-block" 
+                    href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" 
+                    target="_blank"
+                    title="@lang('View post on website - opens in new screen')">
+                    <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                </a>
+            </span>
         </h3>
 
         <div class="mb-5 flex flex-wrap md:flex-no-wrap">

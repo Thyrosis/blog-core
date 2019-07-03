@@ -75,6 +75,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if (request()->get('action') == 'duplicate') {
+            return redirect(route('admin.post.edit', $post->duplicate()));
+        }
+
         return view('core.admin.post.edit')->with('post', $post);
     }
 

@@ -78,7 +78,10 @@ class Post extends Model implements Feedable
     public function duplicate()
     {
         $newPost = $this->replicate();
+        $newPost->slug = static::createSlug($newPost->title);
         $newPost->save();
+        
+        return $newPost->fresh();
     }
 
     /**
