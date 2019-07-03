@@ -137,7 +137,7 @@
                 <div class="mb-5 md:w-1/2 md:mr-1">
                     <label for="categories" class="form-label">@lang('Category')</label>
                     <div class="flex flex-wrap">
-                        @foreach ($categories as $category)
+                        @foreach ($categories->sortBy('slug') as $category)
                         <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id)) checked @endif /> {{ $category->name }}</div>
                         @endforeach
                     </div>
@@ -159,7 +159,7 @@
                 <div class="mb-5 md:w-1/2 md:ml-1">
                     <label for="tags" class="form-label">@lang('Tags')</label>
                     <div class="flex flex-wrap">
-                        @foreach (\App\Tag::all() as $tag)
+                        @foreach ($tags->sortBy('slug') as $tag)
                         <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
                         @endforeach
                     </div>
