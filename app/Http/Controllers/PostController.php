@@ -27,6 +27,7 @@ class PostController extends Controller
      *
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
+     * @version 20190702    Load view based on post type, or post.show when not found
      */
     public function show(Post $post)
     {
@@ -54,7 +55,7 @@ class PostController extends Controller
             $post->previous = $post->previous();
             $post->next = $post->next();
             
-            return view()->first(['post.show', 'core.post.show'])->with('post', $post);
+            return view()->first([$post->type.'.show', 'post.show', 'core.post.show'])->with('post', $post);
         }
 
         return redirect(route('home'));

@@ -13,9 +13,20 @@
     <div class="admin-container">
         <h3 class="admin-h3 flex justify-between">
             @lang('Edit post')
-            <a href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" target="_blank" class="no-underline">
-                <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
-            </a>
+            <span>
+                <a  class="no-underline inline-block"
+                    href="{{ route('admin.post.edit', $post) }}?action=duplicate"
+                    title="@lang('Duplicate this post')" >
+                    <i class="text-grey-darkest" class="text-teal" data-feather="copy"></i>
+                </a>
+                    &nbsp;
+                <a  class="no-underline inline-block" 
+                    href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" 
+                    target="_blank"
+                    title="@lang('View post on website - opens in new screen')">
+                    <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                </a>
+            </span>
         </h3>
 
         <div class="mb-5 flex flex-wrap md:flex-no-wrap">
@@ -74,17 +85,47 @@
     <div class="admin-container">
         <h3 class="admin-h3">@lang('Content')</h3>
     
-        <div class="mb-5">
-            <label for="body" class="form-label">@lang('Body')</label>
-            <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body', $post->body()) }}</textarea>
-            <p class="form-info">@lang('The body of the post.')</p>
+            @php
+                $medias = App\Media::all();
+                if ($medias->count() > 0) {
+                    $hasMedia = true;
+                } else {
+                    $hasMedia = false;
+                }
+            @endphp
 
-            @if ($errors->has('body'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('body') }}</span>
-                </div>
+            @if ($hasMedia)
+            <div class="flex">
             @endif
-        </div>
+
+                <div class="mb-5 @if($hasMedia) lg:w-4/5 @endif">
+                    <label for="body" class="form-label">@lang('Body')</label>
+                    <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body', $post->body()) }}</textarea>
+                    <p class="form-info">@lang('The body of the post.')</p>
+
+                    @if ($errors->has('body'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('body') }}</span>
+                        </div>
+                    @endif
+                </div>
+
+                @if ($hasMedia)
+                <div class="hidden lg:block ml-2 mb-5 w-1/5 ">
+                    <label for="body" class="form-label">@lang('Media')</label>
+                    <div class="min-h-128 h-128 overflow-y-scroll">
+                    @foreach ($medias as $media)
+                        <img alt="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" 
+                                class="max-w-1 mb-2"
+                                src="{{ $media->path() }}" 
+                                title="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" />
+                    @endforeach
+                    </div>
+                    <p class="form-info">@lang('Media files you uploaded. Just drag and drop!')</p>
+                </div>
+
+            </div>
+            @endif
     </div>
 
     <div class="admin-container">
@@ -158,7 +199,7 @@
                 <div class="mb-5 md:w-1/2 md:mr-1">
                     <label for="categories" class="form-label">@lang('Category')</label>
                     <div class="flex  flex-wrap">
-                        @foreach (\App\Category::all() as $category)
+                        @foreach ($categories->sortBy('slug') as $category)
                         <div class="my-1 mx-2"><input type="checkbox" name="categories[]" value="{{ $category->id }}" @if (collect(old('categories'))->contains($category->id) || $post->categories->pluck('id')->contains($category->id)) checked @endif /> {{ $category->name }}</div>
                         @endforeach
                     </div>
@@ -180,7 +221,7 @@
                 <div class="mb-5 md:w-1/2 md:ml-1">
                     <label for="tags" class="form-label">@lang('Tags')</label>
                     <div class="flex flex-wrap">
-                        @foreach (\App\Tag::all() as $tag)
+                        @foreach ($tags->sortBy('slug') as $tag)
                         <div class="my-1 mx-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" @if (collect(old('tags'))->contains($tag->id) || $post->tags->pluck('id')->contains($tag->id)) checked @endif /> {{ $tag->name }}</div>
                         @endforeach
                     </div>
