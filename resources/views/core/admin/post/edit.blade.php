@@ -85,17 +85,47 @@
     <div class="admin-container">
         <h3 class="admin-h3">@lang('Content')</h3>
     
-        <div class="mb-5">
-            <label for="body" class="form-label">@lang('Body')</label>
-            <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body', $post->body()) }}</textarea>
-            <p class="form-info">@lang('The body of the post.')</p>
+            @php
+                $medias = App\Media::all();
+                if ($medias->count() > 0) {
+                    $hasMedia = true;
+                } else {
+                    $hasMedia = false;
+                }
+            @endphp
 
-            @if ($errors->has('body'))
-                <div class="form-error">
-                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('body') }}</span>
-                </div>
+            @if ($hasMedia)
+            <div class="flex">
             @endif
-        </div>
+
+                <div class="mb-5 @if($hasMedia) lg:w-4/5 @endif">
+                    <label for="body" class="form-label">@lang('Body')</label>
+                    <textarea id="body" name="body" class="form-control tinymce-full" rows="20">{{ old('body', $post->body()) }}</textarea>
+                    <p class="form-info">@lang('The body of the post.')</p>
+
+                    @if ($errors->has('body'))
+                        <div class="form-error">
+                            <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('body') }}</span>
+                        </div>
+                    @endif
+                </div>
+
+                @if ($hasMedia)
+                <div class="hidden lg:block ml-2 mb-5 w-1/5 ">
+                    <label for="body" class="form-label">@lang('Media')</label>
+                    <div class="min-h-128 h-128 overflow-y-scroll">
+                    @foreach ($medias as $media)
+                        <img alt="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" 
+                                class="max-w-1 mb-2"
+                                src="{{ $media->path() }}" 
+                                title="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" />
+                    @endforeach
+                    </div>
+                    <p class="form-info">@lang('Media files you uploaded. Just drag and drop!')</p>
+                </div>
+
+            </div>
+            @endif
     </div>
 
     <div class="admin-container">

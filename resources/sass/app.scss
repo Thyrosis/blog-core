@@ -2,6 +2,18 @@
 
 @tailwind components;
 
+.h-128 {
+    height: 32rem;
+}
+
+.min-h-128 {
+    min-height: 32rem;
+}
+
+.max-h-128 {
+    max-height: 32rem;
+}
+
 .font {
     font-family: 'Krub', sans-serif;
 }
