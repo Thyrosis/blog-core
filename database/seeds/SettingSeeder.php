@@ -95,6 +95,16 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'post.purify',
+            'type' => 'BOOLEAN',
+            'label' => __("Purify content"),
+            'description' => __('Purify the content of your posts. Security measure against user inputted content. If you trust your users, feel free to turn it off.'),
+            'value' => 1,
+            'category' => 'post',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'comment.notification.subject',
             'type' => 'TEXT',
             'label' => __("New comment subject"),

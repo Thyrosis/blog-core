@@ -104,7 +104,9 @@ class Post extends Model implements Feedable
      */
     public function getBodyAttribute($body)
     {
-        $body = \Purify::clean($body);
+        if (Setting::get('post.purify')) {
+            $body = \Purify::clean($body);
+        }
 
         return $this->parse($body);
     }
@@ -215,7 +217,11 @@ class Post extends Model implements Feedable
      */
     public function getSummaryAttribute($summary)
     {
-        return \Purify::clean($summary);
+        if (Setting::get('post.purify')) {
+            $summary = \Purify::clean($summary);
+        }
+
+        return $summary;
     }
 
     /**
