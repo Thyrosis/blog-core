@@ -3,6 +3,10 @@
 @section ('main')
 
 <div class="admin-container">
+    {!! App\Menu::getHTML() !!}
+</div>
+
+<div class="admin-container">
     <h3 class="admin-h3">{{ $post->title }}</h3>
 
     <h4>{{ $post->user->name ?? config('app.defaultAuthor') }} @ {{ $post->published_at }}</h4>
