@@ -32,7 +32,7 @@
         <div class="form-group">
             <label class="form-label" for="{{ $setting->code }}">{{ $setting->label }}</label>
             <select class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}">
-                <option value="post.index">Indexpagina van artikelen</option>
+                <option value="">Indexpagina van artikelen</option>
                 <option disabled> -- @lang('Posts') -- </option>
                 @foreach (App\Post::orderBy('longTitle', 'ASC')->get() as $post)
                 <option value="{{ $post->slug }}" @if ($setting->value == $post->slug) selected @endif >{{ $post->getLongTitle() }}</option>
