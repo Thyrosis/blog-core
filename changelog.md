@@ -1,8 +1,43 @@
 # Release Notes
 
-## Future functionality
+## Todo
 
 - Better form management (ordering fields, validation, response by mail)
+- Make readTime a global setting
+- Twitter oAPI plug-in
+- On Media index page, style images
+- On Menu admin page, split pages and posts & provide visual feedback for published status
+
+## 1.0.25 (2019-07-18)
+
+- Change default reading speed for method readTime to 175 words
+- Bugfix: home route was not always defined
+- Add new methods get and getHTML to menu class
+- Add global setting Purify to disable purification of post body
+- Composer and NPM update
+- Laravel update to 5.8.28
+
+## 1.0.24 (2019-07-03)
+
+- Show media files on post add/edit admin pages
+- Add new methods duplicate and getTitle to Post
+- Post class overhaul (comments, sorting, new method getTitle)
+
+## 1.0.23 (2019-06-27)
+
+- Add Dutch translation file for TinyMCE
+- Composer and NPM update
+- Laravel update to 5.8.26
+
+## 1.0.22 (2019-06-12)
+
+- Laravel update to 5.8.21
+- Composer, NPM en TinyMCE update.
+- Run NPM production
+
+## 1.0.21 (2019-06-06)
+
+- Add posthash feature, which allows unauthenticated users to read content ahead of unpublished posts
 
 ## 1.0.20 (2019-05-28)
 
