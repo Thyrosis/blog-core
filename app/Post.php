@@ -411,14 +411,15 @@ class Post extends Model implements Feedable
     /**
      * Calculate the average read time for this post.
      * 
-     * The average time is calculated using 250 words per minute as reading speed.
-     * 250 is the average adult's reading speed, according to some researches.
+     * The average time is calculated using 175 words per minute as reading speed.
+     * 250 is the average adult's reading speed, according to some researches,
+     * but drops to 150 when reading technical content.
      * 
      * @return int
      */
     public function readTime()
     {
-        return (floor($this->words() / 250) > 0) ? floor($this->words() / 250) : 1;
+        return (floor($this->words() / 175) > 0) ? floor($this->words() / 175) : 1;
     }
 
     /**
