@@ -108,7 +108,7 @@ class PostController extends Controller
             'published_at_date' => 'nullable|date',
             'published_at_time' => 'nullable|date_format:"H:i"',
             'type' => 'nullable',
-            'use_hash' => 'required',
+            'use_hash' => 'nullable|boolean',
             'hash' => 'nullable',
         ]);
 
