@@ -62,6 +62,16 @@
             image_advtab: true,
             language_url : '{{ config('app.url') }}/js/languages/{{ config('app.locale') }}.js',
             language: '{{ config('app.locale') }}',
+            link_list: [
+                {title: '-- Pages --', value: '/'},
+            @foreach (App\Post::getPages() as $page)
+                {title: '{{ $page->getTitle() }}', value: '{{ $page->path() }}'},
+            @endforeach
+                {title: '-- Posts --', value: '/'},
+            @foreach (App\Post::getPosts() as $post)
+                {title: '{{ $post->getTitle() }}', value: '{{ $post->path() }}'},
+            @endforeach
+            ],
             plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
             relative_urls : false,
             templates: [

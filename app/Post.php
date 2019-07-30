@@ -164,6 +164,11 @@ class Post extends Model implements Feedable
         return $this->getTitle();
     }
 
+    public static function getPages()
+    {
+        return self::where('type', 'page')->orderBy('published_at', 'DESC')->get();
+    }
+
     /**
      * Return a custom path attribute (internal linking)
      * 
@@ -172,6 +177,11 @@ class Post extends Model implements Feedable
     public function getPathAttribute()
     {
         return "/{$this->slug}";
+    }
+
+    public static function getPosts()
+    {
+        return self::where('type', 'post')->orderBy('published_at', 'DESC')->get();
     }
 
     /**
