@@ -53,7 +53,11 @@ class Setting extends Model
 
     public static function get($code)
     {
-        return self::whereCode($code)->first()->value ?? null;
+        try {
+            return self::whereCode($code)->first()->value ?? null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public static function updateSingle($code, $value)
