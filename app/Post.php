@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 
 class Post extends Model implements Feedable
 {
@@ -146,10 +147,12 @@ class Post extends Model implements Feedable
      * Get a custom set link attribute (including hostname)
      * 
      * @return string
+     * 
+     * @version 2019-08-12      Return the result of $this->url() to avoid deprecated warnings
      */
     public function getLinkAttribute()
     {
-        return config('app.url') . $this->path;
+        return $this->url();
     }
 
     /**
@@ -265,10 +268,13 @@ class Post extends Model implements Feedable
 
     /**
      * Returns the direct link, including the URL
+     * 
+     * @deprecated  2019-08-12, deprecated function in favour of the more often used url()
      */
     public function link()
     {
-        return config('app.url').$this->path();
+        Log::warning('The method Post->link() has been deprecated sinds 2019-08-12 and should be replaced by Post->url()');
+        return $this->url();
     }
 
     /**
@@ -558,6 +564,11 @@ class Post extends Model implements Feedable
     {
         return $this->update(['published' => 0]);
     }
+
+    public function url()
+    {
+        return config('app.url').$this->path();
+    }    
 
     /**
      * Define the relationship between posts and users.
