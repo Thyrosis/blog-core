@@ -8,6 +8,13 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.0.26 (2019-08-12)
+
+- Add Akismet to comment preapprove method (needs Database Seed for new settings)
+- Clean up in Post model
+- Update Post factory and tests to fix errors in test suite due to code updates
+- Larvel update to 5.8.31
+
 ## 1.0.25 (2019-07-18)
 
 - Change default reading speed for method readTime to 175 words
