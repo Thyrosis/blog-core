@@ -57,6 +57,13 @@ class Akismet
         return $response;
     }
 
+    /** validateKey
+     * 
+     * Checks the given key against the Akismet API.
+     * 
+     * @return  bool
+     * @link    https://akismet.com/development/api/#verify-key
+     */
     public function validateKey()
     {
         $request = 'key='. $this->key .'&blog='. urlencode($this->blog);
@@ -70,20 +77,72 @@ class Akismet
         }
     }
 
+    /**
+     * checkComment
+     * 
+     * Checks the comment for spam possibility.
+     * 
+     * Returns the opposite of the Akismet intention:
+     * they return TRUE when a comment is spam, whereas our code
+     * returns TRUE when a comment is approved.
+     * 
+     * @return  bool
+     * @link    https://akismet.com/development/api/#comment-check
+     */
     public function checkComment()
     {
         $request = 'blog='. urlencode($this->blog) .
-           '&user_ip='. urlencode($this->comment->ip) .
-           '&user_agent='. urlencode($this->useragent) .
-           '&referrer='. urlencode(request()->headers->get('referer')) .
+            '&blog_lang='. urlencode(config('app_locale')) .
+            '&user_ip='. urlencode($this->comment->ip) .
+            '&user_agent='. urlencode($this->useragent) .
+            '&referrer='. urlencode(request()->headers->get('referer')) .
         //    '&permalink='. urlencode($data['permalink']) .
-           '&comment_type='. urlencode('comment') .
-           '&comment_author='. urlencode($this->comment->name) .
-           '&comment_author_email='. urlencode($this->comment->emailaddress) .
+            '&comment_type='. urlencode('comment') .
+            '&comment_author='. urlencode($this->comment->name) .
+            '&comment_author_email='. urlencode($this->comment->emailaddress) .
         //    '&comment_author_url='. urlencode($data['comment_author_url']) .
-           '&comment_content='. urlencode($this->comment->body);
+            '&comment_content='. urlencode($this->comment->body) .
+            '&comment_post_modified_gmt='. urlencode($this->comment->post->published_at->toIso8601String());
 
         $path = '/1.1/comment-check';
+        $response = $this->query($path, $request, $this->key . '.');
+        
+        if ( 'true' == $response[1] ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * submitSpam
+     * 
+     * Submits a spam comment to Akismet for AI training purposes.
+     * 
+     * Returns the opposite of the Akismet intention:
+     * they return TRUE when a comment is spam, whereas our code
+     * returns TRUE when a comment is approved.
+     * 
+     * @return  bool
+     * @link    https://akismet.com/development/api/#submit-spam
+     */
+    public function submitSpam()
+    {
+        $request = 'blog='. urlencode($this->blog) .
+            '&user_ip='. urlencode($this->comment->ip) .
+            '&blog_lang='. urlencode(config('app_locale')) . 
+            '&user_agent='. urlencode($this->useragent) .
+            '&referrer='. urlencode(request()->headers->get('referer')) .
+        //    '&permalink='. urlencode($data['permalink']) .
+            '&comment_type='. urlencode('comment') .
+            '&comment_author='. urlencode($this->comment->name) .
+            '&comment_author_email='. urlencode($this->comment->emailaddress) .
+        //    '&comment_author_url='. urlencode($data['comment_author_url']) .
+            '&comment_content='. urlencode($this->comment->body) .
+            '&comment_date_gmt='. urlencode($this->comment->created_at->toIso8601String()) . 
+            '&comment_post_modified_gmt='. urlencode($this->comment->post->published_at->toIso8601String());
+
+        $path = '/1.1/submit-spam';
         $response = $this->query($path, $request, $this->key . '.');
         
         if ( 'true' == $response[1] ) {
