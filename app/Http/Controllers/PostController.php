@@ -28,6 +28,8 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      * @version 20190702    Load view based on post type, or post.show when not found
+     * @version 2019-08-12  Return redirect to '/' instead of route('home') when post isn't viewable.
+     *                      It fucked up the tests for whatever reason.
      */
     public function show(Post $post)
     {
@@ -58,6 +60,6 @@ class PostController extends Controller
             return view()->first([$post->type.'.show', 'post.show', 'core.post.show'])->with('post', $post);
         }
 
-        return redirect(route('home'));
+        return redirect('/');
     }
 }
