@@ -4,6 +4,7 @@ namespace App;
 
 use App\Subscription;
 use Illuminate\Database\Eloquent\Model;
+use App\Libraries\Akismet;
 
 class Comment extends Model
 {
@@ -44,8 +45,26 @@ class Comment extends Model
         return config('app.url').$this->path();
     }
 
-    public static function preapprove($data)
+    public function preapprove()
     {
+        $advice = false;
+
+        if (!empty(Setting::get('comment.akismet.key'))) {
+            $akismet = new Akismet($this);
+
+            if ($akismet->validateKey()) {
+                $advice = $akismet->checkComment();
+            }
+
+            return $advice;
+        }
+         
+        $data = [
+            'ip' => $this->ip,
+            'name' => $this->name,
+            'emailaddress' => $this->emailaddress,
+        ];
+
         if (self::where('approved', '=', true)
             ->where(function ($query) use ($data) {
                 $query->where('ip', '=', $data['ip'])

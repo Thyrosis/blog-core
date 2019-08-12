@@ -15,6 +15,8 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      * @version 2018-08-27      Set post_id to be required
+     * @version 2019-08-12      Make the comment before preapproving for 
+     *                          Akismet check in preapprove method.
      */
     public function store(Request $request)
     {
@@ -29,7 +31,9 @@ class CommentController extends Controller
 
         $data['ip'] = $request->ip();
 
-        if (Comment::preapprove($data)) {
+        $comment = Comment::make($data);
+
+        if ($comment->preapprove()) {
             $data['approved'] = true;
             $message = "Bedankt! Je bericht wordt direct geplaatst.";
         } else {
@@ -37,7 +41,7 @@ class CommentController extends Controller
             $message = "Bedankt! Je bericht wordt geplaatst zodra het gecontroleerd is.";
         }
         
-        $comment = Comment::create($data);
+        $comment->save($data);
 
         if ($comment->notify) {
             Subscription::createNew(['post_id' => $comment->post_id, 'emailaddress' => $comment->emailaddress]);            

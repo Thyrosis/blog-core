@@ -125,6 +125,16 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'comment.akismet.key',
+            'type' => 'TEXT',
+            'label' => __("Akismet API key"),
+            'description' => __("If you want to use Akismet for spam protection, enter your API key here."),
+            'value' => "",
+            'category' => 'comment',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'tinyMCE.license',
             'type' => 'TEXT',
             'label' => __("TinyMCE API key"),
