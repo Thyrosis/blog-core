@@ -23,7 +23,6 @@ App\Media::routes();
 App\Post::routes();
 App\Setting::routes();
 
-
 /**
  * API ROUTES
  */
@@ -69,9 +68,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('view', 'Admin\ViewController@index')->name('admin.view.index');
     Route::get('view/{view}', 'Admin\ViewController@show')->name('admin.view.show');
-
-
-
 });
 
 /**
@@ -106,21 +102,7 @@ Route::get('sitemap.xml', function() {
     return Response::view('core.layout.sitemap')->header('Content-Type', 'text/xml');
 });
 
-// App\Setting::routes();
-
 /**
  * And if we're here, nothing matched. Finally, is it a post??
  */
 Route::get('{post}', 'PostController@show')->name('post.show');
-
-// Disabled, no longer relevant
-// Route::get('/wp/{wppost}', function ($wppost) {
-//     $post = \App\Wppps_post::find($wppost)->loadMissing(['wpcomments', 'wpterms']);
-    
-//     return $post;
-// });
-
-// Route::get('test/mc', function() {
-//     $mc = new App\MailChimp;
-//     dump(json_decode($mc->getListSubscribers()));
-// });

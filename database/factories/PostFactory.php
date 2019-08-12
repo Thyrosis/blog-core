@@ -18,10 +18,12 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'featureimage' => '',
         'published' => 1,
         'published_at' => Carbon::now()->subDay(),
+        'type' => 'post',
     ];
 });
 
 $factory->state(App\Post::class, 'publishing', [
     'published_at_date' => Carbon::now()->subDay()->toDateString(),
     'published_at_time' => '00:00',
+    'use_hash' => 0,
 ]);
