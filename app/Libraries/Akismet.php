@@ -7,19 +7,22 @@ use App\Setting;
 
 class Akismet
 {
-    protected $url;
-    protected $client;
-    protected $data = [];
     protected $key;
+    protected $client;
+    protected $blog;
+    protected $host;
+    protected $useragent;
+    protected $blog_lang;
     protected $comment;
-    
+
     public function __construct($comment = false)
     {
         $this->key = Setting::get('comment.akismet.key');
+        $this->client = new \GuzzleHttp\Client();
         $this->blog = config('app.url');
         $this->host = 'rest.akismet.com';
-        $this->port = 443;
         $this->useragent = "Laravel based CMS | Akismet";
+        $this->blog_lang = config('app_locale');
 
         if ($comment) {
             $this->setComment($comment);
@@ -32,29 +35,20 @@ class Akismet
         return $this->comment;
     }
 
-    public function query($path, $request, $hostprefix = '')
+    public function query($host, $data)
     {
-        $content_length = strlen( $request );
-        $http_request  = "POST $path HTTP/1.0\r\n";
-        $http_request .= "Host: {$hostprefix}{$this->host}\r\n";
-        $http_request .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $http_request .= "Content-Length: {$content_length}\r\n";
-        $http_request .= "User-Agent: {$this->useragent}\r\n";
-        $http_request .= "\r\n";
-        $http_request .= $request;
-        $response = '';
-        if( false != ( $fs = @fsockopen( 'ssl://' . $this->host, $this->port, $errno, $errstr, 10 ) ) ) {
-             
-            fwrite( $fs, $http_request );
-         
-            while ( !feof( $fs ) )
-                $response .= fgets( $fs, 1160 ); // One TCP-IP packet
-            fclose( $fs );
-             
-            $response = explode( "\r\n\r\n", $response, 2 );
+        $response = $this->client->request('POST', 'https://'.$host, [
+            'stream' => true,
+            'form_params' => $data
+        ]);
+
+        $body = $response->getBody();
+
+        while(!$body->eof()) {
+           $result = $body->read(1160);
         }
 
-        return $response;
+        return $result;
     }
 
     /** validateKey
@@ -66,11 +60,12 @@ class Akismet
      */
     public function validateKey()
     {
-        $request = 'key='. $this->key .'&blog='. urlencode($this->blog);
-        $path = '/1.1/verify-key';
-        $response = $this->query($path, $request);
+        $response = $this->query($this->host.'/1.1/verify-key', [
+            'key' => $this->key,
+            'blog' => $this->blog,
+        ]);
         
-        if ( 'valid' == $response[1] ) {
+        if ( 'valid' == $response ) {
             return true;
         } else {
             return false;
@@ -91,23 +86,20 @@ class Akismet
      */
     public function checkComment()
     {
-        $request = 'blog='. urlencode($this->blog) .
-            '&blog_lang='. urlencode(config('app_locale')) .
-            '&user_ip='. urlencode($this->comment->ip) .
-            '&user_agent='. urlencode($this->useragent) .
-            '&referrer='. urlencode(request()->headers->get('referer')) .
-        //    '&permalink='. urlencode($data['permalink']) .
-            '&comment_type='. urlencode('comment') .
-            '&comment_author='. urlencode($this->comment->name) .
-            '&comment_author_email='. urlencode($this->comment->emailaddress) .
-        //    '&comment_author_url='. urlencode($data['comment_author_url']) .
-            '&comment_content='. urlencode($this->comment->body) .
-            '&comment_post_modified_gmt='. urlencode($this->comment->post->published_at->toIso8601String());
+        $response = $this->query($this->key . '.' . $this->host . '/1.1/comment-check', [
+            'blog' => $this->blog,
+            'blog_lang' => $this->blog_lang,
+            'user_ip' => $this->comment->ip,
+            'user_agent' => $this->useragent,
+            'referrer' => request()->headers->get('referer'),
+            'comment_type' => 'comment',
+            'comment_author' => $this->comment->name,
+            'comment_author_email' => $this->comment->emailaddress,
+            'comment_content' => $this->comment->body,
+            'comment_post_modified_gmt' => $this->comment->post->published_at->toIso8601String()
+        ]);
 
-        $path = '/1.1/comment-check';
-        $response = $this->query($path, $request, $this->key . '.');
-        
-        if ( 'true' == $response[1] ) {
+        if ( 'true' == $response ) {
             return false;
         } else {
             return true;
@@ -128,24 +120,21 @@ class Akismet
      */
     public function submitSpam()
     {
-        $request = 'blog='. urlencode($this->blog) .
-            '&user_ip='. urlencode($this->comment->ip) .
-            '&blog_lang='. urlencode(config('app_locale')) . 
-            '&user_agent='. urlencode($this->useragent) .
-            '&referrer='. urlencode(request()->headers->get('referer')) .
-        //    '&permalink='. urlencode($data['permalink']) .
-            '&comment_type='. urlencode('comment') .
-            '&comment_author='. urlencode($this->comment->name) .
-            '&comment_author_email='. urlencode($this->comment->emailaddress) .
-        //    '&comment_author_url='. urlencode($data['comment_author_url']) .
-            '&comment_content='. urlencode($this->comment->body) .
-            '&comment_date_gmt='. urlencode($this->comment->created_at->toIso8601String()) . 
-            '&comment_post_modified_gmt='. urlencode($this->comment->post->published_at->toIso8601String());
+        $response = $this->query($this->key . '.' . $this->host . '/1.1/submit-spam', [
+            'blog' => $this->blog,
+            'blog_lang' => $this->blog_lang,
+            'user_ip' => $this->comment->ip,
+            'user_agent' => $this->useragent,
+            'referrer' => request()->headers->get('referer'),
+            'comment_type' => 'comment',
+            'comment_author' => $this->comment->name,
+            'comment_author_email' => $this->comment->emailaddress,
+            'comment_content' => $this->comment->body,
+            'comment_date_gmt' => $this->comment->created_at->toIso8601String(),
+            'comment_post_modified_gmt' => $this->comment->post->published_at->toIso8601String()
+        ]);
 
-        $path = '/1.1/submit-spam';
-        $response = $this->query($path, $request, $this->key . '.');
-        
-        if ( 'true' == $response[1] ) {
+        if ( 'true' == $response ) {
             return false;
         } else {
             return true;
