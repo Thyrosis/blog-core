@@ -36,17 +36,19 @@ class Subscription extends Model
     public static function send(Comment $comment)
     {
         $subscriptions = $comment->post->subscriptions;
-        Log::debug("These are the subscriptions:", ['subscriptions' => $subscriptions]);
+        Log::info("These are the subscriptions:", ['subscriptions' => $subscriptions]);
 
-        if ($subscriptions->count() > 0) {
-            Log::debug("Start mailing {$subscriptions->count()} subscribers.");
-            $subscriptions->each(function ($subscription) use ($comment) {
-                if ($comment->emailaddress !== $subscription->emailaddress) {
-                    Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
-                }
-            });
-        } else {
-            Log::error("No subscribers to notify.");
+        if ($subscriptions->count() == 0) {
+            Log::info("No subscribers to notify.");
         }
+
+        $subscriptions->each(function ($subscription) use ($comment) {
+            if ($comment->emailaddress !== $subscription->emailaddress) {
+                Log::info("Notifying subscriber {$subscription->emailaddress}");
+
+                $mail = Mail::to($subscription->emailaddress);
+                (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment)) : $mail->send(new NewComment($comment));
+            }
+        });
     }
 }

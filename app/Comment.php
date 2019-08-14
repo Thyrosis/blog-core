@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewComment;
 use App\Libraries\Akismet;
+use Illuminate\Support\Facades\Log;
 
 class Comment extends Model
 {
@@ -18,7 +19,10 @@ class Comment extends Model
         
         static::saved(function ($comment) {
             Subscription::send($comment);
-            Mail::to(Setting::get('mail.adminAddress'))->queue(new NewComment($comment));
+            
+            Log::info("Sending a copy of new comment to Admin");
+            $mail = Mail::to(Setting::get('mail.adminAddress'));
+            (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment)) : $mail->send(new NewComment($comment));
         });
     }
 
