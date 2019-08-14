@@ -5,9 +5,9 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Comment;
 use App\Setting;
+use Illuminate\Support\Facades\Log;
 
 class NewComment extends Mailable
 {
@@ -32,6 +32,7 @@ class NewComment extends Mailable
      */
     public function build()
     {
+        Log::info("Sending App\Mail\NewComment");
         return $this->subject(Setting::get('comment.notification.subject'))->markdown('mail.newComment');
     }
 }
