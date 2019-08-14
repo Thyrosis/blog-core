@@ -503,7 +503,8 @@ class Post extends Model implements Feedable
     }
 
     /**
-     * @deprecated?
+     * Define relationship between post and subscriptions.
+     * Definitely NOT deprecated!
      */
     public function subscriptions()
     {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewComment;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class Subscription extends Model
 {
@@ -32,12 +33,20 @@ class Subscription extends Model
         return true;
     }
 
-    public static function send($comment)
+    public static function send(Comment $comment)
     {
-        $comment->post->subscriptions->each(function ($subscription) use ($comment) {
-            if ($comment->emailaddress !== $subscription->emailaddress) {
-                Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
-            }
-        });
+        $subscriptions = $comment->post->subscriptions;
+        Log::debug("These are the subscriptions:", ['subscriptions' => $subscriptions]);
+
+        if ($subscriptions->count() > 0) {
+            Log::debug("Start mailing {$subscriptions->count()} subscribers.");
+            $subscriptions->each(function ($subscription) use ($comment) {
+                if ($comment->emailaddress !== $subscription->emailaddress) {
+                    Mail::to($subscription->emailaddress)->queue(new NewComment($comment));
+                }
+            });
+        } else {
+            Log::error("No subscribers to notify.");
+        }
     }
 }
