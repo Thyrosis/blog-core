@@ -26,7 +26,6 @@ class CommentController extends Controller
             'body' => 'required|min:3', 
             'post_id' => 'required|exists:posts,id',
             'notify' => 'nullable|boolean',
-            'approved' => 'nullable|boolean',
         ]);
 
         $data['ip'] = $request->ip();
@@ -34,14 +33,14 @@ class CommentController extends Controller
         $comment = Comment::make($data);
 
         if ($comment->preapprove()) {
-            $data['approved'] = true;
+            $comment->approved = true;
             $message = "Bedankt! Je bericht wordt direct geplaatst.";
         } else {
-            $data['approved'] = false;
+            $comment->approved = false;
             $message = "Bedankt! Je bericht wordt geplaatst zodra het gecontroleerd is.";
         }
         
-        $comment->save($data);
+        $comment->save();
 
         if ($comment->notify) {
             Subscription::createNew(['post_id' => $comment->post_id, 'emailaddress' => $comment->emailaddress]);            

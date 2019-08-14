@@ -4,6 +4,8 @@ namespace App;
 
 use App\Subscription;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewComment;
 use App\Libraries\Akismet;
 
 class Comment extends Model
@@ -14,8 +16,9 @@ class Comment extends Model
     {
         parent::boot();
         
-        static::created(function ($comment) {
+        static::saved(function ($comment) {
             Subscription::send($comment);
+            Mail::to(Setting::get('mail.adminAddress'))->queue(new NewComment($comment));
         });
     }
 
