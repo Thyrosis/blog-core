@@ -75,9 +75,9 @@ class RegisterController extends Controller
         ]);
 
         // Always add the first user as Admin
-        if ($user && User::all()->count() == 1) {
-            $user->updateMeta('access-level', 'admin');
-        }
+        // if ($user && User::all()->count() == 1) {
+        //     $user->updateMeta('access-level', 'admin');
+        // }
 
         return $user;
     }
