@@ -159,7 +159,7 @@ class SettingSeeder extends Seeder
             'type' => 'TEXT',
             'label' => __("Homepage"),
             'description' => __("When someone visits your domain (not a specific page) what URL do they see?"),
-            'value' => 'post.index',
+            'value' => '',
             'category' => 'general',
             'hidden' => '1',
         ];

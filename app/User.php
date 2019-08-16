@@ -45,6 +45,18 @@ class User extends Authenticatable
 
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::created(function ($user) {
+            // Always add the first user as Admin
+            if ($user && self::all()->count() == 1) {
+                $user->updateMeta('access-level', 'admin');
+            }
+        });
+    }
+
     public function canModerate()
     {
         if ($this->isAdmin() || $this->isModerator()) {

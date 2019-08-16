@@ -1,9 +1,4 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-    <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p align="center">CMS @ Sax{xites}</p>
 
 ## About Blog-Core
 
@@ -13,19 +8,38 @@ There are many solutions available for online publishing of content. I used to b
 
 Because, why not? I am familiar with PHP and, coming from CodeIgniter, Laravel is a step up in the world of web application frameworks. They believe development must be an enjoyable and creative experience and with Laravel, it is. 
 
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+
+<p align="center">
+    <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
+
 ## Installation
 
 Couldn't be easier.
 
-Just clone, do a composer install, set the application key and env-files (mind the database!) and migrate the tables. Et voila!
+ - git clone https://github.com/Thyrosis/blog-core
+ - composer install
+ - php artisan blog:configure
+ - php artisan blog:install
+ - cd public; ln -s ../storage/app storage
 
-## Usage
+## Setup
 
-Logging in via yoururl/admin. Create a user, a category and some tags and start writing.
+Everyone is different, so you'll have to find your own way. I can only tell you what I do.
+
+ - On a staging server, clone from the Github repo.
+ - On development PC, clone from the staging server and branch to template. 
+ - In development/template, make the customisations to the template. 
+ - Push to staging/template, merge into staging/master.
+ - From the live server, I pull staging/master.
+
+Then just Log in via yourdomain.com/admin. Create your own posts and pages, tags and categories, upload media files and publish your site with the default theme.
 
 ## Templates
 
-There is a default layout which is (honestly) dreadful. To override those, just create new view folders and blade files in the resources/views directory. You'll need at least:
+There is a default layout which is (honestly) dreadful. To override those, create new view folders and blade files in the resources/views directory. You'll need at least:
 
 - post/index
 - post/show
