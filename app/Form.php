@@ -105,10 +105,14 @@ class Form extends Model
                         $html .= "<textarea aria-describedBy='info-{$field->elementId}' name='{$field->elementId}' id='{$field->elementId}' class='{$field->class()}' ".($field->required == 1 ? "required" : "" )."></textarea>";
                     } elseif ($field->input == "select") {
                         $html .= "<select aria-describedBy='info-{$field->elementId}' name='{$field->elementId}' id='{$field->elementId}' class='{$field->class()}'>";
-                        foreach ($field->options() as $option) {
-                            $html .= "<option value='{$option['value']}'>{$option['name']}</option>";
+                        foreach (json_decode($field->options) as $option) {
+                            $html .= "<option value='{$option}'>{$option}</option>";
                         }
                         $html .= "</select>";
+                    } elseif ($field->input == "radio") {
+                        foreach (json_decode($field->options) as $option) {
+                            $html .= "<div class='{$field->class()}' ><input type='radio' aria-describedBy='info-{$field->elementId}' name='{$field->elementId}' id='{$field->elementId}' value='{$option}'> {$option}</div>";
+                        }
                     }
                     
                     $html .= "<p class='form-info' id='info-{$field->elementId}'>{$field->description}</p>";

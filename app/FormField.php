@@ -33,4 +33,11 @@ class FormField extends Model
     {
         return $this->belongsTo(Form::class);
     }
+
+    public static function optionsToJson($options)
+    {
+        return collect(explode(",", $options))->map(function ($item) {
+            return trim($item);
+        })->toJson();
+    }
 }
