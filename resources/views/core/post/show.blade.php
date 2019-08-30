@@ -3,7 +3,7 @@
 @section ('main')
 
 <div class="admin-container">
-    {!! App\Menu::getHTML() !!}
+    {!! App\Menu::toHTML(['ulID' => 'navigation', 'ulClass' => 'nav-ul', 'liClass' => 'nav-li', 'aClass' => 'nav-a']) !!}
 </div>
 
 <div class="admin-container">
