@@ -21,6 +21,8 @@
             <input class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}" type="text" value="{{ $setting->value }}" />
             @elseif ($setting->type == "NUMBER")
             <input class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}" type="number" value="{{ $setting->value }}" />
+            @elseif ($setting->type == "TEXTAREA")
+            <textarea class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}">{{ $setting->value }}</textarea>
             @endif
             <p class="form-info">{{ $setting->description }}</p>        
         </div>

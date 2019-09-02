@@ -15,6 +15,11 @@
         {!! $post->body !!}
     </div>
 
+    <!-- Leave this here to clear a possible image floating in the body -->
+    <div style="clear: both">
+    </div>
+    <!-- Leave this here to clear a possible image floating in the body -->
+    
     <p>Took you about {{ $post->readTime() }} {{ \Illuminate\Support\Str::plural('minute', $post->readTime()) }} to read, right?</p>
 </div>
 

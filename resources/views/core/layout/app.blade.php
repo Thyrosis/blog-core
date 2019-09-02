@@ -51,7 +51,7 @@
             autosave_interval: "15s",
             autosave_restore_when_empty: true,
             autosave_retention: "1440",
-            block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Quote=blockquote;Preformatted=pre',
+            // block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Quote=blockquote;Preformatted=pre',
             browser_spellcheck: true,
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
@@ -74,11 +74,25 @@
             ],
             plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
             relative_urls : false,
+            style_formats: [
+                { title: 'Paragraph', format: 'p'},
+                { title: 'Heading 1', format: 'h1'},
+                { title: 'Heading 2', format: 'h2'},
+                { title: 'Heading 3', format: 'h3'},
+                { title: 'Heading 4', format: 'h4'},
+                { title: 'Quote', format: 'blockquote'},
+                { title: 'Code', format: 'pre'},
+                { title: 'Image formats' },
+                { title: 'Image Left', selector: 'img', styles: { 'float': 'left', 'margin': '0 10px 0 10px' } },
+                { title: 'Image Right', selector: 'img', styles: { 'float': 'right', 'margin': '0 0 10px 10px' } },
+                { title: 'Custom CSS rules' },
+                {!! App\Setting::get('tinyMCE.customClasses') !!}
+            ],
             templates: [
                 { title: 'Quote', description: 'Default quote field', content: '<blockquote>This is a quote. Nice to display with a different background color or some padding on the left. Style it in your custom CSS file.</blockquote><p>&nbsp;</p>'},
                 { title: 'Highlight', description: 'Highlighted paragraph', content: '<p style="background-color: #456789; padding: 1rem;">This is a regular paragraph but with a different background color. Style as needed.</p><p>&nbsp;</p>' }
             ],
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
+            toolbar1: 'styleselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
         });
     </script>
 

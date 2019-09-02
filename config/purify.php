@@ -101,7 +101,7 @@ return [
         |
         */
 
-        'CSS.AllowedProperties' => 'background-color,color,float,font,font-size,font-weight,font-style,font-family,height,padding,padding-left,padding-right,padding-top,padding-bottom,text-decoration,text-align,width',
+        'CSS.AllowedProperties' => 'border,background-color,color,float,font,font-size,font-weight,font-style,font-family,height,margin,margin-left,margin-right,margin-top,margin-bottom,padding,padding-left,padding-right,padding-top,padding-bottom,text-decoration,text-align,width',
 
         /*
         |--------------------------------------------------------------------------
