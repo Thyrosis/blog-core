@@ -328,6 +328,7 @@ class Post extends Model implements Feedable
      * @param   string $text    Text to parse for placeholders
      * @return  string
      * @version 20190123
+     * @version 20190827    If form isn't found (non existing ID), don't call toHTML on it
      */
     public function parse($text)
     {
@@ -336,7 +337,7 @@ class Post extends Model implements Feedable
 
             $form = Form::find($temptext[2]);
 
-            $text = Str::replaceFirst("||FORM||{$temptext[2]}||", $form->toHTML(), $text);
+            $text = Str::replaceFirst("||FORM||{$temptext[2]}||", ($form) ? $form->toHTML() : "", $text);
             
             $client = Setting::get('recaptcha.client');
             

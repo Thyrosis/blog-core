@@ -14,12 +14,16 @@ class FormResponseController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @version 20190827    Only require reCAPTCHA if it's available in the settings
      */
     public function store(Request $request, Form $form)
     {
-        $request->validate([
-            'recaptcha_response' => ['required', new Recaptcha]
-        ]);
+        $client = Setting::get('recaptcha.client');            
+        if ($client) {
+            $request->validate([
+                'recaptcha_response' => ['required', new Recaptcha]
+            ]);
+        }
 
         $mailfield = $form->hasMailField();
 

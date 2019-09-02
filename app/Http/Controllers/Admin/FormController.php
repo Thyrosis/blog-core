@@ -51,6 +51,23 @@ class FormController extends Controller
             'name' => 'required',
         ]);
 
+        // $options = collect(explode(",", $request->options[0]))->map(function ($item) {
+        //     return trim($item);
+        // })->toJson();
+        // dump($options);
+
+        // $options = $request->options[0];
+        // dump($options);
+        // $options = collect(explode(",", $options));
+        // dump($options);
+        // $options = $options->map(function ($item, $key) {
+        //     return trim($item);
+        // });
+        // dump($options);
+        // $options = $options->toJson();
+        // dump($options);
+        // dd($request->all());
+
         $form = Form::create($data);
         $form->fresh();
 
@@ -64,6 +81,7 @@ class FormController extends Controller
                     'elementId' => Str::slug($request->elementName[$i]),
                     'class' => $request->class[$i],
                     'description' => $request->description[$i],
+                    'options' => FormField::selectToJson($request->options[$i]),
                     'required' => $request->required[$i],
                 ]);
             }
