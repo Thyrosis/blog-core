@@ -145,6 +145,16 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'tinyMCE.customClasses',
+            'type' => 'TEXTAREA',
+            'label' => __("TinyMCE custom classes"),
+            'description' => __("Custom classes you defined in your stylesheets. This needs to be valid JavaScript syntax as defined here: https://www.tiny.cloud/docs/demo/format-custom/"),
+            'value' => '',
+            'category' => 'general',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'cdn.url',
             'type' => 'TEXT',
             'label' => __("CDN URL"),
@@ -243,6 +253,8 @@ class SettingSeeder extends Seeder
             'category' => 'form',
             'hidden' => '0',
         ];
+
+
 
         foreach ($settings as $setting) {
             try {
