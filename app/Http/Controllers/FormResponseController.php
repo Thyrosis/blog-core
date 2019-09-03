@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Form;
 use App\FormResponse;
 use App\Rules\Recaptcha;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class FormResponseController extends Controller
