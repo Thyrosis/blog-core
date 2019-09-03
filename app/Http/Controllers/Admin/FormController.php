@@ -81,7 +81,7 @@ class FormController extends Controller
                     'elementId' => Str::slug($request->elementName[$i]),
                     'class' => $request->class[$i],
                     'description' => $request->description[$i],
-                    'options' => FormField::selectToJson($request->options[$i]),
+                    'options' => FormField::optionsToJson($request->options[$i]),
                     'required' => $request->required[$i],
                 ]);
             }
