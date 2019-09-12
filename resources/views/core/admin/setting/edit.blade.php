@@ -12,7 +12,9 @@
         @foreach ($settings as $setting)
         <div class="form-group">
             <label class="form-label" for="{{ $setting->code }}">{{ $setting->label }}</label>
-            @if ($setting->type == "BOOLEAN")
+            @if ($setting->type == "ARRAY")
+            <textarea class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}">{{ $setting->getEditValue() }}</textarea>
+            @elseif ($setting->type == "BOOLEAN")
             <select class="form-control" id="{{ $setting->code }}" name="{{ $setting->code }}">
                 <option value="0" @if ($setting->value == "0") selected @endif >@lang('No')</option>
                 <option value="1" @if ($setting->value == "1") selected @endif >@lang('Yes')</option>

@@ -254,6 +254,16 @@ class SettingSeeder extends Seeder
             'hidden' => '0',
         ];
 
+        $settings[] = [
+            'code' => 'custom.routeClasses',
+            'type' => 'ARRAY',
+            'label' => __("Custom class routes"),
+            'description' => __("Custom classes to call the routes-method from."),
+            'value' => '',
+            'category' => 'custom',
+            'hidden' => '0',
+        ];
+
 
 
         foreach ($settings as $setting) {
