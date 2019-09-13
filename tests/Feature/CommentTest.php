@@ -133,4 +133,22 @@ class CommentTest extends TestCase
 
         $this->assertCount(1, Comment::where('approved', 1)->where('body', 'Changed body')->get());
     }
+
+    /**
+     * @test
+     */
+    public function aCommentCanBeDeleted()
+    {
+        $this->signIn();
+
+        $comment = factory(Comment::class)->create(['approved' => 1]);
+
+        $this->assertCount(1, Comment::all());
+
+        $response = $this->delete(route('admin.comment.destroy', $comment));
+        $response->assertStatus(302);
+        $response->assertSessionHas('success');
+
+        $this->assertCount(0, Comment::all());
+    }
 }

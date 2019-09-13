@@ -27,3 +27,11 @@ $factory->state(App\Post::class, 'publishing', [
     'published_at_time' => '00:00',
     'use_hash' => 0,
 ]);
+
+$factory->state(App\Post::class, 'unpublished', [
+    'published' => 0,
+]);
+
+$factory->state(App\Post::class, 'withHash', [
+    'hash' => 'abcde',
+]);

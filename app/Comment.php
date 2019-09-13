@@ -21,8 +21,11 @@ class Comment extends Model
             Subscription::send($comment);
             
             Log::info("Sending a copy of new comment to Admin");
-            $mail = Mail::to(Setting::get('mail.adminAddress'));
-            (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment)) : $mail->send(new NewComment($comment));
+        
+            if ($admin = Setting::get('mail.adminAddress')) {
+                $mail = Mail::to($admin);
+                (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment)) : $mail->send(new NewComment($comment));
+            }
         });
     }
 

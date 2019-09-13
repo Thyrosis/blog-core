@@ -110,9 +110,7 @@
             <a class="admin-nav-link" href="{{ route('feeds.main') }}" target="_blank">@lang('RSS-feed')</a>
         </li> -->
         <li class="mr-3">
-            <a class="admin-nav-link-active font-bold" href="{{ route('home') }}" target="_blank">@lang('Site')</a>
+            <a class="admin-nav-link-active font-bold" href="/" target="_blank">@lang('Site')</a>
         </li>
-
-        
     </ul>
 </div>

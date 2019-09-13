@@ -45,7 +45,7 @@ class MediaController extends Controller
         foreach ($request->uploadedFiles as $file) {
             $category = (!empty($request->category)) ? $request->category : "random";
             $path = $file->store($category);
-            Media::create(['user_id' => auth()->id(), 'filepath' => $path, 'filename' => $file->getClientOriginalName(), 'category' => $category, 'filetype' => $file->getClientMimeType(), 'label' => $data['label'], 'description' => $data['description']]);
+            Media::create(['user_id' => auth()->id(), 'filepath' => $path, 'filename' => $file->getClientOriginalName(), 'category' => $category, 'filetype' => $file->getClientMimeType(), 'label' => $data['label'] ?? "", 'description' => $data['description'] ?? ""]);
         }
 
         return redirect(route('admin.media.index'))->with('success', 'De bestanden zijn succesvol geupload.');

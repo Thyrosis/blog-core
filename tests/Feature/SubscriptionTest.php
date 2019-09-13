@@ -90,10 +90,12 @@ class SubscriptionTest extends TestCase
 
         $this->assertCount(2, $post->fresh()->subscriptions);
 
-        $comment = factory(Comment::class)->make(['post_id' => $post->id]);
+        if (\App\Setting::get('mail.useQueue') !== null) {
+            $comment = factory(Comment::class)->make(['post_id' => $post->id]);
 
-        $result = $this->post(route('comment.store'), $comment->toArray());
+            $result = $this->post(route('comment.store'), $comment->toArray());
 
-        $this->assertEquals(2, DB::table('jobs')->count());
+            $this->assertEquals(2, DB::table('jobs')->count());
+        }        
     }
 }

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostHash extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      *
@@ -21,6 +23,7 @@ class PostHash extends TestCase
         $this->assertEquals(null, $post->fresh()->hash);
 
         $hash = $post->generateHash();
+        $post->update(['hash' => $hash]);
 
         $this->assertEquals($hash, $post->fresh()->hash);
     }
@@ -30,7 +33,7 @@ class PostHash extends TestCase
      */
     public function anUnpublishedPostWithoutHashCantBeViewedByGuest()
     {
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->states('unpublished')->create();
 
         $response = $this->get($post->link);
 
@@ -42,8 +45,7 @@ class PostHash extends TestCase
      */
     public function anUnpublishedPostWithHashStillCantBeViewedByGuest()
     {
-        $post = factory(Post::class)->create();
-        $hash = $post->generateHash();
+        $post = factory(Post::class)->states(['unpublished', 'withHash'])->create();
 
         $response = $this->get($post->link);
 
@@ -55,8 +57,7 @@ class PostHash extends TestCase
      */
     public function anUnpublishedPostWithHashCanBeViewedByGuestWithHash()
     {
-        $post = factory(Post::class)->create();
-        $hash = $post->generateHash();
+        $post = factory(Post::class)->states(['unpublished', 'withHash'])->create();
 
         $response = $this->get($post->link.'?hash='.$post->hash);
 

@@ -54,9 +54,6 @@ class AuthenticationTest extends TestCase
         $this->get(route('admin.post.update', $post))->assertStatus(302);
 
         $this->get(route('admin.comment.index'))->assertStatus(302);
-        
-        $comment = factory(Comment::class)->create();
-        $this->get(route('admin.comment.update', $comment))->assertStatus(405);
 
         $this->get(route('admin.category.index'))->assertStatus(302);
         $this->get(route('admin.category.store'))->assertStatus(302);
@@ -74,9 +71,6 @@ class AuthenticationTest extends TestCase
 
         $post2 = factory(Post::class)->create();
         $this->patch(route('admin.post.update', $post2))->assertStatus(302);
-
-        $comment = factory(Comment::class)->create();
-        $this->delete(route('admin.comment.destroy', $comment))->assertStatus(302);
 
         $category = factory(Category::class)->make();
         $this->post(route('admin.category.store'), $category->toArray())->assertStatus(302);
