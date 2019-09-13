@@ -8,6 +8,16 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.0
+
+- UPDATE TO LARAVEL 6.0
+- Changed version naming: {master}.{laravel master}.{minor}
+- Updates the way menus are converted to HTML
+- Updates to Form building (https://github.com/Thyrosis/blog-core/commit/ee6c4afd6322da750c463ae7a25a7cae67183041)
+- Feature: Add setting to load routes of custom classes
+- Feature: Add TinyMCE custom classes
+- Bugfix: ReCaptcha-setting wasn't properly used in the FormResponseController
+
 ## 1.0.26 (2019-08-12)
 
 - Add Akismet to comment preapprove method (needs Database Seed for new settings)
