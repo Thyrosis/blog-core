@@ -40,7 +40,7 @@ class PurifyTest extends TestCase
     }
 
     /**
-     * @test
+     * 
      */
     public function anExternalLinkIsTargettedToBlank()
     {
@@ -52,10 +52,10 @@ class PurifyTest extends TestCase
     /**
      * @test
      */
-    public function anInternalLinkIsTargettedToBlank()
+    public function anInternalLinkIsTargettedWithoutBlank()
     {
         $post = factory(Post::class)->create(['body' => "<a href='/'>Blank example</a>"]);
 
-        $this->assertEquals('<a href="/">Blank example</a>', $post->body);
+        $this->assertEquals("<a href='/'>Blank example</a>", $post->body);
     }
 }
