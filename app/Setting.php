@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 
 class Setting extends Model
 {
+    protected $fillable = ['code', 'type', 'label', 'description', 'value', 'category', 'hidden'];
+
     /**
      * Defines the route keyname used by Larave.
      * 
