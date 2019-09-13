@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 
 class Setting extends Model
 {
+    protected $fillable = ['code', 'type', 'label', 'description', 'value', 'category', 'hidden'];
+
     /**
      * Defines the route keyname used by Larave.
      * 
@@ -17,6 +19,23 @@ class Setting extends Model
     public function getRouteKeyName()
     {
         return 'code';
+    }
+
+    public function getEditValue()
+    {
+        $return = $this->value;
+        
+        if ($this->type == 'ARRAY') {
+            $return = "";
+
+            $values = collect(json_decode($this->value));
+
+            $values->each(function ($item, $key) use (&$return) {
+                $return .= $item . "\r\n";
+            });
+        }
+
+        return trim($return);
     }
 
     /**
@@ -61,11 +80,17 @@ class Setting extends Model
     }
 
     public static function updateSingle($code, $value)
-    {
+    {        
         $code = str_replace('_', '.', $code);
 
-        return DB::table('settings')
-        ->where('code', $code)
-        ->update(['value' => $value]);
+        $setting = self::whereCode($code)->first();
+
+        $setting->value = $value;
+
+        if ($setting->type == 'ARRAY') {
+            $setting->value = json_encode(explode("\r\n", $value));
+        }
+
+        $setting->save();
     }
 }

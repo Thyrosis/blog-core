@@ -102,6 +102,13 @@ Route::get('sitemap.xml', function() {
     return Response::view('core.layout.sitemap')->header('Content-Type', 'text/xml');
 });
 
+if($customClasses = App\Setting::get('custom.routeClasses')) {    
+    foreach (json_decode($customClasses) as $class) {
+        $class = 'App\\' . $class;
+        $class::routes();
+    }
+}
+
 /**
  * And if we're here, nothing matched. Finally, is it a post??
  */
