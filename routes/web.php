@@ -27,8 +27,9 @@ App\Setting::routes();
  * API ROUTES
  */
 Route::group(['prefix' => 'api'], function () {
+    Route::post('posts/store', 'Api\PostController@store')->middleware('apiauthentication');
     Route::get('post/{limit?}', 'Api\PostController@index');
-    Route::get('post/{post}', 'Api\PostController@show');
+    Route::get('post/show/{post}', 'Api\PostController@show');
 });
 
 /**

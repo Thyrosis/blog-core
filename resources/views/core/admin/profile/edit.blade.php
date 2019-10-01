@@ -20,6 +20,12 @@
             <p class="form-info">@lang('User\'s email address. Used for logging in and sending messages.')</p>
         </div>
 
+        <div class="form-group">
+            <label class="form-label" for="api_token">@lang('API token')</label>
+            <input class="form-control" id="api_token" name="api_token" type="text" value="" />
+            <p class="form-info">@lang('User\'s api_token. Used for logging in via the API. Only enter something here if you want to CHANGE your current token.')</p>
+        </div>
+
         @foreach (App\Meta::where('updateable', true)->get() as $meta)
             @if ($meta->code !== "access-level")
             <div class="form-group">
