@@ -8,15 +8,15 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
-## 1.6.1
+## 1.6.1 (2019-10-01)
 
 - Add ApiAuthentication middleware (needs Database Migration for new api_token column for user).
 - Add API method to store posts (needs ApiAuthentication).
 - Changes in API responses, they now always return (boolean) result, followed by (array) data.
 - Bugfix: APi method to show single post.
+- Composer update: Laravel to 6.0.4
 
-## 1.6.0
-
+## 1.6.0 (2019-09-13)
 - UPDATE TO LARAVEL 6.0
 - Changed version naming: {master}.{laravel master}.{minor}
 - Updates the way menus are converted to HTML
