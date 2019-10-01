@@ -7,6 +7,7 @@ use App\Meta;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -64,6 +65,10 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
         ]);
 
+        if (isset($request->api_token) && !empty($request->api_token)) {
+            $data['api_token'] = Hash::make($request->api_token);
+        }
+        
         $user->update($data);
 
         foreach (Meta::all() as $meta) {

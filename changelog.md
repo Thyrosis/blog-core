@@ -8,6 +8,13 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.1
+
+- Add ApiAuthentication middleware (needs Database Migration for new api_token column for user).
+- Add API method to store posts (needs ApiAuthentication).
+- Changes in API responses, they now always return (boolean) result, followed by (array) data.
+- Bugfix: APi method to show single post.
+
 ## 1.6.0
 
 - UPDATE TO LARAVEL 6.0
