@@ -82,8 +82,6 @@ class PostController extends Controller
                 'status' => Response::HTTP_UNPROCESSABLE_ENTITY
             ], 422);
         }
-
-        $data['user_id'] = auth()->user()->id;
         
         if (!isset($data['commentable'])) {
             $data['commentable'] = 0;
@@ -111,6 +109,8 @@ class PostController extends Controller
 
         $data = Post::processData($data);
 
+        $data['body'] = "<p>".nl2br($data['body'])."</p>";
+        
         $post = Post::create($data)->sync($request);
         
         return response()->json([
