@@ -68,14 +68,15 @@ class UserController extends Controller
         if (isset($request->api_token) && !empty($request->api_token)) {
             $data['api_token'] = Hash::make($request->api_token);
         }
-        
+
         $user->update($data);
 
-        foreach (Meta::all() as $meta) {
-            if ($meta->updateable) {
-                $user->updateMeta($meta->code, $request->{$meta->code});
-            }
-        }
+        // Turned off, as META information isn't available at this point. Should be fixed in future.
+        // foreach (Meta::all() as $meta) {
+        //     if ($meta->updateable) {
+        //         $user->updateMeta($meta->code, $request->{$meta->code});
+        //     }
+        // }
 
         return redirect(route('profile.show', $user))->with("success", "User updated");
     }
