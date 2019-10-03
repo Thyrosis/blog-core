@@ -31,7 +31,7 @@ p {
 }
 
 .admin-h3 {
-    @apply .mb-5 .py-1 .border-b .border-teal .text-grey-darkest .font;
+    @apply .mb-5 .py-1 .pl-5 .border-b .border-purple-500 .text-grey-darkest .font .mx-auto .font-bold
 }
 
 td, th {
@@ -39,11 +39,11 @@ td, th {
 }
 
 .admin-container {
-    @apply .bg-white .shadow .mx-1 .mb-5 .p-5 .rounded;
+    @apply .mb-10;
 }
 
 .btn {
-    @apply .font-bold .py-2 .px-4 .rounded-lg;
+    @apply .font-bold .py-2 .px-4 .rounded-full;
 }
 
 .btn-small {
@@ -51,11 +51,11 @@ td, th {
 }
 
 .btn-blue {
-    @apply .bg-blue .text-white;
+    @apply .bg-blue-600 .text-white .border .border-blue-900
 }
 
 .btn-blue:hover {
-    @apply .bg-blue-dark;
+    @apply .bg-blue-200
 }
 
 .btn-grey {
@@ -67,19 +67,43 @@ td, th {
 }
 
 .btn-red {
-    @apply .bg-red .text-white;
+    @apply .bg-red-700 .text-white .border .border-red-900
 }
 
 .btn-red:hover {
-    @apply .bg-red-dark;
+    @apply .bg-red-600
 }
 
 .btn-teal {
-    @apply .bg-teal .text-white;
+    @apply .bg-teal-500 .text-white;
 }
 
 .btn-teal:hover {
-    @apply .bg-teal-dark;
+    @apply .bg-teal-700;
+}
+
+.btn-purple {
+    @apply .bg-purple-500 .text-white .border .border-purple-900
+}
+
+.btn-purple:hover {
+    @apply .bg-purple-100 .text-purple-700
+}
+
+.btn-green {
+    @apply .bg-green-700 .text-white .border .border-green-900
+}
+
+.btn-green:hover {
+    @apply .bg-green-600
+}
+
+.btn-orange {
+    @apply .bg-orange-200 .text-orange-900 .border .border-orange-900
+}
+
+.btn-orange:hover {
+    @apply .bg-orange-100 .text-orange-700
 }
 
 a.btn {
@@ -87,7 +111,7 @@ a.btn {
 }
 
 .form-error {
-    @apply .mt-2 .text-red-dark .flex .justify-center .items-center;
+    @apply .mt-2 .text-red-700 .flex .justify-center .items-center;
 }
 
 .form-info {
@@ -127,7 +151,7 @@ table.admin-table {
 }
 
 .admin-table-row:hover {
-    @apply .border-blue;
+    @apply .border-blue-500;
 }
 
 .admin-table-cell {
@@ -167,23 +191,39 @@ table.admin-table {
 }
 
 .admin-feedback-success {
-    @apply .border-green-lighter .bg-green-lightest;
+    @apply .border-green-300 .bg-green-100;
 }
 
 .admin-feedback-warning {
-    @apply .border-orange-lighter .bg-orange-lightest;
+    @apply .border-orange-300 .bg-orange-100;
 }
 
 .admin-feedback-error {
-    @apply .border-red-lighter .bg-red-lightest;
+    @apply .border-red-300 .bg-red-100;
 }
 
 .admin-feedback-info {
-    @apply .border-blue-lighter .bg-blue-lightest;
+    @apply .border-blue-300 .bg-blue-100;
 }
 
 .admin-feedback-status {
-    @apply .border-blue-lighter .bg-blue-lightest;
+    @apply .border-blue-300 .bg-blue-100;
+}
+
+.admin-menu-link {
+    @apply .block .pl-4 .align-middle .text-gray-700 .no-underline .border-l-4 .border-transparent
+}
+
+.admin-menu-link:hover {
+    @apply .text-purple-500 .border-gray-400
+}
+
+.admin-menu-selected {
+    @apply .border-purple-500 .border-purple-500 .font-bold
+}
+
+.admin-comment-unapproved {
+    @apply .border .border-t-0 .border-r-0 .border-b-0 .border-l-4 .border-orange-500
 }
 
 @tailwind utilities;

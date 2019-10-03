@@ -1,17 +1,16 @@
 @extends ('core.layout.app')
 
-@section ('title', __('Posts'))
+@section ('title', __('Posts') )
 
 @section ('main')
 
-<div class="admin-container">
-    <h3 class="admin-h3">@lang('New Post')</h3>
-    <p>
-        <a href="{{ route('admin.post.create') }}" class="btn btn-teal">
-            @lang('Create')
-        </a>
-    </p>
-</div>
+
+<p class="mt-5 mb-10">
+    <a href="{{ route('admin.post.create') }}" class="btn btn-purple">
+        @lang('Create')
+    </a>
+</p>
+
 
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Pages')</h3>
@@ -26,7 +25,7 @@
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
 
-        @foreach ($posts->where('type', 'page')->sortByDesc('published_at') as $post)
+        @forelse ($posts->where('type', 'page')->sortByDesc('published_at') as $post)
         <tr class="border-b border-grey-light hover:border-blue">
             <td class="table-cell" >
                 {{ $post->title }}
@@ -46,7 +45,11 @@
                 </a>
             </td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+            <td colspan="6">There are no pages yet.</td>
+        </tr>
+        @endforelse
     </table>
 </div>
 
@@ -66,7 +69,7 @@
             $future = true;
         @endphp
 
-        @foreach ($posts->where('type', 'post')->sortByDesc('published_at') as $post)
+        @forelse ($posts->where('type', 'post')->sortByDesc('published_at') as $post)
             @php
                 if ($future == true && $post->published_at->isPast()) {
                     $future = false;
@@ -91,7 +94,11 @@
                     </a>
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="6">There are no posts yet.</td>
+            </tr>
+        @endforelse
     </table>
 </div>
 @endsection

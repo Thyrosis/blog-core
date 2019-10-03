@@ -1,6 +1,6 @@
 @extends ('core.layout.app')
 
-@section ('title', __('Comments'))
+@section ('title', __('Edit comment'))
 
 @section ('main')
 
@@ -9,8 +9,6 @@
     @method ('PATCH')
 
     <div class="admin-container">
-        <h3 class="admin-h3">@lang('Edit comment')</h3>
-
         <div class="mb-5">
             <label for="name" class="form-label">@lang('Name')</label>
             <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $comment->name) }}" />
