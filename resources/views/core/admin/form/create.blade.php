@@ -10,7 +10,7 @@
         <h3 class="admin-h3">@lang('Create new form')</h3>
         
         <div class="flex flex-col md:flex-row">
-            <div class="mb-5 mx-1 md:w-1/3">
+            <div class=" mx-1 md:w-1/3">
                 <label class="form-label" for="name">@lang('Name')</label>
                 <input class="form-control" type="text" name="name" id="name" aria-describedby="infoName" />
                 <p class="form-info" id="infoName">Name of the form. Mostly just for recognising it.</p>
@@ -21,7 +21,7 @@
                 @endif
             </div>
 
-            <div class="mb-5 mx-1 md:w-1/3">
+            <div class=" mx-1 md:w-1/3">
                 <label class="form-label" for="action">@lang('Action')</label>
                 <input class="form-control" type="text" name="action" id="action" aria-describedby="infoAction" />
                 <p class="form-info" id="infoAction">The action of the form. If empty, defaults to itself. You could action to external sources.</p>
@@ -32,7 +32,7 @@
                 @endif
             </div>
 
-            <div class="mb-5 mx-1 md:w-1/3">
+            <div class=" mx-1 md:w-1/3">
                 <label class="form-label" for="token">@lang('Token')</label>
                 <input class="form-control" type="text" name="token" id="token" aria-describedby="infoToken" />
                 <p class="form-info" id="infoAction">If posting to an external source, you'll probably need some kind of verification token. Set that here.</p>
@@ -104,15 +104,15 @@
             </div>
             <div class="m-1 md:w-1/6">
                 <label for="elementName" class="form-label md:hidden">@lang("Name") / ID</label>
-                <input aria-describedby="infoElementName" class="form-control" id="elementName-{{ $i }}" name="elementName[{{ $i }}]" placeholder="Name" type="text"  />
+                <input aria-describedby="infoElementName" class="form-control" id="elementName-{{ $i }}" name="elementName[{{ $i }}]" placeholder="@lang('Name')" type="text"  />
             </div>
             <div class="m-1 md:w-1/6">
             <label for="class" class="form-label md:hidden">@lang('CSS Class')</label>
-                <input aria-describedby="infoClass" class="form-control" id="class-{{ $i }}" name="class[{{ $i }}]" placeholder="Class" type="text" />
+                <input aria-describedby="infoClass" class="form-control" id="class-{{ $i }}" name="class[{{ $i }}]" placeholder="@lang('Class')" type="text" />
             </div>
             <div class="m-1  md:w-1/6">
                 <label for="description" class="form-label md:hidden">@lang('Description')</label>
-                <input aria-describedby="infoDescription" class="form-control" id="description-{{ $i }}" name="description[{{ $i }}]" placeholder="Description" type="text" />
+                <input aria-describedby="infoDescription" class="form-control" id="description-{{ $i }}" name="description[{{ $i }}]" placeholder="@lang('Description')" type="text" />
             </div>
             <div class="m-1  md:w-1/6 hidden" id="selectOptions-{{ $i }}">
                 <label for="options" class="form-label md:hidden">@lang('Options')</label>
@@ -127,7 +127,7 @@
                     </select>
                 </div>
                 <div>
-                    <span onclick="removeFormRow({{ $i }});"><i class="text-red cursor-pointer" data-feather="trash-2"></i></span>
+                    <span onclick="removeFormRow({{ $i }});"><i class="text-red-500 cursor-pointer" data-feather="trash-2"></i></span>
                 </div>
             </div>
         </div>
@@ -135,9 +135,9 @@
     </div>
 
     <div class="admin-container">
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Create')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
+        <div class="form-button-group" >
+            <button type="submit" class="btn btn-green">@lang('Create')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
         </div>
     </div>
 </form>

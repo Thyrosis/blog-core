@@ -7,7 +7,7 @@
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Create new form')</h3>
     <p>
-        <a href="{{ route('admin.form.create') }}" class="btn btn-teal">
+        <a href="{{ route('admin.form.create') }}" class="btn btn-purple">
             @lang('Create')
         </a>
     </p>
@@ -32,7 +32,7 @@
         <div class="form flex flex-col lg:flex-row @if (!$loop->last) border-b pb-2 mb-2 @endif ">
             
             <div class="cat-name mr-2 w-1/5">
-                <a href="#{{ $form->name }}-{{ $form->id }}" class="text-teal-dark no-underline"><strong>{{ $form->name }}</strong></a>
+                <a href="#{{ $form->name }}-{{ $form->id }}" class="text-teal-700 no-underline"><strong>{{ $form->name }}</strong></a>
             </div>
             <div class="flex-1 cat-desc mr-2">
                 @foreach ($form->fields as $field)

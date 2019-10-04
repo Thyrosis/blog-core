@@ -12,9 +12,9 @@
     @yield ('html.head')
 </head>
 
-<body class="bg-grey-light font-sans leading-normal tracking-normal">
+<body class="bg-gray-200 font-sans leading-normal tracking-normal">
 
-	<nav class="flex items-center justify-between flex-wrap bg-grey-darkest p-6 w-full z-10 top-0">
+	<nav class="flex items-center justify-between flex-wrap bg-gray-700 p-6 w-full z-10 top-0">
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
 			<a class="text-white no-underline hover:text-white hover:no-underline" href="{{ config('app.url') }}/admin">
 				<span class="text-2xl pl-2 font">{{ config('app.name') }}</span>

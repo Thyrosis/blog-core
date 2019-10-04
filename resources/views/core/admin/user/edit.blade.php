@@ -36,7 +36,6 @@
             </div>
         @endforeach
 
-        <hr class="border" />
 
         @foreach ($metas->where('updateable', false) as $meta)
             <div class="form-group">
@@ -46,8 +45,9 @@
             </div>
         @endforeach
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-blue">@lang('Update')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Update')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
         </div>
     </form>
 </div>

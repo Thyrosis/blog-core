@@ -24,7 +24,7 @@
             <th colspan="4">@lang('Related Views')</th>
         </tr>
         @foreach ($view->getSame('user_agent') as $v)
-        <tr class="border-b border-grey-light hover:border-blue">
+        <tr class="border-b border-gray-300 hover:border-blue">
             <td class="table-cell" >{{ $v->post->title }}</td>
             <td class="hidden lg:table-cell">{{ $v->created_at }}</td>
             <td class="hidden lg:table-cell">{{ App\View::decrypt($v->iphash) }}</td>

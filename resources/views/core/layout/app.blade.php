@@ -8,6 +8,8 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <link href="{{ config('app.url') }}/css/core.css" rel="stylesheet">
+
+        @yield ('html.head')
     </head>
 
     <body class="bg-gray-100 tracking-wider tracking-normal">
@@ -127,8 +129,8 @@
                         </a>
                     </li>
                     <li class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent">
-                        <a href="{{ route('feeds.main') }}" class="admin-menu-link {{ is_current_url(route('feeds.main')) ? 'admin-menu-selected' : '' }}">
-                        <span class="pb-1 md:pb-0 text-sm">@lang('RSS-feed')</span>
+                        <a class="admin-menu-link {{ is_current_url(route('feeds.main')) ? 'admin-menu-selected' : '' }}" href="{{ route('feeds.main') }}" target="_blank">
+                            <span class="pb-1 md:pb-0 text-sm">@lang('RSS-feed')</span>
                         </a>
                     </li>
                 </ul>
@@ -136,14 +138,20 @@
                 </div>
             @endauth
             </div>
-            <div class="w-full lg:w-4/5 p-8 mt-6 lg:mt-0 text-gray-900 leading-normal bg-white border border-gray-400 border-rounded">
-                <!--Title-->
+            <div class="w-full lg:w-4/5 text-gray-900 leading-normal ">
                 <div class="font-sans">
-                <h1 class="font-sans break-normal text-purple-700 pt-6 pb-2 text-xl">@yield ('title')</h1>
-                <hr class="border-b border-gray-400">
+                    <h1 class="font-sans break-normal text-purple-700 pt-2 mb-4  text-xl">@yield ('title')</h1>
                 </div>
 
-                @yield ('main')
+                <div class="mb-5">
+                    @include ('core.layout.feedback')
+                </div>
+            
+                <div class="bg-white border border-gray-400 border-rounded p-8 mt-6 lg:mt-0">
+                <!--Title-->
+                
+
+                    @yield ('main')
                 
                             <!--Post Content-->
             <!--Lead Para-->
@@ -174,10 +182,11 @@
 				</code>
 			</pre> -->
             <!--/ Post Content-->
+                </div>
             </div>
             <!--Back link -->
             <div class="w-full lg:w-4/5 lg:ml-auto text-base md:text-sm text-gray-500 px-4 py-6">
-                <span class="text-base text-purple-500 font-bold">&lt;</span> <a href="#" class="text-base md:text-sm text-purple-500 font-bold no-underline hover:underline">Back to Help</a>
+                <span class="text-base text-purple-500 font-bold">&lt;</span> <a href="/" class="text-base md:text-sm text-purple-500 font-bold no-underline hover:underline">Back to website</a>
             </div>
         </div>
         <!--/container-->
@@ -207,13 +216,70 @@
             </div>
         </footer>
         @endauth
-        <script></script>
+
+        <!-- TinyMCE -->
+        <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ Setting::get('tinyMCE.license') }}"></script>
+        <script>
+            tinymce.init({
+                selector: '.tinymce-full',
+                autosave_interval: "15s",
+                autosave_restore_when_empty: true,
+                autosave_retention: "1440",
+                // block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Quote=blockquote;Preformatted=pre',
+                browser_spellcheck: true,
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                ],
+                document_base_url : '{{ config('app.url') }}',
+                // extended_valid_elements: "a[href|title|target=_blank],img[class|src|border=0|alt|title|hspace|vspace|width|height|align],*[name|style|title|class],p[name]",
+                valid_elements: "*[*]",
+                image_advtab: true,
+                language_url : '{{ config('app.url') }}/js/languages/{{ config('app.locale') }}.js',
+                language: '{{ config('app.locale') }}',
+                link_list: [
+                    {title: '-- Pages --', value: '/'},
+                @foreach (App\Post::getPages() as $page)
+                    {title: '{{ $page->getTitle() }}', value: '{{ $page->path() }}'},
+                @endforeach
+                    {title: '-- Posts --', value: '/'},
+                @foreach (App\Post::getPosts() as $post)
+                    {title: '{{ $post->getTitle() }}', value: '{{ $post->path() }}'},
+                @endforeach
+                ],
+                plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
+                relative_urls : false,
+                style_formats: [
+                    { title: 'Paragraph', format: 'p'},
+                    { title: 'Heading 1', format: 'h1'},
+                    { title: 'Heading 2', format: 'h2'},
+                    { title: 'Heading 3', format: 'h3'},
+                    { title: 'Heading 4', format: 'h4'},
+                    { title: 'Quote', format: 'blockquote'},
+                    { title: 'Code', format: 'pre'},
+                    { title: 'Image formats' },
+                    { title: 'Image Left', selector: 'img', styles: { 'float': 'left', 'margin': '0 10px 0 10px' } },
+                    { title: 'Image Right', selector: 'img', styles: { 'float': 'right', 'margin': '0 0 10px 10px' } },
+                    { title: 'Custom CSS rules' },
+                    {!! App\Setting::get('tinyMCE.customClasses') !!}
+                ],
+                templates: [
+                    { title: 'Quote', description: 'Default quote field', content: '<blockquote>This is a quote. Nice to display with a different background color or some padding on the left. Style it in your custom CSS file.</blockquote><p>&nbsp;</p>'},
+                    { title: 'Highlight', description: 'Highlighted paragraph', content: '<p style="background-color: #456789; padding: 1rem;">This is a regular paragraph but with a different background color. Style as needed.</p><p>&nbsp;</p>' }
+                ],
+                toolbar1: 'styleselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
+            });
+        </script>
+        <!-- End TinyMCE -->
+
+        <!-- Feather Icons -->
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script>
             feather.replace()
         </script>
+        <!-- End Feather Icons -->
+
+        <!-- Toggle DropDown List -->
         <script>
-            /*Toggle dropdown list*/
             /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
             
             var navMenuDiv = document.getElementById("nav-content");
@@ -224,49 +290,51 @@
             
             document.onclick = check;
             
-            function check(e){
-            var target = (e && e.target) || (event && event.srcElement);
-            
-            
-            //Nav Menu
-            if (!checkParent(target, navMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, navMenu)) {
-                // click on the link
-                if (navMenuDiv.classList.contains("hidden")) {
-                    navMenuDiv.classList.remove("hidden");
-                } else {navMenuDiv.classList.add("hidden");}
-                } else {
-                // click both outside link and outside menu, hide menu
-                navMenuDiv.classList.add("hidden");
+            function check(e) {
+                var target = (e && e.target) || (event && event.srcElement);
+                            
+                //Nav Menu
+                if (!checkParent(target, navMenuDiv)) {
+                    // click NOT on the menu
+                    if (checkParent(target, navMenu)) {
+                    // click on the link
+                    if (navMenuDiv.classList.contains("hidden")) {
+                        navMenuDiv.classList.remove("hidden");
+                    } else {navMenuDiv.classList.add("hidden");}
+                    } else {
+                    // click both outside link and outside menu, hide menu
+                    navMenuDiv.classList.add("hidden");
+                    }
                 }
-            }
-            
-            //Help Menu
-            if (!checkParent(target, helpMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, helpMenu)) {
-                // click on the link
-                if (helpMenuDiv.classList.contains("hidden")) {
-                    helpMenuDiv.classList.remove("hidden");
-                } else {helpMenuDiv.classList.add("hidden");}
-                } else {
-                // click both outside link and outside menu, hide menu
-                helpMenuDiv.classList.add("hidden");
+                
+                //Help Menu
+                if (!checkParent(target, helpMenuDiv)) {
+                    // click NOT on the menu
+                    if (checkParent(target, helpMenu)) {
+                    // click on the link
+                    if (helpMenuDiv.classList.contains("hidden")) {
+                        helpMenuDiv.classList.remove("hidden");
+                    } else {helpMenuDiv.classList.add("hidden");}
+                    } else {
+                    // click both outside link and outside menu, hide menu
+                    helpMenuDiv.classList.add("hidden");
+                    }
                 }
-            }
             
             }
             
             function checkParent(t, elm) {
-            while(t.parentNode) {
-                if( t == elm ) {return true;}
-                t = t.parentNode;
+                while(t.parentNode) {
+                    if( t == elm ) {return true;}
+                    t = t.parentNode;
+                }
+                return false;
             }
-            return false;
-            }
-            
-            
         </script>
+        <!-- End toggle DropDown List -->
+
+        <!-- Custom JavaScript code - @section ('html.body.scripts') -->
+        @yield ('html.body.scripts')
+        <!-- End custom JavaScript code -->
     </body>
 </html>

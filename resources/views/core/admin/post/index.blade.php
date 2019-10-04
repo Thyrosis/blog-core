@@ -26,28 +26,28 @@
         </tr>
 
         @forelse ($posts->where('type', 'page')->sortByDesc('published_at') as $post)
-        <tr class="border-b border-grey-light hover:border-blue">
+        <tr class="border-b border-gray-300 hover:border-blue">
             <td class="table-cell" >
                 {{ $post->title }}
             </td>
             <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
-            <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-lightest @endif">{{ $post->published_at->toFormattedDateString() }}</td>
+            <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
             <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
             <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
             <td class="table-cell">
-                <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
-                    <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
+                    <i data-feather="edit-3"></i>
                 </a>
             </td>
             <td class="table-cell">
-                <a href="{{ route('admin.post.edit', $post) }}" class="no-underline">
-                    <i class="text-teal" data-feather="edit-3"></i>
+                <a href="{{ route('post.show', $post) }}" target="_blank" class="btn-blue-text">
+                    <i data-feather="eye"></i>
                 </a>
             </td>
         </tr>
         @empty
         <tr>
-            <td colspan="6">There are no pages yet.</td>
+            <td class='italic' colspan="6">@lang('There are no pages yet.')</td>
         </tr>
         @endforelse
     </table>
@@ -75,28 +75,28 @@
                     $future = false;
                 }
             @endphp
-            <tr class="border-b border-grey-light hover:border-blue @if ($future) bg-blue-lightest @endif ">
+            <tr class="border-b border-gray-300 hover:border-blue @if ($future) bg-blue-100 @endif ">
                 <td class="table-cell" >
                     {{ $post->title }}
                 </td>
                 <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
-                <td class="hidden lg:table-cell @if (!$post->published) bg-red-lightest @endif">{{ $post->published_at->toFormattedDateString() }}</td>
+                <td class="hidden lg:table-cell @if (!$post->published) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
                 <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
                 <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
                 <td class="table-cell">
-                    <a href="{{ route('post.show', $post) }}" target="_blank" class="no-underline">
-                        <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                    <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
+                        <i data-feather="edit-3"></i>
                     </a>
                 </td>
                 <td class="table-cell">
-                    <a href="{{ route('admin.post.edit', $post) }}" class="no-underline">
-                        <i class="text-teal" data-feather="edit-3"></i>
+                    <a href="{{ route('post.show', $post) }}" target="_blank" class="btn-blue-text">
+                        <i data-feather="eye"></i>
                     </a>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="6">There are no posts yet.</td>
+                <td class='italic' colspan="6">@lang('There are no posts yet.')</td>
             </tr>
         @endforelse
     </table>

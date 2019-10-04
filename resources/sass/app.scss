@@ -19,195 +19,259 @@
 }
 
 h1 {
-    @apply .uppercase .font .text-3xl;
+    @apply .uppercase .font .text-3xl
 }
 
 h2 {
-    @apply .text-2xl;
+    @apply .text-2xl
 }
 
 p {
-    @apply .mb-3 .tracking-normal .leading-normal;
+    @apply .mb-3 .tracking-normal .leading-normal
 }
 
 .admin-h3 {
-    @apply .mb-5 .py-1 .pl-5 .border-b .border-purple-500 .text-grey-darkest .font .mx-auto .font-bold
+    @apply .mb-5 .py-1 .border-b .border-purple-500 .text-gray-700 .font .mx-auto .font-bold
 }
 
 td, th {
-    @apply .p-2 .text-left;
+    @apply .p-2 .text-left
 }
 
 .admin-container {
-    @apply .mb-10;
+    @apply .mb-10
 }
 
 .btn {
-    @apply .font-bold .py-2 .px-4 .rounded-full;
+    @apply .font-bold .py-2 .px-4 .rounded-full .border
+}
+
+.btn-text {
+    @apply .border-0
 }
 
 .btn-small {
-    @apply .font-bold .py-1 .px-2 .rounded-lg;
+    @apply .m-1 .py-1 .px-2
 }
 
 .btn-blue {
-    @apply .bg-blue-600 .text-white .border .border-blue-900
+    @apply .bg-blue-500 .text-white .border-blue-900
 }
 
 .btn-blue:hover {
-    @apply .bg-blue-200
+    @apply .bg-blue-100 .text-blue-700
 }
 
-.btn-grey {
-    @apply .bg-grey .text-white;
+.btn-blue-text {
+    @apply .font-bold .text-sm .text-blue-700
 }
 
-.btn-grey:hover {
-    @apply .bg-grey-dark;
+.btn-blue-text:hover {
+    @apply .text-blue-500   
+}
+
+.btn-gray {
+    @apply .bg-gray-500 .text-white .border-gray-900
+}
+
+.btn-gray:hover {
+    @apply .bg-gray-100 .text-gray-700
+}
+
+.btn-gray-text {
+    @apply .font-bold .text-sm .text-gray-700
+}
+
+.btn-gray-text:hover {
+    @apply .text-gray-500   
 }
 
 .btn-red {
-    @apply .bg-red-700 .text-white .border .border-red-900
+    @apply .bg-red-500 .text-white .border-red-900
 }
 
 .btn-red:hover {
-    @apply .bg-red-600
+    @apply .bg-red-100 .text-red-700
+}
+
+.btn-red-text {
+    @apply .font-bold .text-sm .text-red-700
+}
+
+.btn-red-text:hover {
+    @apply .text-red-500   
 }
 
 .btn-teal {
-    @apply .bg-teal-500 .text-white;
+    @apply .bg-teal-500 .text-white .border-teal-900
 }
 
 .btn-teal:hover {
-    @apply .bg-teal-700;
+    @apply .bg-teal-100 .text-teal-700
+}
+
+.btn-teal-text {
+    @apply .font-bold .text-sm .text-teal-700
+}
+
+.btn-teal-text:hover {
+    @apply .text-teal-500   
 }
 
 .btn-purple {
-    @apply .bg-purple-500 .text-white .border .border-purple-900
+    @apply .bg-purple-500 .text-white .border-purple-900
 }
 
 .btn-purple:hover {
     @apply .bg-purple-100 .text-purple-700
 }
 
+.btn-purple-text {
+    @apply .font-bold .text-sm .text-purple-700
+}
+
+.btn-purple-text:hover {
+    @apply .text-purple-500   
+}
+
 .btn-green {
-    @apply .bg-green-700 .text-white .border .border-green-900
+    @apply .bg-green-700 .text-white .border-green-900
 }
 
 .btn-green:hover {
-    @apply .bg-green-600
+    @apply .bg-green-100 .text-green-700
+}
+
+.btn-green-text {
+    @apply .font-bold .text-sm .text-green-700
+}
+
+.btn-green-text:hover {
+    @apply .text-green-500   
 }
 
 .btn-orange {
-    @apply .bg-orange-200 .text-orange-900 .border .border-orange-900
+    @apply .bg-orange-200 .text-orange-900 .border-orange-900
 }
 
 .btn-orange:hover {
     @apply .bg-orange-100 .text-orange-700
 }
 
+.btn-orange-text {
+    @apply .font-bold .text-sm .text-orange-700
+}
+
+.btn-orange-text:hover {
+    @apply .text-orange-500   
+}
+
 a.btn {
-    @apply .no-underline;
+    @apply .no-underline
 }
 
 .form-error {
-    @apply .mt-2 .text-red-700 .flex .justify-center .items-center;
+    @apply .mt-2 .text-red-700 .flex .justify-center .items-center
 }
 
 .form-info {
-    @apply .text-xs .text-grey-dark .pt-1;
+    @apply .text-xs .text-gray-500 .pt-1
 }
 
 .form-group {
-    @apply .mb-5;
+    @apply .mb-5
+}
+
+.form-button-group {
+    @apply .mt-10 .mb-5 .flex .justify-around
 }
 
 .form-control {
-    @apply .shadow .w-full .border .border-grey-light .rounded .px-2 .py-2 font .text-black;
+    @apply .shadow .w-full .border .border-gray-300 .rounded .px-2 .py-2 font .text-black
 }
 
 .form-control:focus {
-    @apply .shadow-inner;
+    @apply .shadow-inner
 }
 
 .form-label {
-    @apply .text-grey-darker .text-sm .font-bold .mb-2 .block;
+    @apply .text-gray-500 .text-sm .font-bold .mb-2 .block
 }
 
 .form-button {
-    @apply .font-bold .text-grey-darkest .border-2 .border-grey-darkest .py-2 .px-4 .rounded-lg;
+    @apply .font-bold .text-gray-700 .border-2 .border-gray-700 .py-2 .px-4 .rounded-lg
 }
 
 table.admin-table {
-    @apply .w-full;
+    @apply .w-full
 }
 
 .admin-table-row {
-    @apply .border-b .border-grey-light;
+    @apply .border-b .border-gray-300
 }
 
 .admin-table-row-header {
-    @apply .border-b;
+    @apply .border-b
 }
 
 .admin-table-row:hover {
-    @apply .border-blue-500;
+    @apply .border-blue-500
 }
 
 .admin-table-cell {
-    @apply .table-cell;
+    @apply .table-cell
 }
 
 .admin-nav-link {
-    @apply .inline-block .text-grey .no-underline .py-2 .px-4;
+    @apply .inline-block .text-gray-500 .no-underline .py-2 .px-4
 }
 
 .admin-nav-link-active {
-    @apply .inline-block .py-2 .px-4 .text-white .no-underline;
+    @apply .inline-block .py-2 .px-4 .text-white .no-underline
 }
 
 .admin-nav-link:hover {
-    @apply .text-grey-lighter .underline;
+    @apply .text-gray-200 .underline
 }
 
 .admin-nav-group {
-    @apply .inline-block .text-grey .no-underline .py-2 .px-4;
+    @apply .inline-block .text-gray-500 .no-underline .py-2 .px-4
 }
 
 .admin-nav-group:hover {
-    @apply .text-grey-lighter;
+    @apply .text-gray-200
 }
 
 .admin-nav-group-link {
-    @apply .py-2 .px-4 .block .text-black;
+    @apply .py-2 .px-4 .block .text-black
 }
 
 .admin-nav-group-link:hover {
-    @apply .bg-grey-lighter;
+    @apply .bg-gray-200
 }
 
 .admin-feedback {
-    @apply .mx-auto .text-center .border-2 .rounded .p-3 .shadow;    
+    @apply .mx-auto .text-center .border-2 .rounded .p-3 .shadow
 }
 
 .admin-feedback-success {
-    @apply .border-green-300 .bg-green-100;
+    @apply .border-green-300 .bg-green-100
 }
 
 .admin-feedback-warning {
-    @apply .border-orange-300 .bg-orange-100;
+    @apply .border-orange-300 .bg-orange-100
 }
 
 .admin-feedback-error {
-    @apply .border-red-300 .bg-red-100;
+    @apply .border-red-300 .bg-red-100
 }
 
 .admin-feedback-info {
-    @apply .border-blue-300 .bg-blue-100;
+    @apply .border-blue-300 .bg-blue-100
 }
 
 .admin-feedback-status {
-    @apply .border-blue-300 .bg-blue-100;
+    @apply .border-blue-300 .bg-blue-100
 }
 
 .admin-menu-link {

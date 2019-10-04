@@ -49,10 +49,10 @@
     <div class="admin-container">
         <h3 class="admin-h3">@lang('Actions')</h3>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Save')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
-            <a href="{{ route('admin.comment.destroy', $comment) }}" onclick="return confirm('Are you sure you want to delete this post? It cannot be undone!');" class="btn btn-red">@lang('Delete')</a>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Save')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Reset')</button>
+            <a href="{{ route('admin.comment.destroy', $comment) }}" onclick="return confirm('Are you sure you want to delete this post? It cannot be undone!');" class="btn btn-text btn-red-text">@lang('Delete')</a>
         </div>
     </div>
 </form>

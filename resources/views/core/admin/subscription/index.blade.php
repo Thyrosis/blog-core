@@ -6,18 +6,17 @@
 
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Purge subscriptions')</h3>
+
     <p>
         @lang('<b>Warning:</b> Clicking this button will remove all subscriptions connected to unpublished posts.')
     </p>
-    <p>
-        &nbsp;
-    </p>
+
     <p>
         <form class="inline" method="POST" action="{{ route('admin.subscription.destroy') }}">
             @csrf
             @method('DELETE')
 
-            <button class="btn btn-teal">
+            <button class="btn btn-red">
                 Purge
             </button>
         </form>
@@ -27,12 +26,12 @@
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Index')</h3>
 
-    @foreach ($subscriptions as $post_id => $subscriptions)
+    @forelse ($subscriptions as $post_id => $subscriptions)
     <div class="mb-5">
         <h3>{{ App\Post::find($post_id)->title }}</h3>
         
         <table>
-        @foreach ($subscriptions as $subscription)
+        @forelse ($subscriptions as $subscription)
             <tr>
                 <td>{{ $subscription->emailaddress }}</td>
                 <td>
@@ -43,9 +42,15 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td class="italic" colspan="2">@lang('There are no subscriptions to this post yet')</td>
+            </tr>
+        @endforelse
         </table>
     </div>
-    @endforeach
+    @empty
+        <p class="italic">@lang('There are no posts yet.')</p>
+    @endforelse
 </div>
 @endsection

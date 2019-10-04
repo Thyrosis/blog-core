@@ -1,6 +1,4 @@
 <div class="admin-container">
-    <h3 class="admin-h3">@lang('Search')</h3>
-
     <form method="POST" action="{{ route('search.store') }}">
         @csrf       
 
@@ -16,8 +14,8 @@
             @endif
         </div>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Search')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-purple">@lang('Search')</button>
         </div>
     </form>
 </div>

@@ -24,7 +24,7 @@
             <label class="form-label">@lang('Actions')</label>
             <div class="flex">
                 <div class="tag-save">
-                    <button form="form_0" type="submit" class="m-1 btn-small btn-teal">
+                    <button form="form_0" type="submit" class="btn btn-small btn-green">
                         <i data-feather="save"></i>
                     </button>
                 </div>
@@ -42,42 +42,53 @@
     </div>
 
     <div>
-        @foreach ($tags as $tag)
-        
-        <div class="tag flex flex-col lg:flex-row">
+        <div class="tag hidden lg:flex lg:flex-row">
+            <div class="cat-name mr-3 lg:w-1/5">
+                <label class="form-label" for="name">@lang('Name')</label>
+            </div>
+            <div class="flex-1 cat-desc mr-3 lg:w-3/5">
+                <label class="form-label" for="description">@lang('Description')</label>
+            </div>
+            <div class="cat-actions lg:w-1/5">
+                <label class="form-label">@lang('Actions')</label>
+            </div>
+        </div>
+
+        @forelse ($tags as $tag)
+        <div class="tag flex flex-col lg:flex-row lg:mb-2">
             <form id="form_{{ $tag->id }}" name="form_{{ $tag->id }}" method="POST" action="{{ route('admin.tag.update', $tag) }}">
                 @csrf
                 @method('PATCH')
             </form>
 
-            <div class="tag-name mr-3">
-                <label class="form-label" for="name">@lang('Name')</label>
+            <div class="cat-name mr-3 lg:w-1/5">
+                <label class="form-label block lg:hidden" for="name">@lang('Name')</label>
                 <input form="form_{{ $tag->id }}" type="text" name="name" id="name" value="{{ old('name', $tag->name) }}" class="form-control" />
             </div>
-            <div class="flex-1 tag-desc mr-3">
-                <label class="form-label" for="description">@lang('Description')</label>
+            <div class="flex-1 cat-desc mr-3 lg:w-3/5">
+                <label class="form-label block lg:hidden" for="description">@lang('Description')</label>
                 <input form="form_{{ $tag->id }}" type="text" name="description" id="description" value="{{ old('description', $tag->description) }}" class="form-control" />
             </div>
-            <div class="tag-actions">
-                <label class="form-label">@lang('Actions')</label>
+            <div class="cat-actions lg:w-1/5">
+                <label class="form-label block lg:hidden">@lang('Actions')</label>
                 <div class="flex">
-                    <div class="tag-save">
-                        <button form="form_{{ $tag->id }}" type="submit" class="m-1 btn-small btn-teal">
+                    <div class="cat-save">
+                        <button form="form_{{ $tag->id }}" type="submit" class="btn btn-small btn-green">
                             <i data-feather="save"></i>
                         </button>
                     </div>
-                    <div class="tag-posts">
-                        <a href="{{ route('tag.show', $tag) }}" target="_blank" class="flex items-center m-1 btn-small btn-blue text-blue-darkest">
+                    <div class="cat-posts">
+                        <a href="{{ route('tag.show', $tag) }}" target="_blank" class="flex items-center btn btn-small btn-blue">
                             <div class="mr-2">{{ $tag->posts->count() }}</div> 
                             <i data-feather="list"></i>
                         </a>
                     </div>
-                    <div class="tag-remove">
+                    <div class="cat-remove">
                         <form id="form_delete_{{ $tag->id }}" name="form_delete_{{ $tag->id }}" method="POST" action="{{ route('admin.tag.destroy', $tag) }}" class="mb-0">
                             @csrf
                             @method('DELETE')
 
-                            <button form="form_delete_{{ $tag->id }}" type="submit" class="m-1 btn-small btn-red">
+                            <button form="form_delete_{{ $tag->id }}" type="submit" class="btn btn-small btn-red">
                                 <i data-feather="trash-2"></i>
                             </button>
                         </form>
@@ -85,7 +96,11 @@
                 </div>
             </div>            
         </div>
-        @endforeach
+        @empty
+        <div>
+            <p class="italic">@lang('There are no tags yet.')</p>
+        </div>
+        @endforelse
     </div>
 </div>
 
