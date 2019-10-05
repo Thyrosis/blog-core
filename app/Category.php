@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
-class Category extends Model
+class Category extends CacheModel
 {
     protected $fillable = ['name', 'slug', 'description'];
+    protected $cachetags = ['all'];
 
     protected static function boot()
     {

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
@@ -70,13 +71,24 @@ class Setting extends Model
         // }
     }
 
+    /**
+     * Returns the setting value or null if not set.
+     * 
+     * Caches the value indefinitely if it's not in the cache yet.
+     * 
+     * @param   string $code    Unique setting code to retrieve from cache/db
+     * @return  mixed
+     * @version 2019-10-05      Add the setting to the cache if it doesn't exist there yet.
+     */
     public static function get($code)
     {
-        try {
-            return self::whereCode($code)->first()->value ?? null;
-        } catch (\Exception $e) {
-            return null;
-        }
+        return Cache::rememberForever('settings.'.$code, function () use ($code) {
+            try {
+                return self::select('value')->whereCode($code)->first()->value ?? null;
+            } catch (\Exception $e) {
+                return null;
+            }
+        });
     }
 
     public static function updateSingle($code, $value)
@@ -91,6 +103,8 @@ class Setting extends Model
             $setting->value = json_encode(explode("\r\n", $value));
         }
 
-        $setting->save();
+        Cache::put('settings.'.$code, $value);
+
+        return $setting->save();
     }
 }
