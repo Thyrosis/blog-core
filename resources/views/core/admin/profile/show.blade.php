@@ -8,8 +8,8 @@
     <h3 class="admin-h3 flex justify-between">
         {{ $user->email }}
         @if (auth()->id() == $user->id)
-        <a href="{{ route('profile.edit', $user) }}" class="no-underline">
-            <i class="text-grey-darkest" class="text-teal" data-feather="edit-3"></i>
+        <a href="{{ route('profile.edit', $user) }}" class="btn-blue-text">
+            <i data-feather="edit-3"></i>
         </a>
         @endif
     </h3>

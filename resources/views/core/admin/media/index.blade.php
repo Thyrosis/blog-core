@@ -10,13 +10,13 @@
             {{ csrf_field() }}
 
             <div class="form-group">
-                <label for="uploadedFiles">Bestanden selecteren</label>
+                <label class="form-label" for="uploadedFiles">Bestanden selecteren</label>
                 <input type="file" class="form-control" name="uploadedFiles[]" multiple aria-describedby="filesHelp" />
                 <small id="filesHelp" class="form-text text-muted">De bestanden die je wilt uploaden.</small>
             </div>
 
             <div class="form-group">
-                <label for="category">Categorie</label>
+                <label class="form-label" for="category">Categorie</label>
                 <input type="text" class="form-control" name="category" aria-describedby="categoryHelp" list="categories" />
                 <datalist id="categories">
                     @foreach ($categories as $category)
@@ -27,18 +27,21 @@
             </div>
 
             <div class="form-group">
-                <label for="label">Label</label>
+                <label class="form-label" for="label">Label</label>
                 <input type="text" class="form-control" name="label" aria-describedby="labelHelp" />
                 <small id="labelHelp" class="form-text text-muted">Een label</small>
             </div>
 
             <div class="form-group">
-                <label for="description">Omschrijving</label>
+                <label class="form-label" for="description">Omschrijving</label>
                 <textarea class="form-control" name="description" aria-describedby="descriptionHelp"></textarea>
                 <small id="descriptionHelp" class="form-text text-muted">Een omschrijving</small>
             </div>
 
-            <button type="submit" class="btn btn-teal">Upload</button>
+            <div class="form-button-group">
+                <button type="submit" class="btn btn-green">@lang('Upload')</button>
+                <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
+            </div>  
         </form>
 </div>
 

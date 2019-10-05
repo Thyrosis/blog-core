@@ -14,17 +14,17 @@
         <h3 class="admin-h3 flex justify-between">
             @lang('Edit post')
             <span>
-                <a  class="no-underline inline-block"
+                <a  class="no-underline inline-block btn-purple-text"
                     href="{{ route('admin.post.edit', $post) }}?action=duplicate"
                     title="@lang('Duplicate this post')" >
-                    <i class="text-grey-darkest" class="text-teal" data-feather="copy"></i>
+                    <i data-feather="copy"></i>
                 </a>
                     &nbsp;
-                <a  class="no-underline inline-block" 
+                <a  class="no-underline inline-block btn-blue-text" 
                     href="{{ route('post.show', $post) }}@if($post->hash != null)?hash={{ $post->hash}}@endif" 
                     target="_blank"
                     title="@lang('View post on website - opens in new screen')">
-                    <i class="text-grey-darkest" class="text-teal" data-feather="eye"></i>
+                    <i data-feather="eye"></i>
                 </a>
             </span>
         </h3>
@@ -289,9 +289,9 @@
             </div>
         </div>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Update')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Update')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
         </div>
     </div>
 </form>
@@ -307,7 +307,7 @@
             @lang('If you use this button, you will completely delete a post from all records. It will vanish into the nothingness that is called void. It can NOT be undone! If there is even the slightest chance you will want to keep whatever you\'ve written, just unpublish it.')
         </p>
 
-        <div class="mb-5">
+        <div class="form-button-group">
             <button type="submit" class="btn btn-red" onclick="return confirm('Are you really, absolutely, one hunderd percent sure you want to delete this post? It cannot be undone!');">@lang('Delete')</button>
         </div>
     </div>    

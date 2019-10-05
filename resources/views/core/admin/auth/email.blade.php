@@ -9,10 +9,10 @@
         @csrf
 
         <div class="mb-4">
-            <label for="email" class="block text-grey-darker text-sm font-bold mb-2">@lang('E-Mail Address')</label>
+            <label for="email" class="form-label">@lang('E-Mail Address')</label>
 
             <div>
-                <input id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus placeholder="@lang('email@address.ex')" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline">
+                <input id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autofocus placeholder="@lang('email@address.ex')" class="form-control">
 
                 @if ($errors->has('email'))
                     <div class="form-error">
@@ -22,13 +22,15 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between">
-            <div>
-                <button type="submit" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                    {{ __('Send Password Reset Link') }}
-                </button>
-            </div>
+        
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-purple" type="button">
+                {{ __('Send Password Reset Link') }}
+            </button>
+
+            <a class="btn btn-text btn-orange-text" href="/admin">@lang('Login')</a>
         </div>
+        
     </form>
 </div>
 

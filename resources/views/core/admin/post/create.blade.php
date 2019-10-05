@@ -225,9 +225,9 @@
             </div>
         </div>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Create')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Create')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
         </div>
     </div>
 </form>

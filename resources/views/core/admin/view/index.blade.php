@@ -17,7 +17,7 @@
         </tr>
 
         @foreach ($views as $view)
-        <tr class="border-b border-grey-light hover:border-blue">
+        <tr class="border-b border-gray-300 hover:border-blue">
             <td class="table-cell" >{{ $view->post->title }}</td>
             <td class="hidden lg:table-cell">{{ $view->created_at }}</td>
             <td class="hidden lg:table-cell">{{ App\View::decrypt($view->iphash) }}</td>

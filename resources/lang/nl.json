@@ -13,19 +13,23 @@
     "Name": "Naam",
     "Your Name": "Jouw Naam",
 
+    "Clear this form": "Maak formulier leeg",
+
     "Categories": "Categoriën",
     "Category": "Categorie",
     "New Category": "Nieuwe categorie",
     "Description": "Omschrijving",
     "Name of the category. As descriptive as possible. Will be turned into a URL-friendly slug too.": "Naam van de categorie. Kort maar krachtig, want wordt ook de URL",
     "Manage your categories": "Beheer je categorieën",
-    "<p>An overview of all categories you have defined. Edit names and descriptions or view all posts related to the category.</p><p>Removing a category will only get rid of the category itself. Posts will remain published and available but will no longer be associated with the specific category.</p>":"<p>Een overzicht van alle categoriën die je hebt aangemaakt. Wijzig namen of bekijk de berichten aan die categorie.</p><p>Als je een categorie verwijderd, blijven de berichten onder die categorie wel bestaan. Ze horen alleen niet meer bij die categorie.</p>",
+    "<p>An overview of all categories you have defined. Edit names and descriptions or view all posts related to the category.</p><p>Removing a category will only get rid of the category itself. Posts will remain published and available but will no longer be associated with the specific category.</p>":"<p>Een overzicht van alle categoriën die je hebt aangemaakt. Wijzig namen of bekijk de berichten aan die categorie.</p><p>Als je een categorie verwijdert, blijven de berichten onder die categorie wel bestaan. Ze horen alleen niet meer bij die categorie.</p>",
 
     "Post": "Bericht",
     "Posts": "Berichten",
     "Page": "Pagina",
     "Pages": "Pagina's",
     "Create new post": "Maak nieuw bericht",
+    "There are no pages yet.": "Er zijn nog geen pagina's gemaakt.",
+    "There are no posts yet.": "Er zijn nog geen berichten gemaakt.",
     "Title": "Titel",
     "The title of the post. Will be turned into a URL-friendly slug too.": "De titel van het bericht. Wordt ook gebruikt om de URL mee te maken.",
     "Long title": "Langere titel",
@@ -57,7 +61,6 @@
     "New Post": "Nieuw bericht",
     "Published at": "Publicatiedatum",
     "Post type": "Type post",
-    "Page": "Pagina",
     "Whether this is a post or a page.": "Is dit een blogpost of een specifieke pagina",
 
     "Comments": "Reacties",
@@ -76,7 +79,7 @@
 
     "Create new tag": "Maak nieuw label",
     "Manage your tags": "Beheer de labels",
-    "<p>An overview of all tags you have defined. Edit names and descriptions or view all posts related to the tag.</p><p>Removing a tag will only get rid of the tag itself. Posts will remain published and available but will no longer be associated with the specific tag.</p>": "<p>Een overzicht van alle labels die je hebt aangemaakt. Wijzig namen of bekijk de berichten aan dat label.</p><p>Als je een label verwijderd, blijven de berichten onder dat label wel bestaan. Ze horen alleen niet meer bij dat label.</p>",
+    "<p>An overview of all tags you have defined. Edit names and descriptions or view all posts related to the tag.</p><p>Removing a tag will only get rid of the tag itself. Posts will remain published and available but will no longer be associated with the specific tag.</p>": "<p>Een overzicht van alle labels die je hebt aangemaakt. Wijzig namen of bekijk de berichten aan dat label.</p><p>Als je een label verwijdert, blijven de berichten onder dat label wel bestaan. Ze horen alleen niet meer bij dat label.</p>",
 
     "Users": "Gebruikers",
     "Joined at": "Lid sinds",

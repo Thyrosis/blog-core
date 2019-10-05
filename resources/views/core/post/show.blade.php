@@ -53,9 +53,9 @@
             @endif
         </div>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Save')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Save')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Reset')</button>
         </div>
     </form>
 </div>
@@ -107,9 +107,9 @@
             @lang('Subscribe'): <input type="checkbox" name="notify" value="1" />
         </div>
 
-        <div class="mb-5 flex" style="justify-content: space-around">
-            <button type="submit" class="btn btn-blue">@lang('Save')</button>
-            <button type="reset" class="btn btn-grey">@lang('Reset')</button>
+        <div class="form-button-group">
+            <button type="submit" class="btn btn-green">@lang('Save')</button>
+            <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
         </div>
     </form>
 </div>

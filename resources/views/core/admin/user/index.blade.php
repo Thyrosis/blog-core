@@ -7,7 +7,7 @@
 <div class="admin-container">
     <h3 class="admin-h3">@lang('New Meta')</h3>
     <p>
-        <a href="{{ route('admin.meta.index') }}" class="btn btn-teal">
+        <a href="{{ route('admin.meta.index') }}" class="btn btn-purple">
             @lang('View')
         </a>
     </p>
@@ -26,7 +26,7 @@
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
         @foreach ($users as $user)
-        <tr class="border-b border-grey-light hover:border-blue">
+        <tr class="border-b border-gray-300 hover:border-blue">
             <td class="table-cell" >{{ $user->name }}</td>
             <td class="hidden lg:table-cell">{{ $user->email }}</td>
             <td class="hidden lg:table-cell">{{ $user->created_at->toFormattedDateString() }}</td>

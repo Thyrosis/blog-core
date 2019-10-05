@@ -39,18 +39,26 @@
 					@if (isset($menu->content) && !empty($menu->content))
 						@foreach (json_decode($menu->content) as $key => $item)
 							<li class="p-1" id="li-{{ $key }}" class="py-1" data-name="{{ $item->name ?? ''}}" data-url="{{ $item->url ?? '' }}"> 
-								<div class="border-b border-grey-darker flex p-1">
-									<span class="flex-1">{{ $item->name ?? ''}}</span>
-									<span class="text-red" style="cursor: pointer;" onClick="deleteFromMenu('li-{{ $key }}');"><i class="text-red" data-feather="trash-2"></i></span>
+								<div class="border-b border-gray-500 flex p-1">
+									<span class="flex-1">
+										{{ $item->name ?? ''}}
+									</span>
+									<span class="btn-red-text" style="cursor: pointer;" onClick="deleteFromMenu('li-{{ $key }}');">
+										<i data-feather="trash-2"></i>
+									</span>
 								</div>
 
-								<ul class=''>
+								<ul class='ml-3'>
 									@if (!empty($item->children[0]))
 										@foreach ($item->children[0] as $subKey => $subItem)
-											<li id="li-{{ $key }}-{{ $subKey }}" class="p-1 border-b border-grey" data-name="{{ $subItem->name ?? ''}}" data-url="{{ $subItem->url ?? '' }}">
+											<li id="li-{{ $key }}-{{ $subKey }}" class="p-1 border-b border-gray-500" data-name="{{ $subItem->name ?? ''}}" data-url="{{ $subItem->url ?? '' }}">
 												<div class="flex">
-													<span class="flex-1">{{ $subItem->name ?? ''}}</span>
-													<span class="text-red" style="cursor: pointer;" onClick="deleteFromMenu('li-{{ $key }}-{{ $subKey }}');"><i data-feather="trash-2"></i></span>
+													<span class="flex-1">
+														{{ $subItem->name ?? ''}}
+													</span>
+													<span class="btn-red-text" style="cursor: pointer;" onClick="deleteFromMenu('li-{{ $key }}-{{ $subKey }}');">
+														<i data-feather="trash-2"></i>
+													</span>
 												</div>
 											</li>
 										@endforeach
@@ -70,7 +78,7 @@
 						<option class="p-1" value="{{ $category->url() }}">{{ $category->name }}</option>
 					@endforeach
 					</select>
-					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('category');"></i>
+					<i class="cursor-pointer ml-2 btn-purple-text" data-feather="plus-circle" onClick="addExistingToMenu('category');"></i>
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('category');">Add</button> -->
 				</div>
 
@@ -81,7 +89,7 @@
 						<option class="p-1" value="{{ $tag->url() }}">{{ $tag->name }}</option>
 					@endforeach
 					</select>
-					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('tag');"></i>
+					<i class="cursor-pointer ml-2 btn-purple-text" data-feather="plus-circle" onClick="addExistingToMenu('tag');"></i>
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('tag');">Add</button> -->
 				</div>
 
@@ -92,24 +100,25 @@
 						<option class="p-1" value="{{ $post->link() }}">{{ $post->title }}</option>
 					@endforeach
 					</select>
-					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addExistingToMenu('post');"></i>
+					<i class="cursor-pointer ml-2 btn-purple-text" data-feather="plus-circle" onClick="addExistingToMenu('post');"></i>
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addExistingToMenu('post');">Add</button> -->
 				</div>
 
 				<label class="form-label">@lang('URL')</label>
 				<div class="my-2 flex items-center">
-					<input placeholder="@lang('Name')" class="flex-1 form-control" type="text" id="item_name" />
-					<input placeholder="@lang('URL')" class="flex-1 form-control" type="text" id="item_link" />
-					<i class="cursor-pointer ml-2 text-teal" data-feather="plus-circle" onClick="addToMenu();"></i>
+					<input class="flex-1 form-control" form="menu_form" id="item_name" placeholder="@lang('Name')" type="text" />
+					<input class="flex-1 form-control" form="menu_form" id="item_link" placeholder="@lang('URL')" type="text" />
+					<i class="cursor-pointer ml-2 btn-purple-text" data-feather="plus-circle" onClick="addToMenu();"></i>
 					<!-- <button class="border border-teal bg-teal px-3" onClick="addToMenu();">Add</button> -->
 				</div>
 
-				<div class="my-2">
+				<div class="form-button-group">
 					<form method="POST" id="menu_form" name="menu_form" action="{{ route('admin.menu.update') }}">
 						@csrf
 						@method ('PATCH')
 						<input type="hidden" id="hidden_menu" name="hidden_menu" value="" />
-						<button class="btn btn-blue">@lang('Save')</button>
+						<button class="btn btn-green">@lang('Save')</button>
+						<button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
 					</form>					
 				</div>
 			</div>

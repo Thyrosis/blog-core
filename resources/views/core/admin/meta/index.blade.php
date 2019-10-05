@@ -32,7 +32,7 @@
             <label class="form-label">@lang('Actions')</label>
             <div class="flex">
                 <div class="meta-save">
-                    <button form="form_0" type="submit" class="m-1 btn-small btn-teal">
+                    <button form="form_0" type="submit" class="btn btn-small btn-green">
                         <i data-feather="save"></i>
                     </button>
                 </div>
@@ -50,7 +50,7 @@
     </div>
 
     <div>
-        @foreach ($metas as $meta)
+        @forelse ($metas as $meta)
         
         <div class="meta flex flex-col lg:flex-row">
             <form id="form_{{ $meta->id }}" name="form_{{ $meta->id }}" method="POST" action="{{ route('admin.meta.update', $meta) }}">
@@ -70,7 +70,7 @@
                 <label class="form-label">@lang('Actions')</label>
                 <div class="flex">
                     <div class="meta-save">
-                        <button form="form_{{ $meta->id }}" type="submit" class="m-1 btn-small btn-teal">
+                        <button form="form_{{ $meta->id }}" type="submit" class="btn btn-small btn-teal">
                             <i data-feather="save"></i>
                         </button>
                     </div>
@@ -79,7 +79,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button form="form_delete_{{ $meta->id }}" type="submit" class="m-1 btn-small btn-red">
+                            <button form="form_delete_{{ $meta->id }}" type="submit" class="btn btn-small btn-red">
                                 <i data-feather="trash-2"></i>
                             </button>
                         </form>
@@ -87,7 +87,11 @@
                 </div>
             </div>            
         </div>
-        @endforeach
+        @empty
+        <div>
+            <p class="italic">@lang("There are no custom metas yet.")</p>
+        </div>
+        @endforelse
     </div>
 </div>
 

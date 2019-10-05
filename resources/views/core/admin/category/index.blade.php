@@ -24,7 +24,7 @@
             <label class="form-label">@lang('Actions')</label>
             <div class="flex">
                 <div class="cat-save">
-                    <button form="form_0" type="submit" class="m-1 btn-small btn-teal">
+                    <button form="form_0" type="submit" class="btn btn-small btn-green">
                         <i data-feather="save"></i>
                     </button>
                 </div>
@@ -34,6 +34,7 @@
 </div>
 
 <div class="admin-container">
+
     <h3 class="admin-h3">@lang('Manage your categories')</h3>
 
     <div class="mb-3">
@@ -41,31 +42,43 @@
     </div>
 
     <div>
-        @foreach ($categories as $category)
-        <div class="category flex flex-col lg:flex-row">
+        <div class="category hidden lg:flex lg:flex-row">
+            <div class="cat-name mr-3 lg:w-1/5">
+                <label class="form-label" for="name">@lang('Name')</label>
+            </div>
+            <div class="flex-1 cat-desc mr-3 lg:w-3/5">
+                <label class="form-label" for="description">@lang('Description')</label>
+            </div>
+            <div class="cat-actions lg:w-1/5">
+                <label class="form-label">@lang('Actions')</label>
+            </div>
+        </div>
+
+        @forelse ($categories as $category)
+        <div class="category flex flex-col lg:flex-row lg:mb-2">
             <form id="form_{{ $category->id }}" name="form_{{ $category->id }}" method="POST" action="{{ route('admin.category.update', $category) }}">
                 @csrf
                 @method('PATCH')
             </form>
 
-            <div class="cat-name mr-3">
-                <label class="form-label" for="name">@lang('Name')</label>
+            <div class="cat-name mr-3 lg:w-1/5">
+                <label class="form-label block lg:hidden" for="name">@lang('Name')</label>
                 <input form="form_{{ $category->id }}" type="text" name="name" id="name" value="{{ old('name', $category->name) }}" class="form-control" />
             </div>
-            <div class="flex-1 cat-desc mr-3">
-                <label class="form-label" for="description">@lang('Description')</label>
+            <div class="flex-1 cat-desc mr-3 lg:w-3/5">
+                <label class="form-label block lg:hidden" for="description">@lang('Description')</label>
                 <input form="form_{{ $category->id }}" type="text" name="description" id="description" value="{{ old('description', $category->description) }}" class="form-control" />
             </div>
-            <div class="cat-actions">
-                <label class="form-label">@lang('Actions')</label>
+            <div class="cat-actions lg:w-1/5">
+                <label class="form-label block lg:hidden">@lang('Actions')</label>
                 <div class="flex">
                     <div class="cat-save">
-                        <button form="form_{{ $category->id }}" type="submit" class="m-1 btn-small btn-teal">
+                        <button form="form_{{ $category->id }}" type="submit" class="btn btn-small btn-green">
                             <i data-feather="save"></i>
                         </button>
                     </div>
                     <div class="cat-posts">
-                        <a href="{{ route('category.show', $category) }}" target="_blank" class="flex items-center m-1 btn-small btn-blue text-blue-darkest">
+                        <a href="{{ route('category.show', $category) }}" target="_blank" class="flex items-center btn btn-small btn-blue">
                             <div class="mr-2">{{ $category->posts->count() }}</div> 
                             <i data-feather="list"></i>
                         </a>
@@ -75,7 +88,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button form="form_delete_{{ $category->id }}" type="submit" class="m-1 btn-small btn-red">
+                            <button form="form_delete_{{ $category->id }}" type="submit" class="btn btn-small btn-red">
                                 <i data-feather="trash-2"></i>
                             </button>
                         </form>
@@ -83,8 +96,11 @@
                 </div>
             </div>            
         </div>
-        @endforeach
+        @empty
+        <div>
+            <p class="italic">@lang('There are no categories yet.')</p>
+        </div>
+        @endforelse
     </div>
 </div>
-
 @endsection
