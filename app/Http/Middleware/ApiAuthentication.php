@@ -18,9 +18,9 @@ class ApiAuthentication
      */
     public function handle($request, Closure $next)
     {
-        $user = \App\User::where(['email' => request()->user])->first();
-        
-        if (!$user || !Hash::check(request()->token, $user->api_token)) {
+        $user = \App\User::where(['email' => $request->get('user')])->first();
+
+        if (!$user || !Hash::check($request->get('token'), $user->api_token)) {
             return response()->json([
                 'result' => false,
                 'data' => ['errors' => 'unauthorised'],
