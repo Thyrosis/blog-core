@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -92,7 +93,9 @@ class User extends Authenticatable
 
     public function level()
     {
-        return $this->meta('access-level') ?? 'user';   
+        return Cache::remember('users.'.$this->id.'level', 300, function () {
+            return $this->meta('access-level') ?? 'user'; 
+        });  
     }
 
     public function meta($code = null)

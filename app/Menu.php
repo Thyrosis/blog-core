@@ -43,7 +43,7 @@ class Menu extends Model
      */
     public static function getHTML($ulClass, $liClass, $subulClass, $subliClass)
     {
-        Log::warning("You're using the deprecated method Menu::toHTML. Please switch to getHTML to avoid future issues.");
+        Log::warning("You're using the deprecated method Menu::toHTML. Please switch to toHTML to avoid future issues.");
         return self::toHTML(compact('ulClass', 'liClass', 'subulClass', 'subliClass'));        
     }
 
@@ -92,7 +92,7 @@ class Menu extends Model
                     $html .= "<ul class='{$subulClass}' id='{$subulID}'>";
                     foreach ($item->children[0] as $subitem) {
                         $html .= "<li class='{$subliClass}' id='{$subliID}'>
-                            <a class='{$subaclass}' id='{$subaID}' href='$subitem->url'>$subitem->name</a>
+                            <a class='{$subaClass}' id='{$subaID}' href='$subitem->url'>$subitem->name</a>
                         </li>";
                     }
                     $html .= "</ul>";

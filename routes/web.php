@@ -105,8 +105,10 @@ Route::get('sitemap.xml', function() {
 
 if($customClasses = App\Setting::get('custom.routeClasses')) {    
     foreach (json_decode($customClasses) as $class) {
-        $class = 'App\\' . $class;
-        $class::routes();
+        if (!empty($class)) {
+            $class = 'App\\' . $class;
+            $class::routes();
+        }
     }
 }
 

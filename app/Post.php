@@ -13,11 +13,13 @@ use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
-class Post extends Model implements Feedable
+class Post extends CacheModel implements Feedable
 {
     protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type', 'hash'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
+    protected $cachetags = ['posts', 'pages'];
 
     protected static function boot()
     {
@@ -169,7 +171,9 @@ class Post extends Model implements Feedable
 
     public static function getPages()
     {
-        return self::where('type', 'page')->orderBy('published_at', 'DESC')->get();
+        return Cache::rememberForever('post.pages', function () {
+            return self::where('type', 'page')->orderBy('published_at', 'DESC')->get();
+        });  
     }
 
     /**
@@ -184,7 +188,9 @@ class Post extends Model implements Feedable
 
     public static function getPosts()
     {
-        return self::where('type', 'post')->orderBy('published_at', 'DESC')->get();
+        return Cache::rememberForever('post.posts', function () {
+            return self::where('type', 'post')->orderBy('published_at', 'DESC')->get();
+        });        
     }
 
     /**

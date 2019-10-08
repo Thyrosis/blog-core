@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Tag extends Model
+class Tag extends CacheModel
 {
     protected $fillable = ['name', 'slug', 'description'];
+    protected $cachetags = ['all'];
 
     protected static function boot()
     {
