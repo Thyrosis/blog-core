@@ -115,6 +115,26 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'comment.notification.message',
+            'type' => 'TEXT',
+            'label' => __("New comment message"),
+            'description' => __("The message for new comment notifcation emails."),
+            'value' => __("A new comment has been posted on a post you want to receive updates for."),
+            'category' => 'comment',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'comment.notification.salutation',
+            'type' => 'TEXT',
+            'label' => __("New comment salutation"),
+            'description' => __("The salutation for new comment notifcation emails."),
+            'value' => __("Kind regards,"),
+            'category' => 'comment',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'comment.notification.subscribed',
             'type' => 'TEXT',
             'label' => __("Notification thanks"),

@@ -33,6 +33,12 @@ class NewComment extends Mailable
     public function build()
     {
         Log::info("Sending App\Mail\NewComment");
-        return $this->subject(Setting::get('comment.notification.subject'))->markdown('mail.newComment');
+        $this->subject(Setting::get('comment.notification.subject'));
+        
+        if (view()->exists('mail.newComment')) {
+            return $this->markdown('mail.newComment');
+        } else {
+            return $this->markdown('core.mail.newComment');
+        }        
     }
 }
