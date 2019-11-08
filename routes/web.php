@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,12 +106,22 @@ Route::get('sitemap.xml', function() {
     return Response::view('core.layout.sitemap')->header('Content-Type', 'text/xml');
 });
 
-if($customClasses = App\Setting::get('custom.routeClasses')) {    
-    foreach (explode(",", $customClasses) as $class) {
-        if (!empty($class)) {
-            $class = 'App\\' . $class;
-            $class::routes();
+if ($customClasses = App\Setting::get('custom.routeClasses')) {
+    if (is_array(json_decode($customClasses))) {
+        foreach (json_decode($customClasses) as $class) {
+            if (!empty($class)) {
+                $file = "../app/" . $class . ".php";
+                $class = 'App\\' . $class;
+
+                if (File::exists( $file )) {
+                    $class::routes();
+                } else {
+                    Log::alert("Trying to load $class as defined by setting, but can't find it.");
+                }
+            }
         }
+    } else {
+        Log::warning("The Custom Classes setting isn't properly formatted as a JSON decodable string ( Setting: $customClasses, expected: ['Classname', 'OtherClassname'] )");
     }
 }
 
