@@ -22,6 +22,8 @@ class ProfileTest extends TestCase
         $response = $this->get(route('profile.show', auth()->user()));
 
         $response->assertStatus(200);
+
+        ob_end_clean();
     }
 
     /**
@@ -40,5 +42,7 @@ class ProfileTest extends TestCase
         $response = $this->patch(route('profile.update', auth()->user()), auth()->user()->toArray());
 
         $response->assertStatus(302)->assertSessionHas('success');
+
+        ob_end_clean();
     }
 }

@@ -102,5 +102,7 @@ class MediaTest extends TestCase
         }
 
         $response = $this->get(route('admin.media.index'))->assertSee($media->filepath);
+
+        ob_end_clean();
     }
 }
