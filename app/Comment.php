@@ -13,11 +13,14 @@ class Comment extends Model
 {
     protected $fillable = ['post_id', 'name', 'emailaddress', 'body', 'ip', 'approved', 'notify'];
 
+    /**
+     * @version 20191108    Changed event from 'saved' to 'created', as the saved event is also triggered when model is updated.
+     */
     protected static function boot()
     {
         parent::boot();
         
-        static::saved(function ($comment) {
+        static::created(function ($comment) {
             Subscription::send($comment);
             
             Log::info("Sending a copy of new comment to Admin");
