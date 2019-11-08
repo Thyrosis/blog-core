@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('comment', 'Admin\CommentController@index')->name('admin.comment.index');
     Route::get('comment/{comment}/edit', 'Admin\CommentController@edit')->name('admin.comment.edit');
+    Route::get('comment/{comment}/submitspam', 'Admin\SubmitSpamController@store')->name('admin.comment.submitspam');
     Route::patch('comment/{comment}', 'Admin\CommentController@update')->name('admin.comment.update');
     Route::delete('comment/{comment}', 'Admin\CommentController@destroy')->name('admin.comment.destroy');
 
@@ -104,7 +105,7 @@ Route::get('sitemap.xml', function() {
 });
 
 if($customClasses = App\Setting::get('custom.routeClasses')) {    
-    foreach (json_decode($customClasses) as $class) {
+    foreach (explode(",", $customClasses) as $class) {
         if (!empty($class)) {
             $class = 'App\\' . $class;
             $class::routes();

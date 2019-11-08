@@ -25,7 +25,7 @@
                 </a>&nbsp;
 
                 <a class="btn-purple-text" href="{{ route('admin.comment.edit', $comment) }}">
-                    <i  data-feather="edit-3"></i>
+                    <i data-feather="edit-3"></i>
                 </a>&nbsp;
 
                 <form class="m-0" method="POST" action="{{ route('admin.comment.update', $comment) }}">
@@ -43,6 +43,12 @@
                     </button>
                     @endif
                 </form>&nbsp;
+
+                @if (!empty(\App\Setting::get('comment.akismet.key')))
+                <a class="btn-gray-text" href="{{ route('admin.comment.submitspam', $comment) }}">
+                    <i data-feather="flag"></i>
+                </a>&nbsp;
+                @endif
 
                 <form class="m-0" method="POST" onsubmit="return confirm('Are you sure?');" action="{{ route('admin.comment.destroy', $comment) }}">
                     @csrf

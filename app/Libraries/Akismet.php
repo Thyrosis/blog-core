@@ -14,6 +14,7 @@ class Akismet
     protected $useragent;
     protected $blog_lang;
     protected $comment;
+    protected $response;
 
     public function __construct($comment = false)
     {
@@ -86,7 +87,7 @@ class Akismet
      */
     public function checkComment()
     {
-        $response = $this->query($this->key . '.' . $this->host . '/1.1/comment-check', [
+        $this->response = $this->query($this->key . '.' . $this->host . '/1.1/comment-check', [
             'blog' => $this->blog,
             'blog_lang' => $this->blog_lang,
             'user_ip' => $this->comment->ip,
@@ -99,7 +100,7 @@ class Akismet
             'comment_post_modified_gmt' => $this->comment->post->published_at->toIso8601String()
         ]);
 
-        if ( 'true' == $response ) {
+        if ( 'true' == $this->response ) {
             return false;
         } else {
             return true;
@@ -117,10 +118,12 @@ class Akismet
      * 
      * @return  bool
      * @link    https://akismet.com/development/api/#submit-spam
+     * 
+     * @version 20191108    Added the $simulate flag
      */
-    public function submitSpam()
+    public function submitSpam($simulate = false)
     {
-        $response = $this->query($this->key . '.' . $this->host . '/1.1/submit-spam', [
+        $data = [
             'blog' => $this->blog,
             'blog_lang' => $this->blog_lang,
             'user_ip' => $this->comment->ip,
@@ -132,12 +135,32 @@ class Akismet
             'comment_content' => $this->comment->body,
             'comment_date_gmt' => $this->comment->created_at->toIso8601String(),
             'comment_post_modified_gmt' => $this->comment->post->published_at->toIso8601String()
-        ]);
+        ];
 
-        if ( 'true' == $response ) {
+        if ($simulate) {
+            $data['is_test'] = 1;
+        }
+        
+        $this->response = $this->query($this->key . '.' . $this->host . '/1.1/submit-spam', $data);
+
+        if ( 'true' == $this->response ) {
             return false;
         } else {
             return true;
         }
+    }
+
+    /**
+     * Returns the protected $response value.
+     * 
+     * The $response variable is set when calling checkSpam or submitSpam.
+     * 
+     * @return      string
+     * @author      Maarten sax
+     * @version     20191108
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }
