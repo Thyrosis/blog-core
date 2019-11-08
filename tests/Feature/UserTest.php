@@ -33,6 +33,8 @@ class UserTest extends TestCase
         foreach ($users as $user) {
             $response->assertSee($user->name);
         }
+
+        ob_end_clean();
     }
 
     /**
@@ -67,6 +69,8 @@ class UserTest extends TestCase
 
         $response->assertSee($user->name);
         $response->assertSee($user->email);        
+
+        ob_end_clean();
     }
 
     /**

@@ -21,6 +21,7 @@ class AuthenticationTest extends TestCase
     public function aLoginPageIsShownToUnauthenticatedUser()
     {
         $this->get(route('login'))->assertStatus(200);
+        ob_end_clean();
     }
 
     /**
@@ -29,6 +30,7 @@ class AuthenticationTest extends TestCase
     public function aUserCanResetTheirPassword()
     {
         $this->get(route('password.request'))->assertStatus(200);
+        ob_end_clean();
     }
 
     /**

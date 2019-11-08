@@ -34,7 +34,9 @@ class PostTest extends TestCase
             $response->assertSee($post->title);    
         } catch (\Exception $e) {
             $response->assertSee($post->longTitle);
-        }        
+        }
+
+        ob_end_clean();
     }
 
     /**
@@ -59,6 +61,8 @@ class PostTest extends TestCase
         }
 
         $response->assertDontSee($unpublishedPost->title);
+
+        ob_end_clean();
     }
 
     /**
@@ -96,6 +100,8 @@ class PostTest extends TestCase
         }
 
         $response->assertDontSee($unpublishedPost->title);
+
+        ob_end_clean();
     }
 
     /**
@@ -129,6 +135,8 @@ class PostTest extends TestCase
         foreach ($posts as $post) {
             $response->assertSee($post->title);
         }
+
+        ob_end_clean();
     }
 
     /**
