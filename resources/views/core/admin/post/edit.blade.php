@@ -13,6 +13,12 @@
     <div class="admin-container">
         <h3 class="admin-h3 flex justify-between">
             @lang('Edit post')
+            <span class="font-normal">
+                @lang('Comments'): {{ $post->comments->count() }}
+            </span>
+            <span class="font-normal">
+                @lang('Views'): {{ $post->views->count() }}
+            </span>
             <span>
                 <a  class="no-underline inline-block btn-purple-text"
                     href="{{ route('admin.post.edit', $post) }}?action=duplicate"
