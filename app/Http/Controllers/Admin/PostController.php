@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('core.admin.post.index')->with('posts', Post::with(['views', 'comments'])->get());
+        return view('core.admin.post.index')->with('posts', Post::with(['comments'])->get());
     }
 
     /**

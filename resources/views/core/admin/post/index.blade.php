@@ -20,7 +20,6 @@
             <th class="table-cell">@lang('Title')</th>
             <th class="hidden lg:table-cell">@lang('Summary')</th>
             <th class="hidden lg:table-cell">@lang('Published at')</th>
-            <th class="hidden lg:table-cell">@lang('Views')</th>
             <th class="hidden lg:table-cell">@lang('Comments')</th>
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
@@ -32,7 +31,6 @@
             </td>
             <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
             <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
-            <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
             <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
             <td class="table-cell">
                 <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
@@ -60,7 +58,6 @@
             <th class="table-cell">@lang('Title')</th>
             <th class="hidden lg:table-cell">@lang('Summary')</th>
             <th class="hidden lg:table-cell">@lang('Published at')</th>
-            <th class="hidden lg:table-cell">@lang('Views')</th>
             <th class="hidden lg:table-cell">@lang('Comments')</th>
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
@@ -81,7 +78,6 @@
                 </td>
                 <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
                 <td class="hidden lg:table-cell @if (!$post->published) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
-                <td class="hidden lg:table-cell">{{ $post->views->count() }}</td>
                 <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
                 <td class="table-cell">
                     <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
