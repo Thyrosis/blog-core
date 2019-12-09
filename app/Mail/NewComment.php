@@ -8,21 +8,24 @@ use Illuminate\Queue\SerializesModels;
 use App\Comment;
 use App\Setting;
 use Illuminate\Support\Facades\Log;
+use User;
 
 class NewComment extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $comment;
+    public $isAdmin;
     
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct(Comment $comment, $isAdmin = false)
     {
         $this->comment = $comment;
+        $this->isAdmin = $isAdmin;
     }
 
     /**

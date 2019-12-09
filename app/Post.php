@@ -6,7 +6,6 @@ use App\Comment;
 use App\Mail\NewComment;
 use App\View;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
@@ -24,6 +23,18 @@ class Post extends CacheModel implements Feedable
     protected static function boot()
     {
         parent::boot();
+    }
+
+    /**
+     * approvedComments 
+     * 
+     * Returns all the approved comments for this post.
+     * 
+     * @return Illuminate\Database\Eloquent\Relations
+     */
+    public function approvedComments()
+    {
+        return $this->comments()->where('approved', true)->get();
     }
 
     public function body()

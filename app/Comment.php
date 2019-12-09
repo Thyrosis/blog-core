@@ -21,13 +21,19 @@ class Comment extends Model
         parent::boot();
         
         static::created(function ($comment) {
-            Subscription::send($comment);
-            
-            Log::info("Sending a copy of new comment to Admin");
-        
+            if ($comment->approved) {
+                Log::info("Sending email to subscriptions for new comment.", $comment->toArray());
+                Subscription::send($comment);
+            } else {
+                Log::warning("NOT Sending email to subscriptions for new comment, as it's flagged as spam.", $comment->toArray());
+            }
+
             if ($admin = Setting::get('mail.adminAddress')) {
+                Log::info("Sending a copy of new comment to Admin ($admin)");
                 $mail = Mail::to($admin);
-                (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment)) : $mail->send(new NewComment($comment));
+                (Setting::get('mail.useQueue') == "1") ? $mail->queue(new NewComment($comment, true)) : $mail->send(new NewComment($comment, true));
+            } else {
+                Log::info("Not sending a copy of new Comment to Admin for whatever reason...", ['admin' => $admin]);
             }
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Subscription;
 
 class CommentController extends Controller
 {
@@ -70,6 +71,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        foreach (Subscription::where(['post_id' => $comment->post_id, 'emailaddress' => $comment->emailaddress])->get() as $subscription) {
+            $subscription->delete();
+        }
+
         $comment->delete();
         
         return redirect(route('admin.comment.index'))->with('success', 'Comment has been removed');
