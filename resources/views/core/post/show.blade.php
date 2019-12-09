@@ -26,7 +26,7 @@
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Comments')</h3>
 
-    @foreach ($post->comments as $comment)
+    @foreach ($post->approvedComments() as $comment)
         <div>
             <p><strong>{{ $comment->name }}</strong> @lang('said'):<br />
             {!! $comment->body !!}</p>

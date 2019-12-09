@@ -107,6 +107,7 @@ Route::get('sitemap.xml', function() {
 });
 
 if ($customClasses = App\Setting::get('custom.routeClasses')) {
+    // dd(json_decode($customClasses));
     if (is_array(json_decode($customClasses))) {
         foreach (json_decode($customClasses) as $class) {
             if (!empty($class)) {
@@ -121,7 +122,7 @@ if ($customClasses = App\Setting::get('custom.routeClasses')) {
             }
         }
     } else {
-        Log::warning("The Custom Classes setting isn't properly formatted as a JSON decodable string ( Setting: $customClasses, expected: ['Classname', 'OtherClassname'] )");
+        Log::warning("The Custom Classes setting isn't properly formatted as a JSON decodable string ( Setting: $customClasses, expected: [\"Classname\", \"OtherClassname\"] )");
     }
 }
 
