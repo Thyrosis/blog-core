@@ -284,7 +284,15 @@ class SettingSeeder extends Seeder
             'hidden' => '0',
         ];
 
-
+        $settings[] = [
+            'code' => 'rss.customFeedCategories',
+            'type' => 'ARRAY',
+            'label' => __("Custom RSS feed categories"),
+            'description' => __("Custom categories to generate a RSS feed for."),
+            'value' => '',
+            'category' => 'rss',
+            'hidden' => '0',
+        ];
 
         foreach ($settings as $setting) {
             try {

@@ -31,6 +31,22 @@ class Category extends CacheModel
         return \Purify::clean($description);
     }
 
+    /** 
+     * Get all items to post on custom RSS feed
+     * 
+     * @return Collection
+     */
+    public static function getFeedItems()
+    {
+        $posts = collect();
+
+        foreach (Setting::get('rss.customFeedCategories') as $category) {
+            $posts = $posts->merge(Category::whereSlug($category)->first()->publishedPosts()->whereType('post')->get());
+        }
+
+        return $posts->unique('id');
+    }
+
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = Str::slug($value);

@@ -84,7 +84,13 @@ class Setting extends Model
     {
         return Cache::rememberForever('settings.'.$code, function () use ($code) {
             try {
-                return self::select('value')->whereCode($code)->first()->value ?? null;
+                $setting = self::whereCode($code)->first() ?? null;
+
+                if ($setting->type == 'ARRAY') {
+                    return json_decode($setting->value);
+                }
+
+                return $setting->value;
             } catch (\Exception $e) {
                 return null;
             }
@@ -103,7 +109,11 @@ class Setting extends Model
             $setting->value = json_encode(explode("\r\n", $value));
         }
 
-        Cache::put('settings.'.$code, $value);
+        Cache::put('settings.'.$code, $setting->value);
+
+        if ($setting->type == 'ARRAY') {
+            return Cache::put('settings.'.$code, json_decode($setting->value));
+        }
 
         return $setting->save();
     }
