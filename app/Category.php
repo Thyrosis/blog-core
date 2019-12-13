@@ -39,7 +39,12 @@ class Category extends CacheModel
     public static function getFeedItems()
     {
         $posts = collect();
+        $categories = Setting::get('rss.customFeedCategories');
 
+        if (!is_array($categories)) {
+            return $posts;
+        }
+        
         foreach (Setting::get('rss.customFeedCategories') as $c) {
             $category = Category::whereSlug($c)->first();
 
