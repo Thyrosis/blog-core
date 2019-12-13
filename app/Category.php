@@ -40,8 +40,12 @@ class Category extends CacheModel
     {
         $posts = collect();
 
-        foreach (Setting::get('rss.customFeedCategories') as $category) {
-            $posts = $posts->merge(Category::whereSlug($category)->first()->publishedPosts()->whereType('post')->get());
+        foreach (Setting::get('rss.customFeedCategories') as $c) {
+            $category = Category::whereSlug($c)->first();
+
+            if($category) {
+                $posts = $posts->merge($category->publishedPosts()->whereType('post')->get());
+            }
         }
 
         return $posts->unique('id');
