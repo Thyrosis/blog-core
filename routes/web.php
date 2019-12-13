@@ -108,8 +108,8 @@ Route::get('sitemap.xml', function() {
 
 if ($customClasses = App\Setting::get('custom.routeClasses')) {
     // dd(json_decode($customClasses));
-    if (is_array(json_decode($customClasses))) {
-        foreach (json_decode($customClasses) as $class) {
+    if (is_array($customClasses)) {
+        foreach ($customClasses as $class) {
             if (!empty($class)) {
                 $file = "../app/" . $class . ".php";
                 $class = 'App\\' . $class;
