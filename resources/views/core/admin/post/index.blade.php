@@ -4,13 +4,11 @@
 
 @section ('main')
 
-
 <p class="mt-5 mb-10">
     <a href="{{ route('admin.post.create') }}" class="btn btn-purple">
         @lang('Create')
     </a>
 </p>
-
 
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Pages')</h3>
@@ -24,21 +22,30 @@
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
 
-        @forelse ($posts->where('type', 'page')->sortByDesc('published_at') as $post)
-        <tr class="border-b border-gray-300 hover:border-blue">
+        @php
+            $future = true;
+        @endphp
+
+        @forelse ($posts->where('type', 'page')->sortByDesc('published_at') as $page)
+            @php
+                if ($future == true && $page->published_at->isPast()) {
+                    $future = false;
+                }
+            @endphp
+        <tr class="border-b border-gray-300 hover:border-blue-800 @if (!$page->published) bg-red-200 @elseif ($future) bg-blue-200 @endif">
             <td class="table-cell" >
-                {{ $post->title }}
+                {{ $page->title }}
             </td>
-            <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
-            <td class="hidden lg:table-cell @if (!$post->isPublished()) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
-            <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
+            <td class="hidden lg:table-cell">{!! $page->summary !!}</td>
+            <td class="hidden lg:table-cell">{{ $page->published_at->toFormattedDateString() }}</td>
+            <td class="hidden lg:table-cell">{{ $page->comments->count() }}</td>
             <td class="table-cell">
-                <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
+                <a href="{{ route('admin.post.edit', $page) }}" class="btn-purple-text">
                     <i data-feather="edit-3"></i>
                 </a>
             </td>
             <td class="table-cell">
-                <a href="{{ route('post.show', $post) }}" target="_blank" class="btn-blue-text">
+                <a href="{{ route('post.show', $page) }}" target="_blank" class="btn-blue-text">
                     <i data-feather="eye"></i>
                 </a>
             </td>
@@ -61,7 +68,7 @@
             <th class="hidden lg:table-cell">@lang('Comments')</th>
             <th class="table-cell" colspan="2">@lang('Actions')</th>
         </tr>
-        
+
         @php
             $future = true;
         @endphp
@@ -72,12 +79,12 @@
                     $future = false;
                 }
             @endphp
-            <tr class="border-b border-gray-300 hover:border-blue @if ($future) bg-blue-100 @endif ">
+            <tr class="border-b border-gray-300 hover:border-blue-800 @if (!$post->published) bg-red-200 @elseif ($future) bg-blue-200 @endif ">
                 <td class="table-cell" >
                     {{ $post->title }}
                 </td>
                 <td class="hidden lg:table-cell">{!! $post->summary !!}</td>
-                <td class="hidden lg:table-cell @if (!$post->published) bg-red-100 @endif">{{ $post->published_at->toFormattedDateString() }}</td>
+                <td class="hidden lg:table-cell">{{ $post->published_at->toFormattedDateString() }}</td>
                 <td class="hidden lg:table-cell">{{ $post->comments->count() }}</td>
                 <td class="table-cell">
                     <a href="{{ route('admin.post.edit', $post) }}" class="btn-purple-text">
