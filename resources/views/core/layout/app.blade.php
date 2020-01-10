@@ -199,7 +199,7 @@
                         <h3 class="font-bold text-gray-900">About</h3>
                         <p class="py-4 text-gray-600 text-sm">
                             <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.  -->
-                            
+                            @lang('Current version'): 2020-01-10
                         </p>
                     </div>
                 </div>
