@@ -8,8 +8,19 @@
     @csrf
     @method('PATCH')
 
+    @php
+        $group = "";
+    @endphp
+
     <div class="admin-container">
         @foreach ($settings as $setting)
+            @if ($group !== $setting->category)
+                <h3 class="admin-h3">{{ ucfirst($setting->category) }}</h3>
+
+                @php 
+                    $group = $setting->category;
+                @endphp
+            @endif
         <div class="form-group">
             <label class="form-label" for="{{ $setting->code }}">{{ $setting->label }}</label>
             @if ($setting->type == "ARRAY")
