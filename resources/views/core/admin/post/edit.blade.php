@@ -295,6 +295,24 @@
             </div>
         </div>
 
+        <div class="flex justify-between flex-col md:flex-row">
+            <div class="mb-5 md:w-1/4 md:mr-1">
+                <label for="type" class="form-label">@lang('Post author')</label>
+                <select class="form-control" id="user_id" name="user_id">
+                    @foreach (App\User::all() as $user)
+                    <option value="{{ $user->id }}" @if (old('user_id', $post->user_id) == $user->id) selected @endif >{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                <p class="form-info">@lang('Whether this is a post or a page.')</p>
+
+                @if ($errors->has('type'))
+                    <div class="form-error">
+                        <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('type') }}</span>
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <div class="form-button-group">
             <button type="submit" class="btn btn-green">@lang('Update')</button>
             <button type="reset" class="btn btn-text btn-orange-text">@lang('Clear this form')</button>
