@@ -8,6 +8,70 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.13 (2020-01-21)
+
+- Added: create Purify folder on Artisan command blog:configure
+- Improved: output from blog:configure command
+- Changed: Comment preapproval is now true if authorised user posts comment that has already passed Akismet
+- Added: A ton of changes from the past couple of months to the changelog
+
+## 1.6.12 (2020-01-13)
+
+- Improved: In admin.settings.edit, show the settings per category.
+- Changed: Exclude Purify folders from repository.
+- Changed: laravel/framework (v6.6.2 => v6.10.1)
+- Changed: Composer Update: 3 installs, 60 updates, 1 removal
+
+## 1.6.11 (2020-01-10)
+
+- Added: Displays the current version date in the footer of admin template.
+- Improved: Clean up dashboard header & footer
+
+## 1.6.10 (2020-01-07)
+
+- Improved: In admin.post.index, provide better visual differentation between regular, future and unpublished posts and pages.
+
+## 1.6.9 (2019-12-19)
+
+- Added: Change the author of a post of page to a different user_id.
+
+## 1.6.8 (2019-12-13)
+
+- Added: Create a custom RSS feed based on a set number of categories.
+
+## 1.6.7 (2019-12-09)
+
+- Changed: A few fixes to the comment system.
+- Changed: laravel/framework (v6.6.0 => v6.6.2)
+- Changed: Composer Update: 0 installs, 29 updates, 0 removals
+
+## 1.6.6 (2019-11-27)
+
+- Changed: Update Laravel version to 6.6.0
+- Changed: Update all Composer packages to the latest versions.
+- Fixed: Fix memory error on busy blogs
+
+## 1.6.5 (2019-11-08)
+
+- Fixed: Perform extra validation on routes creation based on user settings.
+- Changed: Update all tests to continue working with new versions of Laravel and PHPUnit.
+- Added: Add the ability to submit spam
+
+## 1.6.4 (2019-10-21)
+
+- Added: Make mails customisable by creating a different view file in mail folder
+- Changed: Remove the copyright/reserved part from the mail template footer
+
+## 1.6.3 (2019-10-06)
+
+- Added: Use cache to remember application settings
+- Fixed: sub-items in menu generator
+- Fixed: ignore empty custom classes in routes file
+
+## 1.6.2 (2019-10-05)
+
+- Changed: new lay-out for the admin backend
+
 ## 1.6.1 (2019-10-01)
 
 - Add ApiAuthentication middleware (needs Database Migration for new api_token column for user).
