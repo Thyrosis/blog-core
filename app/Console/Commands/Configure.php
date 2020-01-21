@@ -46,6 +46,8 @@ class Configure extends Command
             $this->call('key:generate');
         }
 
+        $this->createPurifyFolder();
+
         $this->requestApplicationInformation();
         $this->setupDatabase();
         $this->requestMailInformation();
@@ -65,7 +67,25 @@ class Configure extends Command
     {
         if (! file_exists('.env')) {
             copy('.env.example', '.env');
-            $this->line('.env file successfully created');
+            $this->info('.env file successfully created.');
+        } else {
+            $this->line(' -- .env file already exists. -- ');
+        }
+    }
+
+    /**
+     * Create the Purify folder
+     */
+    protected function createPurifyFolder()
+    {
+        if (@mkdir('./storage/purify')) {
+            $this->info('Successfully created Purify directory.');
+        } else {
+            if (file_exists('./storage/purify')) {
+                $this->line(' -- The Purify folder already exists. -- ');
+            } else {
+                $this->error('Something went wrong while creating the Purify directory. Please check if ./storage/purify exists and if not, create it yourself.');
+            }
         }
     }
 
