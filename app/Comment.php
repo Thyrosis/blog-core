@@ -64,6 +64,17 @@ class Comment extends Model
         return config('app.url').$this->path();
     }
 
+    /**
+     * Set the preapproval logic for posted comments.
+     * 
+     * If Akismet is enabled, this always has the first say.
+     * Failing that: authorised users always get approved.
+     * 
+     * Unauthorised users only get approved if they have a previously approved comment
+     * using their IP, name or email address
+     * 
+     * @version 2020-01-21  Add an authorised user check
+     */
     public function preapprove()
     {
         $advice = false;
@@ -76,6 +87,10 @@ class Comment extends Model
             }
 
             return $advice;
+        }
+
+        if (!auth()->guest()) {
+            return true;
         }
          
         $data = [
@@ -97,16 +112,41 @@ class Comment extends Model
         return false;
     }
 
+    /**
+     * approve
+     * 
+     * Updates the current approve-status to true, so that the comment
+     * will appear as approved.
+     * 
+     * @return bool
+     */
     public function approve()
     {
         return $this->update(['approved' => true]);
     }
 
+    /**
+     * unapprove
+     * 
+     * Updates the current approve-status to false, so that the comment
+     * will appear as unapproved.
+     * 
+     * @return bool
+     */
     public function unapprove()
     {
         return $this->update(['approved' => false]);
     }
 
+    /**
+     * switchApproval
+     * 
+     * Updates the current approve-status to the opposite
+     * of what it was before. So if it is now true, set 
+     * it to false and vice versa.
+     * 
+     * @return bool
+     */
     public function switchApproval()
     {
         if ($this->approved) {
