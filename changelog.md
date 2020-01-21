@@ -11,9 +11,11 @@
 ## 1.6.13 (2020-01-21)
 
 - Added: create Purify folder on Artisan command blog:configure
-- Improved: output from blog:configure command
-- Changed: Comment preapproval is now true if authorised user posts comment that has already passed Akismet
 - Added: A ton of changes from the past couple of months to the changelog
+- Changed: Comment preapproval is now true if authorised user posts comment that has already passed Akismet
+- Fixed: An issue with saving array-settings not being saved to the database.
+- Improved: output from blog:configure command
+- Improved: Custom RSS feed items are now sorted in descending order by published_at column
 
 ## 1.6.12 (2020-01-13)
 
