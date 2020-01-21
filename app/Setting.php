@@ -110,9 +110,9 @@ class Setting extends Model
         }
 
         Cache::put('settings.'.$code, $setting->value);
-
+        
         if ($setting->type == 'ARRAY') {
-            return Cache::put('settings.'.$code, json_decode($setting->value));
+            Cache::put('settings.'.$code, json_decode($setting->value));
         }
 
         return $setting->save();

@@ -35,6 +35,8 @@ class Category extends CacheModel
      * Get all items to post on custom RSS feed
      * 
      * @return Collection
+     * 
+     * @version 2020-01-21  Rearranged order of posts to be descending in published_at
      */
     public static function getFeedItems()
     {
@@ -45,13 +47,15 @@ class Category extends CacheModel
             return $posts;
         }
         
-        foreach (Setting::get('rss.customFeedCategories') as $c) {
+        foreach ($categories as $c) {
             $category = Category::whereSlug($c)->first();
 
             if($category) {
                 $posts = $posts->merge($category->publishedPosts()->whereType('post')->get());
             }
         }
+
+        $posts = $posts->sortByDesc('published_at');
 
         return $posts->unique('id');
     }
