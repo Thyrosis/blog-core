@@ -11,9 +11,12 @@
 ## 1.6.14 (2020-02-11)
 
 - Added: Settings to add Google Analytics to template using the @google custom Blade directive.
-- Added: Option to compile custom scss files in resources/sass.
+- Added: Option to compile a custom scss files in resources/sass.
 - Changed: Made TinyMCE more mobile friendly on edit and create post.
 - Changed: Updated TailwindCSS to version 1.2.0.
+- Changed: added active variant for backgroundColor to Tailwind config.
+- Changed: laravel/framework (v6.10.1 => v6.15.0)
+- Changed: Package operations: 0 installs, 24 updates, 1 removal
 
 ## 1.6.13 (2020-01-21)
 
