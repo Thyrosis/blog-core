@@ -36,9 +36,9 @@
         </h3>
 
         <div class="mb-5 flex flex-wrap md:flex-no-wrap">
-            <div class="mr-5 flex flex-col justify-around">
+            <div class="mr-5 w-full md:w-1/2 flex flex-col justify-around">
                 <div class="mb-5">
-                <label for="title" class="form-label">@lang('Title')</label>
+                    <label for="title" class="form-label">@lang('Title')</label>
                     <input type="text" id="title" name="title" class="form-control" required value="{{ old('title', $post->title) }}" />
                     <p class="form-info">@lang('The title of the post. Will be turned into a URL-friendly slug too.')</p>
 
@@ -74,9 +74,9 @@
                 </div>
             </div>
         
-            <div class="mb-5">
+            <div class="mb-5 w-full md:w-1/2">
                 <label for="summary" class="form-label">@lang('Summary')</label>
-                <textarea id="summary" name="summary" class="form-control tinymce-full" rows="10">{{ old('summary', $post->summary) }}</textarea>
+                <textarea id="summary" name="summary" class="form-control" rows="10">{{ old('summary', $post->summary) }}</textarea>
                 <p class="form-info">@lang('A small summary of the post. Often used on index pages.')</p>
 
                 @if ($errors->has('summary'))

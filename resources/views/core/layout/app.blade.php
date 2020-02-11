@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        @google
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -138,6 +140,7 @@
                 </div>
             @endauth
             </div>
+            
             <div class="w-full lg:w-4/5 text-gray-900 leading-normal ">
                 <div class="font-sans">
                     <h1 class="font-sans break-normal text-purple-700 pt-2 mb-4  text-xl">@yield ('title')</h1>
@@ -148,9 +151,7 @@
                 </div>
             
                 <div class="bg-white border border-gray-400 border-rounded p-8 mt-6 lg:mt-0">
-                <!--Title-->
                 
-
                     @yield ('main')
                 
                             <!--Post Content-->
@@ -190,6 +191,7 @@
             </div>
         </div>
         <!--/container-->
+
         @auth
         <footer class="bg-white border-t border-gray-400 shadow">
             <div class="container mx-auto flex py-8">
@@ -198,8 +200,7 @@
                     <div class="px-8">
                         <h3 class="font-bold text-gray-900">About</h3>
                         <p class="py-4 text-gray-600 text-sm">
-                            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.  -->
-                            @lang('Current version'): 1.6.13 @ 2020-01-21
+                            @lang('Current version'): 1.6.14 @ 2020-02-11
                         </p>
                     </div>
                 </div>
@@ -220,6 +221,16 @@
 
         <!-- TinyMCE -->
         <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey={{ Setting::get('tinyMCE.license') }}"></script>
+        <script>
+            tinymce.init({
+                selector: '#summary',
+                mobile: {
+                    menubar: true, 
+                    statusbar: false,                 
+                    toolbar: false
+                }               
+            });
+        </script>
         <script>
             tinymce.init({
                 selector: '.tinymce-full',
