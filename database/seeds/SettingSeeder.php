@@ -225,6 +225,16 @@ class SettingSeeder extends Seeder
         ];
 
         $settings[] = [
+            'code' => 'recaptcha.enabled',
+            'type' => 'BOOLEAN',
+            'label' => __("Enable reCaptcha?"),
+            'description' => __("Activate Google's Recaptcha service to use. Enter the version and keys too."),
+            'value' => false,
+            'category' => 'recaptcha',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
             'code' => 'recaptcha.version',
             'type' => 'TEXT',
             'label' => __("reCaptcha version"),
@@ -251,6 +261,26 @@ class SettingSeeder extends Seeder
             'description' => __("The private part of the key provided by Google's Recaptcha service."),
             'value' => null,
             'category' => 'recaptcha',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'analytics.enabled',
+            'type' => 'BOOLEAN',
+            'label' => __("Enable Google Analytics?"),
+            'description' => __("Activate Google's Analytics service to use. Enter the version and keys too."),
+            'value' => false,
+            'category' => 'google',
+            'hidden' => '0',
+        ];
+
+        $settings[] = [
+            'code' => 'analytics.trackingID',
+            'type' => 'TEXT',
+            'label' => __("Google Analytics Tracking-ID"),
+            'description' => __("The tracking ID found in your Google Analytics dashboard at the Property Settings."),
+            'value' => null,
+            'category' => 'google',
             'hidden' => '0',
         ];
 

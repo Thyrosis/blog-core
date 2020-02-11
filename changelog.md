@@ -8,6 +8,11 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.14 (2020-02-11)
+
+- Added: Settings to add Google Analytics to template using the @google custom Blade directive.
+- Changed: Made TinyMCE more mobile friendly on edit and create post.
+
 ## 1.6.13 (2020-01-21)
 
 - Added: create Purify folder on Artisan command blog:configure
