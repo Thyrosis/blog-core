@@ -1,0 +1,9 @@
+@tailwind base;
+
+@tailwind components;
+
+p {
+    @apply .mb-3 .tracking-normal .leading-normal
+}
+
+@tailwind utilities;
