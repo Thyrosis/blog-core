@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const mix = require('laravel-mix');
 
 require('laravel-mix-tailwind');
@@ -14,5 +16,15 @@ require('laravel-mix-tailwind');
  */
 
 mix.js('resources/js/app.js', 'public/js/core.js')
-   .sass('resources/sass/app.scss', 'public/css/core.css')
+   // .sass('resources/sass/app.scss', 'public/css/core.css')
    .tailwind('./tailwind.config.js');
+
+/**
+ * Looping through the resources/sass directory, transform each found scss file
+ * into the corresponding css file in public/css.
+ */
+const files = fs.readdirSync(path.resolve(__dirname, 'resources', 'sass'), 'utf-8')  
+
+for (let file of files) {
+   mix.sass(`resources/sass/${file}`, 'public/css');
+}

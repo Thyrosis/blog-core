@@ -11,7 +11,9 @@
 ## 1.6.14 (2020-02-11)
 
 - Added: Settings to add Google Analytics to template using the @google custom Blade directive.
+- Added: Option to compile custom scss files in resources/sass.
 - Changed: Made TinyMCE more mobile friendly on edit and create post.
+- Changed: Updated TailwindCSS to version 1.2.0.
 
 ## 1.6.13 (2020-01-21)
 
