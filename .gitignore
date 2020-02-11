@@ -25,5 +25,5 @@ yarn-error.log
 /storage/purify
 
 # Exclude the SASS resource files, apart from the SCSS file for the default CSS
-/resources/sass/*
-!/resources/sass/core.scss
+#/resources/sass/*
+#!/resources/sass/core.scss
