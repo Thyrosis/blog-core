@@ -126,6 +126,27 @@ class Post extends CacheModel implements Feedable
     }
 
     /**
+     * Get the latest featured post.
+     * 
+     * @return  App\Post        The latest featured post
+     */
+    public static function getFeaturedPost()
+    {
+        return self::getFeaturedPosts()->first();
+    }
+
+    /**
+     * Get all the published featured posts.
+     * 
+     * @param   int $limit      Amount of featured posts to return.
+     * @return  collection      Collection of featured posts.
+     */
+    public static function getFeaturedPosts($limit = 1)
+    {
+        return self::getPublished()->whereFeatured(true)->limit($limit)->get();    
+    }
+
+    /**
      * Returns the URL to the feature image (if used)
      * 
      * @param   bool    default     Whether to return the default featureImage
@@ -180,6 +201,22 @@ class Post extends CacheModel implements Feedable
         return $this->getTitle();
     }
 
+    /**
+     * Get all the published non-featured posts.
+     * 
+     * @param   int $limit      Amount of non-featured posts to return.
+     * @return  collection      Collection of featured posts.
+     */
+    public static function getNonFeaturedPosts($limit = 99)
+    {
+        return self::getPublished()->whereFeatured(false)->limit($limit)->get();    
+    }
+
+    /**
+     * Get all the stored pages.
+     * 
+     * @return  collection      Collection of pages
+     */
     public static function getPages()
     {
         return Cache::rememberForever('post.pages', function () {
@@ -197,6 +234,11 @@ class Post extends CacheModel implements Feedable
         return "/{$this->slug}";
     }
 
+    /**
+     * Get all the stored posts.
+     * 
+     * @return  collection      Collection of posts
+     */
     public static function getPosts()
     {
         return Cache::rememberForever('post.posts', function () {
