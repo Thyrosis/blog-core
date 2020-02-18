@@ -1,5 +1,60 @@
 @extends ('core.layout.app')
 
+@section ('html.head')
+<script type="application/ld+json">
+    {
+		"@context":"http://schema.org",
+		"@type": "BlogPosting",
+		"image": "{{ $post->getFeatureImage() }}",
+		"url": "{{ $post->url() }}",
+		"headline": "{{ $post->title }}",
+		"alternativeHeadline": "{{ $post->longTitle }}",
+		"dateCreated": "{{ $post->created_at->toIso8601String() }}",
+		"datePublished": "{{ $post->published_at->toIso8601String() }}",
+		"dateModified": "{{ $post->updated_at->toIso8601String() }}",
+		"inLanguage": "en-GB",
+		"isFamilyFriendly": "true",
+		"copyrightYear": "{{ $post->published_at->year }}",
+		"copyrightHolder": "",
+		"contentLocation": {
+			"@type": "Place",
+			"name": "Eindhoven, Netherlands"
+		},
+		"accountablePerson": {
+			"@type": "Person",
+			"name": "{{ $post->user->name }}",
+			"url": "{{ config('app.url') }}"
+		},
+		"author": {
+			"@type": "Person",
+			"name": "{{ $post->user->name }}",
+			"url": "{{ config('app.url') }}"
+		},
+		"creator": {
+			"@type": "Person",
+			"name": "{{ $post->user->name }}",
+			"url": "{{ config('app.url') }}"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "{{ config('app.name') }}",
+			"url": "{{ config('app.url') }}"
+		},
+		"mainEntityOfPage": "True",
+        @if (count($post->getKeywords('array')) > 0)
+		"keywords": [
+            @foreach ($post->getKeywords('array') as $keyword) "{{ $keyword }}" @if (!$loop->last),@endif 
+            @endforeach
+		],
+        @endif
+        @if ($post->categories->count() > 0)
+		    "articleSection": "{{ $post->categories->first()->name }}",
+        @endif
+		"articleBody": "{!! strip_tags($post->body) !!}"
+	}
+</script>
+@endsection
+
 @section ('main')
 
 <div class="admin-container">
