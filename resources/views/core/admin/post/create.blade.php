@@ -67,6 +67,34 @@
     </div>
 
     <div class="admin-container">
+        <h3 class="admin-h3">@lang('SEO information')</h3>
+
+        <div class="mb-5">
+            <label for="keywords" class="form-label">@lang('Keywords')</label>
+            <input class="form-control" id="keywords" name="keywords" placeholder="@lang('keyword, another, one')" type="text" value="{{ old('keywords') }}"></textarea>
+            <p class="form-info">@lang('The keywords for this post.')</p>
+
+            @if ($errors->has('keywords'))
+                <div class="form-error">
+                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('keywords') }}</span>
+                </div>
+            @endif
+        </div>
+
+        <div class="mb-5">
+            <label for="metadescription" class="form-label">@lang('Meta description')</label>
+            <input class="form-control" id="metadescription" name="metadescription" placeholder="@lang('A description to put in the meta-tags of the HTML markup.')" type="text" value="{{ old('metadescription') }}"></textarea>
+            <p class="form-info">@lang("The metadescription of the post. Usually around 155 characters, although that is not a hard limit. <a class='underline' href='https://yoast.com/meta-descriptions/' target='_blank'>Information</a>")</p>
+
+            @if ($errors->has('metadescription'))
+                <div class="form-error">
+                    <i data-feather="alert-triangle"></i> <span class="pl-2">{{ $errors->first('metadescription') }}</span>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <div class="admin-container">
         <h3 class="admin-h3">@lang('Extra information')</h3>
 
         <div class="flex justify-between flex-col md:flex-row">

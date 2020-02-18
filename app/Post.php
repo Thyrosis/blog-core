@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Post extends CacheModel implements Feedable
 {
-    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type', 'hash'];
+    protected $fillable = ['user_id', 'title', 'longTitle', 'slug', 'summary', 'body', 'keywords', 'metadescription', 'commentable', 'featured', 'published', 'featureimage', 'published_at', 'created_at', 'updated_at', 'type', 'hash'];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
     protected $cachetags = ['posts', 'pages'];
 
@@ -168,6 +168,29 @@ class Post extends CacheModel implements Feedable
     }
 
     /** 
+     * Get this post's keywords
+     * 
+     * @param   bool returntype What return type to use for the keywords.
+     * @return  mixed           They keywords, formatted as the requested type.
+     * @version 20200218
+     */
+    public function getKeywords($returntype = "array")
+    {
+        switch($returntype) {
+            case "text":
+            case "string":
+                return $this->keywords;
+                break;
+            case "array":
+            case "default":
+                if (!empty($this->keywords)) {
+                    return explode(",", $this->keywords);
+                }
+                return array();
+        }
+    }
+
+    /** 
      * Get all items to post on RSS feed
      * 
      * @return Collection
@@ -199,6 +222,24 @@ class Post extends CacheModel implements Feedable
     public function getLongTitle()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * Return the meta description, either as is or clipped at 155 characters.
+     * 
+     * @param   bool $clipped   If true, clip at 155 characters.
+     * @param   int $characters Amount of characters to clip at.
+     * @return  string
+     * 
+     * @version 20200218
+     */
+    public function getMetaDescription($clipped = false, $characters = 155)
+    {
+        if ($clipped) {
+            return Str::limit($this->metadescription, $characters);
+        }
+
+        return $this->metadescription;
     }
 
     /**

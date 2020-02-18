@@ -8,6 +8,11 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.16 (2020-02-18)
+
+- Added: Option to add keywords and metadescription to Posts. Requires migration.
+- Fixed: Missing translation lines in Post/create and Post/edit.
+
 ## 1.6.15 (2020-02-14)
 
 - Added: Post::getFeaturedPosts and Post::getFeaturedPost to retrieve all or just one featured post.

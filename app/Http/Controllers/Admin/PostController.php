@@ -50,6 +50,8 @@ class PostController extends Controller
             'longTitle' => 'nullable|min:3|max:255',
             'summary' => 'nullable',
             'body' => 'required|min:3',
+            'keywords' => 'nullable',
+            'metadescription' => 'nullable',
             'commentable' => 'required|boolean',
             'featured' => 'required|boolean',
             'featureimage' => 'nullable',
@@ -101,6 +103,8 @@ class PostController extends Controller
             ],
             'summary' => 'nullable',
             'body' => 'nullable|min:3',
+            'keywords' => 'nullable',
+            'metadescription' => 'nullable',
             'commentable' => 'nullable|boolean',
             'featured' => 'nullable|boolean',
             'featureimage' => 'nullable',
@@ -114,7 +118,7 @@ class PostController extends Controller
 
         $data = Post::processData($data);
         $post->update($data);
-        $post->sync($request);       
+        $post->sync($request);
 
         return redirect(route('admin.post.edit', $post))->with("success", "Post updated");
     }
