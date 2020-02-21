@@ -8,6 +8,12 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.6.17 (2020-02-21)
+
+- Changed: Added mobile specific parameters to TinyMCE-full code.
+- Fixed: Excluded authorised users from Google including analytics.
+- Removed: Commented out unused social block in footer of core.layout.app.
+
 ## 1.6.16 (2020-02-18)
 
 - Added: Option to add keywords and metadescription to Posts. Requires migration.

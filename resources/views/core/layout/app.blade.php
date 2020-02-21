@@ -200,18 +200,18 @@
                     <div class="px-8">
                         <h3 class="font-bold text-gray-900">About</h3>
                         <p class="py-4 text-gray-600 text-sm">
-                            @lang('Current version'): 1.6.16 (2020-02-18)
+                            @lang('Current version'): 1.6.17 (2020-02-21)
                         </p>
                     </div>
                 </div>
                 <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right">
                     <div class="px-8">
-                        <h3 class="font-bold text-gray-900">Social</h3>
+                        <!-- <h3 class="font-bold text-gray-900">Social</h3>
                         <ul class="list-reset items-center text-sm pt-3">
                             <li>
                             <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-1" href="#">Add social links</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 </div>
@@ -258,6 +258,11 @@
                     {title: '{{ $post->getTitle() }}', value: '{{ $post->path() }}'},
                 @endforeach
                 ],
+                mobile: {
+                    menubar: true, 
+                    statusbar: false,                 
+                    toolbar: false
+                }
                 plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
                 relative_urls : false,
                 style_formats: [
