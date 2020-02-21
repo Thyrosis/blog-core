@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Blade::directive('google', function () {
-            if (Setting::get('analytics.enabled')) {   
+            if (Setting::get('analytics.enabled') && auth()->guest()) {   
                 $trackingcode = Setting::get('analytics.trackingID');
 
                 if ($trackingcode !== null) {
