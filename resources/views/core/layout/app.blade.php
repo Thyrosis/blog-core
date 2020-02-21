@@ -262,7 +262,7 @@
                     menubar: true, 
                     statusbar: false,                 
                     toolbar: false
-                }
+                },
                 plugins: 'advlist anchor autosave code fullscreen help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars wordcount',
                 relative_urls : false,
                 style_formats: [
