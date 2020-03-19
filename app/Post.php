@@ -6,6 +6,7 @@ use App\Comment;
 use App\Mail\NewComment;
 use App\View;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
@@ -563,6 +564,17 @@ class Post extends CacheModel implements Feedable
             Route::delete('post/{post}/delete', 'Admin\PostController@destroy')->name('post.destroy');
             Route::get('post/{post}', 'Admin\PostController@show')->name('post.show');
         });
+    }
+
+    /**
+     * Prepare a date for array / JSON serialization.
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 
     /** 

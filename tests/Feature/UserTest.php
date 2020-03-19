@@ -44,10 +44,6 @@ class UserTest extends TestCase
     {
         $users = factory(User::class, 4)->create();
 
-        foreach ($users as $user) {
-            $this->assertDatabaseHas('users', $user->toArray());
-        }
-
         $this->signIn();
 
         $response = $this->get(route('admin.user.index'));

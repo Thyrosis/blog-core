@@ -18,8 +18,9 @@ class PostTest extends TestCase
     public function aPostCanBeRead()
     {
         $this->withoutExceptionHandling();
+        $user = $this->signIn();
 
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->create(['user_id' => $user->id]);
 
         $this->assertDatabaseHas('posts', $post->toArray());
 

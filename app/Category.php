@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Cache;
 class Category extends CacheModel
 {
     protected $fillable = ['name', 'slug', 'description'];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+    
     protected $cachetags = ['all'];
 
     protected static function boot()
