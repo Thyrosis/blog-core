@@ -8,6 +8,14 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.7.0 (2020-03-19)
+
+- Added: laravel/ui to composer.json
+- Changed: laravel/framework (v6.15.0 => v7.2.1)
+- Changed: Composer update: 2 installs, 55 updates, 0 removals
+- Changed: Hide created_at/updated_at in Category, Tag and User models to avoid PHPUnit errors on finding wrong timestamp formats. 
+- Changed: Override Post->serializeDate() as described by https://laravel.com/docs/7.x/upgrade#date-serialization .
+
 ## 1.6.17 (2020-02-21)
 
 - Changed: Added mobile specific parameters to TinyMCE-full code.
