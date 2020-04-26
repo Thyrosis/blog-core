@@ -200,7 +200,7 @@
                     <div class="px-8">
                         <h3 class="font-bold text-gray-900">About</h3>
                         <p class="py-4 text-gray-600 text-sm">
-                            @lang('Current version'): 1.7.0 (2020-03-19)
+                            @lang('Current version'): 1.7.1 (2020-04-26)
                         </p>
                     </div>
                 </div>
