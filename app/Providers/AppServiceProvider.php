@@ -19,12 +19,19 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Blade::directive('google', function () {
-            if (Setting::get('analytics.enabled') && auth()->guest()) {   
+            $html = "";
+
+            if (!auth()->guest()) {
+                return "<?php echo \"<!-- Authorised users don't count towards analytics. -->\"; ?>";
+            }
+
+            if (Setting::get('analytics.enabled')) {   
+                $html = "<!-- Google tracking code goes here -->";
+
                 $trackingcode = Setting::get('analytics.trackingID');
 
                 if ($trackingcode !== null) {
-            
-                    $html = "<!-- Global site tag (gtag.js) - Google Analytics -->
+                    $html .= "<!-- Global site tag (gtag.js) - Google Analytics -->
                     <script async src=\'https://www.googletagmanager.com/gtag/js?id=".$trackingcode."\'></script>
                     <script>
                     window.dataLayer = window.dataLayer || [];
@@ -36,7 +43,11 @@ class AppServiceProvider extends ServiceProvider
 
                     return "<?php echo '$html'; ?>";
                 }
+
+                $html .= "<!-- At least it would, if someone had set a tracking code... -->";
             }
+
+            return "<?php echo '$html'; ?>";
         });
     }
 
