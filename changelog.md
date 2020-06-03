@@ -8,6 +8,11 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.7.2 (2020-06-02)
+
+- Fixed: The @google directive didn't show information correctly. Do a php artisan view:clear to apply this fix.
+- Fixed: Adds slashes to the articleBody in the BlogPosting schema in core.post.show. Apply in your own templates too.
+
 ## 1.7.1 (2020-04-26)
 
 - Changed: Laravel/framework (v7.2.1 => 7.8.1)
