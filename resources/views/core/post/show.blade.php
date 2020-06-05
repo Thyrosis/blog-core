@@ -50,7 +50,7 @@
         @if ($post->categories->count() > 0)
 		    "articleSection": "{{ $post->categories->first()->name }}",
         @endif
-		"articleBody": "{!! addslashes(strip_tags($post->body)) !!}"
+		"articleBody": "{!! str_replace('"', '\"', strip_tags($post->body)) !!}"
 	}
 </script>
 @endsection
