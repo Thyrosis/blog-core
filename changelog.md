@@ -11,7 +11,7 @@
 ## 1.7.2 (2020-06-02)
 
 - Fixed: The @google directive didn't show information correctly. Do a php artisan view:clear to apply this fix.
-- Fixed: Adds slashes to the articleBody in the BlogPosting schema in core.post.show. Apply in your own templates too.
+- Fixed: Adds slashes to the articleBody double quotes in the BlogPosting schema in core.post.show. Apply in your own templates too.
 
 ## 1.7.1 (2020-04-26)
 
