@@ -31,7 +31,7 @@ module.exports = {
   important: false,
   separator: ':',
   purge: [
-    './src/**/*.html',
+    './resources/views/**/*.php',
   ],
   theme: {
     screens: {
