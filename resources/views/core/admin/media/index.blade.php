@@ -48,9 +48,13 @@
 <div class="admin-container">
     <h3 class="admin-h3">@lang('Media')</h3>
 
+    <div class="flex flex-wrap">
     @foreach ($medias as $media)
-        <img alt="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" src="{{ $media->path() }}" title="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" />
+        <a href="{{ $media->path() }}">
+            <img alt="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" class="w-40 h-40" src="{{ $media->path() }}" title="{{ $media->label ?? '' }} - {{ $media->description ?? '' }}" />
+        </a>
     @endforeach
+    </div>
 </div>
 
 @endsection
