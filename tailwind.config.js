@@ -30,6 +30,9 @@ module.exports = {
   prefix: '',
   important: false,
   separator: ':',
+  purge: [
+    './src/**/*.html',
+  ],
   theme: {
     screens: {
       sm: '640px',

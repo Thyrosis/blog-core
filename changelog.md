@@ -8,6 +8,13 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.7.3 (2020-06-30)
+
+- Changed: Laravel/framework (v7.8.1 => v7.17.2)
+- Changed: TailwindCSS@1.4.6
+- Changed: Composer update: 5 installs, 53 updates, 0 removals
+- Added: Purge in Tailwind.config.js to shrink core CSS file from 1.54Mb to 12.6Kb
+
 ## 1.7.2 (2020-06-02)
 
 - Fixed: The @google directive didn't show information correctly. Do a php artisan view:clear to apply this fix.
