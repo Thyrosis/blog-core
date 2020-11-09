@@ -8,6 +8,13 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.8.0 (2020-11-09)
+
+- Changed: Laravel/framework (v7.8.1 => 8.13.0)
+- Changed: TailwindCSS@1.9.6
+- Changed: Composer update
+- Changed: NPM update
+
 ## 1.7.3 (2020-06-30)
 
 - Changed: Laravel/framework (v7.8.1 => v7.17.2)
