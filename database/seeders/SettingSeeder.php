@@ -328,7 +328,7 @@ class SettingSeeder extends Seeder
 
         foreach ($settings as $setting) {
             try {
-                Setting::create($setting);
+                \app\Setting::create($setting);
             } catch (Exception $e) {
                 // do nothing;
             }

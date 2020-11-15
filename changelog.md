@@ -8,6 +8,10 @@
 - On Media index page, style images
 - On Menu admin page, split pages and posts & provide visual feedback for published status
 
+## 1.8.1 (2020-11-15)
+
+- Fixed: exception in SettingSeeder caused by added namespacing in Laravel 8
+
 ## 1.8.0 (2020-11-09)
 
 - Changed: Laravel/framework (v7.8.1 => 8.13.0)
